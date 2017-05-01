@@ -1,0 +1,136 @@
+#accordion{
+	margin-bottom: 0;
+}
+
+#accordion .panel-heading{
+	padding: 5px;
+}
+#accordion .panel-heading a{
+	text-decoration: none;
+}
+
+#accordion .panel-title{
+	text-decoration: none;
+	color: #888;
+}
+
+.aside-pp{
+	width: 80%;
+	margin: auto;
+}
+
+.carousels-container > .col-sm-12{
+	padding: 0;
+}
+
+.carousels-container .carousel{
+	height: 186px;
+	/*height: 250px;*/
+	background-color: rgba(0,0,0,0.02);
+}
+.carousels-container .col-sm-12:not(:last-child){
+	border-bottom: 1px solid #DDD;
+}
+
+.panel-carousel > .panel-body{
+	padding-bottom: 0;
+}
+
+.carousels-container .carousel img{
+	height: 250px;
+	width: 100%;
+	object-fit: cover;
+	object-position: center;
+}
+
+.main-container > .row > .col-sm-9 > .panel > .panel-body{
+	padding-top: 0;
+}
+
+.panel-carousel .carousel-inner .row{
+	padding: 2.5% 7.5%;
+}
+
+.panel-carousel .carousel-control{
+	width: 5%;
+	background-color: rgba(0,0,0,0.2);
+	background-image: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.carousel-title{
+	margin: 0;
+	text-align: center;
+	display: none;
+}
+
+.last-link a{
+	text-align: center;
+}
+
+.last-link a:hover{
+	text-decoration: none;
+}
+.last-link a .glyphicon{
+	font-size: 2em;
+	margin: 0;
+	margin-top: 0.1em;
+}
+
+.panel-carousel .btn-group-justified .btn-group:last-child button{
+	border-left-width: 0;
+}
+
+.panel-carousel .item .panel-heading h5{
+	margin: 0;
+	text-align: center;
+}
+
+.panel-carousel .item .panel-body{
+	overflow: hidden;
+	padding: 0.5em;
+}
+
+.panel-carousel .item .panel-body .description{
+	text-overflow: ellipsis;
+	overflow: hidden;
+	height: 50px;
+	font-size: 0.9em;
+}
+
+.panel-carousel .item .panel-footer{
+	padding: 0 5px;
+}
+
+@media screen and (min-width: 767px){
+	.column{
+		padding: 0;
+	}
+
+	.column:first-child > .panel{border-radius: 4px 0 0 4px;}
+	.column:last-child > .panel{border-radius: 0 4px 4px 0;}
+
+	.column:first-child > .panel,
+	.column:last-child > .panel{
+		box-shadow: none;
+		border-radius: 0;
+	}
+
+	.column:first-child > .panel{
+		border-right-width: 0;
+	}	
+
+	.column > .panel-default{
+		min-height: 85vh;
+	}
+	.messaging-panel .panel-body{
+		min-height: 63vh;
+		max-height: 63vh;
+		overflow-y: auto;
+	}
+	.message{
+		max-width: 50%;
+	}
+}

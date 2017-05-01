@@ -1,0 +1,36 @@
+h2 + .form-group{
+	margin-top: 1em;
+}
+
+h2{
+	background-color: rgba(0,0,0,0.05);
+	padding: 0.3em 1em 0.5em 1em;
+}
+
+label{
+	margin: 1.5em 0 0 0;
+	text-indent: 0.3em;
+}
+
+.input-group{
+	margin: 0!important;
+	width: 100%;
+}
+
+.section{
+	float: right;
+	color: #3498db;
+	font-size: 0.7em;
+	font-family: Courier;
+	font-weight: bold;
+	position: relative;
+	padding: 0.28em 0.5em;
+	/*transform: translate(0,50%);*/
+}
+
+.section:after{
+	content: "/3";
+	color: #AAA; 
+	font-size: 0.8em;
+}
+

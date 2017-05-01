@@ -1,0 +1,134 @@
+.message-filters li{
+}
+
+.message-filters li a{
+	display: block;
+	padding: 5px 10px;
+}
+
+.message-filters li a:hover,
+.message-filters li a:focus,
+.message-filters li a.active{
+	background-color: #EEE;
+	text-decoration: none;
+	color: #3498db;
+}
+
+.message-filters li a.active{
+	cursor: default;
+	background-color: #DDD;
+}
+
+.msg-container{
+	overflow: auto;
+	clear: both;
+}
+
+.msg-container.sent + .msg-container.sent .message,
+.msg-container.receive + .msg-container.receive .message{
+}
+
+.message{
+	margin: 3px 0;
+	padding: 5px 10px;
+	border-radius: 0.5em;
+	max-width: 75%;
+}
+
+.sent .message{
+	float: right;
+	clear: both;
+	color: white;
+	background-color: #3498db;
+}
+
+.receive .message{
+	float: left;
+	clear: both;
+	background-color: #EEE;
+}
+
+.recipient-img{
+	height: 3em;
+	margin-bottom: -0.2em;
+	margin-right: 0.5em;
+}
+
+.person{
+	border: 1px solid #DDD;
+	display: flex;
+	align-items: center;
+}
+
+.person-name{
+	color: #888;
+}
+
+.person:hover{
+	cursor: pointer;
+	text-decoration: none;
+}
+
+.person-img{
+	height: 2.5em;
+	margin-right: 0.25em;
+}
+
+.messaging-panel{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.people-list{
+	max-height: 65.5vh;
+	overflow-y: auto;
+}
+
+/*.people-list::-webkit-scrollbar{display: none;}*/
+::-webkit-scrollbar{
+	position: absolute;
+	background-color: transparent;
+	width: 6px;
+}               
+::-webkit-scrollbar-button {
+	height: 0;
+}
+::-webkit-scrollbar-thumb {
+	background-color: #95a5a6;
+	border-radius: 50px;
+	box-sizing: border-box;
+	margin-right: 3px;
+}  
+
+@media screen and (min-width: 767px){
+	.column{
+		padding: 0;
+	}
+
+	.column:first-child .panel{border-radius: 4px 0 0 4px;}
+	.column:last-child .panel{border-radius: 0 4px 4px 0;}
+
+	.column:not(:first-child):not(:last-child) .panel{
+		box-shadow: none;
+		border-radius: 0;
+		border-right-width: 0;
+		border-left-width: 0;
+	}
+
+	.column .panel-default{
+		min-height: 85vh;
+	}
+	.messaging-panel .panel-body{
+		min-height: 63vh;
+		max-height: 63vh;
+		overflow-y: auto;
+	}
+	.message{
+		max-width: 50%;
+	}
+}
+
+
+
+

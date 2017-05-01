@@ -1,0 +1,148 @@
+body{
+	background-color: white;
+}
+
+.headline{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	min-height: 80vh;
+}
+
+.check-box label{
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	padding: 6px 12px;
+	margin: 0;
+	cursor: pointer;
+}
+
+.check-box label:hover{
+	background-color: rgba(46,204,113 ,0.05);
+}
+
+.check-box label input[type=checkbox]{
+	margin: 0;
+}
+
+.check-box{
+	border: 0.1em solid #CCC;
+	border-radius: 4px;
+	margin: 5px 0;
+}
+
+.check-box label input{
+	display: none;
+}
+
+.check-box label input + .box{
+	display: inline-block;
+	height: 1em;
+	width: 1em;
+	border: 0.1em solid #DDD;
+	position: relative;
+	border-radius: 3px;
+	transition: 0.15s;
+}
+
+.check-box label input + .box .check{
+	display: inline-block;
+	height: 0em;
+	width: 0em;
+	border: 0.1em solid #DDD;
+	border-width: 0 0.2em 0.2em 0;
+	position: absolute;
+	top: 40%;
+	left: 50%;
+	transform: translate(-50%,-50%) rotate(45deg);
+	opacity: 0;
+	transition: 0.15s;
+}
+
+.check-box label input:checked ~ .label-text{
+	transition: 0.15s;
+}
+
+
+form:not(.navbar-form) .input-group{
+	margin: 10px 0;
+}
+
+.check-box label input:checked + .box{
+	border-color: #2ecc71;
+}
+
+.check-box label input:checked + .box .check{
+	height: 0.5em;
+	width: 0.3em;
+	border-color: #2ecc71;
+	opacity: 1;
+}
+
+.check-box label input:checked ~ .label-text{
+	color: #27ae60;
+}
+
+.register-btn{
+	display: inline-block;
+	position: relative;
+}
+
+.register-btn:hover{
+	border-bottom: 1px solid #2980b9;
+}
+
+.instruction{
+	font-size: 0.9em;
+	text-align: center;
+	margin-top: 3em;
+}
+
+.input-group input[type=text],
+.input-group input[type=password]{
+	border: 0;
+	box-shadow: none;
+	border-bottom: 1px solid #AAA;
+	border-radius: 0;
+	transition: 0.1s;
+}
+
+.input-group .input-group-addon{
+	background-color: transparent;
+	border: 0;
+	box-shadow: none;
+	border-bottom: 1px solid #AAA;
+	border-radius: 0;
+	transition: 0.1s;
+}
+
+.input-group input[type=text] + .input-group-addon .glyphicon,
+.input-group input[type=password] + .input-group-addon .glyphicon{
+	transition: 0.2s;
+}
+
+.input-group input[type=text]:focus,
+.input-group input[type=password]:focus{
+	border-color: #2ecc71;
+	background-color: rgba(0,0,0,0.02);
+}
+.input-group input[type=text]:focus + .input-group-addon,
+.input-group input[type=password]:focus + .input-group-addon{
+	background-color: rgba(0,0,0,0.02);
+	border-color: #2ecc71;
+	color: #2ecc71;
+}
+.input-group input[type=text]:focus + .input-group-addon .glyphicon,
+.input-group input[type=password]:focus + .input-group-addon .glyphicon{
+	 transform: scale(1.2,1.2); 
+}
+
+@media screen and (min-width: 768px){
+	#login{
+		padding: 2em 0;
+		margin: 0 10%;
+	}	
+}
+
