@@ -19,6 +19,7 @@ class CreateStudentAccountTable extends Migration
             $table->string('student_fname');
             $table->string('student_lname');
             $table->string('student_gender');
+            $table->string('student_address');
             $table->date('student_birthdate');
             $table->string('student_region');
             $table->string('student_nationality');
