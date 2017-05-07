@@ -2,83 +2,68 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\MessageBag;
 use Illuminate\Http\Request;
+use App\User;
+use App\Sponsor;
+use Hash;
 
-class SponsorAuthController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
+class SponsorAuthController extends Controller{
+
+    public function showSponsorForm(){
+        return view("registration.sponsor_form");
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+
+    public function Validation(Request $request){
+
+        $validator = Validator::make($request->all(),[
+            'email' => 'required|email|max:255|unique:user_account,user_email',
+            'password' => 'min:6|required|same:repassword',
+            'repassword' => 'min:6|same:password',
+            'contact' => 'required|regex:/(09)[0-9]{9}/',
+            'fname' => 'required',
+            'lname' => 'required',
+            'address' => 'required',
+            'curr_agency' => 'required',
+            'addr_agency' => 'required',
+            'job_title' => 'required',
+
+        ]);
+        
+        if ($validator->fails()) {
+            return redirect('/registration/Sponsor Form')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+        else{
+            return $this->RegisterSponsor($request);
+        }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+    public function RegisterSponsor(Request $request){
+        $user = new User;
+        $user ->user_email = $request ->email;
+        $password = $request ->password;
+        $user ->user_password = Hash::make($password);
+        $user ->user_contact  = $request ->contact;
+        $user ->user_type  = 'sponsor';
+        $user ->user_aboutme  = 'WLA';
+        $user ->user_imagepath  = '0';
+        $user ->save();
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $sponsor = new Sponsor;
+        $lastId=$user->user_id;
+        $sponsor ->user_id = $lastId;
+        $sponsor ->sponsor_fname = $request ->fname;
+        $sponsor ->sponsor_lname = $request ->lname;
+        $sponsor ->sponsor_address = $request ->address;
+        $sponsor ->sponsor_agency = $request ->curr_agency;
+        $sponsor ->sponsor_agencyaddress = $request ->addr_agency;
+        $sponsor ->sponsor_job = $request ->job_title;
+        $sponsor ->save();
     }
 }

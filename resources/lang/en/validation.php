@@ -109,11 +109,23 @@ return [
         ],
 
         'univ'  => [
-            'required'  => 'Please input the name of your School / University',
+            'required'  => 'Please input the complete name of your School / University',
         ],
 
         'univ_address'  => [
             'required'  => 'Please input the address of your School / University',
+        ],
+
+        'curr_agency'  => [
+            'required'  => 'Please input the complete name of the Agency you are currently working for',
+        ],
+
+        'addr_agency'  => [
+            'required'  => 'Please input the address of the Agency you are currently working for',
+        ],
+
+        'job_title'  => [
+            'required'  => 'Please input your job title on the Agency you are currently working for',
         ],
     ],
 
@@ -144,6 +156,7 @@ return [
         'degree_att'    => 'Degree Attained',
         'field'         => 'Study Field',
         'degree_st'     => 'Degree Sought',
+
     ],
 
 ];
