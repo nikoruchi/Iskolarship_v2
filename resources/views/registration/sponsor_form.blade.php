@@ -154,7 +154,7 @@
 							</div>
 							<label>Agency Address:</label>
 							<div class="input-group {{ $errors->has('addr_agency') ? ' has-error' : '' }} ">
-								<input type="text" name="addr_agency" placeholder="First Name" class="form-control" value="{{ old('addr_agency') }}"/>
+								<input type="text" name="addr_agency" placeholder="e.g Jaro, Iloilo City" class="form-control" value="{{ old('addr_agency') }}"/>
 
 								@if ($errors->has('addr_agency'))
 									<span class="help-block">

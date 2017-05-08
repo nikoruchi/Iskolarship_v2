@@ -48,7 +48,7 @@ class SponsorAuthController extends Controller{
         $user = new User;
         $user ->user_email = $request ->email;
         $password = $request ->password;
-        $user ->user_password = Hash::make($password);
+        $user ->password = Hash::make($password);
         $user ->user_contact  = $request ->contact;
         $user ->user_type  = 'sponsor';
         $user ->user_aboutme  = 'WLA';
