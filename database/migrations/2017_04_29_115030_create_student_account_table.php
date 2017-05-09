@@ -15,7 +15,7 @@ class CreateStudentAccountTable extends Migration
     {
         Schema::create('student_account', function (Blueprint $table) {
             $table->increments('student_id');
-            $table->integer('user_id')->references('user_id')->on('user_account');
+            $table->integer('user_id')->references('user_id')->on('users');
             $table->string('student_fname');
             $table->string('student_lname');
             $table->string('student_gender');

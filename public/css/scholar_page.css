@@ -1,0 +1,73 @@
+.user-pp{
+	margin: auto;
+	width: 12.5em;
+	height: 12.5em;
+	margin-top: 1.5em;
+}
+
+.user-name,
+.education,
+.user-email{
+	text-align: center;
+	/*color: #888;*/
+}
+
+.user-name{
+	font-size: 2em;
+}
+
+.education{
+	font-size: 1.25em;
+}
+
+.user-email{
+	font-size: 1em;
+	color: #888;	
+}
+
+.btn-group{
+	margin-bottom: 1.5em;
+}
+
+.youHave{
+	font-size: 1em;
+}
+
+.count{
+	font-size: 5em;
+	margin: 0em;
+	font-family: Arial;
+}
+
+.list{
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	width: 100%;
+}
+
+.list li{
+	border-bottom: 1px solid #DDD;
+	padding: 0 1em;
+}
+
+.list li:first-child{
+	border-top: 1px solid #DDD;
+}
+.list li a{
+	display: block;
+	text-align: center;
+	padding: 0.5em 0;
+	text-decoration: none;
+}
+
+.list li:hover{
+	background-color: rgba(0,0,0,0.025);
+}
+
+.seeAll{
+	background-color: transparent!important;
+	font-size: 1.2em;
+	border-width: 0!important;
+	margin-top: 0.5em;
+}

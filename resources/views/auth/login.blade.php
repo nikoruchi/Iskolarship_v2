@@ -1,68 +1,58 @@
-@extends('layouts.app')
+@extends("layouts.indexGuest")
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
-                <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ route('login') }}">
-                        {{ csrf_field() }}
+    <div class="container main-container">
+        <div class="col-sm-6 col-sm-offset-3 headline">
+            <div class="text-center">
+                <h1>Iskolarship</h1>
+                <h3><small>Ang iyong kaagabay sa broke mong buhay.</small></h3>
+            </div>
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+            <form action="login" method="POST" id="login" class="overflow-a">
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
+                {{ csrf_field() }}
+                
+                <div class="input-group {{ $errors->has('email') ? ' has-error' : '' }}">
+                    <input type="text" name="email" placeholder="Email Address" class="form-control" value="{{ old('email') }}"/>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
 
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+                    
 
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-8 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Login
-                                </button>
-
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    Forgot Your Password?
-                                </a>
-                            </div>
-                        </div>
-                    </form>
                 </div>
+
+                <div class="input-group {{ $errors->has('password') ? ' has-error' : '' }}">
+                    <input type="password" name="password" placeholder="Password" class="form-control" />
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>                                
+                </div>
+
+                @if ($errors->has('email'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('email') }}</strong>
+                    </span>
+                @endif
+
+                @if ($errors->has('password'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('password') }}</strong>
+                    </span>
+                @endif
+
+                <!-- <div class="check-box pull-left">
+                    <label><input type="checkbox" name="remember me"><span class="box"><span class="check"></span></span>&nbsp;<span class="label-text">Remember me</span></label>
+                </div> -->
+                <button type="submit" name="login" class="btn btn-success pull-right">Login&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-log-in"></span></button>
+            </form>
+
+            <p class="instruction">You do not have an account yet? Click the button below.</p>
+            <div class="dropdown">
+                <button class="register-btn btn btn-primary" data-toggle="dropdown"><span class="glyphicon glyphicon-user register"><span class="register-icon">+</span></span>&nbsp;&nbsp;Register <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    <li class="dropdown-header">Register as?</li>
+                    <li><a href="{{ url('registration/Student Form') }}"><span class="glyphicon glyphicon-education"></span>&nbsp;&nbsp;Student</a></li>
+                    <li><a href="{{ url('registration/Sponsor Form') }}"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;&nbsp;Sponsor</a></li>
+                </ul>
             </div>
         </div>
     </div>
-</div>
+
 @endsection

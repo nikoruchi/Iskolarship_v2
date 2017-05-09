@@ -1,6 +1,4 @@
-@extends("layouts.indexGuest")
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 	<div class="container main-container">
 		<div class="col-sm-6 col-sm-offset-3 headline">
 			<div class="text-center">
@@ -9,27 +7,27 @@
 			</div>
 
 			<form action="login" method="POST" id="login" class="overflow-a">
-				<div class="input-group {{ $errors->has('email') ? ' has-error' : '' }}">
-					<input type="text" name="email" placeholder="Email Address" class="form-control" value="{{ old('email') }}"/>
+				<div class="input-group <?php echo e($errors->has('email') ? ' has-error' : ''); ?>">
+					<input type="text" name="email" placeholder="Email Address" class="form-control" value="<?php echo e(old('email')); ?>"/>
 					<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
 
-					 @if ($errors->has('email'))
+					 <?php if($errors->has('email')): ?>
                         <span class="help-block">
-                            <strong>{{ $errors->first('email') }}</strong>
+                            <strong><?php echo e($errors->first('email')); ?></strong>
                         </span>
-                    @endif
+                    <?php endif; ?>
 
 				</div>
 
-				<div class="input-group {{ $errors->has('password') ? ' has-error' : '' }}">
+				<div class="input-group <?php echo e($errors->has('password') ? ' has-error' : ''); ?>">
 					<input type="password" name="password" placeholder="Password" class="form-control" />
 					<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
 
-					@if ($errors->has('password'))
+					<?php if($errors->has('password')): ?>
                         <span class="help-block">
-                            <strong>{{ $errors->first('password') }}</strong>
+                            <strong><?php echo e($errors->first('password')); ?></strong>
                         </span>
-                    @endif
+                    <?php endif; ?>
                                 
 				</div>
 				<!-- <div class="check-box pull-left">
@@ -43,11 +41,12 @@
 				<button class="register-btn btn btn-primary" data-toggle="dropdown"><span class="glyphicon glyphicon-user register"><span class="register-icon">+</span></span>&nbsp;&nbsp;Register <span class="caret"></span></button>
 				<ul class="dropdown-menu">
 					<li class="dropdown-header">Register as?</li>
-					<li><a href="{{ url('registration/Student Form') }}"><span class="glyphicon glyphicon-education"></span>&nbsp;&nbsp;Student</a></li>
-					<li><a href="{{ url('registration/Sponsor Form') }}"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;&nbsp;Sponsor</a></li>
+					<li><a href="<?php echo e(url('registration/Student Form')); ?>"><span class="glyphicon glyphicon-education"></span>&nbsp;&nbsp;Student</a></li>
+					<li><a href="<?php echo e(url('registration/Sponsor Form')); ?>"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;&nbsp;Sponsor</a></li>
 				</ul>
 			</div>
 		</div>
 	</div>
 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make("layouts.indexGuest", array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

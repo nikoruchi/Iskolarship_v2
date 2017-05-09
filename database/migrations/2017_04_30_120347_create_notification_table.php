@@ -19,7 +19,7 @@ class CreateNotificationTable extends Migration
             $table->timestamp('notification_date');
             $table->string('notification_status');
             $table->integer('application_id')->references('application_id')->on('application');
-            $table->integer('account_id')->references('user_id')->on('user_account');
+            $table->integer('account_id')->references('user_id')->on('users');
             $table->timestamps();
         });
     }

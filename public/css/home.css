@@ -19,118 +19,167 @@
 	margin: auto;
 }
 
-.carousels-container > .col-sm-12{
-	padding: 0;
-}
-
-.carousels-container .carousel{
-	height: 186px;
-	/*height: 250px;*/
-	background-color: rgba(0,0,0,0.02);
-}
-.carousels-container .col-sm-12:not(:last-child){
-	border-bottom: 1px solid #DDD;
-}
-
-.panel-carousel > .panel-body{
-	padding-bottom: 0;
-}
-
-.carousels-container .carousel img{
-	height: 250px;
-	width: 100%;
-	object-fit: cover;
-	object-position: center;
-}
-
-.main-container > .row > .col-sm-9 > .panel > .panel-body{
-	padding-top: 0;
-}
-
-.panel-carousel .carousel-inner .row{
-	padding: 2.5% 7.5%;
-}
-
-.panel-carousel .carousel-control{
-	width: 5%;
-	background-color: rgba(0,0,0,0.2);
-	background-image: none;
+.stories .panel-body{
 	display: flex;
-	justify-content: center;
+	flex-wrap: wrap;
 	align-items: center;
 }
 
-.carousel-title{
-	margin: 0;
+.stories .direct .circle{
+	margin: 6px 0;
+	height: 63px;
+	width: 63px;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 50%;
+	border: 1px solid #DDD;
+}
+	
+.stories .direct .circle .glyphicon{
+	font-size: 2.5em;
+	color: #E91E63;
+	transform: translate(-5%,-5%);
+}
+
+.stories .separator{
+	width: 1px;
+	background-color: #DDD;
+	height: 5em;
+	margin: 0 0.25em 2em 1em;
+}
+
+.stories .person{
+	margin: 0 0.25em;
+}
+
+.stories .person img{
+	height: 75px;
+}
+
+.stories .direct p,
+.stories .person p{
 	text-align: center;
-	display: none;
-}
-
-.last-link a{
-	text-align: center;
-}
-
-.last-link a:hover{
-	text-decoration: none;
-}
-.last-link a .glyphicon{
-	font-size: 2em;
 	margin: 0;
-	margin-top: 0.1em;
 }
 
-.panel-carousel .btn-group-justified .btn-group:last-child button{
-	border-left-width: 0;
+.stories .person:not(.my) img{
+	padding: 3px;
+	border: 2px solid #E91E63;
 }
 
-.panel-carousel .item .panel-heading h5{
+.stories .person.my img{
+	padding: 6px;
+}
+
+.stories .person.my{
+	position: relative;
+}
+
+.stories .person.my .glyphicon{
+	display: block;
+	color: white;
+	position: absolute;
+	top: 5%;
+	right: 5%;
+	background-color: #E91E63;
+	font-size: 0.7em;
+	border-radius: 50%;
+	padding: 0.4em;
+	border: 2px solid white;
+}
+
+#formCarousel .paper h2{
 	margin: 0;
+}
+
+#formCarousel .carousel-indicators{
+	position: relative;
+	top: 0;
+	left: 0;
+	margin: 0;
+}
+
+#formCarousel .carousel-indicators li{
+	border-color: #DDD;
+	height: 2.5em;
+	width: 2.5em;
+	color: #888;
+	text-indent: 0;
 	text-align: center;
+	vertical-align: middle;
+	background-color: transparent;
+	border-radius: 50%;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	transition: 0.2s;
+	margin: 1px!important;
 }
 
-.panel-carousel .item .panel-body{
-	overflow: hidden;
-	padding: 0.5em;
+#formCarousel .carousel-indicators{
+	margin: auto;
+	margin-bottom: 1em;
 }
 
-.panel-carousel .item .panel-body .description{
-	text-overflow: ellipsis;
-	overflow: hidden;
-	height: 50px;
-	font-size: 0.9em;
+#formCarousel .carousel-indicators li span{
+	font-size: 1em;
+	text-align: center;
+	transform: translate(0,-20%);
+	transition: 0.2s;
 }
 
-.panel-carousel .item .panel-footer{
-	padding: 0 5px;
+#formCarousel .carousel-indicators li .fa-money{
+	background-color: #888;
+	color: white;
+	padding: 0 2.5px 0 2px;	
+	border-radius: 2px;
+	text-align: center;
+	transform: translate(0,-10%);
 }
 
-@media screen and (min-width: 767px){
-	.column{
-		padding: 0;
-	}
+#formCarousel .carousel-indicators li.active{
+	border-color: #2ecc71;
+	box-shadow: 0 0 10px rgba(39,174,96 ,0.2); 
+	color: #2ecc71;
+}
 
-	.column:first-child > .panel{border-radius: 4px 0 0 4px;}
-	.column:last-child > .panel{border-radius: 0 4px 4px 0;}
+#formCarousel .carousel-indicators li.active .fa-money{
+	background-color: #2ecc71;
+}
 
-	.column:first-child > .panel,
-	.column:last-child > .panel{
-		box-shadow: none;
-		border-radius: 0;
-	}
+#formCarousel .carousel-inner{
+	/*padding: 0.5em 0;*/
+	/*margin: 0.5em 0;*/
+	/*overflow: visible;*/
 
-	.column:first-child > .panel{
-		border-right-width: 0;
-	}	
+}
 
-	.column > .panel-default{
-		min-height: 85vh;
+#formCarousel .paper{
+	padding: 1em;
+	/*box-shadow: -3px 3px 15px rgba(0,0,0,0.08);*/
+	border: 1px solid #DDD;
+	border-radius: 4px;
+	min-height: 150px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+#formCarousel h2{
+	font-size: 1em;
+	text-align: left;
+	width: 100%;
+}
+
+
+@media screen and (min-width: 768px){
+	#formCarousel .paper{
+		width: 50%;
+		margin: auto;
 	}
-	.messaging-panel .panel-body{
-		min-height: 63vh;
-		max-height: 63vh;
-		overflow-y: auto;
-	}
-	.message{
-		max-width: 50%;
+	#formCarousel h2{
+		font-size: 2em;
 	}
 }
