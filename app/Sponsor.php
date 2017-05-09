@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Sponsor extends Model{
 
 	use Notifiable;
-    public $timestamps = false;
     protected $primaryKey = 'sponsor_id';
     protected $table = 'sponsor_account';
 

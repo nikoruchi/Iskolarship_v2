@@ -20,7 +20,7 @@ class SponsorAuthController extends Controller{
     public function Validation(Request $request){
 
         $validator = Validator::make($request->all(),[
-            'email' => 'required|email|max:255|unique:user_account,user_email',
+            'email' => 'required|email|max:255|unique:users,email',
             'password' => 'min:6|required|same:repassword',
             'repassword' => 'min:6|same:password',
             'contact' => 'required|regex:/(09)[0-9]{9}/',
@@ -46,7 +46,7 @@ class SponsorAuthController extends Controller{
 
     public function RegisterSponsor(Request $request){
         $user = new User;
-        $user ->user_email = $request ->email;
+        $user ->email = $request ->email;
         $password = $request ->password;
         $user ->password = Hash::make($password);
         $user ->user_contact  = $request ->contact;

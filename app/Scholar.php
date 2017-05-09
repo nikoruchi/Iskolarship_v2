@@ -11,8 +11,6 @@ use Illuminate\Database\Eloquent\Model;
 class Scholar extends Model
 {
     use Notifiable;
-    public $timestamps = false;
-    // protected $connection = 'mysql';
     protected $primaryKey = 'student_id';
     protected $table = 'student_account';
 
