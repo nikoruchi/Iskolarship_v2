@@ -37,11 +37,18 @@ Route::post('/registration/Student', 'ScholarAuthController@Validation');
 Route::post('/registration/Sponsor', 'SponsorAuthController@Validation');
 
 
-
-
-
 //============================ CHECKERS =========================
 // This will be changed as soon as auth and middleware is added
+// wag danay idelete
+// Route::get('/profile scholar', function(){
+	// return view('profiles/profile_scholar');
+// })->middleware('student');
+
+// Route::get('/profile scholar', function(){
+	// return view('profiles/profile_scholarship');
+// })->middleware('sponsor');
+
+Route::get('/profile scholar/{student_id}', ['middleware'=>'isguest','uses'=>'ProfileController@profile']);
 
 Route::get('/home', function () {
     return view('home');
@@ -49,10 +56,6 @@ Route::get('/home', function () {
 
 Route::get('/Search Results', function () {
     return view('search_results');
-});
-
-Route::get('/profile scholar', function () {
-    return view('profiles/profile_scholar');
 });
 
 Route::get('/profile scholarship', function () {

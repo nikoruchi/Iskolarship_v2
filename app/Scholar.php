@@ -5,6 +5,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
+// use
 
 // use Illuminate\Foundation\Auth\Scholar as Authenticatable;
 
@@ -45,4 +46,8 @@ class Scholar extends Model
     // protected $hidden = [
     //     'password', 'remember_token',
     // ];
+    public function userScholar()
+    {
+        return $this->belongsTo('User');
+   }
 }

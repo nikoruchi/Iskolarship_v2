@@ -25,28 +25,29 @@
 				</div>
 				<div class="collapse navbar-collapse" id="app-navbar-collapse">
 					<ul class="nav navbar-nav">
-						<li><a href="{{ url('/home') }}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-						@if(Auth::check())
+						<li><a href="<?php echo e(url('/home')); ?>"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+						<?php if(Auth::check()): ?>
 						<li><a href="#"><span class="glyphicon glyphicon-envelope"></span> Messages</a></li>
 						<li><a href="#"><span class="glyphicon glyphicon-bell"></span> Notifications</a></li>
-						@endif
-						@if(Auth::check() && Auth::user()->hasRole('student'))
+						<?php endif; ?>
+						<?php if(Auth::check() && Auth::user()->hasRole('student')): ?>
 						<li><a href="#"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
-						@elseif(Auth::check() && Auth::user()->hasRole('sponsor'))
-						<li><a href="{{ url('/profile scholarship') }}"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
-						@endif
+						<?php elseif(Auth::check() && Auth::user()->hasRole('sponsor')): ?>
+						<li><a href="<?php echo e(url('/profile scholarship')); ?>"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+						<?php endif; ?>
 					
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
-						@if(Auth::check())
-						<li><a href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><span class="glyphicon glyphicon-off"></span>&nbsp;Logout</a></li>
-						 <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
-                           		{{ csrf_field() }}
+						<?php if(Auth::check()): ?>
+						<li><a href="<?php echo e(url('/logout')); ?>" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><span class="glyphicon glyphicon-off"></span>&nbsp;Logout</a></li>
+						 <form id="logout-form" action="<?php echo e(url('/logout')); ?>" method="POST" style="display: none;">
+                           		<?php echo e(csrf_field()); ?>
+
                          </form>
-                         @endif
+                         <?php endif; ?>
 						<li class="dropdown">
 						<!-- dpat name hehe to check lng danay -->
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->email }} <span class="caret"></span></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo e(Auth::user()->email); ?> <span class="caret"></span></a>
 							<ul class="dropdown-menu">
 								<li><a href="profile.html"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
 								<li><a href="#"><span class="glyphicon glyphicon-cog"></span> Account Settings</a></li>
@@ -67,6 +68,6 @@
 			</div>
 		</nav>
 	</div>
-	@yield('content')
+	<?php echo $__env->yieldContent('content'); ?>
 </body>
 </html>
