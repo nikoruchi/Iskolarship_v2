@@ -31,11 +31,13 @@
 						<li><a href="#"><span class="glyphicon glyphicon-bell"></span> Notifications</a></li>
 						@endif
 						@if(Auth::check() && Auth::user()->hasRole('student'))
-						<li><a href="#"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+						<!-- should be student_id -->
+						<!-- $student_id = DB::table('student_account')->where('user_id', Auth::user()->user_id)->pluck('student_id'); -->
+
+						<li><a href="{{ url('/profile scholar/$student_id') }}"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
 						@elseif(Auth::check() && Auth::user()->hasRole('sponsor'))
 						<li><a href="{{ url('/profile scholarship') }}"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
 						@endif
-					
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						@if(Auth::check())

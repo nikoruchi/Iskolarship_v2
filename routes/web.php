@@ -20,7 +20,9 @@
 
 Route::get('/', function () {
     return view('auth.login');
-});
+})->middleware('guest');
+
+// Route::get('/profile scholar/{student_id}', ['middleware'=>'isguest','uses'=>'ProfileController@profile']);
 
 Auth::routes();
 

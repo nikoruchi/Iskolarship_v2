@@ -20,6 +20,7 @@
 						<button class="btn btn-primary"> <span class="glyphicon glyphicon-envelope"></span> Message</button>
 					</div>
 					@endif
+					@if(Auth::user()->hasRole('student'))
 					<div class="row">
 						<div class="col-sm-6">
 							<div class="paper">
@@ -59,6 +60,7 @@
 								</div>
 							</div>
 						</div>
+						@endif
 					</div>
 				</div>
 			</div>

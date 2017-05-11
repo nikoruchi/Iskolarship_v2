@@ -5,11 +5,11 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 
-class Scholarships extends Model
+class Application extends Model
 {
-     use Notifiable;
-    protected $primaryKey = 'scholarship_id';
-    protected $table = 'scholarship';
+    use Notifiable;
+    protected $primaryKey = 'application_id';
+    protected $table = 'application';
 
     /**
      * The attributes that are mass assignable.
@@ -17,10 +17,11 @@ class Scholarships extends Model
      * @var array
      */
     protected $fillable = [
- 		'sponsor_id',
-    	'scholarship_name',
-        'scholarship_desc' ,
-        'scholarship_logo',       
+ 		'scholarship_id',
+    	'student_id',
+        'application_date' ,
+        'accept_status',
+        'avail_status',       
     ];
 
     /**
