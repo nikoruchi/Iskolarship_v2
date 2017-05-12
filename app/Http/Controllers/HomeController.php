@@ -3,26 +3,44 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
+use App\Scholar;
+use App\User;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    // /**
+    //  * Create a new controller instance.
+    //  *
+    //  * @return void
+    //  */
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
+
+    // /**
+    //  * Show the application dashboard.
+    //  *
+    //  * @return \Illuminate\Http\Response
+    //  */
+    public function homeGuests()
     {
-        $this->middleware('auth');
+        return view('/');
+    }
+    public function homeSponsor(){
+        
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        return view('index');
+    public function homeStudent(){
+        $user_id = Auth::user()->user_id;
+        $user = User::findOrFail($user_id);
+        
+        $stud_id = Scholar::where('user_id','=', $user_id)->pluck('student_id');
+
+        $student = Scholar::findOrFail($stud_id);
+
+
+        return view('home', compact('student', 'user'));
     }
 }

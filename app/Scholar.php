@@ -46,8 +46,8 @@ class Scholar extends Model
     // protected $hidden = [
     //     'password', 'remember_token',
     // ];
-    public function userScholar()
+    public function student()
     {
-        return $this->belongsTo('User');
-   }
+        return $this->belongsTo('App\User');
+    }
 }

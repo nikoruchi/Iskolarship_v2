@@ -35,8 +35,9 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-     public function user_student(){
-        return $this->hasOne('Scholar');
+    public function user_student(){
+        return $this->hasMany('App\Scholar');
+        return $this->hasMany('App\Sponsor');
     }
 
     public function hasRole($role){

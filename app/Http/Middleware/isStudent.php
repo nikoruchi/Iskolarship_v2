@@ -14,7 +14,7 @@ class isStudent
      */
     public function handle($request, Closure $next)
     {
-        if(\Auth::check() && Auth::user()->user_type == 'student'){
+        if(Auth::check() && Auth::user()->user_type == 'student'){
             return $next($request);    
         }
         

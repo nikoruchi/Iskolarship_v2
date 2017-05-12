@@ -10,6 +10,7 @@
 	<link rel="stylesheet" type="text/css" href="/css/home.css"/>
 	<link rel="stylesheet" type="text/css" href="/css/scholar_page.css"/>
 	<link rel="stylesheet" type="text/css" href="/css/scholarship_page.css"/>
+
 </head>
 <body class="container-white">
 	<div id="app">
@@ -31,26 +32,30 @@
 						<li><a href="#"><span class="glyphicon glyphicon-bell"></span> Notifications</a></li>
 						@endif
 						@if(Auth::check() && Auth::user()->hasRole('student'))
-						<li><a href="#"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+						<li><a href="{{url('/profile scholar')}}"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
 						@elseif(Auth::check() && Auth::user()->hasRole('sponsor'))
 						<li><a href="{{ url('/profile scholarship') }}"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
 						@endif
 					
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
-						@if(Auth::check())
-						<li><a href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><span class="glyphicon glyphicon-off"></span>&nbsp;Logout</a></li>
-						 <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
-                           		{{ csrf_field() }}
-                         </form>
-                         @endif
+						
 						<li class="dropdown">
 						<!-- dpat name hehe to check lng danay -->
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->email }} <span class="caret"></span></a>
+						@if(Auth::user()->hasRole('student'))
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ $student->student_fname }} {{ $student->student_lname}} <span class="caret"></span></a>
+						@elseif(Auth::user()->hasRole('sponsor'))
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->$sponsor->sponsor_fname }} {{$sponsor->sponsor_lname}} <span class="caret"></span></a>
+						@endif
 							<ul class="dropdown-menu">
 								<li><a href="profile.html"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
 								<li><a href="#"><span class="glyphicon glyphicon-cog"></span> Account Settings</a></li>
-								<li><a href="index.html"><span class="glyphicon glyphicon-off"></span>&nbsp;Logout</a></li>
+								@if(Auth::check())
+									<li><a href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><span class="glyphicon glyphicon-off"></span>&nbsp;Logout</a></li>
+									 <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+			                           		{{ csrf_field() }}
+			                         </form>
+		                         @endif
 							</ul>
 						</li>
 					</ul>
@@ -68,5 +73,13 @@
 		</nav>
 	</div>
 	@yield('content')
+
+	<script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/app.js"></script>
+    <script>
+        $(document).ready(function(){$('[data-toggle="popover"]').popover();});
+        $(document).ready(function(){$('[data-toggle="tooltip"]').tooltip();});
+    </script>
+
 </body>
 </html>
