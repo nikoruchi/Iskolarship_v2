@@ -11,6 +11,7 @@ class ProfileController extends Controller
     public function profile($student_id){
     	$student = Scholar::findOrFail($student_id);
     	$user_id = $student->user_id;
+    	// $scholarships = Scholarships::
     	$user = User::findOrFail($user_id);
     	return view('profiles.profile_scholar', compact('student','user'));
     }

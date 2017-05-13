@@ -8,8 +8,8 @@ use Illuminate\Notifications\Notifiable;
 class Scholarships extends Model
 {
      use Notifiable;
-    protected $primaryKey = 'scholarship_id';
-    protected $table = 'scholarship';
+    protected $primaryKey = 'essay_questionID';
+    protected $table = 'essay_question';
 
     /**
      * The attributes that are mass assignable.
@@ -17,10 +17,8 @@ class Scholarships extends Model
      * @var array
      */
     protected $fillable = [
- 		'sponsor_id',
-    	'scholarship_name',
-        'scholarship_desc' ,
-        'scholarship_logo',       
+ 		'scholarship_id',
+    	'essay_question',       
     ];
 
     /**
