@@ -13,7 +13,7 @@ class CreateStudentAccountTable extends Migration
      */
     public function up()
     {
-        Schema::create('student_account', function (Blueprint $table) {
+        Schema::create('scholars', function (Blueprint $table) {
             $table->increments('student_id');
             $table->integer('user_id')->references('user_id')->on('users');
             $table->string('student_fname');
