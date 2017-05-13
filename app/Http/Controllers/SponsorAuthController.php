@@ -52,7 +52,7 @@ class SponsorAuthController extends Controller{
         $user ->user_contact  = $request ->contact;
         $user ->user_type  = 'sponsor';
         $user ->user_aboutme  = 'WLA';
-        $user ->user_imagepath  = '0';
+        $user ->user_imagepath  = 'default';
         $user ->save();
 
         $sponsor = new Sponsor;

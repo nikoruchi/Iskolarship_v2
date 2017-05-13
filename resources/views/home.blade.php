@@ -7,9 +7,9 @@
 			<div class="col-sm-3">
 				<div class="panel panel-default"> 
 					<div class="panel-heading">
-						<img src="uploads/pp.jpg" class="img-responsive img-circle aside-pp"/>
-						<h4 class="text-center">Clyde Joshua Delgado</h4>
-						<h4 class="text-center"><span class="small">Xon_Gado</span></h4>
+						<img src="image/{{ Auth::user()->user_imagepath }}.jpg" class="img-responsive img-circle aside-pp"/>
+						<h4 class="text-center">{{$student->student_fname}} {{$student->student_lname}}</h4>
+						<h4 class="text-center"><span class="small"></span></h4>
 					</div>
 					<div class="panel-body panel-group" id="accordion">
 						<div class="panel panel-default">

@@ -20,7 +20,9 @@
 
 Route::get('/', function () {
     return view('auth.login');
-});
+})->middleware('guest');
+
+// Route::get('/profile scholar/{student_id}', ['middleware'=>'isguest','uses'=>'ProfileController@profile']);
 
 Auth::routes();
 
@@ -38,17 +40,32 @@ Route::post('/registration/Sponsor', 'SponsorAuthController@Validation');
 
 //============================ CHECKERS =========================
 // This will be changed as soon as auth and middleware is added
+// wag danay idelete
 
-Route::get('/home', function () {
-    return view('home');
-});
+// Route::get('/profile scholar', function(){
+	// return view('profiles/profile_scholar');
+// })->middleware('student');
+
+// Route::get('/profile scholar', function(){
+	// return view('profiles/profile_scholarship');
+// })->middleware('sponsor');
+
+Route::get('/profile scholar/{student_id}', ['middleware'=>'isguest','uses'=>'ProfileController@profile']);
+
+Route::get('/profile scholar', 'ProfileController@profileStudent');
+// Route::get('/home', function () {
+//     return view('home');
+// });
+
+Route::get('/home', ['middleware'=>'student','uses'=>'HomeController@homeStudent']);
+
+// Route::get('/home', ['middleware'=>'sponsor','uses'=>'HomeController@homeSponsor']);
+
+// Route::get('/home', 'HomeController@homeGuests');
+
 
 Route::get('/Search Results', function () {
     return view('search_results');
-});
-
-Route::get('/profile scholar', function () {
-    return view('profiles/profile_scholar');
 });
 
 Route::get('/profile scholarship', function () {

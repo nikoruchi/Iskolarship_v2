@@ -34,4 +34,13 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function user_student(){
+        return $this->hasMany('App\Scholar');
+        return $this->hasMany('App\Sponsor');
+    }
+
+    public function hasRole($role){
+        return $this->user_type == $role;
+    }
 }

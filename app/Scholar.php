@@ -1,6 +1,5 @@
 <?php
 
-// namespace App;
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
@@ -45,4 +44,8 @@ class Scholar extends Model
     // protected $hidden = [
     //     'password', 'remember_token',
     // ];
+    public function student()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

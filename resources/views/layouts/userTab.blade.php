@@ -24,18 +24,35 @@
 				</div>
 				<div class="collapse navbar-collapse" id="app-navbar-collapse">
 					<ul class="nav navbar-nav">
-						<li><a href="#"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+						<li><a href="{{ url('/home') }}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+						@if(Auth::check())
 						<li><a href="#"><span class="glyphicon glyphicon-envelope"></span> Messages</a></li>
 						<li><a href="#"><span class="glyphicon glyphicon-bell"></span> Notifications</a></li>
-						<li><a href="#"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+						@endif
+						@if(Auth::check() && Auth::user()->hasRole('student'))
+						<li><a href="{{url('/profile scholar')}}"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+						@elseif(Auth::check() && Auth::user()->hasRole('sponsor'))
+						<li><a href="{{ url('/profile scholarship') }}"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+						@endif
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
+						
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Clyde Joshua Delgado <span class="caret"></span></a>
+						<!-- dpat name hehe to check lng danay -->
+						@if(Auth::user()->hasRole('student'))
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ $student->student_fname }} {{ $student->student_lname}} <span class="caret"></span></a>
+						@elseif(Auth::user()->hasRole('sponsor'))
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->$sponsor->sponsor_fname }} {{$sponsor->sponsor_lname}} <span class="caret"></span></a>
+						@endif
 							<ul class="dropdown-menu">
 								<li><a href="profile.html"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
 								<li><a href="#"><span class="glyphicon glyphicon-cog"></span> Account Settings</a></li>
-								<li><a href="index.html"><span class="glyphicon glyphicon-off"></span>&nbsp;Logout</a></li>
+								@if(Auth::check())
+									<li><a href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><span class="glyphicon glyphicon-off"></span>&nbsp;Logout</a></li>
+									 <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+			                           		{{ csrf_field() }}
+			                         </form>
+		                         @endif
 							</ul>
 						</li>
 					</ul>
@@ -52,7 +69,6 @@
 			</div>
 		</nav>
 	</div>
-	
 	@yield('content')
 
 	@stack('scripts')

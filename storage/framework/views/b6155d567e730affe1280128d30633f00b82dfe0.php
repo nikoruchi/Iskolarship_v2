@@ -29,8 +29,8 @@
                             <a href="#" data-toggle="dropdown"><span class="glyphicon glyphicon-user register"><span class="register-icon">+</span></span>&nbsp;&nbsp;Register <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li class="dropdown-header">Register as?</li>
-                                <li><a href="registration/Student Form"><span class="glyphicon glyphicon-education"></span>&nbsp;&nbsp;Student</a></li>
-                                <li><a href="registration/Sponsor Form"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;&nbsp;Sponsor</a></li>
+                                <li><a href="<?php echo e(url('registration/Student Form')); ?>"><span class="glyphicon glyphicon-education"></span>&nbsp;&nbsp;Student</a></li>
+                                <li><a href="<?php echo e(url('registration/Sponsor Form')); ?>"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;&nbsp;Sponsor</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -42,8 +42,8 @@
     
   <?php echo $__env->yieldContent('content'); ?>;
 
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/app.js"></script>
     <script>
         $(document).ready(function(){$('[data-toggle="popover"]').popover();});
         $(document).ready(function(){$('[data-toggle="tooltip"]').tooltip();});
