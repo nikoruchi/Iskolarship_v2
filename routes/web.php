@@ -38,7 +38,6 @@ Route::post('/registration/Student', 'ScholarAuthController@Validation');
 
 Route::post('/registration/Sponsor', 'SponsorAuthController@Validation');
 
-
 //============================ CHECKERS =========================
 // This will be changed as soon as auth and middleware is added
 // wag danay idelete
@@ -70,4 +69,14 @@ Route::get('/Search Results', function () {
 
 Route::get('/profile scholarship', function () {
     return view('profiles/profile_scholarship');
+});
+
+
+//=============== FOR FRONT-END PURPOSES =======================
+Route::get('/messages', function () {
+    return view('user/messages');
+});
+
+Route::get('/search', function () {
+    return view('user/search');
 });

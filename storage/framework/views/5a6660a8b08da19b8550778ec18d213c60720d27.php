@@ -4,10 +4,17 @@
     <title>Iskolarship</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
+<<<<<<< HEAD
     <link rel="stylesheet" type="text/css" href="/css/app.css"/>
     <link rel="stylesheet" type="text/css" href="/css/font-awesome/css/font-awesome.min.css"/>
     <link rel="stylesheet" type="text/css" href="/css/main.css"/>
     <link rel="stylesheet" type="text/css" href="/css/index.css"/>
+=======
+    <link rel="stylesheet" type="text/css" href="css/app.css"/>
+    <link rel="stylesheet" type="text/css" href="css/font-awesome/css/font-awesome.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="css/index.css"/>
+>>>>>>> fba89996be0a5dacff11b86ed13eaf58d6eab177
 </head>
 <body>
     <div id="app">
@@ -29,7 +36,11 @@
                             <ul class="dropdown-menu">
                                 <li class="dropdown-header">Register as?</li>
                                 <li><a href="registration/Student Form"><span class="glyphicon glyphicon-education"></span>&nbsp;&nbsp;Student</a></li>
+<<<<<<< HEAD
                                 <li><a href="/Sponsor Form"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;&nbsp;Sponsor</a></li>
+=======
+                                <li><a href="registration/Sponsor Form"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;&nbsp;Sponsor</a></li>
+>>>>>>> fba89996be0a5dacff11b86ed13eaf58d6eab177
                             </ul>
                         </li>
                     </ul>
@@ -44,8 +55,13 @@
 
 
 
+<<<<<<< HEAD
     <script type="text/javascript" src="/js/jquery.min.js"></script>
     <script type="text/javascript" src="/js/app.js"></script>
+=======
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+>>>>>>> fba89996be0a5dacff11b86ed13eaf58d6eab177
     <script>
         $(document).ready(function(){$('[data-toggle="popover"]').popover();});
         $(document).ready(function(){$('[data-toggle="tooltip"]').tooltip();});

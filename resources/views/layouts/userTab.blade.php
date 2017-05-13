@@ -4,13 +4,11 @@
 	<title>Iskolarship</title>
 	<meta charset="utf-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
-	<link rel="stylesheet" type="text/css" href="/css/app.css"/>
-	<link rel="stylesheet" type="text/css" href="/css/font-awesome/css/font-awesome.min.css"/>
-	<link rel="stylesheet" type="text/css" href="/css/main.css"/>
-	<link rel="stylesheet" type="text/css" href="/css/home.css"/>
-	<link rel="stylesheet" type="text/css" href="/css/scholar_page.css"/>
-	<link rel="stylesheet" type="text/css" href="/css/scholarship_page.css"/>
-
+	<link rel="stylesheet" type="text/css" href="css/app.css"/>
+	<link rel="stylesheet" type="text/css" href="css/font-awesome/css/font-awesome.min.css"/>
+	<link rel="stylesheet" type="text/css" href="css/main.css"/>
+	<!-- <link rel="stylesheet" type="text/css" href="css/scholarship_page.css"/> -->
+	@stack('styles')
 </head>
 <body class="container-white">
 	<div id="app">
@@ -73,12 +71,6 @@
 	</div>
 	@yield('content')
 
-	<script type="text/javascript" src="/js/jquery.min.js"></script>
-    <script type="text/javascript" src="/js/app.js"></script>
-    <script>
-        $(document).ready(function(){$('[data-toggle="popover"]').popover();});
-        $(document).ready(function(){$('[data-toggle="tooltip"]').tooltip();});
-    </script>
-
+	@stack('scripts')
 </body>
 </html>

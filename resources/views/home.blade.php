@@ -134,3 +134,7 @@
 	</div>
 
 @endsection
+
+@push('styles')
+	<link rel="stylesheet" type="text/css" href="css/home.css"/>
+@endpush
