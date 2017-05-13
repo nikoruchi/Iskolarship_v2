@@ -1,6 +1,4 @@
-@extends("layouts.userTab")
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 	<div class="container main-container">
 		<div class="row">
 			<div class="col-sm-8 col-sm-offset-2">
@@ -61,12 +59,13 @@
 		</div>
 	</div>
 
-@endsection
+<?php $__env->stopSection(); ?>
 
-@push('styles')
+<?php $__env->startPush('styles'); ?>
 	<link rel="stylesheet" type="text/css" href="css/scholar_page.css"/>
-@endpush
+<?php $__env->stopPush(); ?>
 
-@push('scripts')
+<?php $__env->startPush('scripts'); ?>
 	<script src="js/default_img.js"></script>
-@endpush
+<?php $__env->stopPush(); ?>
+<?php echo $__env->make("layouts.userTab", array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

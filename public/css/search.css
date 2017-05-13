@@ -1,0 +1,53 @@
+*{
+	box-sizing: border-box;
+}
+
+.panel-container{
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	flex-wrap: wrap;
+	width: 80%;
+	margin: auto;
+}
+
+.panel-container > h2{
+	width: 100%;
+	padding-top: 1em;
+	border-top: 1px solid #DDD;
+}
+
+.panel-container > .panel{
+	width: 23%;
+	margin: 1%;
+}
+
+.panel-container .panel .scholarship-name{
+	text-align: center;
+}
+
+.panel-container .panel .description{
+	max-height: 6em;
+	font-size: 0.9em;
+	overflow: hidden;
+	width: 100%;
+	text-overflow: ellipsis;
+}
+
+.img-square{
+	width: 80%;
+	margin: 5% 10%;
+	padding-bottom: 80%;
+	position: relative;	
+	display: block;
+}
+
+.img-square img{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+
+.search-img{
+	border-radius: 4px;
+}

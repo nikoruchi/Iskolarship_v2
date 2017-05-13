@@ -8,7 +8,7 @@
 	<link rel="stylesheet" type="text/css" href="css/font-awesome/css/font-awesome.min.css"/>
 	<link rel="stylesheet" type="text/css" href="css/main.css"/>
 	<!-- <link rel="stylesheet" type="text/css" href="css/scholarship_page.css"/> -->
-	@stack('styles')
+	<?php echo $__env->yieldPushContent('styles'); ?>
 </head>
 <body class="container-white">
 	<div id="app">
@@ -53,8 +53,8 @@
 		</nav>
 	</div>
 	
-	@yield('content')
+	<?php echo $__env->yieldContent('content'); ?>
 
-	@stack('scripts')
+	<?php echo $__env->yieldPushContent('scripts'); ?>
 </body>
 </html>
