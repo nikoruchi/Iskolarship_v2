@@ -81,3 +81,5 @@ Route::get('/messages', function () {
 Route::get('/search', function () {
     return view('user/search');
 });
+
+Route::get('/edit profile', 'EditProfileController@editProfileStudent');

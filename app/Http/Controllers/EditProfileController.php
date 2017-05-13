@@ -7,7 +7,7 @@ use Auth;
 use App\Scholar;
 use App\User;
 
-class HomeController extends Controller
+class EditProfileController extends Controller
 {
     // /**
     //  * Create a new controller instance.
@@ -24,15 +24,16 @@ class HomeController extends Controller
     //  *
     //  * @return \Illuminate\Http\Response
     //  */
-    public function homeGuests()
-    {
-        return view('/');
-    }
-    public function homeSponsor(){
-        
-    }
 
-    public function homeStudent(){
+    // public function homeGuests()
+    // {
+    //     return view('/');
+    // }
+    // public function homeSponsor(){
+        
+    // }
+
+    public function editProfileStudent(){
         $user_id = Auth::user()->user_id;
         $user = User::findOrFail($user_id)->first();
         
@@ -40,7 +41,6 @@ class HomeController extends Controller
 
         $student = Scholar::findOrFail($stud_id)->first();
 
-
-        return view('home', compact('student', 'user'));
+        return view('profiles/settings/edit_profile', compact('student', 'user'));
     }
 }

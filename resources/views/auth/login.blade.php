@@ -15,9 +15,6 @@
                 <div class="input-group {{ $errors->has('email') ? ' has-error' : '' }}">
                     <input type="text" name="email" placeholder="Email Address" class="form-control" value="{{ old('email') }}"/>
                     <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-
-                    
-
                 </div>
 
                 <div class="input-group {{ $errors->has('password') ? ' has-error' : '' }}">
