@@ -37,7 +37,10 @@ class User extends Authenticatable
 
     public function user_student(){
         return $this->hasMany('App\Scholar');
-        return $this->hasMany('App\Sponsor');
+    }
+
+    public function user_sponsor(){
+        return $this->hasMany('App\Sponsor');        
     }
 
     public function hasRole($role){

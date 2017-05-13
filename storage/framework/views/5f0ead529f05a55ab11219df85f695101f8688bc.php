@@ -10,6 +10,7 @@
 	<link rel="stylesheet" type="text/css" href="/css/home.css"/>
 	<link rel="stylesheet" type="text/css" href="/css/scholar_page.css"/>
 	<link rel="stylesheet" type="text/css" href="/css/scholarship_page.css"/>
+
 </head>
 <body class="container-white">
 	<div id="app">
@@ -31,29 +32,30 @@
 						<li><a href="#"><span class="glyphicon glyphicon-bell"></span> Notifications</a></li>
 						<?php endif; ?>
 						<?php if(Auth::check() && Auth::user()->hasRole('student')): ?>
-						<!-- should be student_id -->
-						<!-- $student_id = DB::table('student_account')->where('user_id', Auth::user()->user_id)->pluck('student_id'); -->
-
-						<li><a href="<?php echo e(url('/profile scholar/$student_id')); ?>"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+						<li><a href="<?php echo e(url('/profile scholar')); ?>"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
 						<?php elseif(Auth::check() && Auth::user()->hasRole('sponsor')): ?>
 						<li><a href="<?php echo e(url('/profile scholarship')); ?>"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
 						<?php endif; ?>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
-						<?php if(Auth::check()): ?>
-						<li><a href="<?php echo e(url('/logout')); ?>" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><span class="glyphicon glyphicon-off"></span>&nbsp;Logout</a></li>
-						 <form id="logout-form" action="<?php echo e(url('/logout')); ?>" method="POST" style="display: none;">
-                           		<?php echo e(csrf_field()); ?>
-
-                         </form>
-                         <?php endif; ?>
+						
 						<li class="dropdown">
 						<!-- dpat name hehe to check lng danay -->
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo e(Auth::user()->email); ?> <span class="caret"></span></a>
+						<?php if(Auth::user()->hasRole('student')): ?>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo e($student->student_fname); ?> <?php echo e($student->student_lname); ?> <span class="caret"></span></a>
+						<?php elseif(Auth::user()->hasRole('sponsor')): ?>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo e(Auth::user()->$sponsor->sponsor_fname); ?> <?php echo e($sponsor->sponsor_lname); ?> <span class="caret"></span></a>
+						<?php endif; ?>
 							<ul class="dropdown-menu">
 								<li><a href="profile.html"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
 								<li><a href="#"><span class="glyphicon glyphicon-cog"></span> Account Settings</a></li>
-								<li><a href="index.html"><span class="glyphicon glyphicon-off"></span>&nbsp;Logout</a></li>
+								<?php if(Auth::check()): ?>
+									<li><a href="<?php echo e(url('/logout')); ?>" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><span class="glyphicon glyphicon-off"></span>&nbsp;Logout</a></li>
+									 <form id="logout-form" action="<?php echo e(url('/logout')); ?>" method="POST" style="display: none;">
+			                           		<?php echo e(csrf_field()); ?>
+
+			                         </form>
+		                         <?php endif; ?>
 							</ul>
 						</li>
 					</ul>
@@ -71,5 +73,13 @@
 		</nav>
 	</div>
 	<?php echo $__env->yieldContent('content'); ?>
+
+	<script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/app.js"></script>
+    <script>
+        $(document).ready(function(){$('[data-toggle="popover"]').popover();});
+        $(document).ready(function(){$('[data-toggle="tooltip"]').tooltip();});
+    </script>
+
 </body>
 </html>

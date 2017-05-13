@@ -64,7 +64,6 @@ Route::get('/home', ['middleware'=>'student','uses'=>'HomeController@homeStudent
 
 // Route::get('/home', 'HomeController@homeGuests');
 
-
 Route::get('/Search Results', function () {
     return view('search_results');
 });
