@@ -6,6 +6,7 @@
 				<div class="panel panel-default"> 
 					<div class="panel-heading">
 						<img src="image/<?php echo e(Auth::user()->user_imagepath); ?>.jpg" class="img-responsive img-circle aside-pp"/>
+<<<<<<< HEAD
 						<h4 class="text-center">
 						<?php if(Auth::user()->hasRole('student')): ?>
 							<?php echo e($student->student_fname); ?> <?php echo e($student->student_lname); ?>
@@ -15,11 +16,15 @@
 
 						<?php endif; ?>
 						</h4>
+=======
+						<h4 class="text-center"><?php echo e($student->student_fname); ?> <?php echo e($student->student_lname); ?></h4>
+>>>>>>> a3ddce09f01a43ffcc055928c616644a858fa593
 						<h4 class="text-center"><span class="small"></span></h4>
 					</div>
 					<div class="panel-body panel-group" id="accordion">
 						<div class="panel panel-default">
 							<div class="panel-heading">
+<<<<<<< HEAD
 								<a data-toggle="collapse" data-parent="#accordion" href="#collapse1"><h5 class="text-center panel-title">
 								<?php if(Auth::user()->hasRole('student')): ?>
 									Your Sponsors
@@ -27,6 +32,9 @@
 									Your Scholarships
 								<?php endif; ?>
 								</h5></a>
+=======
+								<a data-toggle="collapse" data-parent="#accordion" href="#collapse1"><h5 class="text-center panel-title">Your Scholarships</h5></a>
+>>>>>>> a3ddce09f01a43ffcc055928c616644a858fa593
 							</div>
 							<div id="collapse1" class="panel-collapse collapse in">
 						      	<div class="panel-body">
@@ -43,6 +51,7 @@
 
 						<div class="panel panel-default">
 							<div class="panel-heading">
+<<<<<<< HEAD
 								<a data-toggle="collapse" data-parent="#accordion" href="#collapse2"><h5 class="text-center panel-title">
 								<?php if(Auth::user()->hasRole('student')): ?>
 									Your Sponsors
@@ -50,11 +59,17 @@
 									Your Scholarships
 								<?php endif; ?>
 								</h5></a>
+=======
+								<a data-toggle="collapse" data-parent="#accordion" href="#collapse2"><h5 class="text-center panel-title">Your Sponsors</h5></a>
+>>>>>>> a3ddce09f01a43ffcc055928c616644a858fa593
 							</div>
 							<div id="collapse2" class="panel-collapse collapse">
 						      	<div class="panel-body">
 						      		<ul class="list-unstyled">
+<<<<<<< HEAD
 
+=======
+>>>>>>> a3ddce09f01a43ffcc055928c616644a858fa593
 										<li><a href="#" data-toggle="tooltip" data-placement="right" title="Sponsor 1">Sponsor 1</a></li>
 										<li><a href="#" data-toggle="tooltip" data-placement="right" title="Sponsor 2">Sponsor 2</a></li>
 										<li><a href="#" data-toggle="tooltip" data-placement="right" title="Sponsor 3">Sponsor 3</a></li>

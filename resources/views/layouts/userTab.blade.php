@@ -39,10 +39,17 @@
 						
 						<li class="dropdown">
 						<!-- dpat name hehe to check lng danay -->
+<<<<<<< HEAD
 						@if(Auth::check() && Auth::user()->hasRole('student'))
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ $student->student_fname }} {{ $student->student_lname}} <span class="caret"></span></a>
 						@elseif(Auth::check() && Auth::user()->hasRole('sponsor'))
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ $sponsor->sponsor_fname }} {{$sponsor->sponsor_lname}} <span class="caret"></span></a>
+=======
+						@if(Auth::user()->hasRole('student'))
+							<a href="#" class="" ="dropdown-toggle" data-toggle="dropdown">{{ $student->student_fname }} {{ $student->student_lname}} <span class="caret"></span></a>
+						@elseif(Auth::user()->hasRole('sponsor'))
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->$sponsor->sponsor_fname }} {{$sponsor->sponsor_lname}} <span class="caret"></span></a>
+>>>>>>> a3ddce09f01a43ffcc055928c616644a858fa593
 						@endif
 							<ul class="dropdown-menu">
 								<li><a href="{{ url('/profile scholar') }}"><span class="glyphicon glyphicon-user"></span> Profile</a></li>

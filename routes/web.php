@@ -75,9 +75,3 @@ Route::get('/profile scholarship/{scholarship_id}', 'ProfileController@homeSpons
 Route::get('/search', function () {
     return view('user/search');
 });
-
-// Route::resource('/messages', ['middleware' => 'isguest', 'uses' => 'MessagesController']);
-
-Route::group(['middleware' => 'isguest'], function() {
-  Route::resource('/messages', 'MessagesController');
-});
