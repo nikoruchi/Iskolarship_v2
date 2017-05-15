@@ -6,13 +6,27 @@
 				<div class="panel panel-default"> 
 					<div class="panel-heading">
 						<img src="image/<?php echo e(Auth::user()->user_imagepath); ?>.jpg" class="img-responsive img-circle aside-pp"/>
-						<h4 class="text-center"><?php echo e($student->student_fname); ?> <?php echo e($student->student_lname); ?></h4>
+						<h4 class="text-center">
+						<?php if(Auth::user()->hasRole('student')): ?>
+							<?php echo e($student->student_fname); ?> <?php echo e($student->student_lname); ?>
+
+						<?php elseif(Auth::user()->hasRole('sponsor')): ?>
+							<?php echo e($sponsor->sponsor_fname); ?> <?php echo e($sponsor->sponsor_lname); ?>
+
+						<?php endif; ?>
+						</h4>
 						<h4 class="text-center"><span class="small"></span></h4>
 					</div>
 					<div class="panel-body panel-group" id="accordion">
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								<a data-toggle="collapse" data-parent="#accordion" href="#collapse1"><h5 class="text-center panel-title">Your Scholarships</h5></a>
+								<a data-toggle="collapse" data-parent="#accordion" href="#collapse1"><h5 class="text-center panel-title">
+								<?php if(Auth::user()->hasRole('student')): ?>
+									Your Sponsors
+								<?php elseif(Auth::user()->hasRole('sponsor')): ?>
+									Your Scholarships
+								<?php endif; ?>
+								</h5></a>
 							</div>
 							<div id="collapse1" class="panel-collapse collapse in">
 						      	<div class="panel-body">
@@ -29,11 +43,18 @@
 
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								<a data-toggle="collapse" data-parent="#accordion" href="#collapse2"><h5 class="text-center panel-title">Your Sponsors</h5></a>
+								<a data-toggle="collapse" data-parent="#accordion" href="#collapse2"><h5 class="text-center panel-title">
+								<?php if(Auth::user()->hasRole('student')): ?>
+									Your Sponsors
+								<?php elseif(Auth::user()->hasRole('sponsor')): ?>
+									Your Scholarships
+								<?php endif; ?>
+								</h5></a>
 							</div>
 							<div id="collapse2" class="panel-collapse collapse">
 						      	<div class="panel-body">
 						      		<ul class="list-unstyled">
+
 										<li><a href="#" data-toggle="tooltip" data-placement="right" title="Sponsor 1">Sponsor 1</a></li>
 										<li><a href="#" data-toggle="tooltip" data-placement="right" title="Sponsor 2">Sponsor 2</a></li>
 										<li><a href="#" data-toggle="tooltip" data-placement="right" title="Sponsor 3">Sponsor 3</a></li>
@@ -132,4 +153,8 @@
 	</div>
 
 <?php $__env->stopSection(); ?>
+
+<?php $__env->startPush('styles'); ?>
+	<link rel="stylesheet" type="text/css" href="css/home.css"/>
+<?php $__env->stopPush(); ?>
 <?php echo $__env->make("layouts.userTab", array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

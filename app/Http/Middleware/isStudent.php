@@ -14,11 +14,9 @@ class isStudent
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::check() && Auth::user()->user_type == 'student'){
-            return $next($request);    
+        if(Auth::check() && Auth::user()->user_type != 'student'){
+            return redirect()->action('HomeController@homeSponsor');
         }
-        
-        // can guests etc...
-        // return redirect
+        return $next($request);    
     }
 }

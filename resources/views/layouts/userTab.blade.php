@@ -26,7 +26,7 @@
 					<ul class="nav navbar-nav">
 						<li><a href="{{ url('/home') }}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
 						@if(Auth::check())
-						<li><a href="#"><span class="glyphicon glyphicon-envelope"></span> Messages</a></li>
+						<li><a href="{{ url('/messages') }}"><span class="glyphicon glyphicon-envelope"></span> Messages</a></li>
 						<li><a href="#"><span class="glyphicon glyphicon-bell"></span> Notifications</a></li>
 						@endif
 						@if(Auth::check() && Auth::user()->hasRole('student'))
@@ -39,13 +39,13 @@
 						
 						<li class="dropdown">
 						<!-- dpat name hehe to check lng danay -->
-						@if(Auth::user()->hasRole('student'))
+						@if(Auth::check() && Auth::user()->hasRole('student'))
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ $student->student_fname }} {{ $student->student_lname}} <span class="caret"></span></a>
-						@elseif(Auth::user()->hasRole('sponsor'))
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->$sponsor->sponsor_fname }} {{$sponsor->sponsor_lname}} <span class="caret"></span></a>
+						@elseif(Auth::check() && Auth::user()->hasRole('sponsor'))
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ $sponsor->sponsor_fname }} {{$sponsor->sponsor_lname}} <span class="caret"></span></a>
 						@endif
 							<ul class="dropdown-menu">
-								<li><a href="profile.html"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+								<li><a href="{{ url('/profile scholar') }}"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
 								<li><a href="#"><span class="glyphicon glyphicon-cog"></span> Account Settings</a></li>
 								@if(Auth::check())
 									<li><a href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><span class="glyphicon glyphicon-off"></span>&nbsp;Logout</a></li>
@@ -72,5 +72,11 @@
 	@yield('content')
 
 	@stack('scripts')
+	<script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/app.js"></script>
+    <script>
+        $(document).ready(function(){$('[data-toggle="popover"]').popover();});
+        $(document).ready(function(){$('[data-toggle="tooltip"]').tooltip();});
+    </script>
 </body>
 </html>

@@ -24,7 +24,7 @@
 						<div class="col-sm-6">
 							<div class="paper">
 								<h4 class="text-center youHave">You have</h4>
-								<h4 class="count">6</h4>
+								<h4 class="count"><?php echo e($scholarships); ?></h4>
 								<h4 class="text-center">Scholarships</h4>
 								<div class="flex"><button class="btn btn-default"><span class="glyphicon glyphicon-modal-window"></span> See all</button></div>
 							</div>
@@ -32,7 +32,7 @@
 						<div class="col-sm-6">
 							<div class="paper">
 								<h4 class="text-center youHave">You have</h4>
-								<h4 class="count">5</h4>
+								<h4 class="count"><?php echo e($sponsors); ?></h4>
 								<h4 class="text-center">Sponsors</h4>
 								<div class="flex">
 									<button class="btn btn-default"><span class="glyphicon glyphicon-modal-window"></span> See all</button>
@@ -42,7 +42,7 @@
 						<div class="col-sm-6">
 							<div class="paper margin-top">
 								<h4 class="text-center youHave">You have</h4>
-								<h4 class="count">5</h4>
+								<h4 class="count"><?php echo e($pending); ?></h4>
 								<h4 class="text-center">Pending Scholarships</h4>
 								<div class="flex">
 									<button class="btn btn-default"><span class="glyphicon glyphicon-modal-window"></span> See all</button>
@@ -67,4 +67,12 @@
 	</div>
 
 <?php $__env->stopSection(); ?>
+
+<?php $__env->startPush('styles'); ?>
+	<link rel="stylesheet" type="text/css" href="css/scholar_page.css"/>
+<?php $__env->stopPush(); ?>
+
+<?php $__env->startPush('scripts'); ?>
+	<script src="js/default_img.js"></script>
+<?php $__env->stopPush(); ?>
 <?php echo $__env->make('layouts.userTab', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

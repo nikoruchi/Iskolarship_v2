@@ -4,24 +4,11 @@
 	<title>Iskolarship</title>
 	<meta charset="utf-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<<<<<<< HEAD
 	<link rel="stylesheet" type="text/css" href="css/app.css"/>
 	<link rel="stylesheet" type="text/css" href="css/font-awesome/css/font-awesome.min.css"/>
 	<link rel="stylesheet" type="text/css" href="css/main.css"/>
 	<!-- <link rel="stylesheet" type="text/css" href="css/scholarship_page.css"/> -->
 	<?php echo $__env->yieldPushContent('styles'); ?>
-=======
-	<link rel="stylesheet" type="text/css" href="/css/app.css"/>
-	<link rel="stylesheet" type="text/css" href="/css/font-awesome/css/font-awesome.min.css"/>
-	<link rel="stylesheet" type="text/css" href="/css/main.css"/>
-	<link rel="stylesheet" type="text/css" href="/css/home.css"/>
-	<link rel="stylesheet" type="text/css" href="/css/scholar_page.css"/>
-	<link rel="stylesheet" type="text/css" href="/css/scholarship_page.css"/>
-<<<<<<< HEAD
-
-=======
->>>>>>> 9dc1e86788c62aa660e1218e084f319b012e8a76
->>>>>>> fba89996be0a5dacff11b86ed13eaf58d6eab177
 </head>
 <body class="container-white">
 	<div id="app">
@@ -37,19 +24,9 @@
 				</div>
 				<div class="collapse navbar-collapse" id="app-navbar-collapse">
 					<ul class="nav navbar-nav">
-<<<<<<< HEAD
-						<li><a href="#"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-						<li><a href="#"><span class="glyphicon glyphicon-envelope"></span> Messages</a></li>
-						<li><a href="#"><span class="glyphicon glyphicon-bell"></span> Notifications</a></li>
-						<li><a href="#"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
-					</ul>
-					<ul class="nav navbar-nav navbar-right">
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Clyde Joshua Delgado <span class="caret"></span></a>
-=======
 						<li><a href="<?php echo e(url('/home')); ?>"><span class="glyphicon glyphicon-home"></span> Home</a></li>
 						<?php if(Auth::check()): ?>
-						<li><a href="#"><span class="glyphicon glyphicon-envelope"></span> Messages</a></li>
+						<li><a href="<?php echo e(url('/messages')); ?>"><span class="glyphicon glyphicon-envelope"></span> Messages</a></li>
 						<li><a href="#"><span class="glyphicon glyphicon-bell"></span> Notifications</a></li>
 						<?php endif; ?>
 						<?php if(Auth::check() && Auth::user()->hasRole('student')): ?>
@@ -62,18 +39,13 @@
 						
 						<li class="dropdown">
 						<!-- dpat name hehe to check lng danay -->
-<<<<<<< HEAD
-						<?php if(Auth::user()->hasRole('student')): ?>
+						<?php if(Auth::check() && Auth::user()->hasRole('student')): ?>
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo e($student->student_fname); ?> <?php echo e($student->student_lname); ?> <span class="caret"></span></a>
-						<?php elseif(Auth::user()->hasRole('sponsor')): ?>
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo e(Auth::user()->$sponsor->sponsor_fname); ?> <?php echo e($sponsor->sponsor_lname); ?> <span class="caret"></span></a>
+						<?php elseif(Auth::check() && Auth::user()->hasRole('sponsor')): ?>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo e($sponsor->sponsor_fname); ?> <?php echo e($sponsor->sponsor_lname); ?> <span class="caret"></span></a>
 						<?php endif; ?>
-=======
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo e(Auth::user()->email); ?> <span class="caret"></span></a>
->>>>>>> 9dc1e86788c62aa660e1218e084f319b012e8a76
->>>>>>> fba89996be0a5dacff11b86ed13eaf58d6eab177
 							<ul class="dropdown-menu">
-								<li><a href="profile.html"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+								<li><a href="<?php echo e(url('/profile scholar')); ?>"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
 								<li><a href="#"><span class="glyphicon glyphicon-cog"></span> Account Settings</a></li>
 								<?php if(Auth::check()): ?>
 									<li><a href="<?php echo e(url('/logout')); ?>" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><span class="glyphicon glyphicon-off"></span>&nbsp;Logout</a></li>
@@ -98,24 +70,14 @@
 			</div>
 		</nav>
 	</div>
-<<<<<<< HEAD
-	
 	<?php echo $__env->yieldContent('content'); ?>
 
 	<?php echo $__env->yieldPushContent('scripts'); ?>
-=======
-	<?php echo $__env->yieldContent('content'); ?>
-<<<<<<< HEAD
-
 	<script type="text/javascript" src="/js/jquery.min.js"></script>
     <script type="text/javascript" src="/js/app.js"></script>
     <script>
         $(document).ready(function(){$('[data-toggle="popover"]').popover();});
         $(document).ready(function(){$('[data-toggle="tooltip"]').tooltip();});
     </script>
-
-=======
->>>>>>> 9dc1e86788c62aa660e1218e084f319b012e8a76
->>>>>>> fba89996be0a5dacff11b86ed13eaf58d6eab177
 </body>
 </html>
