@@ -1,4 +1,13 @@
-#accordion{
+.select-query{
+	padding: 0;
+	border: 0;
+}
+
+.select-query{
+	width: 30%;
+}
+
+/*#accordion{
 	margin-bottom: 0;
 }
 
@@ -182,4 +191,4 @@
 	#formCarousel h2{
 		font-size: 2em;
 	}
-}
+}*/

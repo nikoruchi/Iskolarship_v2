@@ -14,9 +14,6 @@
                 <div class="input-group <?php echo e($errors->has('email') ? ' has-error' : ''); ?>">
                     <input type="text" name="email" placeholder="Email Address" class="form-control" value="<?php echo e(old('email')); ?>"/>
                     <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-
-                    
-
                 </div>
 
                 <div class="input-group <?php echo e($errors->has('password') ? ' has-error' : ''); ?>">
