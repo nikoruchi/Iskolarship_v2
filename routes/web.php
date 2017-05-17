@@ -43,8 +43,6 @@ Route::get('/profile scholar/{student_id}', ['middleware'=>'isguest','uses'=>'Pr
 
 Route::get('/profile scholar', 'ProfileController@profileStudent');
 
-// Route::get('/home', ['middleware'=>'student','uses'=>'HomeController@homeStudent']);
-
 	
 Route::get("/home", function(){
     switch(Auth::user()->user_type){
@@ -58,9 +56,6 @@ Route::get("/home", function(){
     }
 });
 
-// Route::get('/home', ['middleware'=>'sponsor','uses'=>'HomeController@homeSponsor']);
-	
-// Route::get('/home', 'HomeController@homeStudent');
 
 Route::get('/Search Results', function () {
     return view('search_results');
@@ -70,8 +65,20 @@ Route::get('/profile scholarship/{scholarship_id}', 'ProfileController@homeSpons
 
 
 //=============== FOR FRONT-END PURPOSES =======================
-// Route::get('/messages', ['middleware'=>'isguest','uses'=>'MessageController@index']);
 
 Route::get('/search', function () {
     return view('user/search');
 });
+
+Route::get('/edit profile', 'EditProfileController@editProfileStudent');
+
+// MESSAGES
+Route::get('/messages', ['middleware'=>'isguest','uses'=>'MessagesController@index']);
+
+Route::get('/messages/read', ['middleware'=>'isguest','uses'=>'MessagesController@getReadMsg']);
+
+Route::get('/messages/unread', ['middleware'=>'isguest','uses'=>'MessagesController@getUnReadMsg']);
+
+Route::get('/messages/inbox', ['middleware'=>'isguest','uses'=>'MessagesController@getAllMsg']);
+
+Route::post('/messages/send', ['middleware'=>'isguest','uses'=>'MessagesController@send']);

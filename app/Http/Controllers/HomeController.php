@@ -40,17 +40,9 @@ class HomeController extends Controller
     public function homeStudent(){
         $user_id = Auth::user()->user_id;
         $user = User::findOrFail($user_id)->first();
-<<<<<<< HEAD
-        $stud_id = Scholar::where('user_id','=', $user_id)->pluck('student_id');
-        $student = Scholar::findOrFail($stud_id)->first();
-=======
         
         $stud_id = Scholar::where('user_id','=', $user_id)->pluck('student_id');
-
         $student = Scholar::findOrFail($stud_id)->first();
-
-
->>>>>>> a3ddce09f01a43ffcc055928c616644a858fa593
         return view('home', compact('student', 'user'));
     }
 }

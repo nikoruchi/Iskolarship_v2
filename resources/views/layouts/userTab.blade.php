@@ -7,6 +7,12 @@
 	<link rel="stylesheet" type="text/css" href="css/app.css"/>
 	<link rel="stylesheet" type="text/css" href="css/font-awesome/css/font-awesome.min.css"/>
 	<link rel="stylesheet" type="text/css" href="css/main.css"/>
+
+	<script type="text/javascript" src="/js/js.js"></script>
+    <script type="text/javascript" src="/js/script-messages.js"></script>
+
+    <!-- <meta name="csrf_token" content = "{{ csrf_token() }}"> -->
+
 	<!-- <link rel="stylesheet" type="text/css" href="css/scholarship_page.css"/> -->
 	@stack('styles')
 </head>
@@ -36,20 +42,11 @@
 						@endif
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
-						
 						<li class="dropdown">
-						<!-- dpat name hehe to check lng danay -->
-<<<<<<< HEAD
-						@if(Auth::check() && Auth::user()->hasRole('student'))
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ $student->student_fname }} {{ $student->student_lname}} <span class="caret"></span></a>
-						@elseif(Auth::check() && Auth::user()->hasRole('sponsor'))
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ $sponsor->sponsor_fname }} {{$sponsor->sponsor_lname}} <span class="caret"></span></a>
-=======
 						@if(Auth::user()->hasRole('student'))
-							<a href="#" class="" ="dropdown-toggle" data-toggle="dropdown">{{ $student->student_fname }} {{ $student->student_lname}} <span class="caret"></span></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ $student->student_fname }} {{ $student->student_lname}} <span class="caret"></span></a>
 						@elseif(Auth::user()->hasRole('sponsor'))
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->$sponsor->sponsor_fname }} {{$sponsor->sponsor_lname}} <span class="caret"></span></a>
->>>>>>> a3ddce09f01a43ffcc055928c616644a858fa593
 						@endif
 							<ul class="dropdown-menu">
 								<li><a href="{{ url('/profile scholar') }}"><span class="glyphicon glyphicon-user"></span> Profile</a></li>

@@ -45,4 +45,8 @@ class User extends Authenticatable
     public function hasRole($role){
         return $this->user_type == $role;
     }
+
+    public function messages(){
+        return $this->hasMany('App\Messages');
+   }
 }

@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Scholar;
 use App\User;
+use App\Sponsor;
+use App\Message;
+use Carbon\Carbon;
 class MessagesController extends Controller
 {
     /**
@@ -16,75 +19,91 @@ class MessagesController extends Controller
     public function index()
     {
         $user_id = Auth::user()->user_id;
-        $user = User::findOrFail($user_id)->first();
+        $user = User::findOrFail($user_id);
         $stud_id = Scholar::where('user_id','=', $user_id)->pluck('student_id');
         $student = Scholar::findOrFail($stud_id)->first();
-        return view('/user/messages', compact('student','user'));
+       
+        $inbox = Message::where('msg_receiver','=',$user_id)->get();
+        return view('/user/messages', compact('student','user','inbox'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function getReadMsg(){
+        $user_id = Auth::user()->user_id;
+        $read = Message::where('msg_receiver','=',$user_id)->where('msg_status','=','read')->get();
+        $messages = array();
+        foreach($read as $message){
+            $messages[] = array(
+                'content'=>$message->msg_content,
+                'sender'=>$message->msg_sender,
+                'timestamp'=>$message->created_at->diffForHumans()
+                );
+        }
+        return $messages;
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    public function getUnreadMsg(){
+        $user_id = Auth::user()->user_id;
+        $unread = Message::where('msg_receiver','=',$user_id)->where('msg_status','=','unread')->get();
+        // $name =
+        $messages = array();
+        foreach($unread as $message){
+            $user = User::find($message->msg_sender);
+            if($user->user_type=='sponsor'){
+                // $sender = Sponsor::find($user->user_id);
+                $sender = Sponsor::pluck('fullname','user_id');
+                // $sender = Sponsor::select(DB::raw("CONCAT('sponsor_fname','sponsor_lname') AS full"))-where('user_id','=',$user->user_id)->get();
+                // $sender= $sender->full;
+
+                // return $sender; 
+                // $sender = $sender->sponsor_fname;
+                // $senderName += $sender->sponsor_lname;
+            }elseif($user->user_type=='student'){
+                $sender = Student::find($message->msg_sender)->student_fname;
+
+            }
+            $messages[] = array(
+                'content'=>$message->msg_content,
+                'sender'=>$sender,
+                'timestamp'=>$message->created_at->diffForHumans()
+                );
+        }
+        return $messages;
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+
+    public function getAllMsg(){
+        $user_id = Auth::user()->user_id;
+        $inbox = Message::where('msg_receiver','=',$user_id)->get();
+
+        $messages = array();
+        foreach($inbox as $message){
+            $messages[] = array(
+                'content'=>$message->msg_content,
+                'sender'=>$message->msg_sender,
+                'timestamp'=>$message->created_at->diffForHumans()
+                );
+        }
+        return $messages;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+    public function send(Request $request){
+        $currentTime = Carbon::now()->toDateTimeString();
+        $receiver = $request->to;
+        $receiver_id = Auth::user()->where('email','=',$receiver)->pluck('user_id');
+        $user_id = Auth::user()->user_id;
+
+        $message = new Message;
+
+        $message->msg_sender=$user_id;
+        $message->msg_receiver=$receiver_id;
+        $message->msg_content=$request->content;
+        $message->msg_status='unread';
+        $message->msg_date=$currentTime;
+        $message->msg_subject=$request->subject;
+
+        $message->save();
+        return $message;
     }
 }
