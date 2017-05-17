@@ -20,6 +20,10 @@ $(document).ready(function(){
 })
 
 $(document).ready(function(){
+	$(document).on("click",".message", seeFullMessage);
+})
+
+$(document).ready(function(){
 	$('#formMsg').submit(function(event){
 		event.preventDefault();
 		var data = $(this).serialize();
@@ -30,7 +34,9 @@ $(document).ready(function(){
 			data: $(this).serialize(),
 
 			success:function(data){
-
+				// $.each()
+				// var message = "";
+				// message = ""
 				console.log(data);
 			},
 			error: function(data){
@@ -40,10 +46,27 @@ $(document).ready(function(){
 	});
 })
 
+function seeFullMessage(e){
+	e.preventDefault();
+	var id = $(this).attr("data-pg");
+	$.ajax({
+		url: "/messages/thread",
+		type: "GET",
+		data: {'id': id},
+		success:function(data){
+			console.log(data);
+			var msgs = "";
+			// msgs += '';
+
+			$("#message-form").html(msgs);
+
+		}
+	})
+}
+
 
 function unread(e){
 	e.preventDefault();
-	console.log("unread");
 	$.ajax({
 		url: "/messages/unread",
 		type: "GET",
@@ -70,7 +93,6 @@ function unread(e){
 }
 function read(e){
 	e.preventDefault();
-	console.log("read");
 	$.ajax({
 		url: "/messages/read",
 		type: "get",
@@ -79,7 +101,7 @@ function read(e){
 			console.log(data);
 			console.log(data.length);
 			$.each(data, function(key,value){
-				msgs+= '<li class="message">';
+				msgs+= '<li class="message" data-id="'+value['id']+'">';
 				msgs+= '<div class="panel panel-default">';
 				msgs+= '<div class="panel-body">';
 				msgs+= '<form class="select-form">';
@@ -98,8 +120,6 @@ function read(e){
 }
 
 function all(){
-	var msg_receiver = $(this).attr("data-pg");
-	console.log("all");
 	$.ajax({
 		url: "/messages/inbox",
 		type: "get",

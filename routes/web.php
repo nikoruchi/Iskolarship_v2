@@ -82,3 +82,5 @@ Route::get('/messages/unread', ['middleware'=>'isguest','uses'=>'MessagesControl
 Route::get('/messages/inbox', ['middleware'=>'isguest','uses'=>'MessagesController@getAllMsg']);
 
 Route::post('/messages/send', ['middleware'=>'isguest','uses'=>'MessagesController@send']);
+
+Route::get('/messages/thread',['middleware'=>'isgues','uses'=>'MessagesController@showThread']);
