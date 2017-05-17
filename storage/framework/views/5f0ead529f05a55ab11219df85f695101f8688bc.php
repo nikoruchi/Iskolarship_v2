@@ -18,10 +18,10 @@
 </head>
 <body class="container-white">
 	<div id="app">
-		<nav class="navbar navbar-default navbar-fixed-top">
+		<nav class="navbar navbar-default customized navbar-fixed-top">
 			<div class="container">
 				<div class="navbar-header">
-					<a href="/" class="navbar-brand">Iskolarship</a>
+					<a href="<?php echo e(url('/home')); ?>" class="navbar-brand">Iskolarship</a>
 					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -29,6 +29,7 @@
                     </button>
 				</div>
 				<div class="collapse navbar-collapse" id="app-navbar-collapse">
+<<<<<<< HEAD
 					<ul class="nav navbar-nav">
 						<li><a href="<?php echo e(url('/home')); ?>"><span class="glyphicon glyphicon-home"></span> Home</a></li>
 						<?php if(Auth::check()): ?>
@@ -41,6 +42,8 @@
 						<li><a href="<?php echo e(url('/profile scholarship')); ?>"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
 						<?php endif; ?>
 					</ul>
+=======
+>>>>>>> 2ecd27ec34e48675b80fa2bce5b20df7c3fd51f5
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown">
 						<?php if(Auth::user()->hasRole('student')): ?>
@@ -49,7 +52,15 @@
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo e(Auth::user()->$sponsor->sponsor_fname); ?> <?php echo e($sponsor->sponsor_lname); ?> <span class="caret"></span></a>
 						<?php endif; ?>
 							<ul class="dropdown-menu">
+<<<<<<< HEAD
 								<li><a href="<?php echo e(url('/profile scholar')); ?>"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+=======
+								<li><a href="profile.html"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+								<?php if(Auth::check()): ?>
+								<li><a href="#"><span class="glyphicon glyphicon-envelope"></span> Messages</a></li>
+								<li><a href="#"><span class="glyphicon glyphicon-bell"></span> Notifications</a></li>
+								<?php endif; ?>
+>>>>>>> 2ecd27ec34e48675b80fa2bce5b20df7c3fd51f5
 								<li><a href="#"><span class="glyphicon glyphicon-cog"></span> Account Settings</a></li>
 								<?php if(Auth::check()): ?>
 									<li><a href="<?php echo e(url('/logout')); ?>" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><span class="glyphicon glyphicon-off"></span>&nbsp;Logout</a></li>
@@ -61,7 +72,7 @@
 							</ul>
 						</li>
 					</ul>
-					<form class="navbar-nav navbar-form">
+					<!-- <form class="navbar-nav navbar-form">
 						<div class="input-group">
 							<input type="text-box" class="form-control" name="search" placeholder="Search..." />
 						
@@ -69,7 +80,7 @@
 								<button type="submit" class="btn btn-default input-btn"><span class="glyphicon glyphicon-search"></span></button>
 							</span>
 						</div>
-					</form>
+					</form> -->
 				</div>
 			</div>
 		</nav>
@@ -77,11 +88,22 @@
 	<?php echo $__env->yieldContent('content'); ?>
 
 	<?php echo $__env->yieldPushContent('scripts'); ?>
+<<<<<<< HEAD
 	<script type="text/javascript" src="/js/jquery.min.js"></script>
     <script type="text/javascript" src="/js/app.js"></script>
     <script>
         $(document).ready(function(){$('[data-toggle="popover"]').popover();});
         $(document).ready(function(){$('[data-toggle="tooltip"]').tooltip();});
     </script>
+=======
+	
+	<script type="text/javascript" src="/js/jquery.min.js"></script>
+	<script type="text/javascript" src="/js/app.js"></script>
+	<script>
+		$(document).ready(function(){$('[data-toggle="popover"]').popover();});
+		$(document).ready(function(){$('[data-toggle="tooltip"]').tooltip();});
+	</script>
+
+>>>>>>> 2ecd27ec34e48675b80fa2bce5b20df7c3fd51f5
 </body>
 </html>

@@ -43,6 +43,13 @@ class ProfileController extends Controller
     			->distinct()->count();
   	
 
+<<<<<<< HEAD
     	return view('profiles.profile_scholar', compact('student', 'user','pending','scholarships','sponsors'));
     }
 }
+=======
+    // public function profileSponsor(){
+    // 	$
+    // }
+}
+>>>>>>> 2ecd27ec34e48675b80fa2bce5b20df7c3fd51f5

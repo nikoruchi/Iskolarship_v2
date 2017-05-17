@@ -7,8 +7,8 @@
 	padding-top: 10px;
 }
 
-.navbar a{
-	/*box-shadow: inset 0 0px #EEE;*/
+/*.navbar a{
+	box-shadow: inset 0 0px #EEE;
 	transition: 0.2s;
 	border: 1px solid #EEE;
 	border-width: 0 1px;
@@ -18,10 +18,18 @@
 }
 .navbar a:hover{
 	background-color: #EEE!important;
-	/*box-shadow: inset 0 -50px #EEE;*/
+	box-shadow: inset 0 -50px #EEE;
+}*/
+
+.navbar-default.customized{
+	background-color: white;
+	border-bottom: 0;
+	box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
+
 .navbar .navbar-brand{
 	border: 0;
+	/*font-size: 2em;*/
 }
 .glyphicon-user.register{
 	position: relative;
@@ -255,4 +263,36 @@ form:not(.navbar-form) .input-group{
 
 .margin-bottom{
 	margin-bottom: 1.5em;
+}
+
+.center-el{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+} 
+
+.center-el.col{
+	flex-direction: column;
+}
+
+.fill-height{
+	min-height: 100vh;
+}
+
+.nine-height{
+	min-height: 90vh;
+}
+
+.eight-height{
+	min-height: 80vh;
+}
+
+.navbar-header{
+	position: relative;
+	left: 50%;
+	transform: translate(-50%,0);
+}
+
+.navbar-brand{
+	font-weight: bold;
 }
