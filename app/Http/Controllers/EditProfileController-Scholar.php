@@ -22,7 +22,7 @@ class EditProfileController extends Controller
      */
     public function index()
     {
-        //
+        //  
     }
 
     /**

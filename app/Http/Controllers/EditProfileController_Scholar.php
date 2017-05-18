@@ -13,7 +13,7 @@ use Illuminate\Support\MessageBag;
 use Hash;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\JsonResponse;
-class EditProfileController extends Controller
+class EditProfileController_Scholar extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,7 +22,7 @@ class EditProfileController extends Controller
      */
     public function index()
     {
-        //
+        //  
     }
 
     /**
@@ -188,4 +188,4 @@ class EditProfileController extends Controller
     {
         //
     }
-}
+} 

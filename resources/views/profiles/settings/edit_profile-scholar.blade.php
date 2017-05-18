@@ -9,21 +9,57 @@
 				</div>
 			</div>
 			<button class="btn btn-success btn-block" style="border-radius: 0 0 4px 4px; border-top: 0;"><span class="glyphicon glyphicon-upload"></span> Upload New</button>
-
-			<button class="btn btn-primary btn-block" data-toggle="modal" data-target="#changePass" style="border-radius: 4px; margin-top: 10px;"><span class="glyphicon glyphicon-lock"></span> Change Password</button>
-
 		</div>
 		<div class="col-sm-6">
-			<div class="panel panel-default">
+			
 				<div class="panel-heading">
 					<h1 class="unmargined txt-success">Account Settings</h1>
 				</div>
+			<div class="panel panel-default">
+			<div class="panel-body">
+				<div class="form-group">
+					<form action="/Change Password" method="POST"  id="changePass">
+					    {{ csrf_field() }}
+					        <label><span class="glyphicon glyphicon-lock"></span> Password:</label>
+							<div class="input-group ">
+								<input type="password" name="password" placeholder="Create a secure password. Minimum of 6 characters" class="form-control {{ $errors->has('password') ? ' has-error' : '' }} " />
+
+								@if ($errors->has('password'))
+									<script>
+										$(document).ready(function(){
+										    $('#changePass').modal({show: true});
+										}
+										</script>
+									<span class="help-block">
+										<strong>{{ $errors->first('password') }}</strong>
+									</span>
+								@endif
+
+							</div>
+							<label><span class="glyphicon glyphicon-lock"></span> Re-type Password</label>
+							<div class="input-group {{ $errors->has('repassword') ? ' has-error' : '' }} ">
+								<input type="password" name="repassword" placeholder="Create a secure password. Minimum of 6 characters" class="form-control" />
+
+					 			@if ($errors->has('repassword'))
+									<span class="help-block">
+										<strong>{{ $errors->first('repassword') }}</strong>
+									</span>
+								@endif
+							</div>
+				    	<button type="submit" class="btn btn-success pull-right" style="margin-top: 10px;">
+							<span class="glyphicon glyphicon-refresh"></span>&nbsp;&nbsp;Confirm Password
+						</button> 
+				    </form>
+				</div>
+			</div>
+
 
 				<form action="/Update Profile" method="POST" id="editForm">
 					{{ csrf_field() }}
 					<!-- {{ method_field('PUT') }} -->
 					<div class="panel-body">
 						<div class="form-group">
+
 							<label>Name:</label>
 							<div class="input-group" >
 								<input type="text" name="fname" placeholder="First Name" class="form-control" value="{{$student->student_fname}}" />
@@ -161,51 +197,6 @@
 		</div>
 	</div>
 
-<!-- ==================== M O D A L ==================== -->
-<div id="changePass" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Change Your Password</h4>
-      </div>
-      <div class="modal-body">
-
-	    <form action="/Change Password" method="POST" >
-	        <label><span class="glyphicon glyphicon-lock"></span> Password:</label>
-			<div class="input-group ">
-				<input type="password" name="password" placeholder="Create a secure password. Minimum of 6 characters" class="form-control" />
-
-					@if ($errors->has('password'))
-						<span class="help-block">
-							<strong>{{ $errors->first('password') }}</strong>
-						</span>
-					@endif
-			</div>
-			<label><span class="glyphicon glyphicon-lock"></span> Re-type Password</label>
-			<div class="input-group {{ $errors->has('repassword') ? ' has-error' : '' }} ">
-				<input type="password" name="repassword" placeholder="Create a secure password. Minimum of 6 characters" class="form-control" />
-
-	 			@if ($errors->has('repassword'))
-					<span class="help-block">
-						<strong>{{ $errors->first('repassword') }}</strong>
-					</span>
-				@endif
-			</div>
-      </div>
-      <div class="modal-footer">
-        	<button type="submit" class="btn btn-success pull-right">
-				<span class="glyphicon glyphicon-refresh"></span>&nbsp;&nbsp;Confirm Password
-			</button> 
-      </div>
-
-      </form>
-    </div>
-
-  </div>
-</div>
-
-
 
 @endsection
 
@@ -218,4 +209,5 @@
 
 @push('scripts')
 	<script src="js/default_img.js"></script>
+	<script src="js/edit-profile.js"></script>
 @endpush

@@ -53,11 +53,11 @@ Route::get('/profile sponsor/scholars', 'ProfileController@viewScholars');
 Route::get("/home", function(){
     switch(Auth::user()->user_type){
         case 'sponsor':
-          return (new \App\Http\Controllers\HomeController)->homeSponsor();
+          return (new \App\Http\Controllers\SponsorController)->viewHome();
         break;
 
         case 'student':
-          return (new \App\Http\Controllers\HomeController)->homeStudent();
+          return (new \App\Http\Controllers\ScholarController)->viewHome();
         break;
     }
 });
@@ -88,8 +88,9 @@ Route::get('/scholarship form', function () {
 //=============== END FOR FRONT-END PURPOSES =======================
 
 
-Route::get('/Account Settings', 'EditProfileController@show');
-Route::post('/Update Profile', 'EditProfileController@updateScholar');
+Route::get('/Account Settings', 'EditProfileController_Scholar@show');
+Route::post('/Update Profile', 'EditProfileController_Scholar@ValidationScholar');
+Route::post('/Change Password', 'EditProfileController_Scholar@validatePassword');
 
 
 // MESSAGES
