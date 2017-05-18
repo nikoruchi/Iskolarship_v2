@@ -40,25 +40,14 @@ Route::post('/registration/Sponsor', 'SponsorAuthController@Validation');
 // This will be changed as soon as auth and middleware is added
 
 
-Route::get('/profile scholar', 'ProfileController@profileStudent');
+Route::get('/profile scholar', 'ScholarController@viewProfile');
 
 
-// Route::get('/home', ['middleware']=>'sponsor','uses'=>'HomeController@homeSponsor']);
+Route::get('/home', ['middleware'=>'student','uses'=>'ScholarController@viewHome']);
+
+Route::get('/home', ['middleware'=>'sponsor','uses'=>'SponsorController@viewHome']);
 
 // Route::get('/home', 'HomeController@homeGuests');
-
-	
-Route::get("/home", function(){
-    switch(Auth::user()->user_type){
-        case 'sponsor':
-          return (new \App\Http\Controllers\HomeController)->homeSponsor();
-        break;
-
-        case 'student':
-          return (new \App\Http\Controllers\HomeController)->homeStudent();
-        break;
-    }
-});
 
 
 
@@ -86,9 +75,9 @@ Route::get('/profile sponsor', function () {
 //=============== END FOR FRONT-END PURPOSES =======================
 
 
-Route::get('/Account Settings', 'EditProfileController@show');
-Route::post('/Update Profile', 'EditProfileController@ValidationScholar');
-Route::post('/Change Password', 'EditProfileController@validatePassword');
+Route::get('/Account Settings', 'EditProfileController-Scholar@show');
+Route::post('/Update Profile', 'EditProfileController-Scholar@ValidationScholar');
+Route::post('/Change Password', 'EditProfileController-Scholar@validatePassword');
 
 
 // MESSAGES
