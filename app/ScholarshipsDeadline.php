@@ -19,8 +19,12 @@ class ScholarshipsDeadline extends Model
     protected $fillable = [
  		'scholarship_id',
     	'scholarship_deadlinestartdate',
-        'scholarship_deadlineenddata' ,      
+        'scholarship_deadlineenddate' ,      
     ];
+
+    public function deadline(){
+        return $this-belongsTo('App\Scholarships');
+    }
 
     /**
      * The attributes that should be hidden for arrays.

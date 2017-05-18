@@ -1,28 +1,32 @@
 @extends("layouts.userTab")
 
 @section('content')
+
 	<div class="container main-container">
 		<div class="row">
 			<div class="col-sm-3">
 				<div class="panel panel-default">
 					<div class="panel-body">
 						<h3 class="text-center">Messages</h3>
-						<button class="btn btn-success btn-block">COMPOSE</button>
-						<button class="btn btn-danger btn-block">DELETE</button>
+						<button class="compose btn btn-success btn-block" href="javascript:void(0)">COMPOSE</button>
+						<button class="delete btn btn-danger btn-block" href="javascript:void(0)">DELETE {{$user->user_id}}</button>
 					</div>
 				</div>
 			</div>
 			<div class="col-sm-9">
-				<div class="panel panel-default">
+				<div id="message-form" class="panel panel-default">
 					<div class="panel-body">
 						<div class="form">
 							<div class="form-group">
-								<input class="form-control" type="text" name="subject" placeholder="Subject"/>
-								<input class="form-control" type="text" name="to" placeholder="To"/>
-								<textarea class="form-control" placeholder="Message"></textarea>
-								<button class="btn btn-primary pull-right" type="submit" name="send_message">
+							<form name="formMsg" id="formMsg">
+								{{ csrf_field() }}
+								<input class="form-control" type="text" name="subject" id="subject" placeholder="Subject"/>
+								<input class="form-control" type="text" name="to" id="to" placeholder="To"/>
+								<textarea class="form-control" placeholder="Message" name="content" id="message_content"></textarea>
+								<button class="btn btn-primary pull-right send" type="submit" name="send_message" id="send_message" href="javascript:void(0)">
 									<span class="glyphicon glyphicon-send"></span>
 								</button>
+							</form>
 							</div>
 						</div>
 					</div>
@@ -32,59 +36,26 @@
 				<div class="panel panel-default">
 					<div class="panel-body">
 						<div class="btn-group btn-group-justified message-filter">
-							<a href="#" class="btn btn-default">All</a>
-							<a href="#" class="btn btn-default">Read</a>
-							<a href="#" class="btn btn-default">Unread</a>
+							<a href="javascript:void(0)" data-pg="{{ $user->user_id }}" class="allbtn btn btn-default">All</a>
+							<a href="jjavascript:void(0)" data-pg="{{ $user->user_id }}" class="readbtn btn btn-default">Read</a>
+							<a href="javasscript:void(0)" data-pg="{{ $user->user_id }}" class="unreadbtn btn btn-default">Unread</a>
 						</div>
-						<ul class="list-unstyled messages-container">
+						<ul class="list-unstyled messages-container" id="messages-container">
+							@foreach($inbox as $message)
 							<li class="message">
 								<div class="panel panel-default">
 									<div class="panel-body">
 										<form class="select-form">
 											<input type="checkbox" class="select"/>
 										</form>
-										<p class="from"><strong>Clyde Joshua Delgado</strong></p>
-										<p class="message-content">Boi kamusta na ang scholarship mo?</p>
-										<p class="time-stamp">1:00 am</p>
+										<p class="from"><strong>{{$message->msg_sender}}</strong></p>
+										<p class="message-content">{{$message->msg_content}}</p>
+										<p class="time-stamp">{{$message->created_at->diffForHumans()}}</p>
 									</div>
 								</div>
 							</li>
-							<li class="message">
-								<div class="panel panel-default">
-									<div class="panel-body">
-										<form class="select-form">
-											<input type="checkbox" class="select"/>
-										</form>
-										<p class="from"><strong>Clyde Joshua Delgado</strong></p>
-										<p class="message-content">Boi kamusta na ang scholarship mo?</p>
-										<p class="time-stamp">1:00 am</p>
-									</div>
-								</div>
-							</li>
-							<li class="message">
-								<div class="panel panel-default">
-									<div class="panel-body">
-										<form class="select-form">
-											<input type="checkbox" class="select"/>
-										</form>
-										<p class="from"><strong>Clyde Joshua Delgado</strong></p>
-										<p class="message-content">Boi kamusta na ang scholarship mo?</p>
-										<p class="time-stamp">1:00 am</p>
-									</div>
-								</div>
-							</li>
-							<li class="message">
-								<div class="panel panel-default">
-									<div class="panel-body">
-										<form class="select-form">
-											<input type="checkbox" class="select"/>
-										</form>
-										<p class="from"><strong>Clyde Joshua Delgado</strong></p>
-										<p class="message-content">Boi kamusta na ang scholarship mo?</p>
-										<p class="time-stamp">1:00 am</p>
-									</div>
-								</div>
-							</li>
+							@endforeach
+							
 						</ul>
 					</div>
 				</div>

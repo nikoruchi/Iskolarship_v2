@@ -29,5 +29,10 @@ class Application extends Model
      *
      * @var array
      */
-
+    public function application(){
+        return $this->hasMany('App\ScholarshipsDeadline');
+    }
+    public function appscholarship(){
+        return $this->belongsToMany('App\Scholarships');
+    }
 }

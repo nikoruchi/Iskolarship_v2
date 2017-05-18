@@ -15,6 +15,7 @@
 Route::get('/', function () {
     return view('auth.login');
 })->middleware('guest');
+
 Auth::routes();
 Route::get('/registration/Student Form', function () {
     return view('registration/scholar_form');
@@ -26,9 +27,21 @@ Route::post('/registration/Student', 'ScholarAuthController@Validation');
 Route::post('/registration/Sponsor', 'SponsorAuthController@Validation');
 //============================ CHECKERS =========================
 // This will be changed as soon as auth and middleware is added
+
 Route::get('/profile scholar', 'ProfileController@profileStudent');
 // Route::get('/home', ['middleware']=>'sponsor','uses'=>'HomeController@homeSponsor']);
 // Route::get('/home', 'HomeController@homeGuests');
+
+
+
+Route::get('/profile scholar', 'ProfileController@profileStudent');
+
+
+// Route::get('/home', ['middleware']=>'sponsor','uses'=>'HomeController@homeSponsor']);
+
+// Route::get('/home', 'HomeController@homeGuests');
+
+
 	
 Route::get("/home", function(){
     switch(Auth::user()->user_type){
@@ -41,9 +54,12 @@ Route::get("/home", function(){
     }
 });
 
+
 // Route::get('/profile scholarship/{scholarship_id}', 'ProfileController@homeSponsor');
 
 //=============== FOR FRONT-END PURPOSES =======================
+
+
 Route::get('/search', function () {
     return view('user/search');
 });
@@ -70,4 +86,22 @@ Route::get("/search", function(){
     }
 });
 
+
+
+Route::get('/Account Settings', 'EditProfileController@show');
+Route::post('/Update Profile', 'EditProfileController@updateScholar');
+
+
+// MESSAGES
+Route::get('/messages', ['middleware'=>'isguest','uses'=>'MessagesController@index']);
+
+Route::get('/messages/read', ['middleware'=>'isguest','uses'=>'MessagesController@getReadMsg']);
+
+Route::get('/messages/unread', ['middleware'=>'isguest','uses'=>'MessagesController@getUnReadMsg']);
+
+Route::get('/messages/inbox', ['middleware'=>'isguest','uses'=>'MessagesController@getAllMsg']);
+
+Route::post('/messages/send', ['middleware'=>'isguest','uses'=>'MessagesController@send']);
+
+Route::get('/messages/thread',['middleware'=>'isgues','uses'=>'MessagesController@showThread']);
 

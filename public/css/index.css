@@ -71,13 +71,13 @@ form:not(.navbar-form) .input-group{
 }
 
 .check-box label input:checked + .box{
-	border-color: #2ecc71;
+	border-color: #69cc2e;
 }
 
 .check-box label input:checked + .box .check{
 	height: 0.5em;
 	width: 0.3em;
-	border-color: #2ecc71;
+	border-color: #69cc2e;
 	opacity: 1;
 }
 
@@ -125,14 +125,14 @@ form:not(.navbar-form) .input-group{
 
 .input-group input[type=text]:focus,
 .input-group input[type=password]:focus{
-	border-color: #2ecc71;
+	border-color: #69cc2e;
 	background-color: rgba(0,0,0,0.02);
 }
 .input-group input[type=text]:focus + .input-group-addon,
 .input-group input[type=password]:focus + .input-group-addon{
 	background-color: rgba(0,0,0,0.02);
-	border-color: #2ecc71;
-	color: #2ecc71;
+	border-color: #69cc2e;
+	color: #69cc2e;
 }
 .input-group input[type=text]:focus + .input-group-addon .glyphicon,
 .input-group input[type=password]:focus + .input-group-addon .glyphicon{

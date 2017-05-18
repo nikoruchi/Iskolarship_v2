@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 
-class Messages extends Model
+class Message extends Model
 {
     use Notifiable;
     protected $primaryKey = 'msg_id';
@@ -25,10 +25,9 @@ class Messages extends Model
         'msg_status',       
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
+   public function yourmessages(){
+        return $this->belongToMany('App\User', 'msg_sender');
+   }
+
 
 }

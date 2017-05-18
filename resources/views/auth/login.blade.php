@@ -4,7 +4,7 @@
     <div class="container main-container">
         <div class="col-sm-6 col-sm-offset-3 headline">
             <div class="text-center">
-                <h1>Iskolarship</h1>
+                <h1><strong class="isko">Isko</strong></h1>
                 <h3><small>Ang iyong kaagabay sa broke mong buhay.</small></h3>
             </div>
 
