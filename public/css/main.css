@@ -357,6 +357,7 @@ form:not(.navbar-form) .input-group {
 
 .navbar-brand {
     font-weight: bold;
+    text-align: center
 }
 
 .checkbox,
