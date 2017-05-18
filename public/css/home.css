@@ -7,6 +7,16 @@
 	width: 30%;
 }
 
+.home-search input[type="text"]{
+	font-size: 1.5em;
+	padding: 1em 1.5em;
+}
+
+.input-group-btn span{
+	padding: 0.15em;
+	font-size: 1.5em;
+}
+
 /*#accordion{
 	margin-bottom: 0;
 }

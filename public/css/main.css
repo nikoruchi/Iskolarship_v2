@@ -2,6 +2,11 @@
 	box-sizing: border-box;
 }
 
+@font-face{
+	font-family: Seri;
+	src: "fonts/SERIFAB.TTF";
+}
+
 .main-container{
 	margin-top: 50px;
 	padding-top: 10px;
@@ -31,6 +36,18 @@
 	border: 0;
 	/*font-size: 2em;*/
 }
+
+.isko{
+	filter: brightness(110%);
+	color: #6aa417;
+	letter-spacing: 0.025em;
+}
+
+.isko::after{
+	content: "larship";
+	color: #1777a4;
+}
+
 .glyphicon-user.register{
 	position: relative;
 }
@@ -147,7 +164,7 @@ form:not(.navbar-form) .input-group{
 }
 
 .check-box label input:checked ~ .label-text{
-	color: #27ae60;
+	color: #6dae27;
 }
 
 @media screen and (min-width: 768px){
@@ -160,15 +177,15 @@ form:not(.navbar-form) .input-group{
 }
 
 .btn.btn-success{
-	background-color: #2ecc71;
-	border-color: #27ae60;
+	background-color: #69cc2e;
+	border-color: #6dae27;
 }
 .btn.btn-success:hover{
-	background-color: #27ae60;
+	filter: brightness(110%);
 }
 
 .txt-success{
-	color: #2ecc71;
+	color: #69cc2e;
 }
 
 .radio{
@@ -218,7 +235,7 @@ form:not(.navbar-form) .input-group{
 }
 
 .radio input:checked + .circle{
-	border-color: #27ae60;
+	border-color: #6dae27;
 }
 
 .radio input:checked + .circle .dot{

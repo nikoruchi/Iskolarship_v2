@@ -3,10 +3,9 @@
 	<div class="container main-container">
 		<div class="row">
 			<div class="center-el col eight-height col-sm-6 col-sm-offset-3">
-				<h3 class="text-center">Find the most suitable choice for you.</h3>
-				<form>
+				<form class="home-search">
 					<div class="input-group">
-						<input type="text" name="keyword" class="form-control"/>
+						<input type="text" name="keyword" class="form-control" placeholder="Find the most suitable choice for you." />
 						<div class="input-group-btn">
 							<button class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
 						</div>

@@ -15,7 +15,7 @@
 		<nav class="navbar navbar-default customized navbar-fixed-top">
 			<div class="container">
 				<div class="navbar-header">
-					<a href="{{ url('/home') }}" class="navbar-brand">Iskolarship</a>
+					<a href="{{ url('/home') }}" class="navbar-brand"><span class="isko">Isko</span></a>
 					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
