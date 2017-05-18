@@ -5,10 +5,22 @@
 		<div class="col-sm-4 col-sm-offset-1">
 			<div class="affix panel panel-default" style="position: relative; margin-bottom: 0; border-radius: 4px 4px 0 0;">
 				<div class="panel-body">
-					<img src="uploads/komsai.png" class="img-circle img-responsive" />
+					<img src="image/{{$user->user_imagepath}}" class="img-circle img-responsive" style="background-size: cover;" />
 				</div>
 			</div>
-			<button class="btn btn-success btn-block" style="border-radius: 0 0 4px 4px; border-top: 0;"><span class="glyphicon glyphicon-upload"></span> Upload New</button>
+
+			<form action="/upload" method="POST" enctype="multipart/form-data">
+				{{ csrf_field() }}
+				<input type="file" class="btn btn-success btn-block {{ $errors->has('image') ? ' has-error' : '' }}" name="image" style="border-radius: 0 0 4px 4px; border-top: 0;" value="Upload New" />
+				@if ($errors->has('image'))
+					<span class="help-block">
+						<strong>{{ $errors->first('image') }}</strong>
+					</span>
+				@endif
+				<!-- <button type="file" class="btn btn-success btn-block" style="border-radius: 0 0 4px 4px; border-top: 0;"><span class="glyphicon glyphicon-upload"></span> Upload New</button> -->
+				<input type="submit" />
+			</form>
+
 		</div>
 		<div class="col-sm-6">
 			
@@ -25,11 +37,6 @@
 								<input type="password" name="password" placeholder="Create a secure password. Minimum of 6 characters" class="form-control {{ $errors->has('password') ? ' has-error' : '' }} " />
 
 								@if ($errors->has('password'))
-									<script>
-										$(document).ready(function(){
-										    $('#changePass').modal({show: true});
-										}
-										</script>
 									<span class="help-block">
 										<strong>{{ $errors->first('password') }}</strong>
 									</span>
