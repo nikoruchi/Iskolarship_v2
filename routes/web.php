@@ -39,9 +39,13 @@ Route::post('/registration/Sponsor', 'SponsorAuthController@Validation');
 //============================ CHECKERS =========================
 // This will be changed as soon as auth and middleware is added
 
-Route::get('/profile scholar/{student_id}', ['middleware'=>'isguest','uses'=>'ProfileController@profile']);
 
 Route::get('/profile scholar', 'ProfileController@profileStudent');
+
+
+// Route::get('/home', ['middleware']=>'sponsor','uses'=>'HomeController@homeSponsor']);
+
+// Route::get('/home', 'HomeController@homeGuests');
 
 	
 Route::get("/home", function(){
@@ -57,11 +61,12 @@ Route::get("/home", function(){
 });
 
 
-Route::get('/Search Results', function () {
-    return view('search_results');
-});
 
-Route::get('/profile scholarship/{scholarship_id}', 'ProfileController@homeSponsor');
+// Route::get('/Search Results', function () {
+//     return view('search_results');
+// });
+
+// Route::get('/profile scholarship/{scholarship_id}', 'ProfileController@homeSponsor');
 
 
 //=============== FOR FRONT-END PURPOSES =======================
@@ -70,7 +75,10 @@ Route::get('/search', function () {
     return view('user/search');
 });
 
-Route::get('/edit profile', 'EditProfileController@editProfileStudent');
+
+Route::get('/Account Settings', 'EditProfileController@show');
+Route::post('/Update Profile', 'EditProfileController@updateScholar');
+
 
 // MESSAGES
 Route::get('/messages', ['middleware'=>'isguest','uses'=>'MessagesController@index']);
@@ -84,3 +92,4 @@ Route::get('/messages/inbox', ['middleware'=>'isguest','uses'=>'MessagesControll
 Route::post('/messages/send', ['middleware'=>'isguest','uses'=>'MessagesController@send']);
 
 Route::get('/messages/thread',['middleware'=>'isgues','uses'=>'MessagesController@showThread']);
+
