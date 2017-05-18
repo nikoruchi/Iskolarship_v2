@@ -4,9 +4,9 @@
 	<title>Iskolarship</title>
 	<meta charset="utf-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
-	<link rel="stylesheet" type="text/css" href="css/app.css"/>
-	<link rel="stylesheet" type="text/css" href="css/font-awesome/css/font-awesome.min.css"/>
-	<link rel="stylesheet" type="text/css" href="css/main.css"/>
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}"/>
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome/css/font-awesome.min.css') }}"/>
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}"/>
 
 	<script type="text/javascript" src="/js/js.js"></script>
     <script type="text/javascript" src="/js/script-messages.js"></script>
@@ -38,7 +38,7 @@
 						@endif
 							<ul class="dropdown-menu">
 							@if(Auth::user()->hasRole('sponsor'))
-								<li><a href="{{ url('/profile scholarship') }}"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+								<li><a href="{{ url('/profile sponsor') }}"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
 							@elseif(Auth::user()->hasRole('student'))
 								<li><a href="{{ url('/profile scholar')}}"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
 							@endif

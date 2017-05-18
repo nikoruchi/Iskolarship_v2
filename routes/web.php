@@ -39,9 +39,11 @@ Route::post('/registration/Sponsor', 'SponsorAuthController@Validation');
 //============================ CHECKERS =========================
 // This will be changed as soon as auth and middleware is added
 
-
 Route::get('/profile scholar', 'ProfileController@profileStudent');
 
+Route::get('/profile sponsor', 'ProfileController@profileSponsor');
+
+Route::get('/profile sponsor/scholars', 'ProfileController@viewScholars');
 
 // Route::get('/home', ['middleware']=>'sponsor','uses'=>'HomeController@homeSponsor']);
 
@@ -79,9 +81,9 @@ Route::get('/scholarship form', function () {
     return view('registration/scholarship_form');
 });
 
-Route::get('/profile sponsor', function () {
-    return view('user/sponsor_profile');
-});
+// Route::get('/profile sponsor', function () {
+//     return view('user/sponsor_profile');
+// });
 
 //=============== END FOR FRONT-END PURPOSES =======================
 

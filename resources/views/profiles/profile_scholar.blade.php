@@ -9,7 +9,7 @@
 				<h3 class="user-email">{{ $user->email }}</h3>
 				@if(Auth::user()->hasRole('student'))
 				<div class="btn-group flex">	
-					<a href="/Account Settings">		
+					<a href="/Account Settings" class="acc_settings">		
 						<button class="btn btn-default"><span class="glyphicon glyphicon-cog"></span> Account Settings</button>
 					</a>
 				</div>
@@ -86,7 +86,7 @@
 @endsection
 
 @push('styles')
-	<link rel="stylesheet" type="text/css" href="css/scholar_page.css"/>
+	<link rel="stylesheet" type="text/css" href="css/profile_page.css"/>
 @endpush
 
 @push('scripts')

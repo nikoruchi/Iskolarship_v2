@@ -5,18 +5,17 @@
 		<div class="row">
 			<div class="col-sm-8 col-sm-offset-2">
 				<img src="/image/{{ $user->user_imagepath }}.jpg" class="img-responsive user-pp img-circle"/>
-				<h1 class="user-name">{{ $student->student_fname }}</h1>
-				<h2>Job</h2>
-				<!-- Hide these elements from others -->
-				<h3>Address</h3>
-				<h3>Agency Workplace</h3>
-				<h3>Agency Address</h3>
-				<!-- <h2 class="education"> {{ $student->student_studyfield }}, {{ $student->student_university }}</h2> -->
-				<!-- <h3 class="user-email">{{ $user->email }}</h3> -->
+				<h1 class="user-name">{{ $sponsor->sponsor_fname }}</h1>
+				<h2 class="work"> {{ $sponsor->sponsor_agency }}, {{ $sponsor->sponsor_job }}</h2>
+				<h3 class="user-email">{{ $user->email }}</h3>
+
 				@if(Auth::user()->hasRole('sponsor'))
 				<div class="btn-group flex">	
-					<a href="/Account Settings">		
-						<button class="btn btn-default"><span class="glyphicon glyphicon-cog"></span> Account Settings</button>
+					<a href="/Account Settings" class="btn btn-default acc_settings">
+						<span class="glyphicon glyphicon-cog"></span> Account Settings
+					</a>
+					<a href="/Account Settings" class="btn btn-success acc_settings">
+						<span class="glyphicon glyphicon-plus"></span> Create Scholarship
 					</a>
 				</div>
 				@endif
@@ -78,7 +77,7 @@
 								<h2 class="name">Scholarship Name</h2>
 								<div class="btns">
 									<a href="#" class="edit"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
-									<a href="#" class="view_scholars"><span class="glyphicon glyphicon-pencil"></span> Scholars</a>
+									<a href="{{ url('profile sponsor/scholars') }}" class="view_scholars"><span class="glyphicon glyphicon-eye-open"></span> Scholars</a>
 								</div>
 							</article>
 						</li>
@@ -91,7 +90,7 @@
 								<div class="btns">
 									<a href="#" class="edit"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
 									<!-- We will place the delete inside the edit form. -->
-									<a href="#" class="view_scholars"><span class="glyphicon glyphicon-pencil"></span> Scholars</a>
+									<a href="{{ url('profile sponsor/scholars') }}" class="view_scholars"><span class="glyphicon glyphicon-eye-open"></span> Scholars</a>
 								</div>
 							</article>
 						</li>
@@ -104,5 +103,5 @@
 @endsection
 
 @push('styles')
-	<link rel="stylesheet" type="text/css" href="css/scholar_page.css"/>
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/profile_page.css') }}"/>
 @endpush
