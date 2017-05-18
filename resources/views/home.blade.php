@@ -1,11 +1,11 @@
- @extends("layouts.userTab")
+@extends("layouts.userTab")
 
 @section('content')
 
 	<div class="container main-container">
 		<div class="row">
-			<div class="center-el col col-sm-6 col-sm-offset-3">
-				<form class="home-search">
+			<div class="center-el col eight-height col-sm-6 col-sm-offset-3">
+				<form class="home-search" method="get" action="/search">
 					<div class="input-group">
 						<input type="text" name="keyword" class="form-control" placeholder="Find the most suitable choice for you." />
 						<div class="input-group-btn">
@@ -13,10 +13,10 @@
 						</div>
 					</div>
 					<div class="center-el check-boxes">
-						<label class="checkbox-inline"><input type="checkbox" name="search_q"><i class="sub-check"><i class="check"></i></i>Scholarships</label>
-						<label class="checkbox-inline"><input type="checkbox" name="search_q"><i class="sub-check"><i class="check"></i></i>Sponsors</label>
-						<label class="checkbox-inline"><input type="checkbox" name="search_q"><i class="sub-check"><i class="check"></i></i>Scholars</label>
-						<label class="checkbox-inline"><input type="checkbox" name="search_q"><i class="sub-check"><i class="check"></i></i>Open Applications</label>
+						<label class="checkbox-inline"><input type="checkbox" name="search_q[]" value="scholarships"><i class="sub-check"><i class="check"></i></i>Scholarships</label>
+						<label class="checkbox-inline"><input type="checkbox" name="search_q[]" value="sponsors"><i class="sub-check"><i class="check"></i></i>Sponsors</label>
+						<label class="checkbox-inline"><input type="checkbox" name="search_q[]" value="scholars"><i class="sub-check"><i class="check"></i></i>Scholars</label>
+						<label class="checkbox-inline"><input type="checkbox" name="search_q[]" value="open_applications"><i class="sub-check"><i class="check"></i></i>Open Applications</label>
 					</div>
 				</form>
 			</div>
