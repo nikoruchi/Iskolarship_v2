@@ -21,7 +21,7 @@ class MessagesController extends Controller
         $user_id = Auth::user()->user_id;
         $user = User::findOrFail($user_id);
         $stud_id = Scholar::where('user_id','=', $user_id)->pluck('student_id');
-        $student = Scholar::findOrFail($stud_id)->first();
+        $student = Scholar::findOrFail($stud_id);
         $inbox = Message::where('msg_receiver','=',$user_id)->get();
         // $senders = Student::
         return view('/user/messages', compact('student','user','inbox'));

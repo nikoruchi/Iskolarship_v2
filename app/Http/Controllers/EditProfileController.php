@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\MessageBag;
 use Hash;
+use Illuminate\Validation\Rule;
 class EditProfileController extends Controller
 {
     /**
@@ -77,27 +78,30 @@ class EditProfileController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     public function Validation_Scholar(Request $request){
+     public function validatePassword(Request $request){
+ 
+        $validator = Validator::make($request->all(),[
+            'password' => 'min:6|required|same:repassword',
+            'repassword' => 'min:6|same:password',
+        ]);
+        
+        if ($validator->fails()) {
+            return redirect('/Change Password')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+        else{
+            return $this->updateScholar($request);
+        }
+    }
+
+        public function ValidationScholar(Request $request){
+        $user_id = Auth::user()->user_id;
 
         $validator = Validator::make($request->all(),[
-            'email' => 'required|email|max:255|unique:users,email',
-            // 'password' => 'min:6|required|same:repassword',
-            // 'repassword' => 'min:6|same:password',
             'contact' => 'required|regex:/(09)[0-9]{9}/',
-            'bdate' => 'required|date',
-            'fname' => 'required',
-            'lname' => 'required',
-            'gender' => 'required|in:male,female',
-            'address' => 'required',
-            'region' => 'required',
-            'ntnlty' => 'required',
-            'begin_study' => 'required|date',
-            'degree_att' => 'required',
-            'field' => 'required',
-            'degree_st' => 'required',
-            'univ' => 'required',
-            'univ_address' => 'required'
-
+            'email' => 'required|email|max:255',
+             Rule::unique('users')->ignore($user_id),
         ]);
         
         if ($validator->fails()) {
@@ -110,17 +114,20 @@ class EditProfileController extends Controller
         }
     }
 
+    public function updateScholarPass(Request $request){
+
+        $user_id = Auth::user()->user_id;
+        $user = User::findOrFail($user_id);
+ 
+        // $request -> merge(array('password'=>bcrypt($request->password)));
+        $user ->password = Hash::make($password);
+    }
+
     public function updateScholar(Request $request){
         $user_id = Auth::user()->user_id;
         $user = User::findOrFail($user_id);
         $stud_id = Scholar::where('user_id','=', $user_id)->pluck('student_id');
         $student = Scholar::findOrFail($stud_id);
-
-
-        $request -> merge(array('password'=>bcrypt($request->password)));
-
-        // $user->update($request->all());
-        // $student->update($request->all());
 
         $user ->email = $request ->email;
         // $password = $request ->password;
