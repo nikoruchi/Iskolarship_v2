@@ -10,11 +10,11 @@
     <link rel="stylesheet" type="text/css" href="/css/index.css"/>
 </head>
 <body>
-    <div id="app">
+    <!-- <div id="app">
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
-                    <a href="/" class="navbar-brand">Iskolarship</a>
+                    <a href="/" class="navbar-brand"><span class="isko">Isko</span></a>
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -36,13 +36,9 @@
                 </div>
             </div>
         </nav>
-    </div>
+    </div> -->
   
-
-
-  @yield('content');
-
-
+    @yield('content')
 
     <script type="text/javascript" src="/js/jquery.min.js"></script>
     <script type="text/javascript" src="/js/app.js"></script>

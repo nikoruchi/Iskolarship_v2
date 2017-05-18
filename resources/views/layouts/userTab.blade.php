@@ -16,12 +16,12 @@
 	<!-- <link rel="stylesheet" type="text/css" href="css/scholarship_page.css"/> -->
 	@stack('styles')
 </head>
-<body class="container-white">
+<body class="container">
 	<div id="app">
 		<nav class="navbar navbar-default customized navbar-fixed-top">
 			<div class="container">
 				<div class="navbar-header">
-					<a href="{{ url('/home') }}" class="navbar-brand">Iskolarship</a>
+					<a href="{{ url('/home') }}" class="navbar-brand"><span class="isko">Isko</span></a>
 					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -32,9 +32,9 @@
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown">
 						@if(Auth::user()->hasRole('student'))
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ $student->student_fname }} {{ $student->student_lname}} <span class="caret"></span></a>
+							<a href="/profile scholar" class="dropdown-toggle" data-toggle="dropdown">{{ $student->student_fname }} {{ $student->student_lname}} <span class="caret"></span></a>
 						@elseif(Auth::user()->hasRole('sponsor'))
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->$sponsor->sponsor_fname }} {{$sponsor->sponsor_lname}} <span class="caret"></span></a>
+							<a href="" class="dropdown-toggle" data-toggle="dropdown">{{ $sponsor->sponsor_fname }} {{$sponsor->sponsor_lname}} <span class="caret"></span></a>
 						@endif
 							<ul class="dropdown-menu">
 							@if(Auth::user()->hasRole('sponsor'))
@@ -46,7 +46,7 @@
 								<li><a href="{{ url('/messages') }}"><span class="glyphicon glyphicon-envelope"></span> Messages</a></li>
 								<li><a href="#"><span class="glyphicon glyphicon-bell"></span> Notifications</a></li>
 								@endif
-								<li><a href="#"><span class="glyphicon glyphicon-cog"></span> Account Settings</a></li>
+								<li><a href="/Account Settings"><span class="glyphicon glyphicon-cog"></span> Account Settings</a></li>
 								@if(Auth::check())
 									<li><a href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><span class="glyphicon glyphicon-off"></span>&nbsp;Logout</a></li>
 									 <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
@@ -56,15 +56,6 @@
 							</ul>
 						</li>
 					</ul>
-					<!-- <form class="navbar-nav navbar-form">
-						<div class="input-group">
-							<input type="text-box" class="form-control" name="search" placeholder="Search..." />
-						
-							<span class="input-group-btn">
-								<button type="submit" class="btn btn-default input-btn"><span class="glyphicon glyphicon-search"></span></button>
-							</span>
-						</div>
-					</form> -->
 				</div>
 			</div>
 		</nav>
