@@ -9,7 +9,7 @@
 					<div class="panel-body">
 						<h3 class="text-center">Messages</h3>
 						<button class="compose btn btn-success btn-block" href="javascript:void(0)">COMPOSE</button>
-						<button class="delete btn btn-danger btn-block" href="javascript:void(0)">DELETE {{$user->user_id}}</button>
+						<button class="delete btn btn-danger btn-block" href="javascript:void(0)">DELETE</button>
 					</div>
 				</div>
 			</div>
@@ -42,11 +42,11 @@
 						</div>
 						<ul class="list-unstyled messages-container" id="messages-container">
 							@foreach($inbox as $message)
-							<li class="message">
+							<li class="message clickable" data-pg="{{$message->msg_id}}">
 								<div class="panel panel-default">
 									<div class="panel-body">
-										<form class="select-form">
-											<input type="checkbox" class="select"/>
+										<form class="select-form" id="formDel">
+											<input name="messages[]" data-id="{{$message->msg_id}}" type="checkbox" class="not-clickable select"/>
 										</form>
 										<p class="from"><strong>{{$message->msg_sender}}</strong></p>
 										<p class="message-content">{{$message->msg_content}}</p>

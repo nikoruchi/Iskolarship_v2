@@ -20,14 +20,18 @@ $(document).ready(function(){
 })
 
 $(document).ready(function(){
-	$(document).on("click",".message", seeFullMessage);
+	$(document).on("click",".clickable", seeFullMessage);
 })
+
+$(document).ready(function(){
+	$(document).on("click",".not-clickable", notClickable);
+})
+
+
 
 $(document).ready(function(){
 	$('#formMsg').submit(function(event){
 		event.preventDefault();
-		var data = $(this).serialize();
-		console.log(data),
 		$.ajax({
 			url: "/messages/send",
 			type: "POST",
@@ -37,7 +41,7 @@ $(document).ready(function(){
 				// $.each()
 				// var message = "";
 				// message = ""
-				console.log(data);
+				console.log("Data from send: " +data);
 			},
 			error: function(data){
 				console.log('error');
@@ -64,6 +68,11 @@ function seeFullMessage(e){
 	})
 }
 
+function notClickable(e){
+	e.stopPropagation();
+}
+
+
 
 function unread(e){
 	e.preventDefault();
@@ -74,11 +83,11 @@ function unread(e){
 			var msgs = "";
 			console.log(data);
 			$.each(data, function(key,value){
-				msgs = '<li class="message">';
+				msgs+= '<li class="message clickable" data-pg="'+value['id']+'">';
 				msgs+= '<div class="panel panel-default">';
 				msgs+= '<div class="panel-body">';
 				msgs+= '<form class="select-form">';
-				msgs+= '<input type="checkbox" class="select"/>';
+				msgs+= '<input type="checkbox" name="messages[]" value="'+value['id']+'" class="not-clickable select"/>';
 				msgs+= '</form>';
 				msgs+= '<p class="from"><strong>' + value['sender']+ '</strong></p>';
 				msgs+= '<p class="message-content">' + value['content'] + '</p>';
@@ -99,13 +108,12 @@ function read(e){
 		success:function(data){
 			var msgs = "";
 			console.log(data);
-			console.log(data.length);
 			$.each(data, function(key,value){
-				msgs+= '<li class="message" data-id="'+value['id']+'">';
+				msgs+= '<li class="message clickable" data-pg="'+value['id']+'">';
 				msgs+= '<div class="panel panel-default">';
 				msgs+= '<div class="panel-body">';
-				msgs+= '<form class="select-form">';
-				msgs+= '<input type="checkbox" class="select"/>';
+				msgs+= '<form class="select-form" id="formDel">';
+				msgs+= '<input type="checkbox" name="messages[]" value="'+value['id']+'" class="not-clickable select"/>';
 				msgs+= '</form>';
 				msgs+= '<p class="from"><strong>' + value['sender']+ '</strong></p>';
 				msgs+= '<p class="message-content">' + value['content'] + '</p>';
@@ -113,6 +121,7 @@ function read(e){
 				msgs+= '</div>';
 				msgs+= '</div>';
 				msgs+= '</li>';
+				// console.log(value['id']);
 			});
 			$("#messages-container").html(msgs);
 		}
@@ -127,11 +136,11 @@ function all(){
 			console.log(data);
 			var msgs = "";
 			$.each(data, function(key,value){
-				msgs+= '<li class="message">';
+				msgs+= '<li class="message clickable" data-pg="'+value['id']+'">';
 				msgs+= '<div class="panel panel-default">';
 				msgs+= '<div class="panel-body">';
 				msgs+= '<form class="select-form">';
-				msgs+= '<input type="checkbox" class="select"/>';
+				msgs+= '<input type="checkbox" name="messages[]" value="'+value['id']+'" class="not-clickable select"/>';
 				msgs+= '</form>';
 				msgs+= '<p class="from"><strong>' + value['sender']+ '</strong></p>';
 				msgs+= '<p class="message-content">' + value['content'] + '</p>';
@@ -148,6 +157,20 @@ function writeMessage(){
 
 }
 
-function deleteMessage(){
-		
+function deleteMessage(e){
+	e.preventDefault();
+	console.log("delete");
+	var datas = $('.not-clickable:checked').serialize();
+	console.log("data: " + datas);
+	$.ajax({
+		url: "/messages/delete",
+		type: "DELETE",
+		data: $('not-clickable:checked').serialize(),
+		success:function(data){
+			console.log(data);
+			var msgs = "";
+			// msgs += '';
+			// $("#message-form").html(msgs);
+		}
+	})
 }

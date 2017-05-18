@@ -103,15 +103,12 @@ class MessagesController extends Controller
     }
 
 
-
     public function send(Request $request){
         $currentTime = Carbon::now()->toDateTimeString();
         $receiver = $request->to;
-        $receiver_id = Auth::user()->where('email','=',$receiver)->pluck('user_id');
+        $receiver_id = Auth::user()->where('email','=',$receiver)->pluck('user_id')->first();
         $user_id = Auth::user()->user_id;
-
         $message = new Message;
-
         $message->msg_sender=$user_id;
         $message->msg_receiver=$receiver_id;
         $message->msg_content=$request->content;
@@ -125,5 +122,11 @@ class MessagesController extends Controller
 
     public function showThread(Request $request){
         return "yes";
+    }
+
+    public function destroy(Request $request){
+       return $request;
+        // Message::destroy($request->messages);
+        // return "yay";
     }
 }

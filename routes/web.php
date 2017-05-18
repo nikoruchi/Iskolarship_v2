@@ -83,4 +83,8 @@ Route::get('/messages/inbox', ['middleware'=>'isguest','uses'=>'MessagesControll
 
 Route::post('/messages/send', ['middleware'=>'isguest','uses'=>'MessagesController@send']);
 
-Route::get('/messages/thread',['middleware'=>'isgues','uses'=>'MessagesController@showThread']);
+Route::get('/messages/thread',['middleware'=>'isguest','uses'=>'MessagesController@showThread']);
+
+Route::delete('/messages/delete',['middleware'=>'isguest','uses'=>'MessagesController@destroy']);
+
+
