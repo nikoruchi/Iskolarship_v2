@@ -9,7 +9,7 @@
 				<h3 class="user-description"><?php echo e($studentProfile->student->user_aboutme); ?></h3>
 				<?php if(Auth::user()->hasRole('student')): ?>
 				<div class="btn-group flex">	
-					<a href="/Account Settings">		
+					<a href="/Account Settings" class="acc_settings">		
 						<button class="btn btn-default"><span class="glyphicon glyphicon-cog"></span> Account Settings</button>
 					</a>
 				</div>

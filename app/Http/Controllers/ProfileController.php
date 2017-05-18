@@ -4,35 +4,29 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Scholar;
+use App\Sponsor;
 use App\User;
 use Auth;
 use App\Application;
 use App\Scholarship;
 use DB;
-use App\Sponsor;
 class ProfileController extends Controller
 {
-    public function profileStudent(){
-    	$user_id = Auth::user()->user_id;
-    	$user = User::findOrFail($user_id);
-    	$student_id = Scholar::where('user_id','=', $user_id)->pluck('student_id')->first();
-    	$studentProfile = Scholar::find($student_id);
-        $student = Scholar::find($student_id);
+   public function profileSponsor(){
+        $user_id = Auth::user()->user_id;
+        $user = User::findOrFail($user_id);
+        $sponsor_id = Sponsor::where('user_id','=', $user_id)->pluck('sponsor_id')->first();
+        // $sponsor_id = User::find($user_id)->user_sponsor->sponsor_id;
+        $sponsor = Sponsor::find($sponsor_id);
+        return view('profiles.profile_sponsor', compact('sponsor', 'user'));       
+    } 
 
-		$pending = Application::where('student_id','=', $student_id)
-    		->where('accept_status', '=','pending')
-    		->where('avail_status','=','pending')
-    		// ->deadline()->where('scholarship_deadlineenddate',)
-    		->count();
-		$scholarships = Application::where('student_id', '=', $student_id)
-    		->where('accept_status','=','accept')
-    		->where('avail_status','=','accept')
-    		->get();
-    	$pendingAvail = Application::where('student_id','=',$student_id)
-            ->where('accept_status','=','accept')
-            ->where('avail_status','=','pending')
-            ->get();
-  	         return view('profiles.profile_scholar', compact('studentProfile','student', 'user','pending','scholarships','pendingAvail'));   
+    public function viewScholars(){
+        $user_id = Auth::user()->user_id;
+        $user = User::findOrFail($user_id);
+        $sponsor_id = Sponsor::where('user_id','=', $user_id)->pluck('sponsor_id')->first();
+        $sponsor = Sponsor::find($sponsor_id);
+        return view('profiles.scholars', compact('sponsor', 'user'));       
     }   
 
    public function profileNotStudent($student_id){
@@ -48,21 +42,5 @@ class ProfileController extends Controller
             return view('profiles.profile_scholar',compact('studentProfile','student','user'));    
         }
     }
-     public function scholarshipStudent($scholarship_id){
-        $user_id = Auth::user()->user_id;
-        $user = User::findOrFail($user_id);
-        $stud_id = Scholar::where('user_id','=', $user_id)->pluck('student_id')->first();
-        $student = Scholar::findOrFail($stud_id);
-        $scholarship = Scholarship::find($scholarship_id);
-        return view('/profiles/profile_scholarship', compact('student','user','scholarship'));
-    }
-
-     public function scholarshipSponsor($scholarship_id){
-        $user_id = Auth::user()->user_id;
-        $user = User::findOrFail($user_id);
-        $spon_id = Sponsor::where('user_id','=', $user_id)->pluck('sponsor_id')->first();
-        $sponsor = Sponsor::findOrFail($spon_id);
-        $scholarship = Scholarship::findOrFail($scholarship_id);
-        return view('/profiles/profile_scholarship', compact('sponsor','user','scholarship'));
-    }
+    
 }

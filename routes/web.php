@@ -29,19 +29,27 @@ Route::post('/registration/Student', 'ScholarAuthController@Validation');
 
 Route::post('/registration/Sponsor', 'SponsorAuthController@Validation');
 
-Route::get('/profile scholar', 'ProfileController@profileStudent');
+//============================ CHECKERS =========================
+// This will be changed as soon as auth and middleware is added
+
+Route::get('/profile scholar', 'ScholarController@viewProfile');
 
 Route::get('/profile scholar/{student_id}', 'ProfileController@profileNotStudent');
+
+Route::get('/profile sponsor', 'ProfileController@profileSponsor');
+
+Route::get('/profile sponsor/scholars', 'ProfileController@viewScholars');
+
 	
 // will change into something more elegant. band aid solution
 Route::get("/home", function(){
     switch(Auth::user()->user_type){
         case 'sponsor':
-          return (new \App\Http\Controllers\HomeController)->homeSponsor();
+          return (new \App\Http\Controllers\SponsorController)->viewHome();
         break;
 
         case 'student':
-          return (new \App\Http\Controllers\HomeController)->homeStudent();
+          return (new \App\Http\Controllers\ScholarController)->viewHome();
         break;
     }
 });
@@ -49,11 +57,11 @@ Route::get("/home", function(){
 Route::get("/profile scholarship/{scholarship_id}", function($scholarship_id){
     switch(Auth::user()->user_type){
         case 'sponsor':
-          return (new \App\Http\Controllers\ProfileController)->scholarshipSponsor($scholarship_id);
+          return (new \App\Http\Controllers\ScholarshipsController)->scholarshipSponsor($scholarship_id);
         break;
 
         case 'student':
-          return (new \App\Http\Controllers\ProfileController)->scholarshipStudent($scholarship_id);
+          return (new \App\Http\Controllers\ScholarshipsController)->scholarshipStudent($scholarship_id);
         break;
     }
 });
@@ -65,9 +73,16 @@ Route::get('/search', function () {
     return view('user/search');
 });
 
+Route::get('/scholarship form', function () {
+    return view('registration/scholarship_form');
+});
 
-Route::get('/Account Settings', 'EditProfileController@show');
-Route::post('/Update Profile', 'EditProfileController@updateScholar');
+//=============== END FOR FRONT-END PURPOSES =======================
+
+
+Route::get('/Account Settings', 'EditProfileController_Scholar@show');
+Route::post('/Update Profile', 'EditProfileController_Scholar@ValidationScholar');
+Route::post('/Change Password', 'EditProfileController_Scholar@validatePassword');
 
 
 // MESSAGES

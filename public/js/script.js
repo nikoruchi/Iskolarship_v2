@@ -20,6 +20,7 @@ function accept(e){
 		success:function(data){
 			console.log(data);
 			console.log("yay");
+			
 		},
 		error:function(data){
 			console.log("error");

@@ -38,7 +38,7 @@
 						<?php endif; ?>
 							<ul class="dropdown-menu">
 							<?php if(Auth::user()->hasRole('sponsor')): ?>
-								<li><a href="<?php echo e(url('/profile scholarship')); ?>"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+								<li><a href="<?php echo e(url('/profile sponsor')); ?>"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
 							<?php elseif(Auth::user()->hasRole('student')): ?>
 								<li><a href="<?php echo e(url('/profile scholar')); ?>"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
 							<?php endif; ?>

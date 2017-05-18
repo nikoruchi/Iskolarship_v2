@@ -9,16 +9,57 @@
 			<button class="btn btn-success btn-block" style="border-radius: 0 0 4px 4px; border-top: 0;"><span class="glyphicon glyphicon-upload"></span> Upload New</button>
 		</div>
 		<div class="col-sm-6">
-			<div class="panel panel-default">
+			
 				<div class="panel-heading">
 					<h1 class="unmargined txt-success">Account Settings</h1>
 				</div>
-				<form action="/Update Profile" method="POST">
+			<div class="panel panel-default">
+			<div class="panel-body">
+				<div class="form-group">
+					<form action="/Change Password" method="POST"  id="changePass">
+					    <?php echo e(csrf_field()); ?>
+
+					        <label><span class="glyphicon glyphicon-lock"></span> Password:</label>
+							<div class="input-group ">
+								<input type="password" name="password" placeholder="Create a secure password. Minimum of 6 characters" class="form-control <?php echo e($errors->has('password') ? ' has-error' : ''); ?> " />
+
+								<?php if($errors->has('password')): ?>
+									<script>
+										$(document).ready(function(){
+										    $('#changePass').modal({show: true});
+										}
+										</script>
+									<span class="help-block">
+										<strong><?php echo e($errors->first('password')); ?></strong>
+									</span>
+								<?php endif; ?>
+
+							</div>
+							<label><span class="glyphicon glyphicon-lock"></span> Re-type Password</label>
+							<div class="input-group <?php echo e($errors->has('repassword') ? ' has-error' : ''); ?> ">
+								<input type="password" name="repassword" placeholder="Create a secure password. Minimum of 6 characters" class="form-control" />
+
+					 			<?php if($errors->has('repassword')): ?>
+									<span class="help-block">
+										<strong><?php echo e($errors->first('repassword')); ?></strong>
+									</span>
+								<?php endif; ?>
+							</div>
+				    	<button type="submit" class="btn btn-success pull-right" style="margin-top: 10px;">
+							<span class="glyphicon glyphicon-refresh"></span>&nbsp;&nbsp;Confirm Password
+						</button> 
+				    </form>
+				</div>
+			</div>
+
+
+				<form action="/Update Profile" method="POST" id="editForm">
 					<?php echo e(csrf_field()); ?>
 
 					<!-- <?php echo e(method_field('PUT')); ?> -->
 					<div class="panel-body">
 						<div class="form-group">
+
 							<label>Name:</label>
 							<div class="input-group" >
 								<input type="text" name="fname" placeholder="First Name" class="form-control" value="<?php echo e($student->student_fname); ?>" />
@@ -106,35 +147,6 @@
 							<div class="input-group">
 								<input type="text" name="email" placeholder="What's your email Address?" class="form-control"  value="<?php echo e($user->email); ?>"/>
 							</div>
-
-							<div class="input-group">
-								<a href="#" style="text-decoration: none;">
-									<button class="btn btn-primary btn-block" style="border-radius: 4px; margin-top: 10px;"><span class="glyphicon glyphicon-lock"></span> Change Password</button>
-								</a>
-							</div>
-							<!-- <label><span class="glyphicon glyphicon-lock"></span> Password:</label>
-							<div class="input-group ">
-								<input type="password" name="password" placeholder="Create a secure password. Minimum of 6 characters" class="form-control" />
- -->
-							<!-- 	<?php if($errors->has('password')): ?>
-									<span class="help-block">
-										<strong><?php echo e($errors->first('password')); ?></strong>
-									</span>
-								<?php endif; ?>
-
-							</div> -->
-							<!-- <label><span class="glyphicon glyphicon-lock"></span> Re-type Password</label>
-							<div class="input-group <?php echo e($errors->has('repassword') ? ' has-error' : ''); ?> ">
-								<input type="password" name="repassword" placeholder="Create a secure password. Minimum of 6 characters" class="form-control" />
-
-					<!-- 			<?php if($errors->has('repassword')): ?>
-									<span class="help-block">
-										<strong><?php echo e($errors->first('repassword')); ?></strong>
-									</span>
-								<?php endif; ?>
-
-							</div> --> 
-
 						<hr/>
 						<div class="form-group">
 							<label>University Name:</label>
@@ -185,6 +197,7 @@
 		</div>
 	</div>
 
+
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startPush('styles'); ?>
@@ -196,5 +209,6 @@
 
 <?php $__env->startPush('scripts'); ?>
 	<script src="js/default_img.js"></script>
+	<script src="js/edit-profile.js"></script>
 <?php $__env->stopPush(); ?>
 <?php echo $__env->make('layouts.userTab', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

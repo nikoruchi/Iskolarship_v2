@@ -38,7 +38,7 @@
 						@endif
 							<ul class="dropdown-menu">
 							@if(Auth::user()->hasRole('sponsor'))
-								<li><a href="{{ url('/profile scholarship') }}"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+								<li><a href="{{ url('/profile sponsor') }}"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
 							@elseif(Auth::user()->hasRole('student'))
 								<li><a href="{{ url('/profile scholar')}}"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
 							@endif
