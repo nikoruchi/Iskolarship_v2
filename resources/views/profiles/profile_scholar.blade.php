@@ -60,7 +60,14 @@
 								</div>
 							</div>
 						</div>
-						@endif
+					</div>
+					@endif
+					<div class="scholarships">
+						<ul>
+							<li>
+								
+							</li>
+						</ul>
 					</div>
 				</div>
 			</div>

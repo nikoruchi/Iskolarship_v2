@@ -7,9 +7,23 @@
 	width: 30%;
 }
 
+.home-search{
+}
+
 .home-search input[type="text"]{
+	box-shadow: 0 0 15px rgba(0,0,0,0.1);
+	border-radius: 0;
 	font-size: 1.5em;
+	font-family: "Roboto Thin";
+	font-weight: bold;
 	padding: 1em 1.5em;
+	border: 0;
+}
+
+.input-group-btn .btn{
+	box-shadow: 0 0 15px rgba(0,0,0,0.1);
+	border-radius: 0;
+	border: 0;
 }
 
 .input-group-btn span{

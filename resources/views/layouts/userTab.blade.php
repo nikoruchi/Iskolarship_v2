@@ -16,7 +16,7 @@
 	<!-- <link rel="stylesheet" type="text/css" href="css/scholarship_page.css"/> -->
 	@stack('styles')
 </head>
-<body class="container-white">
+<body class="container">
 	<div id="app">
 		<nav class="navbar navbar-default customized navbar-fixed-top">
 			<div class="container">

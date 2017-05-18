@@ -13,10 +13,10 @@
 						</div>
 					</div>
 					<div class="center-el">
-						<label class="checkbox-inline"><input type="checkbox" name="search_q">Scholarships</label>
-						<label class="checkbox-inline"><input type="checkbox" name="search_q">Sponsors</label>
-						<label class="checkbox-inline"><input type="checkbox" name="search_q">Scholars</label>
-						<label class="checkbox-inline"><input type="checkbox" name="search_q">Open Applications</label>
+						<label class="checkbox-inline"><input type="checkbox" name="search_q"><i class="sub-check"><i class="check"></i></i>Scholarships</label>
+						<label class="checkbox-inline"><input type="checkbox" name="search_q"><i class="sub-check"><i class="check"></i></i>Sponsors</label>
+						<label class="checkbox-inline"><input type="checkbox" name="search_q"><i class="sub-check"><i class="check"></i></i>Scholars</label>
+						<label class="checkbox-inline"><input type="checkbox" name="search_q"><i class="sub-check"><i class="check"></i></i>Open Applications</label>
 					</div>
 				</form>
 			</div>

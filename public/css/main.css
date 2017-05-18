@@ -32,6 +32,24 @@
 	box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
+.navbar-default a:not(.navbar-brand){
+	font-family: "Roboto";
+	color: #888;
+}
+
+.navbar-default a:hover:not(.navbar-brand){
+	color: #555;
+}
+
+.dropdown-menu{
+	border: 0;
+	padding: 0;
+}
+
+.dropdown-menu li a{
+	padding: 12px 30px;
+}
+
 .navbar .navbar-brand{
 	border: 0;
 	/*font-size: 2em;*/
@@ -174,6 +192,7 @@ form:not(.navbar-form) .input-group{
 
 .btn{
 	transition: 0.1s;
+	border: 0;
 }
 
 .btn.btn-success{
@@ -312,4 +331,54 @@ form:not(.navbar-form) .input-group{
 
 .navbar-brand{
 	font-weight: bold;
+}
+
+.checkbox,
+.checkbox-inline{
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	font-family: "Roboto Light";
+	font-weight: bold;
+	color: #888;
+}
+
+.checkbox input,
+.checkbox-inline input{
+	display: none;
+}
+
+.checkbox input + .sub-check,
+.checkbox-inline input + .sub-check{
+	content: "";
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	background-color: white;
+	margin-top: -0.1em;
+	margin-right: 0.5em;
+	width: 1em;
+	height: 1em;
+	font-size: 1em;
+	box-shadow: 0 0 15px rgba(0,0,0,0.1);
+	border-radius: 4px;
+}
+
+.checkbox input:checked + .sub-check,
+.checkbox-inline input:checked + .sub-check{
+	background-color: #3097d1;
+}
+
+.checkbox input + .sub-check .check,
+.checkbox-inline input + .sub-check .check{
+	border: 2px solid white;
+	border-width: 0;
+	width: 0.5em;
+	height: 0.25em;
+	transform: rotate(135deg);
+}
+
+.checkbox input:checked + .sub-check .check,
+.checkbox-inline input:checked + .sub-check .check{
+	border-width: 2px 2px 0 0;
 }
