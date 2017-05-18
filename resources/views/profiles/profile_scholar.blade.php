@@ -3,14 +3,14 @@
 	<div class="container main-container">
 		<div class="row">
 			<div class="col-sm-8 col-sm-offset-2">
-				<img src="/image/{{ $user->user_imagepath }}.jpg" class="img-responsive user-pp img-circle"/>
+				<img src="/image/{{ $user->user_imagepath }}" class="img-responsive user-pp img-circle"/>
 				<h1 class="user-name">{{ $studentProfile->student_fname }}</h1>
 				<h2 class="education"> {{ $studentProfile->student_studyfield }}, {{ $studentProfile->student_university }}</h2>
 				<h3 class="user-email">{{ $studentProfile->student->email }}</h3>
 				<h3 class="user-description">{{ $studentProfile->student->user_aboutme }}</h3>
 				@if(Auth::user()->hasRole('student'))
 				<div class="btn-group flex">	
-					<a href="/Account Settings" class="acc_settings">		
+					<a href="/Account Settings" class="acc_settings">
 						<button class="btn btn-default"><span class="glyphicon glyphicon-cog"></span> Account Settings</button>
 					</a>
 				</div>
