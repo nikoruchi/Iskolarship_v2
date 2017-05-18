@@ -34,11 +34,8 @@
 						<?php if(Auth::user()->hasRole('student')): ?>
 							<a href="/profile scholar" class="dropdown-toggle" data-toggle="dropdown"><?php echo e($student->student_fname); ?> <?php echo e($student->student_lname); ?> <span class="caret"></span></a>
 						<?php elseif(Auth::user()->hasRole('sponsor')): ?>
-<<<<<<< HEAD
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo e($sponsor->sponsor_fname); ?> <?php echo e($sponsor->sponsor_lname); ?> <span class="caret"></span></a>
-=======
 							<a href="" class="dropdown-toggle" data-toggle="dropdown"><?php echo e($sponsor->sponsor_fname); ?> <?php echo e($sponsor->sponsor_lname); ?> <span class="caret"></span></a>
->>>>>>> 4966d5f8e2b496ae8616a5e968ce876a3e724d26
 						<?php endif; ?>
 							<ul class="dropdown-menu">
 							<?php if(Auth::user()->hasRole('sponsor')): ?>

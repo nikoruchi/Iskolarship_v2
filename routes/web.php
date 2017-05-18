@@ -86,7 +86,6 @@ Route::get("/search", function(){
     }
 });
 
-
 Route::get('/scholarship form', function () {
     return view('registration/scholarship_form');
 });

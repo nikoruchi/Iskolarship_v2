@@ -34,11 +34,8 @@
 						@if(Auth::user()->hasRole('student'))
 							<a href="/profile scholar" class="dropdown-toggle" data-toggle="dropdown">{{ $student->student_fname }} {{ $student->student_lname}} <span class="caret"></span></a>
 						@elseif(Auth::user()->hasRole('sponsor'))
-<<<<<<< HEAD
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ $sponsor->sponsor_fname }} {{$sponsor->sponsor_lname}} <span class="caret"></span></a>
-=======
 							<a href="" class="dropdown-toggle" data-toggle="dropdown">{{ $sponsor->sponsor_fname }} {{$sponsor->sponsor_lname}} <span class="caret"></span></a>
->>>>>>> 4966d5f8e2b496ae8616a5e968ce876a3e724d26
 						@endif
 							<ul class="dropdown-menu">
 							@if(Auth::user()->hasRole('sponsor'))
