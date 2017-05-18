@@ -11,13 +11,6 @@
 |
 */
 
-// Route::get('/', 'LoginController@showLoginForm');
-
-// Route::post('login',  'LoginController@login'); //INSERTED
-
-
-//========================= USER SIGN-UP ============================
-
 Route::get('/', function () {
     return view('auth.login');
 })->middleware('guest');
@@ -36,18 +29,11 @@ Route::post('/registration/Student', 'ScholarAuthController@Validation');
 
 Route::post('/registration/Sponsor', 'SponsorAuthController@Validation');
 
-//============================ CHECKERS =========================
-// This will be changed as soon as auth and middleware is added
-
-
 Route::get('/profile scholar', 'ProfileController@profileStudent');
 
-
-// Route::get('/home', ['middleware']=>'sponsor','uses'=>'HomeController@homeSponsor']);
-
-// Route::get('/home', 'HomeController@homeGuests');
-
+Route::get('/profile scholar/{student_id}', 'ProfileController@profileNotStudent');
 	
+// will change into something more elegant. band aid solution
 Route::get("/home", function(){
     switch(Auth::user()->user_type){
         case 'sponsor':
@@ -60,13 +46,17 @@ Route::get("/home", function(){
     }
 });
 
+Route::get("/profile scholarship/{scholarship_id}", function($scholarship_id){
+    switch(Auth::user()->user_type){
+        case 'sponsor':
+          return (new \App\Http\Controllers\ProfileController)->scholarshipSponsor($scholarship_id);
+        break;
 
-
-// Route::get('/Search Results', function () {
-//     return view('search_results');
-// });
-
-// Route::get('/profile scholarship/{scholarship_id}', 'ProfileController@homeSponsor');
+        case 'student':
+          return (new \App\Http\Controllers\ProfileController)->scholarshipStudent($scholarship_id);
+        break;
+    }
+});
 
 
 //=============== FOR FRONT-END PURPOSES =======================
@@ -81,7 +71,17 @@ Route::post('/Update Profile', 'EditProfileController@updateScholar');
 
 
 // MESSAGES
-Route::get('/messages', ['middleware'=>'isguest','uses'=>'MessagesController@index']);
+Route::get("/messages", function(){
+    switch(Auth::user()->user_type){
+        case 'sponsor':
+          return (new \App\Http\Controllers\MessagesController)->indexSponsor();
+        break;
+
+        case 'student':
+          return (new \App\Http\Controllers\MessagesController)->indexStudent();
+        break;
+    }
+});
 
 Route::get('/messages/read', ['middleware'=>'isguest','uses'=>'MessagesController@getReadMsg']);
 
@@ -91,3 +91,11 @@ Route::get('/messages/inbox', ['middleware'=>'isguest','uses'=>'MessagesControll
 
 Route::post('/messages/send', ['middleware'=>'isguest','uses'=>'MessagesController@send']);
 
+// APPLICATION STATUS CHANGES
+Route::post('/application/avail','ApplicationController@avail');
+
+Route::post('/application/rejectAvail','ApplicationController@rejectAvail');
+
+Route::post('/application/accept','ApplicationController@accept');
+
+Route::post('/application/reject', 'ApplicationController@reject');

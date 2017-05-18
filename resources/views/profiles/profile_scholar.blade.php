@@ -4,9 +4,10 @@
 		<div class="row">
 			<div class="col-sm-8 col-sm-offset-2">
 				<img src="/image/{{ $user->user_imagepath }}.jpg" class="img-responsive user-pp img-circle"/>
-				<h1 class="user-name">{{ $student->student_fname }}</h1>
-				<h2 class="education"> {{ $student->student_studyfield }}, {{ $student->student_university }}</h2>
-				<h3 class="user-email">{{ $user->email }}</h3>
+				<h1 class="user-name">{{ $studentProfile->student_fname }}</h1>
+				<h2 class="education"> {{ $studentProfile->student_studyfield }}, {{ $studentProfile->student_university }}</h2>
+				<h3 class="user-email">{{ $studentProfile->student->email }}</h3>
+				<h3 class="user-description">{{ $studentProfile->student->user_aboutme }}</h3>
 				@if(Auth::user()->hasRole('student'))
 				<div class="btn-group flex">	
 					<a href="/Account Settings">		
@@ -14,70 +15,41 @@
 					</a>
 				</div>
 				@endif
-				@if(Auth::user()->hasRole('sponsor'))
+				@if(Auth::user()->user_id != $studentProfile->user_id)
 				<div class="btn-group flex">
 					<button class="btn btn-primary"> <span class="glyphicon glyphicon-envelope"></span> Message</button>
 				</div>
 				@endif
-				@if(Auth::user()->hasRole('student'))
-				<!-- <div class="row">
-					<div class="col-sm-6">
-						<div class="paper">
-							<h4 class="text-center youHave">You have</h4>
-							<h4 class="count">{{$scholarships}}</h4>
-							<h4 class="text-center">Scholarships</h4>
-							<div class="flex"><button class="btn btn-default"><span class="glyphicon glyphicon-modal-window"></span> See all</button></div>
-						</div>
-					</div>
-					<div class="col-sm-6">
-						<div class="paper">
-							<h4 class="text-center youHave">You have</h4>
-							<h4 class="count">{{$sponsors}}</h4>
-							<h4 class="text-center">Sponsors</h4>
-							<div class="flex">
-								<button class="btn btn-default"><span class="glyphicon glyphicon-modal-window"></span> See all</button>
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-6">
-						<div class="paper margin-top">
-							<h4 class="text-center youHave">You have</h4>
-							<h4 class="count">{{$pending}}</h4>
-							<h4 class="text-center">Pending Scholarships</h4>
-							<div class="flex">
-								<button class="btn btn-default"><span class="glyphicon glyphicon-modal-window"></span> See all</button>
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-6">
-						<div class="paper margin-top">
-							<h4 class="text-center youHave">You have</h4>
-							<h4 class="count">5</h4>
-							<h4 class="text-center">Expired Scholarships</h4>
-							<div class="flex">
-								<button class="btn btn-default"><span class="glyphicon glyphicon-modal-window"></span> See all</button>
-							</div>
-						</div>
-					</div>
-				</div> -->
-				@endif
 				<div>
+					@if((Auth::user()->user_id)==($studentProfile->user_id))
 					<h2 class="text-center">Scholarships</h2>
 					<ul class="scholarships">
+						@foreach($pendingAvail as $scholarshipAvail)
 						<li>
 							<!-- Image of the scholarship is placed here. -->
 							<!-- The H2 here is just a place holder -->
 							<h2 class="first-letter">S</h2>
 							<article>
-								<h2 class="name">Scholarship Name</h2>
+								<h2 class="name">{{$scholarshipAvail->appscholarship->scholarship_name}}</h2>
 								<div class="btns">
-									<a href="#" class="accept"><span class="glyphicon glyphicon-ok"></span> Accept</a>
-									<a href="#" class="view"><span class="glyphicon glyphicon-eye-open"></span> View</a>
-									<a href="#" class="reject"><span class="glyphicon glyphicon-remove"></span> Reject</a>
+									<form method="post" action="/application/avail" id="acceptForm">
+									{{ csrf_field() }}
+										<input type="hidden" value="{{$scholarshipAvail->application_id}}" name="app_id" />
+										<button type="submit" data-id="{{$scholarshipAvail->application_id}}" class="accept"><span class="glyphicon glyphicon-ok"></span> Accept</button>
+
+									</form>
+									<a href="/profile scholarship/{{ $scholarshipAvail->scholarship_id }}" class="view"><span class="glyphicon glyphicon-eye-open"></span> View</a>
+									<form method="post" action="/application/rejectAvail">
+											{{ csrf_field() }}
+										<input type="hidden" value="{{$scholarshipAvail->application_id}}" name="app_id" />
+										<button type="submit" class="reject" "><span class="glyphicon glyphicon-remove"></span> Reject</button>
+									</form>
 								</div>
 							</article>
 						</li>
+						@endforeach
 					</ul>
+					@endif
 				</div>
 			</div>
 		</div>
@@ -86,7 +58,7 @@
 @endsection
 
 @push('styles')
-	<link rel="stylesheet" type="text/css" href="css/scholar_page.css"/>
+	<link rel="stylesheet" type="text/css" href="{{asset('css/scholar_page.css')}}"/>
 @endpush
 
 @push('scripts')

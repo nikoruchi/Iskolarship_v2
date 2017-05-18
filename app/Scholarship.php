@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 
-class Scholarships extends Model
+class Scholarship extends Model
 {
      use Notifiable;
     protected $primaryKey = 'scholarship_id';
@@ -29,7 +29,7 @@ class Scholarships extends Model
      * @var array
      */
     public function scholarshipApp(){
-        return $this->hasMany('App\Application');
+        return $this->hasMany('App\Application','scholarship_id');
     }
     public function scholarshipsdeadline(){
         return $this->hasMany('App\ScholarshipsDeadline');

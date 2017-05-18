@@ -27,8 +27,6 @@ $(document).ready(function(){
 	$(document).on("click",".not-clickable", notClickable);
 })
 
-
-
 $(document).ready(function(){
 	$('#formMsg').submit(function(event){
 		event.preventDefault();
@@ -38,9 +36,6 @@ $(document).ready(function(){
 			data: $(this).serialize(),
 
 			success:function(data){
-				// $.each()
-				// var message = "";
-				// message = ""
 				console.log("Data from send: " +data);
 			},
 			error: function(data){
@@ -60,8 +55,6 @@ function seeFullMessage(e){
 		success:function(data){
 			console.log(data);
 			var msgs = "";
-			// msgs += '';
-
 			$("#message-form").html(msgs);
 
 		}
@@ -105,6 +98,13 @@ function read(e){
 	$.ajax({
 		url: "/messages/read",
 		type: "get",
+		 beforeSend: function (xhr) {
+            var token = $('meta[name="csrf_token"]').attr('content');
+
+            if (token) {
+                  return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+            }
+        },
 		success:function(data){
 			var msgs = "";
 			console.log(data);
@@ -121,9 +121,11 @@ function read(e){
 				msgs+= '</div>';
 				msgs+= '</div>';
 				msgs+= '</li>';
-				// console.log(value['id']);
 			});
 			$("#messages-container").html(msgs);
+		},
+		error:function(data){
+			console.log('error');
 		}
 	})
 }
@@ -169,8 +171,6 @@ function deleteMessage(e){
 		success:function(data){
 			console.log(data);
 			var msgs = "";
-			// msgs += '';
-			// $("#message-form").html(msgs);
 		}
 	})
 }

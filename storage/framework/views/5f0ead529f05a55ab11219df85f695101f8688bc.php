@@ -4,14 +4,14 @@
 	<title>Iskolarship</title>
 	<meta charset="utf-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
-	<link rel="stylesheet" type="text/css" href="css/app.css"/>
-	<link rel="stylesheet" type="text/css" href="css/font-awesome/css/font-awesome.min.css"/>
-	<link rel="stylesheet" type="text/css" href="css/main.css"/>
+	<link rel="stylesheet" type="text/css" href="<?php echo e(asset('css/app.css')); ?>"/>
+	<link rel="stylesheet" type="text/css" href="<?php echo e(asset('css/font-awesome/css/font-awesome.min.css')); ?>"/>
+	<link rel="stylesheet" type="text/css" href="<?php echo e(asset('css/main.css')); ?>"/>
 
 	<script type="text/javascript" src="/js/js.js"></script>
     <script type="text/javascript" src="/js/script-messages.js"></script>
-
-    <!-- <meta name="csrf_token" content = "<?php echo e(csrf_token()); ?>"> -->
+ 	<!-- <script type="text/javascript" src="/js/script.js"></script> -->
+    <meta name="csrf_token" content = "<?php echo e(csrf_token()); ?>">
 
 	<!-- <link rel="stylesheet" type="text/css" href="css/scholarship_page.css"/> -->
 	<?php echo $__env->yieldPushContent('styles'); ?>
