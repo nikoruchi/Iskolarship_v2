@@ -87,6 +87,16 @@ Route::get("/search", function(){
 });
 
 
+Route::get('/scholarship form', function () {
+    return view('registration/scholarship_form');
+});
+
+Route::get('/profile sponsor', function () {
+    return view('user/sponsor_profile');
+});
+
+//=============== END FOR FRONT-END PURPOSES =======================
+
 
 Route::get('/Account Settings', 'EditProfileController@show');
 Route::post('/Update Profile', 'EditProfileController@updateScholar');
