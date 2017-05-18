@@ -59,7 +59,7 @@ class ScholarAuthController extends Controller{
         $user ->user_contact  = $request ->contact;
         $user ->user_type  = 'student';
         $user ->user_aboutme  = '';
-        $user ->user_imagepath  = 'default';
+        $user ->user_imagepath  = 'default.jpg';
         $user ->save();
 
         $student = new Scholar;
