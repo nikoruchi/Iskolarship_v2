@@ -89,6 +89,7 @@ Route::get('/profile sponsor', function () {
 Route::get('/Account Settings', 'EditProfileController_Scholar@show');
 Route::post('/Update Profile', 'EditProfileController_Scholar@ValidationScholar');
 Route::post('/Change Password', 'EditProfileController_Scholar@validatePassword');
+Route::post('/upload', 'EditProfileController_Scholar@upload');
 
 
 // MESSAGES

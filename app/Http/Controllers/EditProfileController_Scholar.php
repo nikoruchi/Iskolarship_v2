@@ -13,45 +13,42 @@ use Illuminate\Support\MessageBag;
 use Hash;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\JsonResponse;
-class EditProfileController_Scholar extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //  
+
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
+
+class EditProfileController_Scholar extends Controller{
+
+    public function upload (Request $request){
+
+        $file = array('image' => Input::file('image'));
+        $rules = array('image' => 'required',); 
+        $validator = Validator::make($file, $rules);
+        if ($validator->fails()) {
+            return Redirect::to('/Account Settings')->withInput()->withErrors($validator);
+        }
+        else {
+            if (Input::file('image')->isValid()) {
+                $destinationPath = 'image'; 
+                $extension = Input::file('image')->getClientOriginalExtension();
+                $fileName = rand(0,99999).'.'.$extension; 
+                
+                $user = new User;
+                $user->where('user_id', '=', Auth::user()->user_id)->update(['user_imagepath' => $fileName]);
+
+                Input::file('image')->move($destinationPath, $fileName);
+
+                Session::flash('success', 'Upload successfully');
+                return Redirect::to('/profile scholar');
+            }
+            else {
+                Session::flash('error', 'uploaded file is not valid');
+                return Redirect::to('/upload');
+            }
+        }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show(){
         $user_id = Auth::user()->user_id;
         $user = User::findOrFail($user_id);
@@ -132,7 +129,7 @@ class EditProfileController_Scholar extends Controller
         $user ->email = $request ->email;
         $user ->user_contact  = $request ->contact;
         $user ->user_aboutme  = $request ->aboutme;
-        $user ->user_imagepath  = 'default';
+        // $user ->user_imagepath  = 'default';
         $user ->save();
 
         if (empty($request ->fname)){
