@@ -21,5 +21,7 @@ class Sponsor extends Model{
         'sponsor_agencyaddress'       
     ];
 
-
+    public function fullname(){
+        return $this->attributes['sponsor_fname'] . ' ' . $this->attributes['sponsor_lname'];
+    }
 }

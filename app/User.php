@@ -13,12 +13,14 @@ class User extends Authenticatable
 
     /**
      * The attributes that are mass assignable.
-
+<<<<<<< HEAD
+     *
+     * @var array
+     */
      
     protected $fillable = [
-        'user_name', 
         'email', 
-        'user_password', 
+        'password', 
         'user_contact', 
         'user_type',
         'user_aboutme',
@@ -36,10 +38,17 @@ class User extends Authenticatable
 
     public function user_student(){
         return $this->hasMany('App\Scholar');
-        return $this->hasMany('App\Sponsor');
+    }
+
+    public function user_sponsor(){
+        return $this->hasMany('App\Sponsor');        
     }
 
     public function hasRole($role){
         return $this->user_type == $role;
     }
+
+    public function messages(){
+        return $this->hasMany('App\Messages');
+   }
 }

@@ -1,4 +1,4 @@
-@extends("layouts.userTab")
+ @extends("layouts.userTab")
 
 @section('content')
 
@@ -24,13 +24,25 @@
 				<div class="panel panel-default"> 
 					<div class="panel-heading">
 						<img src="image/{{ Auth::user()->user_imagepath }}.jpg" class="img-responsive img-circle aside-pp"/>
-						<h4 class="text-center">{{$student->student_fname}} {{$student->student_lname}}</h4>
+						<h4 class="text-center">
+						@if(Auth::user()->hasRole('student'))
+							{{$student->student_fname}} {{$student->student_lname}}
+						@elseif(Auth::user()->hasRole('sponsor'))
+							{{$sponsor->sponsor_fname}} {{$sponsor->sponsor_lname}}
+						@endif
+						</h4>
 						<h4 class="text-center"><span class="small"></span></h4>
 					</div>
 					<div class="panel-body panel-group" id="accordion">
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								<a data-toggle="collapse" data-parent="#accordion" href="#collapse1"><h5 class="text-center panel-title">Your Scholarships</h5></a>
+								<a data-toggle="collapse" data-parent="#accordion" href="#collapse1"><h5 class="text-center panel-title">
+								@if(Auth::user()->hasRole('student'))
+									Your Sponsors
+								@elseif(Auth::user()->hasRole('sponsor'))
+									Your Scholarships
+								@endif
+								</h5></a>
 							</div>
 							<div id="collapse1" class="panel-collapse collapse in">
 						      	<div class="panel-body">
@@ -47,11 +59,18 @@
 
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								<a data-toggle="collapse" data-parent="#accordion" href="#collapse2"><h5 class="text-center panel-title">Your Sponsors</h5></a>
+								<a data-toggle="collapse" data-parent="#accordion" href="#collapse2"><h5 class="text-center panel-title">
+								@if(Auth::user()->hasRole('student'))
+									Your Sponsors
+								@elseif(Auth::user()->hasRole('sponsor'))
+									Your Scholarships
+								@endif
+								</h5></a>
 							</div>
 							<div id="collapse2" class="panel-collapse collapse">
 						      	<div class="panel-body">
 						      		<ul class="list-unstyled">
+
 										<li><a href="#" data-toggle="tooltip" data-placement="right" title="Sponsor 1">Sponsor 1</a></li>
 										<li><a href="#" data-toggle="tooltip" data-placement="right" title="Sponsor 2">Sponsor 2</a></li>
 										<li><a href="#" data-toggle="tooltip" data-placement="right" title="Sponsor 3">Sponsor 3</a></li>

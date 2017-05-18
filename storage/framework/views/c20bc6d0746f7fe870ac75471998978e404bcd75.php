@@ -29,8 +29,18 @@
                             <a href="#" data-toggle="dropdown"><span class="glyphicon glyphicon-user register"><span class="register-icon">+</span></span>&nbsp;&nbsp;Register <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li class="dropdown-header">Register as?</li>
+<<<<<<< HEAD
+<<<<<<< HEAD
                                 <li><a href="<?php echo e(url('registration/Student Form')); ?>"><span class="glyphicon glyphicon-education"></span>&nbsp;&nbsp;Student</a></li>
                                 <li><a href="<?php echo e(url('registration/Sponsor Form')); ?>"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;&nbsp;Sponsor</a></li>
+=======
+                                <li><a href="registration/Student Form"><span class="glyphicon glyphicon-education"></span>&nbsp;&nbsp;Student</a></li>
+                                <li><a href="registration/Sponsor Form"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;&nbsp;Sponsor</a></li>
+>>>>>>> fba89996be0a5dacff11b86ed13eaf58d6eab177
+=======
+                                <li><a href="<?php echo e(url('registration/Student Form')); ?>"><span class="glyphicon glyphicon-education"></span>&nbsp;&nbsp;Student</a></li>
+                                <li><a href="<?php echo e(url('registration/Sponsor Form')); ?>"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;&nbsp;Sponsor</a></li>
+>>>>>>> a3ddce09f01a43ffcc055928c616644a858fa593
                             </ul>
                         </li>
                     </ul>
@@ -42,8 +52,18 @@
     
   <?php echo $__env->yieldContent('content'); ?>;
 
+<<<<<<< HEAD
+<<<<<<< HEAD
     <script type="text/javascript" src="/js/jquery.min.js"></script>
     <script type="text/javascript" src="/js/app.js"></script>
+=======
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+>>>>>>> fba89996be0a5dacff11b86ed13eaf58d6eab177
+=======
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/app.js"></script>
+>>>>>>> a3ddce09f01a43ffcc055928c616644a858fa593
     <script>
         $(document).ready(function(){$('[data-toggle="popover"]').popover();});
         $(document).ready(function(){$('[data-toggle="tooltip"]').tooltip();});

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Scholar;
 use App\User;
-
+use App\Sponsor;
 class HomeController extends Controller
 {
     // /**
@@ -28,8 +28,13 @@ class HomeController extends Controller
     {
         return view('/');
     }
+
     public function homeSponsor(){
-        
+        $user_id = Auth::user()->user_id;
+        $user = User::findOrFail($user_id)->first();
+        $sponsor_id = Sponsor::where('user_id','=', $user_id)->pluck('sponsor_id');
+        $sponsor = Sponsor::findOrFail($sponsor_id)->first();
+        return view('home', compact('sponsor', 'user'));
     }
 
     public function homeStudent(){
@@ -37,10 +42,7 @@ class HomeController extends Controller
         $user = User::findOrFail($user_id)->first();
         
         $stud_id = Scholar::where('user_id','=', $user_id)->pluck('student_id');
-
         $student = Scholar::findOrFail($stud_id)->first();
-
-
         return view('home', compact('student', 'user'));
     }
 }
