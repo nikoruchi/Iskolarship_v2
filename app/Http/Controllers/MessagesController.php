@@ -16,14 +16,23 @@ class MessagesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function indexSponsor()
     {
         $user_id = Auth::user()->user_id;
         $user = User::findOrFail($user_id);
-        $stud_id = Scholar::where('user_id','=', $user_id)->pluck('student_id');
+        $id = Sponsor::where('user_id','=', $user_id)->pluck('sponsor_id')->first();
+        $sponsor = Sponsor::findOrFail($id);
+        $inbox = Message::where('msg_receiver','=',$user_id)->get();
+        return view('/user/messages', compact('sponsor','user','inbox'));
+    }
+
+    public function indexStudent()
+    {
+        $user_id = Auth::user()->user_id;
+        $user = User::findOrFail($user_id);
+        $stud_id = Scholar::where('user_id','=', $user_id)->pluck('student_id')->first();
         $student = Scholar::findOrFail($stud_id);
         $inbox = Message::where('msg_receiver','=',$user_id)->get();
-        // $senders = Student::
         return view('/user/messages', compact('student','user','inbox'));
     }
 
@@ -32,13 +41,13 @@ class MessagesController extends Controller
         $read = Message::where('msg_receiver','=',$user_id)->where('msg_status','=','read')->get();
         $messages = array();
         foreach($read as $message){
-            // reminder to self: will fix in the future for now muna lng muna
             $user = User::find($message->msg_sender);
             if($user->user_type=='sponsor'){
-                $sender = Sponsor::find($user->user_id);
+                $sender = Sponsor::find($user->user_id);          
                 $sender = $sender->sponsor_fname;
+
             }elseif($user->user_type=='student'){
-                $sender = Student::find($message->msg_sender)->student_fname;
+                $sender = Scholar::find($message->msg_sender)->student_fname;
             }
             $messages[] = array(
                 'content'=>$message->msg_content,
@@ -53,20 +62,14 @@ class MessagesController extends Controller
     public function getUnreadMsg(){
         $user_id = Auth::user()->user_id;
         $unread = Message::where('msg_receiver','=',$user_id)->where('msg_status','=','unread')->get();
-        // $name =
         $messages = array();
         foreach($unread as $message){
             $user = User::find($message->msg_sender);
             if($user->user_type=='sponsor'){
-                $sender = Sponsor::find($user->user_id);
-                // $sender = Sponsor::pluck('fullname','user_id');
-                // $sender = Sponsor::select(DB::raw("CONCAT('sponsor_fname','sponsor_lname') AS full"))-where('user_id','=',$user->user_id)->get();
-                // $sender= $sender->full;
-                // return $sender; 
-                $sender = $sender->sponsor_fname;
-                // $senderName += $sender->sponsor_lname;
-            }elseif($user->user_type=='student'){
-                $sender = Student::find($message->msg_sender)->student_fname;
+                $sender = Sponsor::find($user->user_id)->sponsor_fname;
+            }
+            if($user->user_type=='student'){
+                $sender = Scholar::find($message->msg_sender)->student_fname;
             }
             $messages[] = array(
                 'content'=>$message->msg_content,
@@ -82,7 +85,6 @@ class MessagesController extends Controller
     public function getAllMsg(){
         $user_id = Auth::user()->user_id;
         $inbox = Message::where('msg_receiver','=',$user_id)->get();
-
         $messages = array();
         foreach($inbox as $message){
             $user = User::find($message->msg_sender);
@@ -90,7 +92,7 @@ class MessagesController extends Controller
                 $sender = Sponsor::find($user->user_id);
                 $sender = $sender->sponsor_fname;
             }elseif($user->user_type=='student'){
-                $sender = Student::find($message->msg_sender)->student_fname;
+                $sender = Scholar::find($message->msg_sender)->student_fname;
             }
             $messages[] = array(
                 'content'=>$message->msg_content,
@@ -103,15 +105,12 @@ class MessagesController extends Controller
     }
 
 
-
     public function send(Request $request){
         $currentTime = Carbon::now()->toDateTimeString();
         $receiver = $request->to;
-        $receiver_id = Auth::user()->where('email','=',$receiver)->pluck('user_id');
+        $receiver_id = Auth::user()->where('email','=',$receiver)->pluck('user_id')->first();
         $user_id = Auth::user()->user_id;
-
         $message = new Message;
-
         $message->msg_sender=$user_id;
         $message->msg_receiver=$receiver_id;
         $message->msg_content=$request->content;
@@ -125,5 +124,11 @@ class MessagesController extends Controller
 
     public function showThread(Request $request){
         return "yes";
+    }
+
+    public function destroy(Request $request){
+       return $request;
+        // Message::destroy($request->messages);
+        // return "yay";
     }
 }

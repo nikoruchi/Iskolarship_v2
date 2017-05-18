@@ -52,7 +52,7 @@ class EditProfileController_Scholar extends Controller{
     public function show(){
         $user_id = Auth::user()->user_id;
         $user = User::findOrFail($user_id);
-        $stud_id = Scholar::where('user_id','=', $user_id)->pluck('student_id');
+        $stud_id = Scholar::where('user_id','=', $user_id)->pluck('student_id')->first();
         $student = Scholar::findOrFail($stud_id);
         return view('profiles/settings/edit_profile-scholar', compact('student','user'));
     }

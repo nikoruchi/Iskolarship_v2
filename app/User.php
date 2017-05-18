@@ -11,12 +11,7 @@ class User extends Authenticatable
     protected $primaryKey = 'user_id';
     protected $table = 'users';
 
-    /**
-     * The attributes that are mass assignable.
-<<<<<<< HEAD
-     *
-     * @var array
-     */
+   
      
     protected $fillable = [
         'email', 
@@ -37,11 +32,11 @@ class User extends Authenticatable
     ];
 
     public function user_student(){
-        return $this->hasMany('App\Scholar');
+        return $this->hasOne('App\Scholar', 'user_id');
     }
 
     public function user_sponsor(){
-        return $this->hasMany('App\Sponsor');        
+        return $this->hasMany('App\Sponsor', 'user_id');        
     }
 
     public function hasRole($role){

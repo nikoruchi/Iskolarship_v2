@@ -495,6 +495,8 @@ form:not(.navbar-form) .input-group {
 }
 
 .scholarships > li > article .view,
+.scholarships > li > article .view_scholars,
+.scholarships > li > article .edit,
 .scholarships > li > article .reject,
 .scholarships > li > article .accept{
     padding: 3px 16px;
@@ -504,6 +506,7 @@ form:not(.navbar-form) .input-group {
     text-align: center;
 }
 
+.scholarships > li > article .view_scholars,
 .scholarships > li > article .view{ 
     background-color: #3097d1;
 }
@@ -512,6 +515,9 @@ form:not(.navbar-form) .input-group {
 }
 .scholarships > li > article .accept{
     background-color: #69cc2e;
+}
+.scholarships > li > article .edit{
+    background-color: #e3cf24;
 }
 
 

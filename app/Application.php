@@ -33,6 +33,6 @@ class Application extends Model
         return $this->hasMany('App\ScholarshipsDeadline');
     }
     public function appscholarship(){
-        return $this->belongsToMany('App\Scholarships');
+        return $this->belongsTo('App\Scholarship','scholarship_id');
     }
 }
