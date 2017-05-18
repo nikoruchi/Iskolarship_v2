@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\MessageBag;
 use Hash;
 use Illuminate\Validation\Rule;
+use Illuminate\Http\JsonResponse;
 class EditProfileController extends Controller
 {
     /**
@@ -78,30 +79,29 @@ class EditProfileController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     public function validatePassword(Request $request){
- 
+    public function validatePassword(Request $request){
         $validator = Validator::make($request->all(),[
             'password' => 'min:6|required|same:repassword',
             'repassword' => 'min:6|same:password',
         ]);
         
         if ($validator->fails()) {
-            return redirect('/Change Password')
+            return redirect('/Account Settings')
                         ->withErrors($validator)
                         ->withInput();
         }
         else{
-            return $this->updateScholar($request);
+            return $this->updateScholarPass($request);
         }
     }
 
-        public function ValidationScholar(Request $request){
+    public function ValidationScholar(Request $request){
         $user_id = Auth::user()->user_id;
 
         $validator = Validator::make($request->all(),[
             'contact' => 'required|regex:/(09)[0-9]{9}/',
             'email' => 'required|email|max:255',
-             Rule::unique('users')->ignore($user_id),
+            Rule::unique('users')->ignore($user_id),
         ]);
         
         if ($validator->fails()) {
@@ -115,12 +115,12 @@ class EditProfileController extends Controller
     }
 
     public function updateScholarPass(Request $request){
-
         $user_id = Auth::user()->user_id;
         $user = User::findOrFail($user_id);
- 
-        // $request -> merge(array('password'=>bcrypt($request->password)));
+        $password=$request->password;
         $user ->password = Hash::make($password);
+        $user->save();
+        return redirect('/profile scholar');
     }
 
     public function updateScholar(Request $request){
@@ -130,8 +130,6 @@ class EditProfileController extends Controller
         $student = Scholar::findOrFail($stud_id);
 
         $user ->email = $request ->email;
-        // $password = $request ->password;
-        // $user ->password = Hash::make($password);
         $user ->user_contact  = $request ->contact;
         $user ->user_aboutme  = $request ->aboutme;
         $user ->user_imagepath  = 'default';
@@ -178,8 +176,6 @@ class EditProfileController extends Controller
         $student ->save();
 
         return redirect('/profile scholar');
-
-
     }
 
     /**

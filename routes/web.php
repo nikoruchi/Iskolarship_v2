@@ -87,7 +87,8 @@ Route::get('/profile sponsor', function () {
 
 
 Route::get('/Account Settings', 'EditProfileController@show');
-Route::post('/Update Profile', 'EditProfileController@updateScholar');
+Route::post('/Update Profile', 'EditProfileController@ValidationScholar');
+Route::post('/Change Password', 'EditProfileController@validatePassword');
 
 
 // MESSAGES
