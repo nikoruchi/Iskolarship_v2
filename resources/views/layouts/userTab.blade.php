@@ -29,7 +29,7 @@
 						@if(Auth::user()->hasRole('student'))
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ $student->student_fname }} {{ $student->student_lname}} <span class="caret"></span></a>
 						@elseif(Auth::user()->hasRole('sponsor'))
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->$sponsor->sponsor_fname }} {{$sponsor->sponsor_lname}} <span class="caret"></span></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ $sponsor->sponsor_fname }} {{$sponsor->sponsor_lname}} <span class="caret"></span></a>
 						@endif
 							<ul class="dropdown-menu">
 								<li><a href="profile.html"><span class="glyphicon glyphicon-user"></span> Profile</a></li>

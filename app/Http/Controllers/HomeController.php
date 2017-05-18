@@ -28,18 +28,14 @@ class HomeController extends Controller
     {
         return view('/');
     }
-    public function homeSponsor(){
-        
-    }
+
 
     public function homeStudent(){
         $user_id = Auth::user()->user_id;
         $user = User::findOrFail($user_id)->first();
         
         $stud_id = Scholar::where('user_id','=', $user_id)->pluck('student_id');
-
         $student = Scholar::findOrFail($stud_id)->first();
-
 
         return view('home', compact('student', 'user'));
     }

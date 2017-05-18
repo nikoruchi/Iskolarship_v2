@@ -29,7 +29,7 @@
 						<?php if(Auth::user()->hasRole('student')): ?>
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo e($student->student_fname); ?> <?php echo e($student->student_lname); ?> <span class="caret"></span></a>
 						<?php elseif(Auth::user()->hasRole('sponsor')): ?>
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo e(Auth::user()->$sponsor->sponsor_fname); ?> <?php echo e($sponsor->sponsor_lname); ?> <span class="caret"></span></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo e($sponsor->sponsor_fname); ?> <?php echo e($sponsor->sponsor_lname); ?> <span class="caret"></span></a>
 						<?php endif; ?>
 							<ul class="dropdown-menu">
 								<li><a href="profile.html"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
