@@ -33,8 +33,8 @@
 					<form action="/Change Password" method="POST"  id="changePass">
 					    {{ csrf_field() }}
 					        <label><span class="glyphicon glyphicon-lock"></span> Password:</label>
-							<div class="input-group ">
-								<input type="password" name="password" placeholder="Create a secure password. Minimum of 6 characters" class="form-control {{ $errors->has('password') ? ' has-error' : '' }} " />
+							<div class="input-group {{ $errors->has('password') ? ' has-error' : '' }} ">
+								<input type="password" name="password" placeholder="Create a secure password. Minimum of 6 characters" class="form-control" />
 
 								@if ($errors->has('password'))
 									<span class="help-block">
@@ -45,7 +45,7 @@
 							</div>
 							<label><span class="glyphicon glyphicon-lock"></span> Re-type Password</label>
 							<div class="input-group {{ $errors->has('repassword') ? ' has-error' : '' }} ">
-								<input type="password" name="repassword" placeholder="Create a secure password. Minimum of 6 characters" class="form-control" />
+								<input type="password" name="repassword" placeholder="Re-type your password" class="form-control" />
 
 					 			@if ($errors->has('repassword'))
 									<span class="help-block">
@@ -216,5 +216,4 @@
 
 @push('scripts')
 	<script src="js/default_img.js"></script>
-	<script src="js/edit-profile.js"></script>
 @endpush
