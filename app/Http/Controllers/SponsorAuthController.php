@@ -65,5 +65,7 @@ class SponsorAuthController extends Controller{
         $sponsor ->sponsor_agencyaddress = $request ->addr_agency;
         $sponsor ->sponsor_job = $request ->job_title;
         $sponsor ->save();
+
+        return redirect('/home');
     }
 }

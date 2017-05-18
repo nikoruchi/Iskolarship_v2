@@ -43,11 +43,22 @@ Route::post('/registration/Sponsor', 'SponsorAuthController@Validation');
 Route::get('/profile scholar', 'ScholarController@viewProfile');
 
 
-Route::get('/home', ['middleware'=>'student','uses'=>'ScholarController@viewHome']);
-
-Route::get('/home', ['middleware'=>'sponsor','uses'=>'SponsorController@viewHome']);
+// Route::get('/home', ['middleware']=>'sponsor','uses'=>'HomeController@homeSponsor']);
 
 // Route::get('/home', 'HomeController@homeGuests');
+
+	
+Route::get("/home", function(){
+    switch(Auth::user()->user_type){
+        case 'sponsor':
+          return (new \App\Http\Controllers\SponsorController)->viewHome();
+        break;
+
+        case 'student':
+          return (new \App\Http\Controllers\ScholarController)->viewHome();
+        break;
+    }
+});
 
 
 
