@@ -7,21 +7,18 @@
 	width: 30%;
 }
 
-.home-search{
-}
-
 .home-search input[type="text"]{
-	box-shadow: 0 0 15px rgba(0,0,0,0.1);
+	box-shadow: 0 0 15px rgba(0,0,0,0.2);
 	border-radius: 0;
-	font-size: 1.5em;
+	font-size: 1.25em;
 	font-family: "Roboto Thin";
 	font-weight: bold;
-	padding: 1em 1.5em;
+	padding: 1.2em 1.5em;
 	border: 0;
 }
 
 .input-group-btn .btn{
-	box-shadow: 0 0 15px rgba(0,0,0,0.1);
+	box-shadow: 0 0 15px rgba(0,0,0,0.2);
 	border-radius: 0;
 	border: 0;
 }
@@ -29,6 +26,21 @@
 .input-group-btn span{
 	padding: 0.15em;
 	font-size: 1.5em;
+}
+
+.check-boxes{
+	width: 100;
+	display: flex;
+	justify-content: space-around;
+	align-items: stretch;
+	padding: 8px 0;
+	background-color: white;
+	box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+
+.check-boxes > label.checkbox-inline{
+	padding: 0;
+	margin: 0;
 }
 
 /*#accordion{
@@ -179,18 +191,10 @@
 
 #formCarousel .carousel-indicators li.active .fa-money{
 	background-color: #2ecc71;
-}
+}*/
 
-#formCarousel .carousel-inner{
-	/*padding: 0.5em 0;*/
-	/*margin: 0.5em 0;*/
-	/*overflow: visible;*/
-
-}
-
-#formCarousel .paper{
+/*#formCarousel .paper{
 	padding: 1em;
-	/*box-shadow: -3px 3px 15px rgba(0,0,0,0.08);*/
 	border: 1px solid #DDD;
 	border-radius: 4px;
 	min-height: 150px;
