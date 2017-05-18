@@ -1,4 +1,4 @@
-@extends("layouts.userTab")
+ @extends("layouts.userTab")
 
 @section('content')
 
@@ -21,7 +21,6 @@
 					</div>
 				</form>
 			</div>
-			
 		</div>
 	</div>
 

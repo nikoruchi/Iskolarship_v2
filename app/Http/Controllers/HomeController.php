@@ -7,7 +7,6 @@ use Auth;
 use App\Sponsor;
 use App\Scholar;
 use App\User;
-
 class HomeController extends Controller
 {
     // /**
@@ -29,6 +28,7 @@ class HomeController extends Controller
     {
         return view('/');
     }
+
     public function homeSponsor(){
         $user_id = Auth::user()->user_id;
         $user = User::findOrFail($user_id);
@@ -39,7 +39,6 @@ class HomeController extends Controller
 
 
         return view('home', compact('sponsor', 'user'));
-        
     }
 
     public function homeStudent(){
@@ -49,7 +48,6 @@ class HomeController extends Controller
         $stud_id = Scholar::where('user_id','=', $user_id)->pluck('student_id');
 
         $student = Scholar::findOrFail($stud_id);
-
 
         return view('home', compact('student', 'user'));
     }

@@ -16,8 +16,10 @@ class isSponsor
      */
        public function handle($request, Closure $next)
     {
-        if(\Auth::check() && Auth::user()->user_type == 'sponsor'){
-            return $next($request);    
+        if(Auth::check() && Auth::user()->user_type != 'sponsor'){
+            return redirect('/');
         }
+        return $next($request);    
+
     }
 }

@@ -28,5 +28,11 @@ class Scholarships extends Model
      *
      * @var array
      */
+    public function scholarshipApp(){
+        return $this->hasMany('App\Application');
+    }
+    public function scholarshipsdeadline(){
+        return $this->hasMany('App\ScholarshipsDeadline');
+    }
 
 }

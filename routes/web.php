@@ -22,8 +22,6 @@ Route::get('/', function () {
     return view('auth.login');
 })->middleware('guest');
 
-// Route::get('/profile scholar/{student_id}', ['middleware'=>'isguest','uses'=>'ProfileController@profile']);
-
 Auth::routes();
 
 Route::get('/registration/Student Form', function () {
@@ -40,48 +38,58 @@ Route::post('/registration/Sponsor', 'SponsorAuthController@Validation');
 
 //============================ CHECKERS =========================
 // This will be changed as soon as auth and middleware is added
-// wag danay idelete
 
-// Route::get('/profile scholar', function(){
-	// return view('profiles/profile_scholar');
-// })->middleware('student');
-
-// Route::get('/profile scholar', function(){
-	// return view('profiles/profile_scholarship');
-// })->middleware('sponsor');
-
-Route::get('/profile scholar/{student_id}', ['middleware'=>'isguest','uses'=>'ProfileController@profile']);
 
 Route::get('/profile scholar', 'ProfileController@profileStudent');
-// Route::get('/home', function () {
-//     return view('home');
-// });
 
-Route::get('/home', ['middleware'=>'student','uses'=>'HomeController@homeStudent']);
 
 // Route::get('/home', ['middleware']=>'sponsor','uses'=>'HomeController@homeSponsor']);
 
 // Route::get('/home', 'HomeController@homeGuests');
 
+	
+Route::get("/home", function(){
+    switch(Auth::user()->user_type){
+        case 'sponsor':
+          return (new \App\Http\Controllers\HomeController)->homeSponsor();
+        break;
 
-Route::get('/Search Results', function () {
-    return view('search_results');
+        case 'student':
+          return (new \App\Http\Controllers\HomeController)->homeStudent();
+        break;
+    }
 });
 
-Route::get('/profile scholarship', function () {
-    return view('profiles/profile_scholarship');
-});
+
+
+// Route::get('/Search Results', function () {
+//     return view('search_results');
+// });
+
+// Route::get('/profile scholarship/{scholarship_id}', 'ProfileController@homeSponsor');
 
 
 //=============== FOR FRONT-END PURPOSES =======================
-Route::get('/messages', function () {
-    return view('user/messages');
-});
 
 Route::get('/search', function () {
     return view('user/search');
 });
 
+
 Route::get('/Account Settings', 'EditProfileController@show');
 Route::post('/Update Profile', 'EditProfileController@updateScholar');
-  
+
+
+// MESSAGES
+Route::get('/messages', ['middleware'=>'isguest','uses'=>'MessagesController@index']);
+
+Route::get('/messages/read', ['middleware'=>'isguest','uses'=>'MessagesController@getReadMsg']);
+
+Route::get('/messages/unread', ['middleware'=>'isguest','uses'=>'MessagesController@getUnReadMsg']);
+
+Route::get('/messages/inbox', ['middleware'=>'isguest','uses'=>'MessagesController@getAllMsg']);
+
+Route::post('/messages/send', ['middleware'=>'isguest','uses'=>'MessagesController@send']);
+
+Route::get('/messages/thread',['middleware'=>'isgues','uses'=>'MessagesController@showThread']);
+

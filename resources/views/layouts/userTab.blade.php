@@ -7,6 +7,12 @@
 	<link rel="stylesheet" type="text/css" href="css/app.css"/>
 	<link rel="stylesheet" type="text/css" href="css/font-awesome/css/font-awesome.min.css"/>
 	<link rel="stylesheet" type="text/css" href="css/main.css"/>
+
+	<script type="text/javascript" src="/js/js.js"></script>
+    <script type="text/javascript" src="/js/script-messages.js"></script>
+
+    <!-- <meta name="csrf_token" content = "{{ csrf_token() }}"> -->
+
 	<!-- <link rel="stylesheet" type="text/css" href="css/scholarship_page.css"/> -->
 	@stack('styles')
 </head>
@@ -25,16 +31,19 @@
 				<div class="collapse navbar-collapse" id="app-navbar-collapse">
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown">
-						<!-- dpat name hehe to check lng danay -->
 						@if(Auth::user()->hasRole('student'))
 							<a href="/profile scholar" class="dropdown-toggle" data-toggle="dropdown">{{ $student->student_fname }} {{ $student->student_lname}} <span class="caret"></span></a>
 						@elseif(Auth::user()->hasRole('sponsor'))
 							<a href="" class="dropdown-toggle" data-toggle="dropdown">{{ $sponsor->sponsor_fname }} {{$sponsor->sponsor_lname}} <span class="caret"></span></a>
 						@endif
 							<ul class="dropdown-menu">
-								<li><a href="/profile scholar"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+							@if(Auth::user()->hasRole('sponsor'))
+								<li><a href="{{ url('/profile scholarship') }}"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+							@elseif(Auth::user()->hasRole('student'))
+								<li><a href="{{ url('/profile scholar')}}"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+							@endif
 								@if(Auth::check())
-								<li><a href="#"><span class="glyphicon glyphicon-envelope"></span> Messages</a></li>
+								<li><a href="{{ url('/messages') }}"><span class="glyphicon glyphicon-envelope"></span> Messages</a></li>
 								<li><a href="#"><span class="glyphicon glyphicon-bell"></span> Notifications</a></li>
 								@endif
 								<li><a href="/Account Settings"><span class="glyphicon glyphicon-cog"></span> Account Settings</a></li>
@@ -54,13 +63,11 @@
 	@yield('content')
 
 	@stack('scripts')
-	
 	<script type="text/javascript" src="/js/jquery.min.js"></script>
-	<script type="text/javascript" src="/js/app.js"></script>
-	<script>
-		$(document).ready(function(){$('[data-toggle="popover"]').popover();});
-		$(document).ready(function(){$('[data-toggle="tooltip"]').tooltip();});
-	</script>
-
+    <script type="text/javascript" src="/js/app.js"></script>
+    <script>
+        $(document).ready(function(){$('[data-toggle="popover"]').popover();});
+        $(document).ready(function(){$('[data-toggle="tooltip"]').tooltip();});
+    </script>
 </body>
 </html>
