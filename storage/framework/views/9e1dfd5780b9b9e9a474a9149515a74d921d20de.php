@@ -27,17 +27,17 @@
 						<li class="dropdown">
 						<!-- dpat name hehe to check lng danay -->
 						<?php if(Auth::user()->hasRole('student')): ?>
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo e($student->student_fname); ?> <?php echo e($student->student_lname); ?> <span class="caret"></span></a>
+							<a href="/profile scholar" class="dropdown-toggle" data-toggle="dropdown"><?php echo e($student->student_fname); ?> <?php echo e($student->student_lname); ?> <span class="caret"></span></a>
 						<?php elseif(Auth::user()->hasRole('sponsor')): ?>
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo e(Auth::user()->$sponsor->sponsor_fname); ?> <?php echo e($sponsor->sponsor_lname); ?> <span class="caret"></span></a>
+							<a href="" class="dropdown-toggle" data-toggle="dropdown"><?php echo e($sponsor->sponsor_fname); ?> <?php echo e($sponsor->sponsor_lname); ?> <span class="caret"></span></a>
 						<?php endif; ?>
 							<ul class="dropdown-menu">
-								<li><a href="profile.html"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+								<li><a href="/profile scholar"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
 								<?php if(Auth::check()): ?>
 								<li><a href="#"><span class="glyphicon glyphicon-envelope"></span> Messages</a></li>
 								<li><a href="#"><span class="glyphicon glyphicon-bell"></span> Notifications</a></li>
 								<?php endif; ?>
-								<li><a href="#"><span class="glyphicon glyphicon-cog"></span> Account Settings</a></li>
+								<li><a href="/Account Settings"><span class="glyphicon glyphicon-cog"></span> Account Settings</a></li>
 								<?php if(Auth::check()): ?>
 									<li><a href="<?php echo e(url('/logout')); ?>" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><span class="glyphicon glyphicon-off"></span>&nbsp;Logout</a></li>
 									 <form id="logout-form" action="<?php echo e(url('/logout')); ?>" method="POST" style="display: none;">
@@ -48,15 +48,6 @@
 							</ul>
 						</li>
 					</ul>
-					<!-- <form class="navbar-nav navbar-form">
-						<div class="input-group">
-							<input type="text-box" class="form-control" name="search" placeholder="Search..." />
-						
-							<span class="input-group-btn">
-								<button type="submit" class="btn btn-default input-btn"><span class="glyphicon glyphicon-search"></span></button>
-							</span>
-						</div>
-					</form> -->
 				</div>
 			</div>
 		</nav>

@@ -58,7 +58,7 @@ class ScholarAuthController extends Controller{
         $user ->password = Hash::make($password);
         $user ->user_contact  = $request ->contact;
         $user ->user_type  = 'student';
-        $user ->user_aboutme  = '0';
+        $user ->user_aboutme  = '';
         $user ->user_imagepath  = 'default';
         $user ->save();
 

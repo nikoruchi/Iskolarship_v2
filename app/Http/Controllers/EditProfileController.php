@@ -6,41 +6,183 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Scholar;
 use App\User;
-
+use App\Sponsor;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\MessageBag;
+use Hash;
 class EditProfileController extends Controller
 {
-    // /**
-    //  * Create a new controller instance.
-    //  *
-    //  * @return void
-    //  */
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        //
+    }
 
-    // /**
-    //  * Show the application dashboard.
-    //  *
-    //  * @return \Illuminate\Http\Response
-    //  */
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
 
-    // public function homeGuests()
-    // {
-    //     return view('/');
-    // }
-    // public function homeSponsor(){
-        
-    // }
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
 
-    public function editProfileStudent(){
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show(){
         $user_id = Auth::user()->user_id;
-        $user = User::findOrFail($user_id)->first();
-        
+        $user = User::findOrFail($user_id);
         $stud_id = Scholar::where('user_id','=', $user_id)->pluck('student_id');
+        $student = Scholar::findOrFail($stud_id);
+        return view('profiles/settings/edit_profile-scholar', compact('student','user'));
+    }
 
-        $student = Scholar::findOrFail($stud_id)->first();
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
 
-        return view('profiles/settings/edit_profile', compact('student', 'user'));
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+
+     public function Validation_Scholar(Request $request){
+
+        $validator = Validator::make($request->all(),[
+            'email' => 'required|email|max:255|unique:users,email',
+            // 'password' => 'min:6|required|same:repassword',
+            // 'repassword' => 'min:6|same:password',
+            'contact' => 'required|regex:/(09)[0-9]{9}/',
+            'bdate' => 'required|date',
+            'fname' => 'required',
+            'lname' => 'required',
+            'gender' => 'required|in:male,female',
+            'address' => 'required',
+            'region' => 'required',
+            'ntnlty' => 'required',
+            'begin_study' => 'required|date',
+            'degree_att' => 'required',
+            'field' => 'required',
+            'degree_st' => 'required',
+            'univ' => 'required',
+            'univ_address' => 'required'
+
+        ]);
+        
+        if ($validator->fails()) {
+            return redirect('/Account Settings')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+        else{
+            return $this->updateScholar($request);
+        }
+    }
+
+    public function updateScholar(Request $request){
+        $user_id = Auth::user()->user_id;
+        $user = User::findOrFail($user_id);
+        $stud_id = Scholar::where('user_id','=', $user_id)->pluck('student_id');
+        $student = Scholar::findOrFail($stud_id);
+
+
+        $request -> merge(array('password'=>bcrypt($request->password)));
+
+        // $user->update($request->all());
+        // $student->update($request->all());
+
+        $user ->email = $request ->email;
+        // $password = $request ->password;
+        // $user ->password = Hash::make($password);
+        $user ->user_contact  = $request ->contact;
+        $user ->user_aboutme  = $request ->aboutme;
+        $user ->user_imagepath  = 'default';
+        $user ->save();
+
+        if (empty($request ->fname)){
+            $request ->fname = $student ->student_fname;
+        }
+        if (empty($request ->lname)){
+            $request ->lname = $student ->student_lname;
+        }
+        if (empty($request ->bdate)){
+            $request ->bdate = $student ->student_birthdate;
+        }
+        if (empty($request ->address)){
+            $request ->address = $student ->student_address;
+        }
+        if (empty($request ->begin_study)){
+            $request ->begin_study= $student ->student_beginstudies;
+        }
+        if (empty($request ->field)){
+            $request ->field = $student ->student_studyfield;
+        }
+        if (empty($request ->univ)){
+            $request ->univ = $student ->student_university;
+        }
+        if (empty($request ->univ_address)){
+            $request ->univ_address = $student ->student_universityaddress;
+        }
+
+        $student ->student_fname = $request ->fname;
+        $student ->student_lname = $request ->lname;
+        $student ->student_gender = $request ->gender;
+        $student ->student_birthdate = $request ->bdate;
+        $student ->student_address = $request ->address;
+        $student ->student_region = $request ->region;
+        $student ->student_nationality = $request ->ntnlty;
+        $student ->student_beginstudies = $request ->begin_study;
+        $student ->student_highestdegree = $request ->degree_att;
+        $student ->student_studyfield = $request ->field;
+        $student ->student_degreesought = $request ->degree_st;
+        $student ->student_university = $request ->univ;
+        $student ->student_universityaddress = $request ->univ_address;
+        $student ->save();
+
+        return redirect('/profile scholar');
+
+
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
     }
 }

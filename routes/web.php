@@ -59,7 +59,7 @@ Route::get('/profile scholar', 'ProfileController@profileStudent');
 
 Route::get('/home', ['middleware'=>'student','uses'=>'HomeController@homeStudent']);
 
-// Route::get('/home', ['middleware'=>'sponsor','uses'=>'HomeController@homeSponsor']);
+// Route::get('/home', ['middleware']=>'sponsor','uses'=>'HomeController@homeSponsor']);
 
 // Route::get('/home', 'HomeController@homeGuests');
 
@@ -82,4 +82,6 @@ Route::get('/search', function () {
     return view('user/search');
 });
 
-Route::get('/edit profile', 'EditProfileController@editProfileStudent');
+Route::get('/Account Settings', 'EditProfileController@show');
+Route::post('/Update Profile', 'EditProfileController@updateScholar');
+  

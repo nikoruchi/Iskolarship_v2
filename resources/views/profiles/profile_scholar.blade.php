@@ -9,10 +9,10 @@
 					<h2 class="education"> {{ $student->student_studyfield }}, {{ $student->student_university }}</h2>
 					<h3 class="user-email">{{ $user->email }}</h3>
 					@if(Auth::user()->hasRole('student'))
-					<div class="btn-group flex">
-						<button class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span> Edit Profile</button>
-					
-						<button class="btn btn-default"><span class="glyphicon glyphicon-cog"></span> Account Settings</button>
+					<div class="btn-group flex">	
+						<a href="/Account Settings">		
+							<button class="btn btn-default"><span class="glyphicon glyphicon-cog"></span> Account Settings</button>
+						</a>
 					</div>
 					@endif
 					@if(Auth::user()->hasRole('sponsor'))

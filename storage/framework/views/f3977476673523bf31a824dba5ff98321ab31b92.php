@@ -8,10 +8,10 @@
 					<h2 class="education"> <?php echo e($student->student_studyfield); ?>, <?php echo e($student->student_university); ?></h2>
 					<h3 class="user-email"><?php echo e($user->email); ?></h3>
 					<?php if(Auth::user()->hasRole('student')): ?>
-					<div class="btn-group flex">
-						<button class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span> Edit Profile</button>
-					
-						<button class="btn btn-default"><span class="glyphicon glyphicon-cog"></span> Account Settings</button>
+					<div class="btn-group flex">	
+						<a href="/Account Settings">		
+							<button class="btn btn-default"><span class="glyphicon glyphicon-cog"></span> Account Settings</button>
+						</a>
 					</div>
 					<?php endif; ?>
 					<?php if(Auth::user()->hasRole('sponsor')): ?>

@@ -24,7 +24,5 @@ class ProfileController extends Controller
     	return view('profiles.profile_scholar', compact('student','user'));
     }
 
-    // public function profileSponsor(){
-    // 	$
-    // }
+    
 }
