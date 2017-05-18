@@ -1,12 +1,18 @@
 @extends('layouts.userTab')
+
 @section('content')
 	<div class="container main-container">
 		<div class="row">
 			<div class="col-sm-8 col-sm-offset-2">
 				<img src="/image/{{ $user->user_imagepath }}.jpg" class="img-responsive user-pp img-circle"/>
 				<h1 class="user-name">{{ $student->student_fname }}</h1>
-				<h2 class="education"> {{ $student->student_studyfield }}, {{ $student->student_university }}</h2>
-				<h3 class="user-email">{{ $user->email }}</h3>
+				<h2>Job</h2>
+				<!-- Hide these elements from others -->
+				<h3>Address</h3>
+				<h3>Agency Workplace</h3>
+				<h3>Agency Address</h3>
+				<!-- <h2 class="education"> {{ $student->student_studyfield }}, {{ $student->student_university }}</h2> -->
+				<!-- <h3 class="user-email">{{ $user->email }}</h3> -->
 				@if(Auth::user()->hasRole('sponsor'))
 				<div class="btn-group flex">	
 					<a href="/Account Settings">		
@@ -71,9 +77,21 @@
 							<article>
 								<h2 class="name">Scholarship Name</h2>
 								<div class="btns">
-									<a href="#" class="accept"><span class="glyphicon glyphicon-ok"></span> Accept</a>
-									<a href="#" class="view"><span class="glyphicon glyphicon-eye-open"></span> View</a>
-									<a href="#" class="reject"><span class="glyphicon glyphicon-remove"></span> Reject</a>
+									<a href="#" class="edit"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+									<a href="#" class="view_scholars"><span class="glyphicon glyphicon-pencil"></span> Scholars</a>
+								</div>
+							</article>
+						</li>
+						<li>
+							<!-- Image of the scholarship is placed here. -->
+							<!-- The H2 here is just a place holder -->
+							<h2 class="first-letter">S</h2>
+							<article>
+								<h2 class="name">Scholarship Name</h2>
+								<div class="btns">
+									<a href="#" class="edit"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+									<!-- We will place the delete inside the edit form. -->
+									<a href="#" class="view_scholars"><span class="glyphicon glyphicon-pencil"></span> Scholars</a>
 								</div>
 							</article>
 						</li>
