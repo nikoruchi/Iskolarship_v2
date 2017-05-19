@@ -21,7 +21,6 @@ use Illuminate\Support\Facades\Session;
 class EditProfileController_Scholar extends Controller{
 
     public function upload (Request $request){
-
         $file = array('image' => Input::file('image'));
         $rules = array('image' => 'required',); 
         $validator = Validator::make($file, $rules);
@@ -40,7 +39,7 @@ class EditProfileController_Scholar extends Controller{
                 Input::file('image')->move($destinationPath, $fileName);
 
                 Session::flash('success', 'Upload successfully');
-                return Redirect::to('/profile scholar');
+                return Redirect::to('/profile sponsor');
             }
             else {
                 Session::flash('error', 'uploaded file is not valid');
@@ -52,11 +51,10 @@ class EditProfileController_Scholar extends Controller{
     public function show(){
         $user_id = Auth::user()->user_id;
         $user = User::findOrFail($user_id);
-        $stud_id = Scholar::where('user_id','=', $user_id)->pluck('student_id')->first();
-        $student = Scholar::findOrFail($stud_id);
-        return view('profiles/settings/edit_profile-scholar', compact('student','user'));
+        $spons_id = Sponsor::where('user_id','=', $user_id)->pluck('sponsor_id')->first();
+        $sponsor = Sponsor::findOrFail($stud_id);
+        return view('profiles/settings/edit_profile-sponsor', compact('sponsor','user'));
     }
-
 
     public function validatePassword(Request $request){
         $validator = Validator::make($request->all(),[
@@ -74,7 +72,7 @@ class EditProfileController_Scholar extends Controller{
         }
     }
 
-    public function ValidationScholar(Request $request){
+    public function ValidationSponsor(Request $request){
         $user_id = Auth::user()->user_id;
 
         $validator = Validator::make($request->all(),[
@@ -89,11 +87,11 @@ class EditProfileController_Scholar extends Controller{
                         ->withInput();
         }
         else{
-            return $this->updateScholar($request);
+            return $this->updateSponsor($request);
         }
     }
 
-    public function updateScholarPass(Request $request){
+    public function updateSponsorPass(Request $request){
         $user_id = Auth::user()->user_id;
         $user = User::findOrFail($user_id);
         $password=$request->password;
@@ -111,7 +109,6 @@ class EditProfileController_Scholar extends Controller{
         $user ->email = $request ->email;
         $user ->user_contact  = $request ->contact;
         $user ->user_aboutme  = $request ->aboutme;
-        // $user ->user_imagepath  = 'default';
         $user ->save();
 
         if (empty($request ->fname)){
@@ -156,5 +153,4 @@ class EditProfileController_Scholar extends Controller{
 
         return redirect('/profile scholar');
     }
-
 } 
