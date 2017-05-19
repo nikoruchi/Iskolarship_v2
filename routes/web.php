@@ -78,10 +78,15 @@ Route::get('/scholarship form', function () {
 //=============== END FOR FRONT-END PURPOSES =======================
 
 
-Route::get('/Account Settings', 'EditProfileController_Scholar@show');
-Route::post('/Update Profile', 'EditProfileController_Scholar@ValidationScholar');
-Route::post('/Change Password', 'EditProfileController_Scholar@validatePassword');
-Route::post('/upload', 'EditProfileController_Scholar@upload');
+Route::get('/Scholar/Account Settings', 'EditProfileController_Scholar@show');
+Route::post('/Scholar/Update Profile', 'EditProfileController_Scholar@ValidationScholar');
+Route::post('/Scholar/Change Password', 'EditProfileController_Scholar@validatePassword');
+Route::post('/Scholar/upload', 'EditProfileController_Scholar@upload');
+
+Route::get('/Sponsor/Account Settings', 'EditProfileController_Sponsor@show');
+Route::post('/Sponsor/Update Profile', 'EditProfileController_Sponsor@ValidationSponsor');
+Route::post('/Sponsor/Change Password', 'EditProfileController_Sponsor@validatePassword');
+Route::post('/Sponsor/upload', 'EditProfileController_Sponsor@upload');
 
 
 // MESSAGES

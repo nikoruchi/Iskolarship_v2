@@ -5,18 +5,27 @@
 		<div class="col-sm-4 col-sm-offset-1">
 			<div class="affix panel panel-default" style="position: relative; margin-bottom: 0; border-radius: 4px 4px 0 0;">
 				<div class="panel-body">
-					<img src="image/{{$user->user_imagepath}}" class="img-circle img-responsive" style="background-size: cover;" />
+					<img src="/image/{{$user->user_imagepath}}" class="img-circle img-responsive" style="background-size: cover;" />
 				</div>
 			</div>
 
-			<form action="/upload" method="POST" enctype="multipart/form-data">
+			<form action="/Scholar/upload" method="POST" enctype="multipart/form-data">
 				{{ csrf_field() }}
-				<input type="file" class="btn btn-success btn-block {{ $errors->has('image') ? ' has-error' : '' }}" name="image" style="border-radius: 0 0 4px 4px; border-top: 0;" value="Upload New" />
+				<div class="input-group  {{ $errors->has('image') ? ' has-error' : '' }} ">
+					<input type="file" class="btn btn-success btn-block {{ $errors->has('image') ? ' has-error' : '' }}" name="image" style="border-radius: 0 0 4px 4px; border-top: 0;" value="Upload New" />
 				@if ($errors->has('image'))
 					<span class="help-block">
 						<strong>{{ $errors->first('image') }}</strong>
 					</span>
 				@endif
+				@if(Session::has('success'))
+				    <div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span><em> {{ session('success') }}</em></div>
+				@endif
+				@if(Session::has('error'))
+				    <div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span><em> {{ session('success') }}</em></div>
+				@endif
+				
+				</div>
 				<!-- <button type="file" class="btn btn-success btn-block" style="border-radius: 0 0 4px 4px; border-top: 0;"><span class="glyphicon glyphicon-upload"></span> Upload New</button> -->
 				<input type="submit" />
 			</form>
@@ -30,8 +39,12 @@
 			<div class="panel panel-default">
 			<div class="panel-body">
 				<div class="form-group">
-					<form action="/Change Password" method="POST"  id="changePass">
+					<form action="/Scholar/Change Password" method="POST"  id="changePass">
 					    {{ csrf_field() }}
+					    	@if(Session::has('success_pass'))
+							    <div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span><em> {{ session('success_pass') }}</em></div>
+							@endif
+
 					        <label><span class="glyphicon glyphicon-lock"></span> Password:</label>
 							<div class="input-group {{ $errors->has('password') ? ' has-error' : '' }} ">
 								<input type="password" name="password" placeholder="Create a secure password. Minimum of 6 characters" class="form-control" />
@@ -61,11 +74,15 @@
 			</div>
 
 
-				<form action="/Update Profile" method="POST" id="editForm">
+				<form action="/Scholar/Update Profile" method="POST" id="editForm">
 					{{ csrf_field() }}
-					<!-- {{ method_field('PUT') }} -->
+
 					<div class="panel-body">
 						<div class="form-group">
+
+						@if(Session::has('success_update'))
+						    <div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span><em> {{ session('success_update') }}</em></div>
+						@endif
 
 							<label>Name:</label>
 							<div class="input-group" >

@@ -10,7 +10,7 @@
 				<h3 class="about-me">{{ $studentProfile->student->user_aboutme }}</h3>
 				@if(Auth::user()->hasRole('student'))
 				<div class="btn-group flex">
-					<a href="/Account Settings" class="acc_settings">
+					<a href="/Scholar/Account Settings" class="acc_settings">
 						<button class="btn btn-default"><span class="glyphicon glyphicon-cog"></span> Account Settings</button>
 					</a>
 				</div>

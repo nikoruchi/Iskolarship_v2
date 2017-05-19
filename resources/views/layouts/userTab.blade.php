@@ -42,12 +42,16 @@
 							@elseif(Auth::user()->hasRole('student'))
 								<li><a href="{{ url('/profile scholar')}}"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
 							@endif
-								@if(Auth::check())
-								<li><a href="{{ url('/messages') }}"><span class="glyphicon glyphicon-envelope"></span> Messages</a></li>
-								<li><a href="#"><span class="glyphicon glyphicon-bell"></span> Notifications</a></li>
-								@endif
-								<li><a href="/Account Settings"><span class="glyphicon glyphicon-cog"></span> Account Settings</a></li>
-								@if(Auth::check())
+							@if(Auth::check())
+							<li><a href="{{ url('/messages') }}"><span class="glyphicon glyphicon-envelope"></span> Messages</a></li>
+							<li><a href="#"><span class="glyphicon glyphicon-bell"></span> Notifications</a></li>
+							@endif
+							@if(Auth::user()->hasRole('sponsor'))
+							<li><a href="/Sponsor/Account Settings"><span class="glyphicon glyphicon-cog"></span> Account Settings</a></li>
+							@elseif(Auth::user()->hasRole('student'))
+							<li><a href="/Scholar/Account Settings"><span class="glyphicon glyphicon-cog"></span> Account Settings</a></li>
+							@endif
+							@if(Auth::check())
 									<li><a href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><span class="glyphicon glyphicon-off"></span>&nbsp;Logout</a></li>
 									 <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
 			                           		{{ csrf_field() }}
