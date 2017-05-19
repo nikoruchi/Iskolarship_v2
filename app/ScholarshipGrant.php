@@ -26,5 +26,8 @@ class ScholarshipGrant extends Model
      *
      * @var array
      */
+    public function scholarship(){
+        return $this->belongsTo('App\Scholarship', 'scholarship_id');
+    }
 
 }

@@ -9,7 +9,7 @@ use App\User;
 use Auth;
 use App\Application;
 
-class ProfileController extends Controller
+class ProfileController extends Controller{
     public function viewScholars(){
         $user_id = Auth::user()->user_id;
         $user = User::findOrFail($user_id);

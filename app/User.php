@@ -36,7 +36,7 @@ class User extends Authenticatable
     }
 
     public function user_sponsor(){
-        return $this->hasMany('App\Sponsor', 'user_id');        
+        return $this->hasOne('App\Sponsor', 'user_id');        
     }
 
     public function hasRole($role){

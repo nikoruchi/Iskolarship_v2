@@ -22,7 +22,7 @@
 				@endif
 				<div>
 					@if((Auth::user()->user_id)==($studentProfile->user_id))
-						@if($pendingAvail->count()>0)
+						@if(($pendingAvail->count())>0)
 							<h2 class="text-center">Scholarships</h2>
 							<ul class="scholarships">
 								@foreach($pendingAvail as $scholarshipAvail)
@@ -31,7 +31,7 @@
 									<!-- The H2 here is just a place holder -->
 									<h2 class="first-letter">S</h2>
 									<article>
-										<h2 class="name">{{$scholarshipAvail->appscholarship->scholarship_name}}</h2>
+										<h2 class="name">{{$scholarshipAvail->scholarship->scholarship_name}}</h2>
 										<div class="btns">
 											<form method="post" action="/application/avail" id="acceptForm">
 											{{ csrf_field() }}

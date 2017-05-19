@@ -1,6 +1,4 @@
-@extends("layouts.userTab")
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 
 	<div class="container main-container">
 		<div class="row">
@@ -8,25 +6,25 @@
 				<div class="panel">
 					<div class="panel-heading">
 						<img src="uploads/dost.png" class="img-responsive scholarship-logo"/>
-						<h1 class="scholarship-name">{{$scholarship->scholarship_name}}</h1>
-						<p class="scholarship-description">{{$scholarship->scholarship_desc}}</p>
+						<h1 class="scholarship-name"><?php echo e($scholarship->scholarship_name); ?></h1>
+						<p class="scholarship-description"><?php echo e($scholarship->scholarship_desc); ?></p>
 						<div class="flex">
 						<!-- pa edit lang di design sang paragraph. -->
-						@if($deadline < $currentTime)
+						<?php if($deadline < $currentTime): ?>
 							<p class ="text-center">Submission for application is over.</p>
-						@elseif((Auth::user()->hasRole('student')) && $exists!=0)
+						<?php elseif((Auth::user()->hasRole('student')) && $exists!=0): ?>
 							<p class="text-center">You have applied already. Please wait until the agency reviews your application.</p>
-						@elseif((Auth::user()->hasRole('student')) && $exists==0)
+						<?php elseif((Auth::user()->hasRole('student')) && $exists==0): ?>
 							<a href="#" class="btn btn-success btn-lg apply-btn"><span class="glyphicon glyphicon-education"><span class="glyphicon glyphicon-plus"></span></span>&nbsp;&nbsp;Apply</a>
-						@elseif(Auth::guest())
+						<?php elseif(Auth::guest()): ?>
 							<p class="text-center">You must be <a href="/">logged in</a> to apply.</p>
-						@elseif($user->user_id == ($scholarship->sponsor_id))
+						<?php elseif($user->user_id == ($scholarship->sponsor_id)): ?>
 							<a href="/profile sponsor/scholars" class="btn btn-primary"><span class="glyphicon glyphicon-education"><span class="glyphicon glyphicon-plus"></span></span>&nbsp;&nbsp;Your Scholars</a>
-						@endif
+						<?php endif; ?>
 
 
 						</div>
-						<h2 class="scholar-count"><span class="glyphicon glyphicon-education"></span> Scholars: {{$scholars->count()}}</h2>
+						<h2 class="scholar-count"><span class="glyphicon glyphicon-education"></span> Scholars: <?php echo e($scholars->count()); ?></h2>
 						<ul class="list-unstyled further-details">
 							<li><button class="btn btn-default btn-md"><span class="glyphicon glyphicon-briefcase"></span></button></li>
 							<li><button class="btn btn-default btn-md"><span class="glyphicon glyphicon-calendar"></span></button></li>
@@ -38,9 +36,9 @@
 							<div class="col-sm-12">
 								<h3 class="text-center">Grants</h3>
 								<ul class="list-unstyled">
-									@foreach($grants as $grant)
-										<li>{{$grant->scholarship_grantDesc}}</li>
-									@endforeach
+									<?php $__currentLoopData = $grants; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $grant): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+										<li><?php echo e($grant->scholarship_grantDesc); ?></li>
+									<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 									<!-- <li><span class="glyphicon glyphicon-usd"></span> Tuition and other fees of Php10,000.00 per semester.</li>
 									<li><span class="glyphicon glyphicon-book"></span> Book allowance of Php5,000.00 per semester.</li>
 									<li><span class="glyphicon glyphicon-usd"></span> Monthly stipend of Php5,000.00.</li> -->
@@ -49,9 +47,9 @@
 							<div class="col-sm-12">
 								<h3 class="text-center">Specifications</h3>
 								<ol class="list-unstyled">
-									@foreach($specifications as $specification)
-										<li>{{$specification->scholarship_specDesc}}</li>
-									@endforeach
+									<?php $__currentLoopData = $specifications; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $specification): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+										<li><?php echo e($specification->scholarship_specDesc); ?></li>
+									<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 								</ol>
 							</div>
 						</div>
@@ -61,8 +59,9 @@
 		</div>
 	</div>
 
-@endsection
+<?php $__env->stopSection(); ?>
 
-@push('styles')
-	<link rel="stylesheet" type="text/css" href="{{ asset('css/scholarship_page.css') }}"/>
-@endpush
+<?php $__env->startPush('styles'); ?>
+	<link rel="stylesheet" type="text/css" href="<?php echo e(asset('css/scholarship_page.css')); ?>"/>
+<?php $__env->stopPush(); ?>
+<?php echo $__env->make("layouts.userTab", array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
