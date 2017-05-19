@@ -26,7 +26,7 @@ class SearchController extends Controller
         $user_id = Auth::user()->user_id;
         $user = User::findOrFail($user_id);
         
-        $stud_id = Scholar::where('user_id','=', $user_id)->pluck('student_id');
+        $stud_id = Scholar::where('user_id','=', $user_id)->pluck('student_id')->first();
         $student = Scholar::findOrFail($stud_id);
 
         if($keyword != ''){
@@ -81,6 +81,6 @@ class SearchController extends Controller
             }
         }
 
-        return view('search_results',compact('student','scholarships','scholars','sponsors','keyword','user'));
+        return view('search_results',compact('scholarships','scholars','sponsors','keyword','user','student'));
     }
 }

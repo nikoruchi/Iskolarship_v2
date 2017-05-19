@@ -67,7 +67,10 @@ Route::get("/profile scholarship/{scholarship_id}", function($scholarship_id){
 });
 
 
+Route::get("/search",'SearchController@searchStudent');
+
 //=============== FOR FRONT-END PURPOSES =======================
+
 Route::get('/scholarship form', function () {
     return view('registration/scholarship_form');
 });
