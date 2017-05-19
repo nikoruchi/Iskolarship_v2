@@ -36,7 +36,7 @@ Route::get('/profile scholar', 'ScholarController@viewProfile');
 
 Route::get('/profile scholar/{student_id}', 'ProfileController@profileNotStudent');
 
-Route::get('/profile sponsor', 'ProfileController@profileSponsor');
+Route::get('/profile sponsor', 'SponsorController@profileSponsor');
 
 Route::get('/profile sponsor/scholars', 'ProfileController@viewScholars');
 
@@ -69,9 +69,18 @@ Route::get("/profile scholarship/{scholarship_id}", function($scholarship_id){
 
 //=============== FOR FRONT-END PURPOSES =======================
 
-Route::get('/search', function () {
-    return view('user/search');
-});
+Route::get("/search",'SearchController@searchStudent');
+// Route::get("/search}", function(){
+//     switch(Auth::user()->user_type){
+//         case 'sponsor':
+//           return (new \App\Http\Controllers\SearchController)->searchSponsor();
+//         break;
+
+//         case 'student':
+//           return (new \App\Http\Controllers\SearchController)->searchStudent();
+//         break;
+//     }
+// });
 
 Route::get('/scholarship form', function () {
     return view('registration/scholarship_form');

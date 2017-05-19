@@ -3,10 +3,23 @@
 		<div class="col-sm-4 col-sm-offset-1">
 			<div class="affix panel panel-default" style="position: relative; margin-bottom: 0; border-radius: 4px 4px 0 0;">
 				<div class="panel-body">
-					<img src="uploads/komsai.png" class="img-circle img-responsive" />
+					<img src="image/<?php echo e($user->user_imagepath); ?>" class="img-circle img-responsive" style="background-size: cover;" />
 				</div>
 			</div>
-			<button class="btn btn-success btn-block" style="border-radius: 0 0 4px 4px; border-top: 0;"><span class="glyphicon glyphicon-upload"></span> Upload New</button>
+
+			<form action="/upload" method="POST" enctype="multipart/form-data">
+				<?php echo e(csrf_field()); ?>
+
+				<input type="file" class="btn btn-success btn-block <?php echo e($errors->has('image') ? ' has-error' : ''); ?>" name="image" style="border-radius: 0 0 4px 4px; border-top: 0;" value="Upload New" />
+				<?php if($errors->has('image')): ?>
+					<span class="help-block">
+						<strong><?php echo e($errors->first('image')); ?></strong>
+					</span>
+				<?php endif; ?>
+				<!-- <button type="file" class="btn btn-success btn-block" style="border-radius: 0 0 4px 4px; border-top: 0;"><span class="glyphicon glyphicon-upload"></span> Upload New</button> -->
+				<input type="submit" />
+			</form>
+
 		</div>
 		<div class="col-sm-6">
 			
@@ -20,15 +33,10 @@
 					    <?php echo e(csrf_field()); ?>
 
 					        <label><span class="glyphicon glyphicon-lock"></span> Password:</label>
-							<div class="input-group ">
-								<input type="password" name="password" placeholder="Create a secure password. Minimum of 6 characters" class="form-control <?php echo e($errors->has('password') ? ' has-error' : ''); ?> " />
+							<div class="input-group <?php echo e($errors->has('password') ? ' has-error' : ''); ?> ">
+								<input type="password" name="password" placeholder="Create a secure password. Minimum of 6 characters" class="form-control" />
 
 								<?php if($errors->has('password')): ?>
-									<script>
-										$(document).ready(function(){
-										    $('#changePass').modal({show: true});
-										}
-										</script>
 									<span class="help-block">
 										<strong><?php echo e($errors->first('password')); ?></strong>
 									</span>
@@ -37,7 +45,7 @@
 							</div>
 							<label><span class="glyphicon glyphicon-lock"></span> Re-type Password</label>
 							<div class="input-group <?php echo e($errors->has('repassword') ? ' has-error' : ''); ?> ">
-								<input type="password" name="repassword" placeholder="Create a secure password. Minimum of 6 characters" class="form-control" />
+								<input type="password" name="repassword" placeholder="Re-type your password" class="form-control" />
 
 					 			<?php if($errors->has('repassword')): ?>
 									<span class="help-block">
@@ -209,6 +217,5 @@
 
 <?php $__env->startPush('scripts'); ?>
 	<script src="js/default_img.js"></script>
-	<script src="js/edit-profile.js"></script>
 <?php $__env->stopPush(); ?>
 <?php echo $__env->make('layouts.userTab', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
