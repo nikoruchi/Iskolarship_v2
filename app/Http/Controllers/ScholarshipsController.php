@@ -81,4 +81,21 @@ class ScholarshipsController extends Controller
     {
         //
     }
+    public function scholarshipStudent($scholarship_id){
+        $user_id = Auth::user()->user_id;
+        $user = User::findOrFail($user_id);
+        $stud_id = Scholar::where('user_id','=', $user_id)->pluck('student_id')->first();
+        $student = Scholar::findOrFail($stud_id);
+        $scholarship = Scholarship::find($scholarship_id);
+        return view('/profiles/profile_scholarship', compact('student','user','scholarship'));
+    }
+
+     public function scholarshipSponsor($scholarship_id){
+        $user_id = Auth::user()->user_id;
+        $user = User::findOrFail($user_id);
+        $spon_id = Sponsor::where('user_id','=', $user_id)->pluck('sponsor_id')->first();
+        $sponsor = Sponsor::findOrFail($spon_id);
+        $scholarship = Scholarship::findOrFail($scholarship_id);
+        return view('/profiles/profile_scholarship', compact('sponsor','user','scholarship'));
+    }
 }

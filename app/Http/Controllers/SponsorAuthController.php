@@ -51,8 +51,8 @@ class SponsorAuthController extends Controller{
         $user ->password = Hash::make($password);
         $user ->user_contact  = $request ->contact;
         $user ->user_type  = 'sponsor';
-        $user ->user_aboutme  = 'WLA';
-        $user ->user_imagepath  = 'default';
+        $user ->user_aboutme  = '';
+        $user ->user_imagepath  = 'spon_def.png';
         $user ->save();
 
         $sponsor = new Sponsor;
@@ -65,5 +65,7 @@ class SponsorAuthController extends Controller{
         $sponsor ->sponsor_agencyaddress = $request ->addr_agency;
         $sponsor ->sponsor_job = $request ->job_title;
         $sponsor ->save();
+
+        return redirect('/home');
     }
 }

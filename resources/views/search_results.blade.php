@@ -5,19 +5,95 @@
 	<div class="container main-container">
 		{{ csrf_field() }}
 		<h1 class="text-center">You have searched for: <span class="keyword">{{$keyword}}</span></h1>
-		<div>
+		<div class="row">
+			<div class="col-sm-8 col-sm-offset-2">
 			
-				@foreach($scholarships as $scho)
-				<p>	{{	$scho->scholarship_name }} <p>
-				@endforeach
+				@if(!empty($scholarships))
+					@foreach($scholarships as $scho)
+					<ul class="search-results">
+						<li>
+							<!-- Image of the scholarship is placed here. -->
+							<!-- The H2 here is just a place holder -->
+							<h2 class="first-letter">S</h2>
+							<article>
+								<h2 class="name">{{ $scho->scholarship_name}}</h2>
+								<p class="desc">
+									{{ $scho->scholarship_desc }}
+								</p>
+								<ul class="sample-grants">
+									<li>Insert grant.</li>
+									<li>Insert another grant.</li>
+									<li>Insert another new grant.</li>
+								</ul>
+								<a href="#" class="view">View</a>
+							</article>
+						</li>
+					</ul>
+					@endforeach
+				@endif
 
-				@foreach($scholars as $schol)
-				<p>	{{ $schol->student_fname }} {{ $schol->student_lname }} </p>
-				@endforeach
+				@if(!empty($sponsors))
+					@foreach($sponsors as $spon)
+					<ul class="search-results">
+						<li>
+							<!-- Image of the scholarship is placed here. -->
+							<!-- The H2 here is just a place holder -->
+							<h2 class="first-letter">S</h2>
+							<article>
+								<h2 class="name">{{ $spon->sponsor_fname }} {{ $spon->sponsor_fname }}</h2>
+								<p class="desc"> {{ $spon->sponsor_job }} </p>
+								<p class="desc"> {{ $spon->sponsor_agency }} </p>
+								<a href="#" class="view">View</a>
+							</article>
+						</li>
+					</ul>
+					<p></p>
+					@endforeach
+				@endif
 
-				@foreach($sponsors as $spon)
-				<p>	{{ $spon->sponsor_fname }} {{ $spon->sponsor_fname }} </p>
-				@endforeach
+				@if(!empty($scholars))
+					@foreach($scholars as $schol)
+					<ul class="search-results">
+						<li>
+							<!-- Image of the scholarship is placed here. -->
+							<!-- The H2 here is just a place holder -->
+							<h2 class="first-letter">S</h2>
+							<article>
+								<h2 class="name">{{ $schol->student_fname }} {{ $schol->student_lname }}</h2>
+								<p class="desc"> {{ $schol->student_studyfield }} </p>
+								<p class="desc"> {{ $schol->student_university }} </p>
+								<a href="#" class="view">View</a>
+							</article>
+						</li>
+					</ul>
+					@endforeach
+				@endif
+
+				@if(!empty($opens))
+					@foreach($opens as $open)
+					<ul class="search-results">
+						<li>
+							<!-- Image of the scholarship is placed here. -->
+							<!-- The H2 here is just a place holder -->
+							<h2 class="first-letter">S</h2>
+							<article>
+								<h2 class="name"> {{ $open->scholarship_name}} </h2>
+								<p class="desc"> {{ $open->scholarship_desc }} </p>
+								<p class="desc"> Application Deadline: {{ $open->scholarship_deadlineenddate }} </p>
+								<ul class="sample-grants">
+									<li>Insert grant.</li>
+									<li>Insert another grant.</li>
+									<li>Insert another new grant.</li>
+								</ul>
+								<a href="#" class="view">View</a>
+							</article>
+						</li>
+					</ul>
+					@endforeach
+				@endif
+
+
+			</div>
 		</div>
 	</div>
 	

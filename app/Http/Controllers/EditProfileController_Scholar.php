@@ -12,49 +12,47 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\MessageBag;
 use Hash;
 use Illuminate\Validation\Rule;
-class EditProfileController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
+use Illuminate\Http\JsonResponse;
+
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
+
+class EditProfileController_Scholar extends Controller{
+
+    public function upload (Request $request){
+
+        $file = array('image' => Input::file('image'));
+        $rules = array('image' => 'required',); 
+        $validator = Validator::make($file, $rules);
+        if ($validator->fails()) {
+            return Redirect::to('/Account Settings')->withInput()->withErrors($validator);
+        }
+        else {
+            if (Input::file('image')->isValid()) {
+                $destinationPath = 'image'; 
+                $extension = Input::file('image')->getClientOriginalExtension();
+                $fileName = rand(0,99999).'.'.$extension; 
+                
+                $user = new User;
+                $user->where('user_id', '=', Auth::user()->user_id)->update(['user_imagepath' => $fileName]);
+
+                Input::file('image')->move($destinationPath, $fileName);
+
+                Session::flash('success', 'Upload successfully');
+                return Redirect::to('/profile scholar');
+            }
+            else {
+                Session::flash('error', 'uploaded file is not valid');
+                return Redirect::to('/upload');
+            }
+        }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show(){
         $user_id = Auth::user()->user_id;
         $user = User::findOrFail($user_id);
-        $stud_id = Scholar::where('user_id','=', $user_id)->pluck('student_id');
+        $stud_id = Scholar::where('user_id','=', $user_id)->pluck('student_id')->first();
         $student = Scholar::findOrFail($stud_id);
         return view('profiles/settings/edit_profile-scholar', compact('student','user'));
     }
@@ -78,30 +76,29 @@ class EditProfileController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     public function validatePassword(Request $request){
- 
+    public function validatePassword(Request $request){
         $validator = Validator::make($request->all(),[
             'password' => 'min:6|required|same:repassword',
             'repassword' => 'min:6|same:password',
         ]);
         
         if ($validator->fails()) {
-            return redirect('/Change Password')
+            return redirect('/Account Settings')
                         ->withErrors($validator)
                         ->withInput();
         }
         else{
-            return $this->updateScholar($request);
+            return $this->updateScholarPass($request);
         }
     }
 
-        public function ValidationScholar(Request $request){
+    public function ValidationScholar(Request $request){
         $user_id = Auth::user()->user_id;
 
         $validator = Validator::make($request->all(),[
             'contact' => 'required|regex:/(09)[0-9]{9}/',
             'email' => 'required|email|max:255',
-             Rule::unique('users')->ignore($user_id),
+            Rule::unique('users')->ignore($user_id),
         ]);
         
         if ($validator->fails()) {
@@ -115,12 +112,12 @@ class EditProfileController extends Controller
     }
 
     public function updateScholarPass(Request $request){
-
         $user_id = Auth::user()->user_id;
         $user = User::findOrFail($user_id);
- 
-        // $request -> merge(array('password'=>bcrypt($request->password)));
+        $password=$request->password;
         $user ->password = Hash::make($password);
+        $user->save();
+        return redirect('/profile scholar');
     }
 
     public function updateScholar(Request $request){
@@ -130,11 +127,9 @@ class EditProfileController extends Controller
         $student = Scholar::findOrFail($stud_id);
 
         $user ->email = $request ->email;
-        // $password = $request ->password;
-        // $user ->password = Hash::make($password);
         $user ->user_contact  = $request ->contact;
         $user ->user_aboutme  = $request ->aboutme;
-        $user ->user_imagepath  = 'default';
+        // $user ->user_imagepath  = 'default';
         $user ->save();
 
         if (empty($request ->fname)){
@@ -178,8 +173,6 @@ class EditProfileController extends Controller
         $student ->save();
 
         return redirect('/profile scholar');
-
-
     }
 
     /**
@@ -192,4 +185,4 @@ class EditProfileController extends Controller
     {
         //
     }
-}
+} 
