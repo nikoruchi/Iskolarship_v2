@@ -7,9 +7,9 @@
 				<h1 class="user-name">{{ $studentProfile->student_fname }}</h1>
 				<h2 class="education"> {{ $studentProfile->student_studyfield }}, {{ $studentProfile->student_university }}</h2>
 				<h3 class="user-email">{{ $studentProfile->student->email }}</h3>
-				<h3 class="user-description">{{ $studentProfile->student->user_aboutme }}</h3>
+				<h3 class="about-me">{{ $studentProfile->student->user_aboutme }}</h3>
 				@if(Auth::user()->hasRole('student'))
-				<div class="btn-group flex">	
+				<div class="btn-group flex">
 					<a href="/Account Settings" class="acc_settings">
 						<button class="btn btn-default"><span class="glyphicon glyphicon-cog"></span> Account Settings</button>
 					</a>
@@ -56,7 +56,7 @@
 	</div>
 @endsection
 @push('styles')
-	<link rel="stylesheet" type="text/css" href="{{asset('css/scholar_page.css')}}"/>
+	<link rel="stylesheet" type="text/css" href="{{asset('css/profile_page.css')}}"/>
 @endpush
 @push('scripts')
 	<script src="js/default_img.js"></script>

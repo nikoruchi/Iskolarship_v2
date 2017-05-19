@@ -7,6 +7,7 @@
 
 .user-name,
 .work,
+.about-me,
 .education,
 .user-email{
 	text-align: center;
@@ -25,6 +26,10 @@
 .user-email{
 	font-size: 1em;
 	color: #888;	
+}
+
+.about-me{
+	font-size: 0.9em;
 }
 
 .btn-group{
