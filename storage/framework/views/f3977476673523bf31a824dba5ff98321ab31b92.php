@@ -8,7 +8,11 @@
 				<h3 class="user-email"><?php echo e($studentProfile->student->email); ?></h3>
 				<h3 class="about-me"><?php echo e($studentProfile->student->user_aboutme); ?></h3>
 				<?php if(Auth::user()->hasRole('student')): ?>
+<<<<<<< HEAD:storage/framework/views/924482e0a94481880e1c0c76d67e8ef75b76686e.php
 				<div class="btn-group flex">
+=======
+				<div class="btn-group flex">	
+>>>>>>> dae4c2eec17e82b2cb0f745a9a4f5cb159659ad1:storage/framework/views/f3977476673523bf31a824dba5ff98321ab31b92.php
 					<a href="/Account Settings" class="acc_settings">
 						<button class="btn btn-default"><span class="glyphicon glyphicon-cog"></span> Account Settings</button>
 					</a>
