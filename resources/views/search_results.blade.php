@@ -69,6 +69,30 @@
 					@endforeach
 				@endif
 
+				@if(!empty($opens))
+					@foreach($opens as $open)
+					<ul class="search-results">
+						<li>
+							<!-- Image of the scholarship is placed here. -->
+							<!-- The H2 here is just a place holder -->
+							<h2 class="first-letter">S</h2>
+							<article>
+								<h2 class="name"> {{ $open->scholarship_name}} </h2>
+								<p class="desc"> {{ $open->scholarship_desc }} </p>
+								<p class="desc"> Application Deadline: {{ $open->scholarship_deadlineenddate }} </p>
+								<ul class="sample-grants">
+									<li>Insert grant.</li>
+									<li>Insert another grant.</li>
+									<li>Insert another new grant.</li>
+								</ul>
+								<a href="#" class="view">View</a>
+							</article>
+						</li>
+					</ul>
+					@endforeach
+				@endif
+
+
 			</div>
 		</div>
 	</div>
