@@ -36,7 +36,7 @@ Route::get('/profile scholar', 'ScholarController@viewProfile');
 
 Route::get('/profile scholar/{student_id}', 'ProfileController@profileNotStudent');
 
-Route::get('/profile sponsor', 'ProfileController@profileSponsor');
+Route::get('/profile sponsor', 'SponsorController@viewProfile');
 
 Route::get('/profile sponsor/scholars', 'ProfileController@viewScholars');
 

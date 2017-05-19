@@ -4,7 +4,7 @@
 	<div class="container main-container">
 		<div class="row">
 			<div class="col-sm-8 col-sm-offset-2">
-				<img src="/image/{{ $user->user_imagepath }}.jpg" class="img-responsive user-pp img-circle"/>
+				<img src="/image/{{ $user->user_imagepath }}" class="img-responsive user-pp img-circle"/>
 				<h1 class="user-name">{{ $sponsor->sponsor_fname }}</h1>
 				<h2 class="work"> {{ $sponsor->sponsor_agency }}, {{ $sponsor->sponsor_job }}</h2>
 				<h3 class="user-email">{{ $user->email }}</h3>
