@@ -29,7 +29,7 @@
 								<li>
 									<!-- Image of the scholarship is placed here. -->
 									<!-- The H2 here is just a place holder -->
-									<h2 class="first-letter">S</h2>
+									<h2 class="first-letter">{{$scholarshipAvail->scholarship->scholarship_name[0]}}</h2>
 									<article>
 										<h2 class="name">{{$scholarshipAvail->scholarship->scholarship_name}}</h2>
 										<div class="btns">

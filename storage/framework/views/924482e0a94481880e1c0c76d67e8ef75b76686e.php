@@ -9,7 +9,7 @@
 				<h3 class="about-me"><?php echo e($studentProfile->student->user_aboutme); ?></h3>
 				<?php if(Auth::user()->hasRole('student')): ?>
 				<div class="btn-group flex">
-					<a href="/Account Settings" class="acc_settings">
+					<a href="/Scholar/Account Settings" class="acc_settings">
 						<button class="btn btn-default"><span class="glyphicon glyphicon-cog"></span> Account Settings</button>
 					</a>
 				</div>
@@ -28,7 +28,7 @@
 								<li>
 									<!-- Image of the scholarship is placed here. -->
 									<!-- The H2 here is just a place holder -->
-									<h2 class="first-letter">S</h2>
+									<h2 class="first-letter"><?php echo e($scholarshipAvail->scholarship->scholarship_name[0]); ?></h2>
 									<article>
 										<h2 class="name"><?php echo e($scholarshipAvail->scholarship->scholarship_name); ?></h2>
 										<div class="btns">
