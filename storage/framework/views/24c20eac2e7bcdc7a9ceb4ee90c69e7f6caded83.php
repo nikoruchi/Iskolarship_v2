@@ -69,6 +69,30 @@
 					<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 				<?php endif; ?>
 
+				<?php if(!empty($opens)): ?>
+					<?php $__currentLoopData = $opens; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $open): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+					<ul class="search-results">
+						<li>
+							<!-- Image of the scholarship is placed here. -->
+							<!-- The H2 here is just a place holder -->
+							<h2 class="first-letter">S</h2>
+							<article>
+								<h2 class="name"> <?php echo e($open->scholarship_name); ?> </h2>
+								<p class="desc"> <?php echo e($open->scholarship_desc); ?> </p>
+								<p class="desc"> Application Deadline: <?php echo e($open->scholarship_deadlineenddate); ?> </p>
+								<ul class="sample-grants">
+									<li>Insert grant.</li>
+									<li>Insert another grant.</li>
+									<li>Insert another new grant.</li>
+								</ul>
+								<a href="#" class="view">View</a>
+							</article>
+						</li>
+					</ul>
+					<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+				<?php endif; ?>
+
+
 			</div>
 		</div>
 	</div>

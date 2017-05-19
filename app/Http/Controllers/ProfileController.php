@@ -8,12 +8,8 @@ use App\Sponsor;
 use App\User;
 use Auth;
 use App\Application;
-use App\Scholarship;
-use DB;
-class ProfileController extends Controller
-{
-   
 
+class ProfileController extends Controller
     public function viewScholars(){
         $user_id = Auth::user()->user_id;
         $user = User::findOrFail($user_id);
