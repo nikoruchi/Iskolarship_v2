@@ -18,14 +18,14 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
-class EditProfileController_Scholar extends Controller{
+class EditProfileController_Sponsor extends Controller{
 
     public function upload (Request $request){
-        $validator = Validator::make($request->all(),[
+         $validator = Validator::make($request->all(),[
             'image' => 'image|required',
         ]);
         if ($validator->fails()) {
-            return Redirect::to('/Scholar/Account Settings')->withInput()->withErrors($validator);
+            return Redirect::to('/Sponsor/Account Settings')->withInput()->withErrors($validator);
         }
         else {
             if (Input::file('image')->isValid()) {
@@ -39,11 +39,11 @@ class EditProfileController_Scholar extends Controller{
                 Input::file('image')->move($destinationPath, $fileName);
 
                 Session::flash('success', 'Upload successfully');
-                return Redirect::to('/Scholar/Account Settings');
+                return Redirect::to('/Sponsor/Account Settings');
             }
             else {
                 Session::flash('error', 'uploaded file is not valid');
-                return Redirect::to('/Scholar/Account Settings');
+                return Redirect::to('/upload');
             }
         }
     }
@@ -51,11 +51,10 @@ class EditProfileController_Scholar extends Controller{
     public function show(){
         $user_id = Auth::user()->user_id;
         $user = User::findOrFail($user_id);
-        $stud_id = Scholar::where('user_id','=', $user_id)->pluck('student_id')->first();
-        $student = Scholar::findOrFail($stud_id);
-        return view('profiles/settings/edit_profile-scholar', compact('student','user'));
+        $spons_id = Sponsor::where('user_id','=', $user_id)->pluck('sponsor_id')->first();
+        $sponsor = Sponsor::findOrFail($spons_id);
+        return view('profiles/settings/edit_profile-sponsor', compact('sponsor','user'));
     }
-
 
     public function validatePassword(Request $request){
         $validator = Validator::make($request->all(),[
@@ -64,16 +63,16 @@ class EditProfileController_Scholar extends Controller{
         ]);
         
         if ($validator->fails()) {
-            return redirect('/Scholar/Account Settings')
+            return redirect('/Sponsor/Account Settings')
                         ->withErrors($validator)
                         ->withInput();
         }
         else{
-            return $this->updateScholarPass($request);
+            return $this->updateSponsorPass($request);
         }
     }
 
-    public function ValidationScholar(Request $request){
+    public function ValidationSponsor(Request $request){
         $user_id = Auth::user()->user_id;
 
         $validator = Validator::make($request->all(),[
@@ -83,30 +82,30 @@ class EditProfileController_Scholar extends Controller{
         ]);
         
         if ($validator->fails()) {
-            return redirect('/Scholar/Account Settings')
+            return redirect('/Sponsor/Account Settings')
                         ->withErrors($validator)
                         ->withInput();
         }
         else{
-            return $this->updateScholar($request);
+            return $this->updateSponsor($request);
         }
     }
 
-    public function updateScholarPass(Request $request){
+    public function updateSponsorPass(Request $request){
         $user_id = Auth::user()->user_id;
         $user = User::findOrFail($user_id);
         $password=$request->password;
         $user ->password = Hash::make($password);
         $user->save();
         Session::flash('success_pass', 'Password Updated');
-        return redirect('/Scholar/Account Settings');
+        return redirect('/Sponsor/Account Settings');
     }
 
-    public function updateScholar(Request $request){
+    public function updateSponsor(Request $request){
         $user_id = Auth::user()->user_id;
         $user = User::findOrFail($user_id);
-        $stud_id = Scholar::where('user_id','=', $user_id)->pluck('student_id')->first();
-        $student = Scholar::findOrFail($stud_id);
+        $spons_id = Sponsor::where('user_id','=', $user_id)->pluck('sponsor_id')->first();
+        $sponsor = Sponsor::findOrFail($spons_id);
 
         if (empty($request ->email)){
             $request ->email = $user ->email;
@@ -123,49 +122,34 @@ class EditProfileController_Scholar extends Controller{
         $user ->save();
 
         if (empty($request ->fname)){
-            $request ->fname = $student ->student_fname;
+            $request ->fname = $sponsor ->sponsor_fname;
         }
         if (empty($request ->lname)){
-            $request ->lname = $student ->student_lname;
-        }
-        if (empty($request ->bdate)){
-            $request ->bdate = $student ->student_birthdate;
+            $request ->lname = $sponsor ->sponsor_lname;
         }
         if (empty($request ->address)){
-            $request ->address = $student ->student_address;
+            $request ->address = $sponsor ->sponsor_address;
         }
-        if (empty($request ->begin_study)){
-            $request ->begin_study= $student ->student_beginstudies;
+        if (empty($request ->curr_agency)){
+            $request ->curr_agency = $sponsor ->sponsor_agency;
         }
-        if (empty($request ->field)){
-            $request ->field = $student ->student_studyfield;
+        if (empty($request ->addr_agency)){
+            $request ->addr_agency = $sponsor ->sponsor_agencyaddress;
         }
-        if (empty($request ->univ)){
-            $request ->univ = $student ->student_university;
-        }
-        if (empty($request ->univ_address)){
-            $request ->univ_address = $student ->student_universityaddress;
+        if (empty($request ->job_title)){
+            $request ->job_title = $sponsor ->sponsor_job;
         }
 
+        $sponsor ->sponsor_fname = $request ->fname;
+        $sponsor ->sponsor_lname = $request ->lname;
+        $sponsor ->sponsor_address = $request ->address;
+        $sponsor ->sponsor_agency = $request ->curr_agency;
+        $sponsor ->sponsor_agencyaddress = $request ->addr_agency;
+        $sponsor ->sponsor_job = $request ->job_title;
+        $sponsor ->save();
+    
+    Session::flash('success_update', 'Account Information Updated');
 
-
-        $student ->student_fname = $request ->fname;
-        $student ->student_lname = $request ->lname;
-        $student ->student_gender = $request ->gender;
-        $student ->student_birthdate = $request ->bdate;
-        $student ->student_address = $request ->address;
-        $student ->student_region = $request ->region;
-        $student ->student_nationality = $request ->ntnlty;
-        $student ->student_beginstudies = $request ->begin_study;
-        $student ->student_highestdegree = $request ->degree_att;
-        $student ->student_studyfield = $request ->field;
-        $student ->student_degreesought = $request ->degree_st;
-        $student ->student_university = $request ->univ;
-        $student ->student_universityaddress = $request ->univ_address;
-        $student ->save();
-
-        Session::flash('success_update', 'Account Information Updated');
-        return redirect('/Scholar/Account Settings');
+    return redirect('/Sponsor/Account Settings');
     }
-
 } 

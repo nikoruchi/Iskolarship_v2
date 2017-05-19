@@ -5,20 +5,28 @@
 		<div class="col-sm-4 col-sm-offset-1">
 			<div class="affix panel panel-default" style="position: relative; margin-bottom: 0; border-radius: 4px 4px 0 0;">
 				<div class="panel-body">
-					<img src="image/{{$user->user_imagepath}}" class="img-circle img-responsive" style="background-size: cover;" />
+					<img src="/image/{{$user->user_imagepath}}" class="img-circle img-responsive" style="background-size: cover;" />
 				</div>
 			</div>
 
-			<form action="/upload" method="POST" enctype="multipart/form-data">
+			<form action="/Sponsor/upload" method="POST" enctype="multipart/form-data">
 				{{ csrf_field() }}
-				<input type="file" class="btn btn-success btn-block {{ $errors->has('image') ? ' has-error' : '' }}" name="image" style="border-radius: 0 0 4px 4px; border-top: 0;" value="Upload New" />
+				<div class="input-group  {{ $errors->has('image') ? ' has-error' : '' }} ">
+					<input type="file" class="btn btn-success btn-block" name="image" style="border-radius: 0 0 4px 4px; border-top: 0;" value="Upload New" />
 				@if ($errors->has('image'))
 					<span class="help-block">
 						<strong>{{ $errors->first('image') }}</strong>
 					</span>
 				@endif
-				<!-- <button type="file" class="btn btn-success btn-block" style="border-radius: 0 0 4px 4px; border-top: 0;"><span class="glyphicon glyphicon-upload"></span> Upload New</button> -->
+				@if(Session::has('success'))
+				    <div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span><em> {{ session('success') }}</em></div>
+				@endif
+				@if(Session::has('error'))
+				    <div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span><em> {{ session('success') }}</em></div>
+				@endif
+				
 				<input type="submit" />
+			</div>
 			</form>
 
 		</div>
@@ -30,8 +38,12 @@
 			<div class="panel panel-default">
 			<div class="panel-body">
 				<div class="form-group">
-					<form action="/Change Password" method="POST"  id="changePass">
+					<form action="/Sponsor/Change Password" method="POST"  id="changePass">
 					    {{ csrf_field() }}
+
+				    	@if(Session::has('success_pass'))
+	    					<div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span><em> {{ session('success_pass') }}</em></div>
+						@endif
 					        <label><span class="glyphicon glyphicon-lock"></span> Password:</label>
 							<div class="input-group {{ $errors->has('password') ? ' has-error' : '' }} ">
 								<input type="password" name="password" placeholder="Create a secure password. Minimum of 6 characters" class="form-control" />
@@ -61,17 +73,21 @@
 			</div>
 
 
-				<form action="/Update Profile" method="POST" id="editForm">
+				<form action="/Sponsor/Update Profile" method="POST" id="editForm">
 					{{ csrf_field() }}
 					<!-- {{ method_field('PUT') }} -->
 					<div class="panel-body">
 						<div class="form-group">
 
+						@if(Session::has('success_update'))
+						    <div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span><em> {{ session('success_update') }}</em></div>
+						@endif
+
 							<label>Name:</label>
 							<div class="input-group" >
-								<input type="text" name="fname" placeholder="First Name" class="form-control" value="{{$student->student_fname}}" />
+								<input type="text" name="fname" placeholder="First Name" class="form-control" value="{{$sponsor->sponsor_fname}}" />
 
-								<input type="text" name="lname" placeholder="Last Name" class="form-control" value="{{$student->student_lname}}" />
+								<input type="text" name="lname" placeholder="Last Name" class="form-control" value="{{$sponsor->sponsor_lname}}" />
 							</div>
 
 							<label>About Me</label>
@@ -82,28 +98,7 @@
 							<label>Address:</label>
 							<div class="input-group">
 							
-								<input type="text" name="address" placeholder="e.g. Quitoles Street, San Pedro, San Jose, Antique" class="form-control" value="{{ $student->student_address }}"/>
-							</div>
-							<label>Sex:</label>
-							<div class="input-group">
-								<div class="radio male">
-									<label>
-										<input type="radio" name="gender" value="male"  {{ $student->student_gender=="male" ? 'checked='.'"'.'checked'.'"' : '' }}>
-										<span class="circle"><span class="dot"></span></span>&nbsp;
-										<span class="label-text">Male</span>
-									</label>
-								</div>
-								<div class="radio female">
-									<label>
-										<input type="radio" name="gender"  value="female" {{ $student->student_gender=="female" ? 'checked='.'"'.'checked'.'"' : '' }}>
-										<span class="circle"><span class="dot">
-										</span></span>&nbsp;<span class="label-text">Female</span>
-									</label>
-								</div>
-							</div>
-							<label>Birthdate:</label>
-							<div class="input-group">
-								<input type="date" name="bdate" placeholder="First Name" class="form-control" value="{{$student->student_birthdate}}"/>
+								<input type="text" name="address" placeholder="e.g. Quitoles Street, San Pedro, San Jose, Antique" class="form-control" value="{{ $sponsor->sponsor_address }}"/>
 							</div>
 							<label>Contact Number</label>
 							<div class="input-group">
@@ -117,41 +112,38 @@
 							</div>
 						<hr/>
 						<div class="form-group">
-							<label>University Name:</label>
-							<div class="input-group">
-								<input type="text" name="univ" placeholder="e.g. University of the Philippines, College of XXXX" class="form-control" value="{{ $student->student_university }}"/>
+							<label>Agency Name:</label>
+							<div class="input-group {{ $errors->has('curr_agency') ? ' has-error' : '' }} ">
+								<input type="text" name="curr_agency" placeholder="e.g. University of Sample, College of Sample" class="form-control" value="{{ $sponsor->sponsor_agency }}"/>
+
+								@if ($errors->has('curr_agency'))
+									<span class="help-block">
+										<strong>{{ $errors->first('curr_agency') }}</strong>
+									</span>
+								@endif
+
 							</div>
-							<label>University Address:</label>
-							<div class="input-group">
-								<input type="text" name="univ_address" placeholder="e.g. Miagao, Iloilo" class="form-control" value="{{ $student->student_universityaddress }}"/>
+							<label>Agency Address:</label>
+							<div class="input-group {{ $errors->has('addr_agency') ? ' has-error' : '' }} ">
+								<input type="text" name="addr_agency" placeholder="e.g Jaro, Iloilo City" class="form-control" value="{{  $sponsor->sponsor_agencyaddress }}"/>
+
+								@if ($errors->has('addr_agency'))
+									<span class="help-block">
+										<strong>{{ $errors->first('addr_agency') }}</strong>
+									</span>
+								@endif
+
 							</div>
-							<label>Begin Study:</label>
-							<div class="input-group">
-								<input type="date" name="begin_study" placeholder="First Name" class="form-control" value="{{ $student->student_beginstudies }}"/>
-							</div>
-							<label>Highest Degree Attained:</label>
-							<div class="input-group">
-								<select name="degree_att" class="form-control" >
-									<option disabled selected>Select Degree</option>
-									<option {{ $student->student_highestdegree == "Highschool" ? 'selected' : ''}}>Highschool</option>
-									<option {{ $student->student_highestdegree == "Bachelor's Degree" ? 'selected' : ''}}>Bachelor's Degree</option>
-									<option {{ $student->student_highestdegree == "Master's Degree" ? 'selected' : ''}}>Master's Degree</option>
-									<option {{ $student->student_highestdegree == "Doctoral Degree" ? 'selected' : ''}}>Doctoral Degree</option>
-								</select>
-							</div>
-							<label>Study Field:</label>
-							<div class="input-group ">
-								<input type="text" name="field" placeholder="e.g. BS in Computer Science" class="form-control" value="{{ $student->student_studyfield }}" />
-							</div>
-							<label>Degree Sought:</label>
-							<div class="input-group">
-								<select name="degree_st" class="form-control">
-									<option disabled selected>Select Degree</option>
-									<option {{ $student->student_degreesought == "Highschool" ? 'selected' : ''}}>Highschool</option>
-									<option {{ $student->student_degreesought == "Bachelor's Degree" ? 'selected' : ''}}>Bachelor's Degree</option>
-									<option {{$student->student_degreesought == "Master's Degree" ? 'selected' : ''}}>Master's Degree</option>
-									<option {{ $student->student_degreesought == "Doctoral Degree" ? 'selected' : ''}}>Doctoral Degree</option>
-								</select>
+							<label>Job Title:</label>
+							<div class="input-group {{ $errors->has('job_title') ? ' has-error' : '' }} ">
+								<input type="text" name="job_title" placeholder="e.g. III, IV" class="form-control" value="{{  $sponsor->sponsor_job }}"/>
+
+								@if ($errors->has('job_title'))
+									<span class="help-block">
+										<strong>{{ $errors->first('job_title') }}</strong>
+									</span>
+								@endif
+
 							</div>
 						</div>
 					</div>

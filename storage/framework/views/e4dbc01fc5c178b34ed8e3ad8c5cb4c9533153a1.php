@@ -3,19 +3,28 @@
 		<div class="col-sm-4 col-sm-offset-1">
 			<div class="affix panel panel-default" style="position: relative; margin-bottom: 0; border-radius: 4px 4px 0 0;">
 				<div class="panel-body">
-					<img src="image/<?php echo e($user->user_imagepath); ?>" class="img-circle img-responsive" style="background-size: cover;" />
+					<img src="/image/<?php echo e($user->user_imagepath); ?>" class="img-circle img-responsive" style="background-size: cover;" />
 				</div>
 			</div>
 
-			<form action="/upload" method="POST" enctype="multipart/form-data">
+			<form action="/Scholar/upload" method="POST" enctype="multipart/form-data">
 				<?php echo e(csrf_field()); ?>
 
-				<input type="file" class="btn btn-success btn-block <?php echo e($errors->has('image') ? ' has-error' : ''); ?>" name="image" style="border-radius: 0 0 4px 4px; border-top: 0;" value="Upload New" />
+				<div class="input-group  <?php echo e($errors->has('image') ? ' has-error' : ''); ?> ">
+					<input type="file" class="btn btn-success btn-block <?php echo e($errors->has('image') ? ' has-error' : ''); ?>" name="image" style="border-radius: 0 0 4px 4px; border-top: 0;" value="Upload New" />
 				<?php if($errors->has('image')): ?>
 					<span class="help-block">
 						<strong><?php echo e($errors->first('image')); ?></strong>
 					</span>
 				<?php endif; ?>
+				<?php if(Session::has('success')): ?>
+				    <div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span><em> <?php echo e(session('success')); ?></em></div>
+				<?php endif; ?>
+				<?php if(Session::has('error')): ?>
+				    <div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span><em> <?php echo e(session('success')); ?></em></div>
+				<?php endif; ?>
+				
+				</div>
 				<!-- <button type="file" class="btn btn-success btn-block" style="border-radius: 0 0 4px 4px; border-top: 0;"><span class="glyphicon glyphicon-upload"></span> Upload New</button> -->
 				<input type="submit" />
 			</form>
@@ -29,8 +38,12 @@
 			<div class="panel panel-default">
 			<div class="panel-body">
 				<div class="form-group">
-					<form action="/Change Password" method="POST"  id="changePass">
+					<form action="/Scholar/Change Password" method="POST"  id="changePass">
 					    <?php echo e(csrf_field()); ?>
+
+					    	<?php if(Session::has('success_pass')): ?>
+							    <div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span><em> <?php echo e(session('success_pass')); ?></em></div>
+							<?php endif; ?>
 
 					        <label><span class="glyphicon glyphicon-lock"></span> Password:</label>
 							<div class="input-group <?php echo e($errors->has('password') ? ' has-error' : ''); ?> ">
@@ -61,12 +74,16 @@
 			</div>
 
 
-				<form action="/Update Profile" method="POST" id="editForm">
+				<form action="/Scholar/Update Profile" method="POST" id="editForm">
 					<?php echo e(csrf_field()); ?>
 
-					<!-- <?php echo e(method_field('PUT')); ?> -->
+
 					<div class="panel-body">
 						<div class="form-group">
+
+						<?php if(Session::has('success_update')): ?>
+						    <div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span><em> <?php echo e(session('success_update')); ?></em></div>
+						<?php endif; ?>
 
 							<label>Name:</label>
 							<div class="input-group" >
