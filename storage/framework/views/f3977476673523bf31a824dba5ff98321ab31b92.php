@@ -6,9 +6,17 @@
 				<h1 class="user-name"><?php echo e($studentProfile->student_fname); ?></h1>
 				<h2 class="education"> <?php echo e($studentProfile->student_studyfield); ?>, <?php echo e($studentProfile->student_university); ?></h2>
 				<h3 class="user-email"><?php echo e($studentProfile->student->email); ?></h3>
+<<<<<<< HEAD
 				<h3 class="text-center"><?php echo e($studentProfile->student->user_aboutme); ?></h3>
+=======
+				<h3 class="about-me"><?php echo e($studentProfile->student->user_aboutme); ?></h3>
+>>>>>>> c56d1face5c7d4d0175025c21191924dd9cc77a1
 				<?php if(Auth::user()->hasRole('student')): ?>
+<<<<<<< HEAD:storage/framework/views/924482e0a94481880e1c0c76d67e8ef75b76686e.php
+				<div class="btn-group flex">
+=======
 				<div class="btn-group flex">	
+>>>>>>> dae4c2eec17e82b2cb0f745a9a4f5cb159659ad1:storage/framework/views/f3977476673523bf31a824dba5ff98321ab31b92.php
 					<a href="/Account Settings" class="acc_settings">
 						<button class="btn btn-default"><span class="glyphicon glyphicon-cog"></span> Account Settings</button>
 					</a>
@@ -61,7 +69,7 @@
 	</div>
 <?php $__env->stopSection(); ?>
 <?php $__env->startPush('styles'); ?>
-	<link rel="stylesheet" type="text/css" href="<?php echo e(asset('css/scholar_page.css')); ?>"/>
+	<link rel="stylesheet" type="text/css" href="<?php echo e(asset('css/profile_page.css')); ?>"/>
 <?php $__env->stopPush(); ?>
 <?php $__env->startPush('scripts'); ?>
 	<script src="js/default_img.js"></script>
