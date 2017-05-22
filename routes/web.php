@@ -81,6 +81,10 @@ Route::get('/scholarship form', function () {
 
 Route::get('/notifications', 'NotificationsController@viewNotifications');
 
+Route::get('/scholar setup', 'ProfileSetupController@viewSetup');
+
+Route::get('/scholar setup form', 'ProfileSetupController@viewSetupForm');
+
 //=============== END FOR FRONT-END PURPOSES =======================
 
 

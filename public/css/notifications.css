@@ -65,6 +65,10 @@
 	opacity: 0.3;
 }
 
+.notif .remove:hover{
+	opacity: 0.5;
+}
+
 .notif > img{
 	height: 50px;
 	width: 50px;
