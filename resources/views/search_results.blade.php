@@ -38,7 +38,7 @@
 						<li>
 							<!-- Image of the scholarship is placed here. -->
 							<!-- The H2 here is just a place holder -->
-							<h2 class="first-letter">S</h2>
+							<h2 class="first-letter">{{ $spon->sponsor_fname[0] }}</h2>
 							<article>
 								<h2 class="name">{{ $spon->sponsor_fname }} {{ $spon->sponsor_lname }}</h2>
 								<p class="desc"> {{ $spon->sponsor_job }} </p>
