@@ -8,13 +8,15 @@ use App\User;
 use Auth;
 use App\Application;
 use DB;
+use Illuminate\Support\Facades\Log;
+
 class ScholarController extends Controller{
 
     public function viewHome(){
         $user_id = Auth::user()->user_id;
         $user = User::findOrFail($user_id);
         
-        $stud_id = Scholar::where('user_id','=', $user_id)->pluck('student_id');
+        $stud_id = Scholar::where('user_id','=', $user_id)->pluck('student_id')->first();
 
         $student = Scholar::findOrFail($stud_id);
 
@@ -24,24 +26,25 @@ class ScholarController extends Controller{
     public function viewProfile(){
     	$user_id = Auth::user()->user_id;
     	$user = User::findOrFail($user_id);
+        // dd($user);
     	$student_id = Scholar::where('user_id','=', $user_id)->pluck('student_id')->first();
     	$student = Scholar::find($student_id);
         $studentProfile = Scholar::find($student_id);
 
-		$pending = Application::where('student_id','=', $student_id)
-    		->where('accept_status', '=','pending')
-    		->where('avail_status','=','pending')
-    		// ->deadline()->where('scholarship_deadlineenddate',)
-    		->get();
+		// $pending = Application::where('student_id','=', $student_id)
+        // ->where('accept_status', '=','pending')
+        // ->where('avail_status','=','pending')
+        // ->get();
+
 		$scholarships = Application::where('student_id', '=', $student_id)
     		->where('accept_status','=','accept')
     		->where('avail_status','=','accept')
     		->get();
-    	
-  	     $pendingAvail = Application::where('student_id','=',$student_id)
+
+  	    $pendingAvail = Application::where('student_id','=',$student_id)
             ->where('accept_status','=','accept')
             ->where('avail_status','=','pending')
             ->get();
-            return view('profiles.profile_scholar', compact('studentProfile','student', 'user','pending','scholarships','pendingAvail')); 
+            return view('profiles.profile_scholar', compact('studentProfile','student', 'user','scholarships','pendingAvail')); 
     }  
 }

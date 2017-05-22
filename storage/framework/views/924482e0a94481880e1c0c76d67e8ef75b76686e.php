@@ -9,7 +9,11 @@
 				<h3 class="about-me"><?php echo e($studentProfile->student->user_aboutme); ?></h3>
 				<?php if(Auth::user()->hasRole('student')): ?>
 				<div class="btn-group flex">
+<<<<<<< HEAD
 					<a href="/Account Settings" class="acc_settings">
+=======
+					<a href="/Scholar/Account Settings" class="acc_settings">
+>>>>>>> f583e64ce5f12bf8ecf2b42ab001d736b0b81e36
 						<button class="btn btn-default"><span class="glyphicon glyphicon-cog"></span> Account Settings</button>
 					</a>
 				</div>
@@ -21,6 +25,7 @@
 				<?php endif; ?>
 				<div>
 					<?php if((Auth::user()->user_id)==($studentProfile->user_id)): ?>
+<<<<<<< HEAD
 					<h2 class="text-center">Scholarships</h2>
 					<ul class="scholarships">
 						<?php $__currentLoopData = $pendingAvail; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $scholarshipAvail): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -50,6 +55,41 @@
 						</li>
 						<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 					</ul>
+=======
+						<?php if(($pendingAvail->count())>0): ?>
+							<h2 class="text-center">Scholarships</h2>
+							<ul class="scholarships">
+								<?php $__currentLoopData = $pendingAvail; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $scholarshipAvail): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+								<li>
+									<!-- Image of the scholarship is placed here. -->
+									<!-- The H2 here is just a place holder -->
+									<h2 class="first-letter"><?php echo e($scholarshipAvail->scholarship->scholarship_name[0]); ?></h2>
+									<article>
+										<h2 class="name"><?php echo e($scholarshipAvail->scholarship->scholarship_name); ?></h2>
+										<div class="btns">
+											<form method="post" action="/application/avail" id="acceptForm">
+											<?php echo e(csrf_field()); ?>
+
+												<input type="hidden" value="<?php echo e($scholarshipAvail->application_id); ?>" name="app_id" />
+												<button type="submit" data-id="<?php echo e($scholarshipAvail->application_id); ?>" class="accept"><span class="glyphicon glyphicon-ok"></span> Accept</button>
+
+											</form>
+											<a href="/profile scholarship/<?php echo e($scholarshipAvail->scholarship_id); ?>" class="view"><span class="glyphicon glyphicon-eye-open"></span> View</a>
+											<form method="post" action="/application/rejectAvail">
+													<?php echo e(csrf_field()); ?>
+
+												<input type="hidden" value="<?php echo e($scholarshipAvail->application_id); ?>" name="app_id" />
+												<button type="submit" class="reject" "><span class="glyphicon glyphicon-remove"></span> Reject</button>
+											</form>
+										</div>
+									</article>
+								</li>
+								<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+						</ul>
+						<?php else: ?>
+							<h2 class="text-center">No pending scholarships for avail</h2>
+						<?php endif; ?>
+>>>>>>> f583e64ce5f12bf8ecf2b42ab001d736b0b81e36
 					<?php endif; ?>
 				</div>
 			</div>

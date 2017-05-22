@@ -1,7 +1,8 @@
 @extends("layouts.userTab")
 
 @section('content')
-
+<style>
+</style>
 	<div class="container main-container">
 		<div class="row">
 			<div class="col-sm-3">
@@ -17,7 +18,7 @@
 				<div id="message-form" class="panel panel-default">
 					<div class="panel-body">
 						<div class="form">
-							<div class="form-group">
+							<div class="form-group" id="compose-form">
 							<form name="formMsg" id="formMsg">
 								{{ csrf_field() }}
 								<input class="form-control" type="text" name="subject" id="subject" placeholder="Subject"/>
@@ -27,6 +28,7 @@
 									<span class="glyphicon glyphicon-send"></span>
 								</button>
 							</form>
+								
 							</div>
 						</div>
 					</div>
@@ -47,8 +49,13 @@
 									<div class="panel-body">
 										<form class="select-form" id="formDel">
 											<input name="messages[]" data-id="{{$message->msg_id}}" type="checkbox" class="not-clickable select"/>
+									
 										</form>
-										<p class="from"><strong>{{$message->msg_sender}}</strong></p>
+										@if(Auth::user()->hasRole('student'))
+										<p class="from"><strong>{{$message->yourmessages->user_student->student_fname}}</strong></p>
+										@elseif(Auth::user()->hasRole('sponsor'))
+										<p class="from"><strong>{{$message->yourmessages->user_sponsor->sponsor_fname}}</strong></p>
+										@endif
 										<p class="message-content">{{$message->msg_content}}</p>
 										<p class="time-stamp">{{$message->created_at->diffForHumans()}}</p>
 									</div>

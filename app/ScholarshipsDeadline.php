@@ -22,8 +22,8 @@ class ScholarshipsDeadline extends Model
         'scholarship_deadlineenddate' ,      
     ];
 
-    public function deadline(){
-        return $this-belongsTo('App\Scholarships');
+    public function scholarship(){
+        return $this-belongsTo('App\Scholarship','scholarship_id');
     }
 
     /**

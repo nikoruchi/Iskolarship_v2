@@ -4,6 +4,7 @@
 		<div class="row">
 			<div class="center-el col eight-height col-sm-6 col-sm-offset-3">
 				<form class="home-search" method="get" action="/search">
+				 <?php echo e(csrf_field()); ?> 
 					<div class="input-group">
 						<input type="text" name="keyword" class="form-control" placeholder="Find the most suitable choice for you." />
 						<div class="input-group-btn">

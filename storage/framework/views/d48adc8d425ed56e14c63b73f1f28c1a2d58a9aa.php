@@ -9,7 +9,7 @@
 
 				<?php if(Auth::user()->hasRole('sponsor')): ?>
 				<div class="btn-group flex">	
-					<a href="/Sponsor/Account Settings" class="btn btn-default acc_settings">
+					<a href="/Account Settings" class="btn btn-default acc_settings">
 						<span class="glyphicon glyphicon-cog"></span> Account Settings
 					</a>
 					<a href="/Account Settings" class="btn btn-success acc_settings">

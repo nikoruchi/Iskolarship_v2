@@ -48,4 +48,8 @@ class Scholar extends Model
     {
         return $this->belongsTo('App\User', 'user_id');
     }
+
+    public function application(){
+        return $this->hasMany('App\Application', 'student_id');
+    }
 }

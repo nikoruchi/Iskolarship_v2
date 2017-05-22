@@ -31,8 +31,15 @@ class Scholarship extends Model
     public function scholarshipApp(){
         return $this->hasMany('App\Application','scholarship_id');
     }
-    public function scholarshipsdeadline(){
-        return $this->hasMany('App\ScholarshipsDeadline');
+    public function deadlines(){
+        return $this->hasMany('App\ScholarshipsDeadline','scholarship_id');
     }
 
+    public function specifications(){
+        return $this->hasMany('App\ScholarshipSpecification','scholarship_id');
+    }
+
+    public function grants(){
+        return $this->hasMany('App\ScholarshipGrant','scholarship_id');
+    }
 }

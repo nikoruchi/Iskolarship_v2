@@ -56,6 +56,7 @@ Route::get("/home", function(){
 
 Route::get("/profile scholarship/{scholarship_id}", function($scholarship_id){
     switch(Auth::user()->user_type){
+    // if(Auth::user()->user_type)
         case 'sponsor':
           return (new \App\Http\Controllers\ScholarshipsController)->scholarshipSponsor($scholarship_id);
         break;
@@ -64,10 +65,16 @@ Route::get("/profile scholarship/{scholarship_id}", function($scholarship_id){
           return (new \App\Http\Controllers\ScholarshipsController)->scholarshipStudent($scholarship_id);
         break;
     }
+    // if(Auth::guest()){
+        // return view('profiles.profile_scholarship');
+    // }
 });
 
 
+Route::get("/search",'SearchController@searchStudent');
+
 //=============== FOR FRONT-END PURPOSES =======================
+
 Route::get('/scholarship form', function () {
     return view('registration/scholarship_form');
 });
@@ -77,10 +84,15 @@ Route::get('/notifications', 'NotificationsController@viewNotifications');
 //=============== END FOR FRONT-END PURPOSES =======================
 
 
-Route::get('/Account Settings', 'EditProfileController_Scholar@show');
-Route::post('/Update Profile', 'EditProfileController_Scholar@ValidationScholar');
-Route::post('/Change Password', 'EditProfileController_Scholar@validatePassword');
-Route::post('/upload', 'EditProfileController_Scholar@upload');
+Route::get('/Scholar/Account Settings', 'EditProfileController_Scholar@show');
+Route::post('/Scholar/Update Profile', 'EditProfileController_Scholar@ValidationScholar');
+Route::post('/Scholar/Change Password', 'EditProfileController_Scholar@validatePassword');
+Route::post('/Scholar/upload', 'EditProfileController_Scholar@upload');
+
+Route::get('/Sponsor/Account Settings', 'EditProfileController_Sponsor@show');
+Route::post('/Sponsor/Update Profile', 'EditProfileController_Sponsor@ValidationSponsor');
+Route::post('/Sponsor/Change Password', 'EditProfileController_Sponsor@validatePassword');
+Route::post('/Sponsor/upload', 'EditProfileController_Sponsor@upload');
 
 
 // MESSAGES
@@ -103,6 +115,15 @@ Route::get('/messages/unread', ['middleware'=>'isguest','uses'=>'MessagesControl
 Route::get('/messages/inbox', ['middleware'=>'isguest','uses'=>'MessagesController@getAllMsg']);
 
 Route::post('/messages/send', ['middleware'=>'isguest','uses'=>'MessagesController@send']);
+
+Route::get('/messages/thread', ['middleware'=>'isguest','uses'=>'MessagesController@showThread']);
+
+Route::get('/messages/compose', ['middleware'=>'isguest','uses'=>'MessagesController@compose']);
+
+Route::delete('/messages/delete', ['middleware'=>'isguest','uses'=>'MessagesController@destroy']);
+
+Route::post('/messages/reply', ['middleware'=>'isguest','uses'=>'MessagesController@sendreply']);
+
 
 // APPLICATION STATUS CHANGES
 Route::post('/application/avail','ApplicationController@avail');

@@ -42,12 +42,16 @@
 							<?php elseif(Auth::user()->hasRole('student')): ?>
 								<li><a href="<?php echo e(url('/profile scholar')); ?>"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
 							<?php endif; ?>
-								<?php if(Auth::check()): ?>
-								<li><a href="<?php echo e(url('/messages')); ?>"><span class="glyphicon glyphicon-envelope"></span> Messages</a></li>
-								<li><a href="#"><span class="glyphicon glyphicon-bell"></span> Notifications</a></li>
-								<?php endif; ?>
-								<li><a href="/Account Settings"><span class="glyphicon glyphicon-cog"></span> Account Settings</a></li>
-								<?php if(Auth::check()): ?>
+							<?php if(Auth::check()): ?>
+							<li><a href="<?php echo e(url('/messages')); ?>"><span class="glyphicon glyphicon-envelope"></span> Messages</a></li>
+							<li><a href="#"><span class="glyphicon glyphicon-bell"></span> Notifications</a></li>
+							<?php endif; ?>
+							<?php if(Auth::user()->hasRole('sponsor')): ?>
+							<li><a href="/Sponsor/Account Settings"><span class="glyphicon glyphicon-cog"></span> Account Settings</a></li>
+							<?php elseif(Auth::user()->hasRole('student')): ?>
+							<li><a href="/Scholar/Account Settings"><span class="glyphicon glyphicon-cog"></span> Account Settings</a></li>
+							<?php endif; ?>
+							<?php if(Auth::check()): ?>
 									<li><a href="<?php echo e(url('/logout')); ?>" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><span class="glyphicon glyphicon-off"></span>&nbsp;Logout</a></li>
 									 <form id="logout-form" action="<?php echo e(url('/logout')); ?>" method="POST" style="display: none;">
 			                           		<?php echo e(csrf_field()); ?>
