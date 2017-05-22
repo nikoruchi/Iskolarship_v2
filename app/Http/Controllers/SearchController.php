@@ -26,7 +26,7 @@ class SearchController extends Controller
         $user_id = Auth::user()->user_id;
         $user = User::findOrFail($user_id);
         
-        $stud_id = Scholar::where('user_id','=', $user_id)->pluck('student_id');
+        $stud_id = Scholar::where('user_id','=', $user_id)->pluck('student_id')->first();
         $student = Scholar::findOrFail($stud_id);
 
         if($keyword != ''){
@@ -104,8 +104,8 @@ class SearchController extends Controller
         $user_id = Auth::user()->user_id;
         $user = User::findOrFail($user_id);
         
-        $spon_id = Scholar::where('user_id','=', $user_id)->pluck('sponsor_id');
-        $sponsor = Scholar::findOrFail($spon_id);
+        $spon_id = Sponsor::where('user_id','=', $user_id)->pluck('sponsor_id');
+        $sponsor = Sponsor::findOrFail($spon_id);
 
         if($keyword != ''){
 
@@ -161,16 +161,11 @@ class SearchController extends Controller
                             ->where('Scholarship_deadline.scholarship_deadlineenddate','>',date('Y-m-d').' 00:00:00')
                             ->orderBy('Scholarship.scholarship_name')
                             ->get();
-                    if($filt == "open_scholarships"){
-                        $opens = Scholarship::join('scholarship_deadline','Scholarship.scholarship_id','=','Scholarship_deadline.scholarship_id')
-                            ->where('Scholarship.scholarship_name','LIKE','%'.$keyword.'%')
-                            ->where('Scholarship_deadline.scholarship_deadlineenddate','>',date('Y-m-d').' 00:00:00')
-                            ->orderBy('Scholarship.scholarship_name')
-                            ->get();
                     }
                 }
             }
         }
         return view('search_results',compact('sponsor','scholarships','scholars','sponsors','opens','keyword','user'));
+      //  return view('search_results',compact('scholarships','scholars','sponsors','keyword','user','student'));
     }
 }

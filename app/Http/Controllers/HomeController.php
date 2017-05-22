@@ -35,7 +35,6 @@ class HomeController extends Controller
         
         $spon_id = Sponsor::where('user_id','=', $user_id)->pluck('sponsor_id');
         $sponsor = Sponsor::findOrFail($spon_id);
-
         return view('home', compact('sponsor', 'user'));
     }
 

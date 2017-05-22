@@ -21,12 +21,11 @@ use Illuminate\Support\Facades\Session;
 class EditProfileController_Scholar extends Controller{
 
     public function upload (Request $request){
-
-        $file = array('image' => Input::file('image'));
-        $rules = array('image' => 'required',); 
-        $validator = Validator::make($file, $rules);
+        $validator = Validator::make($request->all(),[
+            'image' => 'image|required',
+        ]);
         if ($validator->fails()) {
-            return Redirect::to('/Account Settings')->withInput()->withErrors($validator);
+            return Redirect::to('/Scholar/Account Settings')->withInput()->withErrors($validator);
         }
         else {
             if (Input::file('image')->isValid()) {
@@ -40,11 +39,11 @@ class EditProfileController_Scholar extends Controller{
                 Input::file('image')->move($destinationPath, $fileName);
 
                 Session::flash('success', 'Upload successfully');
-                return Redirect::to('/profile scholar');
+                return Redirect::to('/Scholar/Account Settings');
             }
             else {
                 Session::flash('error', 'uploaded file is not valid');
-                return Redirect::to('/upload');
+                return Redirect::to('/Scholar/Account Settings');
             }
         }
     }
@@ -57,24 +56,6 @@ class EditProfileController_Scholar extends Controller{
         return view('profiles/settings/edit_profile-scholar', compact('student','user'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
 
     public function validatePassword(Request $request){
         $validator = Validator::make($request->all(),[
@@ -83,7 +64,7 @@ class EditProfileController_Scholar extends Controller{
         ]);
         
         if ($validator->fails()) {
-            return redirect('/Account Settings')
+            return redirect('/Scholar/Account Settings')
                         ->withErrors($validator)
                         ->withInput();
         }
@@ -96,13 +77,13 @@ class EditProfileController_Scholar extends Controller{
         $user_id = Auth::user()->user_id;
 
         $validator = Validator::make($request->all(),[
-            'contact' => 'required|regex:/(09)[0-9]{9}/',
-            'email' => 'required|email|max:255',
+            'contact' => 'regex:/(09)[0-9]{9}/',
+            'email' => 'email|max:255',
             Rule::unique('users')->ignore($user_id),
         ]);
         
         if ($validator->fails()) {
-            return redirect('/Account Settings')
+            return redirect('/Scholar/Account Settings')
                         ->withErrors($validator)
                         ->withInput();
         }
@@ -117,19 +98,28 @@ class EditProfileController_Scholar extends Controller{
         $password=$request->password;
         $user ->password = Hash::make($password);
         $user->save();
-        return redirect('/profile scholar');
+        Session::flash('success_pass', 'Password Updated');
+        return redirect('/Scholar/Account Settings');
     }
 
     public function updateScholar(Request $request){
         $user_id = Auth::user()->user_id;
         $user = User::findOrFail($user_id);
-        $stud_id = Scholar::where('user_id','=', $user_id)->pluck('student_id');
+        $stud_id = Scholar::where('user_id','=', $user_id)->pluck('student_id')->first();
         $student = Scholar::findOrFail($stud_id);
 
+        if (empty($request ->email)){
+            $request ->email = $user ->email;
+        }
+        if (empty($request ->contact)){
+            $request ->contact = $user ->user_contact;
+        }
+        if (empty($request ->aboutme)){
+            $request ->aboutme = $user ->user_aboutme;
+        }
         $user ->email = $request ->email;
         $user ->user_contact  = $request ->contact;
         $user ->user_aboutme  = $request ->aboutme;
-        // $user ->user_imagepath  = 'default';
         $user ->save();
 
         if (empty($request ->fname)){
@@ -157,6 +147,8 @@ class EditProfileController_Scholar extends Controller{
             $request ->univ_address = $student ->student_universityaddress;
         }
 
+
+
         $student ->student_fname = $request ->fname;
         $student ->student_lname = $request ->lname;
         $student ->student_gender = $request ->gender;
@@ -172,17 +164,8 @@ class EditProfileController_Scholar extends Controller{
         $student ->student_universityaddress = $request ->univ_address;
         $student ->save();
 
-        return redirect('/profile scholar');
+        Session::flash('success_update', 'Account Information Updated');
+        return redirect('/Scholar/Account Settings');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 } 

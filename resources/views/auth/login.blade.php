@@ -11,33 +11,36 @@
             <form action="login" method="POST" id="login" class="overflow-a">
 
                 {{ csrf_field() }}
-                
-                <div class="input-group {{ $errors->has('email') ? ' has-error' : '' }}">
-                    <input type="text" name="email" placeholder="Email Address" class="form-control" value="{{ old('email') }}"/>
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                <div class="form-group">
+                    
+                    <div class="input-group {{ $errors->has('email') ? ' has-error' : '' }}">
+                        <input type="text" name="email" placeholder="Email Address" class="form-control" value="{{ old('email') }}"/>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                    </div>
+                    
+                     @if ($errors->has('email'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('email') }}</strong>
+                        </span>
+                    @endif
+
+                    <div class="input-group {{ $errors->has('password') ? ' has-error' : '' }}">
+                        <input type="password" name="password" placeholder="Password" class="form-control" />
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>                                
+                    </div>
+
+
+                    @if ($errors->has('password'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('password') }}</strong>
+                        </span>
+                    @endif
+
+                    <!-- <div class="check-box pull-left">
+                        <label><input type="checkbox" name="remember me"><span class="box"><span class="check"></span></span>&nbsp;<span class="label-text">Remember me</span></label>
+                    </div> -->
+                    <button type="submit" name="login" class="btn btn-success pull-right">Login&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-log-in"></span></button>
                 </div>
-
-                <div class="input-group {{ $errors->has('password') ? ' has-error' : '' }}">
-                    <input type="password" name="password" placeholder="Password" class="form-control" />
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>                                
-                </div>
-
-                @if ($errors->has('email'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('email') }}</strong>
-                    </span>
-                @endif
-
-                @if ($errors->has('password'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('password') }}</strong>
-                    </span>
-                @endif
-
-                <!-- <div class="check-box pull-left">
-                    <label><input type="checkbox" name="remember me"><span class="box"><span class="check"></span></span>&nbsp;<span class="label-text">Remember me</span></label>
-                </div> -->
-                <button type="submit" name="login" class="btn btn-success pull-right">Login&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-log-in"></span></button>
             </form>
 
             <p class="instruction">You do not have an account yet? Click the button below.</p>
