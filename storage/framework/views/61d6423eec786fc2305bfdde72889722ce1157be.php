@@ -12,7 +12,7 @@
 					<a href="/Sponsor/Account Settings" class="btn btn-default acc_settings">
 						<span class="glyphicon glyphicon-cog"></span> Account Settings
 					</a>
-					<a href="/Account Settings" class="btn btn-success acc_settings">
+					<a href="#" class="btn btn-success acc_settings">
 						<span class="glyphicon glyphicon-plus"></span> Create Scholarship
 					</a>
 				</div>
@@ -65,34 +65,27 @@
 				</div> -->
 				<?php endif; ?>
 				<div>
+					<?php if($scholarships->count()>0): ?>
 					<h2 class="text-center">Scholarships</h2>
 					<ul class="scholarships">
+					<?php $__currentLoopData = $scholarships; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $scho): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 						<li>
 							<!-- Image of the scholarship is placed here. -->
 							<!-- The H2 here is just a place holder -->
-							<h2 class="first-letter">S</h2>
+							<h2 class="first-letter"><?php echo e($scho->scholarship_name[0]); ?></h2>
 							<article>
-								<h2 class="name">Scholarship Name</h2>
+								<h2 class="name"><?php echo e($scho->scholarship_name); ?></h2>
 								<div class="btns">
 									<a href="#" class="edit"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
 									<a href="<?php echo e(url('profile sponsor/scholars')); ?>" class="view_scholars"><span class="glyphicon glyphicon-eye-open"></span> Scholars</a>
 								</div>
 							</article>
 						</li>
-						<li>
-							<!-- Image of the scholarship is placed here. -->
-							<!-- The H2 here is just a place holder -->
-							<h2 class="first-letter">S</h2>
-							<article>
-								<h2 class="name">Scholarship Name</h2>
-								<div class="btns">
-									<a href="#" class="edit"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
-									<!-- We will place the delete inside the edit form. -->
-									<a href="<?php echo e(url('profile sponsor/scholars')); ?>" class="view_scholars"><span class="glyphicon glyphicon-eye-open"></span> Scholars</a>
-								</div>
-							</article>
-						</li>
+					<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 					</ul>
+					<?php else: ?>
+					<h3 class="text-center">You haven't created any scholarships.</h3>
+					<?php endif; ?>
 				</div>
 			</div>
 		</div>

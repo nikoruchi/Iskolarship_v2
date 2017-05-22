@@ -63,14 +63,18 @@ function seeFullMessage(e){
 		success:function(data){
 			
 			$.each(data, function(key,value){
-				// console.log(value['id']);
-				msgs+= '<div class="panel panel-default">';
+				if(value['user']==value['sender']){
+					msgs+= '<div class="panel panel-default">pasok';
+				} else {
+					msgs+= '<div class="panel panel-warning">no';
+				}
 				msgs+= '<div class="panel-body">';
 				msgs+= '<p class="message-sender">' + value['sender_name'] + '</p>';
 				msgs+= '<p class="message-content">' + value['content'] + '</p>';
 				msgs+= '<p class="time-stamp">' + value['timestamp'] +'</p>';
 				msgs+= '</div>';
 				msgs+= '</div>';
+				
 			});
 			// msgs += '<form id="reply-form">';
 			msgs += '<textarea id="reply_message" class="form-control" placeholder="Send a reply!"></textarea>';

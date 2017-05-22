@@ -73,35 +73,6 @@ Route::get("/profile scholarship/{scholarship_id}", function($scholarship_id){
 
 //=============== FOR FRONT-END PURPOSES =======================
 
-
-Route::get('/Account Settings', 'EditProfileController@show');
-Route::post('/Update Profile', 'EditProfileController@updateScholar');
-// MESSAGES
-Route::get('/messages', ['middleware'=>'isguest','uses'=>'MessagesController@index']);
-Route::get('/messages/read', ['middleware'=>'isguest','uses'=>'MessagesController@getReadMsg']);
-Route::get('/messages/unread', ['middleware'=>'isguest','uses'=>'MessagesController@getUnReadMsg']);
-Route::get('/messages/inbox', ['middleware'=>'isguest','uses'=>'MessagesController@getAllMsg']);
-Route::post('/messages/send', ['middleware'=>'isguest','uses'=>'MessagesController@send']);
-Route::get('/messages/thread',['middleware'=>'isgues','uses'=>'MessagesController@showThread']);
-
-
-//================ SEARCH THINGY ===============================
-Route::get("/search", function(){
-    switch(Auth::user()->user_type){
-        case 'sponsor':
-          return (new \App\Http\Controllers\SearchController)->searchSponsor();
-        break;
-        case 'student':
-          return (new \App\Http\Controllers\SearchController)->searchStudent();
-        break;
-    }
-});
-
-
-Route::get("/search",'SearchController@searchStudent');
-
-//=============== FOR FRONT-END PURPOSES =======================
-
 Route::get('/scholarship form', function () {
     return view('registration/scholarship_form');
 });
