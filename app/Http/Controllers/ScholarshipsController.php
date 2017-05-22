@@ -33,6 +33,17 @@ class ScholarshipsController extends Controller
         //
     }
 
+    public function createForm()
+    {
+        $user_id = Auth::user()->user_id;
+        $user = User::findOrFail($user_id);
+        $sponsor_id = Sponsor::where('user_id','=', $user_id)->pluck('sponsor_id')->first();
+        $sponsor = Sponsor::find($sponsor_id);
+
+        return view('registration.scholarship_form', compact('user', 'sponsor', 'sponsor_id')); 
+    }
+
+
     /**
      * Store a newly created resource in storage.
      *
@@ -91,8 +102,8 @@ class ScholarshipsController extends Controller
     public function scholarshipStudent($scholarship_id){
         $user_id = Auth::user()->user_id;
         $user = User::findOrFail($user_id);
-        $stud_id = Scholar::where('user_id','=', $user_id)->pluck('student_id')->first();
-        $student = Scholar::findOrFail($stud_id);
+        $stud_id = Scholar::where('user_id','=', $user_id)->pluck('sponsor_id')->first();
+        $sponsor = Scholar::findOrFail($stud_id);
         
         $scholarship = Scholarship::find($scholarship_id);
         $specifications = Scholarship::find($scholarship_id)->specifications;
@@ -104,7 +115,7 @@ class ScholarshipsController extends Controller
         $exists = Application::where('scholarship_id','=',$scholarship_id)
                     ->where('accept_status','=','accept')
                     ->where('avail_status','=','accept')
-                    ->where('student_id','=',$stud_id)
+                    ->where('sponsor_id','=',$stud_id)
                     ->count();
 
         $currentTime = Carbon::now()->toDateTimeString();
@@ -114,7 +125,7 @@ class ScholarshipsController extends Controller
                     // ->where('scholarship_deadlineenddate','<',$currentTime)->get();
         // dd($deadline);
 
-        return view('/profiles/profile_scholarship', compact('student','user','scholarship','specifications','grants','scholars','exists','currentTime','deadline'));
+        return view('/profiles/profile_scholarship', compact('sponsor','user','scholarship','specifications','grants','scholars','exists','currentTime','deadline'));
     }
 
      public function scholarshipSponsor($scholarship_id){

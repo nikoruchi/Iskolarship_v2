@@ -75,9 +75,7 @@ Route::get("/search",'SearchController@searchStudent');
 
 //=============== FOR FRONT-END PURPOSES =======================
 
-Route::get('/scholarship form', function () {
-    return view('registration/scholarship_form');
-});
+Route::get('/scholarship form', 'ScholarshipsController@createForm');
 
 Route::get('/notifications', 'NotificationsController@viewNotifications');
 
