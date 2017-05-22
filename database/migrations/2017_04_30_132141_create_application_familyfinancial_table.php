@@ -14,8 +14,7 @@ class CreateApplicationFamilyfinancialTable extends Migration
     public function up()
     {
         Schema::create('application_familyfinancial', function (Blueprint $table) {
-            $table->increments('financial_id');
-            $table->integer('application_id')->references('application_id')->on('application');
+            $table->integer('student_id')->references('student_id')->on('student_account');
             $table->string('father_employername');
             $table->string('father_employeraddress');
             $table->string('father_AGincome');

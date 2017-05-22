@@ -14,8 +14,7 @@ class CreateApplicationSiblingscholarsTable extends Migration
     public function up()
     {
         Schema::create('application_siblingscholars', function (Blueprint $table) {
-            $table->increments('sibling_id');
-            $table->integer('application_id')->references('application_id')->on('application');
+            $table->integer('student_id')->references('student_id')->on('student_account');
             $table->string('sibling_name');
             $table->string('sibling_scholarship');
             $table->string('sibling_courseschool');

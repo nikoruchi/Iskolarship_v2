@@ -14,8 +14,7 @@ class CreateApplicationRelativecontributionTable extends Migration
     public function up()
     {
         Schema::create('application_relativecontribution', function (Blueprint $table) {
-            $table->increments('relative_id');
-            $table->integer('application_id')->references('application_id')->on('application');
+            $table->integer('student_id')->references('student_id')->on('student_account');
             $table->string('relative_natureofcontribution');
             $table->string('relative_relationship');
             $table->string('relative_averagecontribution');

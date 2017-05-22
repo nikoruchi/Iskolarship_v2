@@ -14,8 +14,7 @@ class CreateApplicationFamilyappliancesTable extends Migration
     public function up()
     {
         Schema::create('application_familyappliances', function (Blueprint $table) {
-            $table->increments('entry_id');
-            $table->integer('application_id')->references('application_id')->on('application');
+            $table->integer('student_id')->references('student_id')->on('student_account');
             $table->integer('aircon_num');
             $table->string('aircon_acquisition');
             $table->string('aircon_year');
