@@ -21,16 +21,16 @@
 				<?php endif; ?>
 				<div>
 					<?php if((Auth::user()->user_id)==($studentProfile->user_id)): ?>
-						<?php if($pendingAvail->count()>0): ?>
+						<?php if(($pendingAvail->count())>0): ?>
 							<h2 class="text-center">Scholarships</h2>
 							<ul class="scholarships">
 								<?php $__currentLoopData = $pendingAvail; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $scholarshipAvail): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 								<li>
 									<!-- Image of the scholarship is placed here. -->
 									<!-- The H2 here is just a place holder -->
-									<h2 class="first-letter">S</h2>
+									<h2 class="first-letter"><?php echo e($scholarshipAvail->scholarship->scholarship_name[0]); ?></h2>
 									<article>
-										<h2 class="name"><?php echo e($scholarshipAvail->appscholarship->scholarship_name); ?></h2>
+										<h2 class="name"><?php echo e($scholarshipAvail->scholarship->scholarship_name); ?></h2>
 										<div class="btns">
 											<form method="post" action="/application/avail" id="acceptForm">
 											<?php echo e(csrf_field()); ?>

@@ -27,6 +27,7 @@ $(document).ready(function(){
 	$(document).on("click",".not-clickable", notClickable);
 })
 
+
 $(document).ready(function(){
 	$('#formMsg').submit(function(event){
 		event.preventDefault();
@@ -63,7 +64,7 @@ function seeFullMessage(e){
 
 function notClickable(e){
 	e.stopPropagation();
-}
+}  
 
 
 

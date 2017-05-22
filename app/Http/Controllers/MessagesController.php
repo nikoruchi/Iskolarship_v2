@@ -20,7 +20,7 @@ class MessagesController extends Controller
     {
         $user_id = Auth::user()->user_id;
         $user = User::findOrFail($user_id);
-        $id = Sponsor::where('user_id','=', $user_id)->pluck('sponsor_id')->first();
+        $id = Sponsor::where('user_id','=', $user_id)->pluck('sponsor_id');
         $sponsor = Sponsor::findOrFail($id);
         $inbox = Message::where('msg_receiver','=',$user_id)->get();
         return view('/user/messages', compact('sponsor','user','inbox'));
@@ -64,12 +64,13 @@ class MessagesController extends Controller
         $unread = Message::where('msg_receiver','=',$user_id)->where('msg_status','=','unread')->get();
         $messages = array();
         foreach($unread as $message){
-            $user = User::find($message->msg_sender);
+            $msg = $message->msg_sender;
+            $user = User::find($msg);
             if($user->user_type=='sponsor'){
-                $sender = Sponsor::find($user->user_id)->sponsor_fname;
+                $sender = Sponsor::where('user_id','=',$msg)->sponsor_fname;
             }
             if($user->user_type=='student'){
-                $sender = Scholar::find($message->msg_sender)->student_fname;
+                $sender = Scholar::where('user_id','=',$msg)->student_fname;
             }
             $messages[] = array(
                 'content'=>$message->msg_content,
