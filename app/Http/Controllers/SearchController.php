@@ -46,7 +46,6 @@ class SearchController extends Controller
                     ->orWhere('sponsor_lname','LIKE','%'.$keyword.'%')
                     ->orderBy('sponsor_fname')
                     ->get();
-
                 $opens = Scholarship::join('scholarship_deadline','Scholarship.scholarship_id','=','Scholarship_deadline.scholarship_id')
                     ->where('Scholarship.scholarship_name','LIKE','%'.$keyword.'%')
                     ->where('Scholarship_deadline.scholarship_deadlineenddate','>',date('Y-m-d').' 00:00:00')
@@ -162,11 +161,16 @@ class SearchController extends Controller
                             ->where('Scholarship_deadline.scholarship_deadlineenddate','>',date('Y-m-d').' 00:00:00')
                             ->orderBy('Scholarship.scholarship_name')
                             ->get();
+                    if($filt == "open_scholarships"){
+                        $opens = Scholarship::join('scholarship_deadline','Scholarship.scholarship_id','=','Scholarship_deadline.scholarship_id')
+                            ->where('Scholarship.scholarship_name','LIKE','%'.$keyword.'%')
+                            ->where('Scholarship_deadline.scholarship_deadlineenddate','>',date('Y-m-d').' 00:00:00')
+                            ->orderBy('Scholarship.scholarship_name')
+                            ->get();
                     }
                 }
             }
         }
-
         return view('search_results',compact('sponsor','scholarships','scholars','sponsors','opens','keyword','user'));
     }
 }

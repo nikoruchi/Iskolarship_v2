@@ -1,4 +1,4 @@
- @extends("layouts.userTab")
+@extends("layouts.userTab")
 
 @section('content')
 
