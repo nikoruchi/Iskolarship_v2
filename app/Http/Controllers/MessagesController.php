@@ -9,13 +9,10 @@ use App\User;
 use App\Sponsor;
 use App\Message;
 use Carbon\Carbon;
+use App\Reply;
 class MessagesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+ 
     public function indexSponsor()
     {
         $user_id = Auth::user()->user_id;
@@ -42,12 +39,11 @@ class MessagesController extends Controller
         $messages = array();
         foreach($read as $message){
             $user = User::find($message->msg_sender);
+            $id = $message->msg_sender;
             if($user->user_type=='sponsor'){
-                $sender = Sponsor::find($user->user_id);          
-                $sender = $sender->sponsor_fname;
-
+                $sender = Sponsor::where('user_id','=',$id)->pluck('sponsor_fname');
             }elseif($user->user_type=='student'){
-                $sender = Scholar::find($message->msg_sender)->student_fname;
+                $sender = Scholar::where('user_id','=',$id)->pluck('student_fname');
             }
             $messages[] = array(
                 'content'=>$message->msg_content,
@@ -64,13 +60,12 @@ class MessagesController extends Controller
         $unread = Message::where('msg_receiver','=',$user_id)->where('msg_status','=','unread')->get();
         $messages = array();
         foreach($unread as $message){
-            $msg = $message->msg_sender;
-            $user = User::find($msg);
+            $user = User::find($message->msg_sender);
+            $id = $message->msg_sender;
             if($user->user_type=='sponsor'){
-                $sender = Sponsor::where('user_id','=',$msg)->sponsor_fname;
-            }
-            if($user->user_type=='student'){
-                $sender = Scholar::where('user_id','=',$msg)->student_fname;
+                $sender = Sponsor::where('user_id','=',$id)->pluck('sponsor_fname');
+            }elseif($user->user_type=='student'){
+                $sender = Scholar::where('user_id','=',$id)->pluck('student_fname');
             }
             $messages[] = array(
                 'content'=>$message->msg_content,
@@ -89,11 +84,11 @@ class MessagesController extends Controller
         $messages = array();
         foreach($inbox as $message){
             $user = User::find($message->msg_sender);
+            $id = $message->msg_sender;
             if($user->user_type=='sponsor'){
-                $sender = Sponsor::find($user->user_id);
-                $sender = $sender->sponsor_fname;
+                $sender = Sponsor::where('user_id','=',$id)->pluck('sponsor_fname');
             }elseif($user->user_type=='student'){
-                $sender = Scholar::find($message->msg_sender)->student_fname;
+                $sender = Scholar::where('user_id','=',$id)->pluck('student_fname');
             }
             $messages[] = array(
                 'content'=>$message->msg_content,
@@ -120,16 +115,59 @@ class MessagesController extends Controller
         $message->msg_subject=$request->subject;
 
         $message->save();
+        $email = Auth::user()->email;
+        $message->user_email=$email;
         return $message;
     }
 
+    public function sendreply(Request $request){
+        $id = $request->id;
+        return $id;
+        $text = $request->text;
+
+        $currentTime = Carbon::now()->toDateTimeString();
+        // return $currentTime;
+        $user_id = Auth::user()->user_id;
+        $reply = new Reply;
+        $reply->user_id=$user_id;
+        $reply->msg_id=$id;
+        $reply->reply_content=$text;
+        $reply->created_at=$currentTime;
+        $reply->save();
+        return $reply;
+    }
+
     public function showThread(Request $request){
-        return "yes";
+        $id = $request->id;
+        $replies = Reply::where('msg_id','=',$id)->get();
+        $repliesMsgs = array();
+
+        foreach($replies as $reply){
+            $user = User::find($reply->user_id);
+            $id = $reply->user_id;
+            if($user->user_type=='sponsor'){
+                $sender = Sponsor::where('user_id','=',$id)->pluck('sponsor_fname');
+            }elseif($user->user_type=='student'){
+                $sender = Scholar::where('user_id','=',$id)->pluck('student_fname');
+            }
+            $repliesMsgs[] = array(
+                'content'=>$reply->reply_content,
+                'sender'=>$reply->user_id,
+                'sender_name'=>$sender,
+                'id'=>$reply->msg_id,
+                'timestamp'=>$reply->created_at->diffForHumans()
+                );
+        }
+        return $repliesMsgs;
+        
     }
 
     public function destroy(Request $request){
+       // $id = $request->
        return $request;
-        // Message::destroy($request->messages);
-        // return "yay";
+    }
+
+    public function compose(){
+        return "yay";
     }
 }

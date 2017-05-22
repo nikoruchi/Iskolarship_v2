@@ -520,7 +520,10 @@ form:not(.navbar-form) .input-group {
     background-color: #e3cf24;
 }
 
-
+.panel-default{
+    border: 0;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.15);
+}
 
 
 

@@ -79,6 +79,12 @@ Route::get('/scholarship form', function () {
     return view('registration/scholarship_form');
 });
 
+Route::get('/notifications', 'NotificationsController@viewNotifications');
+
+Route::get('/scholar setup', 'ProfileSetupController@viewSetup');
+
+Route::get('/scholar setup form', 'ProfileSetupController@viewSetupForm');
+
 //=============== END FOR FRONT-END PURPOSES =======================
 
 
@@ -113,6 +119,15 @@ Route::get('/messages/unread', ['middleware'=>'isguest','uses'=>'MessagesControl
 Route::get('/messages/inbox', ['middleware'=>'isguest','uses'=>'MessagesController@getAllMsg']);
 
 Route::post('/messages/send', ['middleware'=>'isguest','uses'=>'MessagesController@send']);
+
+Route::get('/messages/thread', ['middleware'=>'isguest','uses'=>'MessagesController@showThread']);
+
+Route::get('/messages/compose', ['middleware'=>'isguest','uses'=>'MessagesController@compose']);
+
+Route::delete('/messages/delete', ['middleware'=>'isguest','uses'=>'MessagesController@destroy']);
+
+Route::post('/messages/reply', ['middleware'=>'isguest','uses'=>'MessagesController@sendreply']);
+
 
 // APPLICATION STATUS CHANGES
 Route::post('/application/avail','ApplicationController@avail');
