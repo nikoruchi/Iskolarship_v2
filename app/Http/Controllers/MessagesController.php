@@ -17,7 +17,7 @@ class MessagesController extends Controller
     {
         $user_id = Auth::user()->user_id;
         $user = User::findOrFail($user_id);
-        $id = Sponsor::where('user_id','=', $user_id)->pluck('sponsor_id')->first();
+        $id = Sponsor::where('user_id','=', $user_id)->pluck('sponsor_id');
         $sponsor = Sponsor::findOrFail($id);
         $inbox = Message::where('msg_receiver','=',$user_id)->get();
         return view('/user/messages', compact('sponsor','user','inbox'));
@@ -139,9 +139,9 @@ class MessagesController extends Controller
 
     public function showThread(Request $request){
         $id = $request->id;
-        $replies = Reply::where('msg_id','=',$id)->get();
+        $replies = Reply::where('msg_id','=',$id)->orderBy('created_at','ASC')->get();
         $repliesMsgs = array();
-
+        $auth = Auth::user()->user_id;
         foreach($replies as $reply){
             $user = User::find($reply->user_id);
             $id = $reply->user_id;
@@ -155,7 +155,8 @@ class MessagesController extends Controller
                 'sender'=>$reply->user_id,
                 'sender_name'=>$sender,
                 'id'=>$reply->msg_id,
-                'timestamp'=>$reply->created_at->diffForHumans()
+                'timestamp'=>$reply->created_at->diffForHumans(),
+                'user'=>$auth
                 );
         }
         return $repliesMsgs;

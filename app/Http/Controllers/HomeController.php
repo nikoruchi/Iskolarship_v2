@@ -34,10 +34,7 @@ class HomeController extends Controller
         $user = User::findOrFail($user_id);
         
         $spon_id = Sponsor::where('user_id','=', $user_id)->pluck('sponsor_id');
-
         $sponsor = Sponsor::findOrFail($spon_id);
-
-
         return view('home', compact('sponsor', 'user'));
     }
 
@@ -46,7 +43,6 @@ class HomeController extends Controller
         $user = User::findOrFail($user_id);
         
         $stud_id = Scholar::where('user_id','=', $user_id)->pluck('student_id');
-
         $student = Scholar::findOrFail($stud_id);
 
         return view('home', compact('student', 'user'));

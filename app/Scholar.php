@@ -11,7 +11,7 @@ class Scholar extends Model
 {
     use Notifiable;
     protected $primaryKey = 'student_id';
-    protected $table = 'student_account';
+    protected $table = 'scholars';
 
     /**
      * The attributes that are mass assignable.

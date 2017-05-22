@@ -16,7 +16,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     static $password;
 
     return [
-        'user_email' => $faker->unique()->safeEmail,
+        'email' => $faker->unique()->safeEmail,
         'password' => $password ?: $password = bcrypt('secret'),
         'user_aboutme' => $faker->paragraph,
         'user_contact' => "09000000000",
@@ -25,6 +25,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
 
 $factory->define(App\Sponsor::class, function (Faker\Generator $faker) {
 
