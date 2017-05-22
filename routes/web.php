@@ -72,6 +72,8 @@ Route::get('/scholarship form', function () {
     return view('registration/scholarship_form');
 });
 
+Route::get('/notifications', 'NotificationsController@viewNotifications');
+
 //=============== END FOR FRONT-END PURPOSES =======================
 
 

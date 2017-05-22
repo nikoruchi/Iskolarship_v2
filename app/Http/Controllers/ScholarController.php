@@ -42,6 +42,6 @@ class ScholarController extends Controller{
             ->where('accept_status','=','accept')
             ->where('avail_status','=','pending')
             ->get();
-             return view('profiles.profile_scholar', compact('studentProfile','student', 'user','pending','scholarships','pendingAvail')); 
+            return view('profiles.profile_scholar', compact('studentProfile','student', 'user','pending','scholarships','pendingAvail')); 
     }  
 }

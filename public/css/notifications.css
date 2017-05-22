@@ -1,0 +1,136 @@
+.main-container{
+	margin-top: 100px;
+}
+
+.notif-options{
+	position: fixed;
+	top: 50px;
+	left: 0;
+	width: 100%;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	background-color: white;
+	z-index: 1;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+	overflow: hidden;
+}
+
+.notif-options a{
+	padding: 13px 15px;
+	display: inline-block;
+	font-family: Roboto;
+	color: #777;
+}
+
+.notif-options a:focus,
+.notif-options a:hover{
+	text-decoration: none;
+	background-color: rgba(0, 0, 0, 0.025);
+}
+
+.delete{
+	margin-left: auto;
+	background-color: #ef6767;
+	right: -11.5em;
+	transition: 0.3s;
+	transition-timing-function: ease-out;
+	position: relative;
+}
+
+.delete:hover{
+	right: 0;
+}
+
+.delete a{
+	color: white;
+}
+
+.notif{
+	box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+	position: relative;
+	padding: 0.5em;
+	margin: 1em 0;
+	overflow: auto;
+	display: flex;
+	align-items: center;
+}
+
+.notif .remove{
+	font-size: 1em;
+	position: absolute;
+	top: 0.5em;
+	right: 0.5em;
+	color: red;
+	opacity: 0.3;
+}
+
+.notif > img{
+	height: 50px;
+	width: 50px;
+	object-fit: cover;
+	object-position: center;
+	border-radius: 50%;
+	float: left;
+	max-width: 10%; 
+	filter: brightness(110%);
+}
+
+.notif > img[src="http://localhost:8000/image/spon_def.png"]{
+	filter: brightness(120%);
+}
+
+.notif > p{
+	float: left;
+	width: 90%;
+	padding-left: 1em;
+	margin: 0;
+	font-family: Roboto;
+}
+
+.notif .rejct,
+.notif .cnfrm,
+.notif .accpt,
+.notif.no-notif,
+.notif .schol-name,
+.notif .sship-name{
+	font-family: "Roboto Light";
+	font-weight: bold;
+	font-style: italic;
+}
+
+.notif .accpt,
+.notif .schol-name{
+	color: #6aa417;
+}
+
+.notif .sship-name{
+	color: #1777a4;
+}
+
+.notif .rejct{
+	color: #d53040;
+}
+
+.notif .cnfrm{
+	color: #d5b030;
+}
+
+.notif-header{
+	position: absolute;
+	left: 50%;
+	transform: translate(-52%, 0);
+}
+
+.notif.no-notif{
+	color: #CCC;
+	text-align: center;
+	font-style: normal;
+	display: block;
+	box-shadow: none;
+}
+
+.notif-header > *{
+	font-size: 1.5em;
+	margin: 0;
+}
