@@ -26,8 +26,11 @@ class Message extends Model
     ];
 
    public function yourmessages(){
-        return $this->belongToMany('App\User', 'msg_sender');
+        return $this->belongsTo('App\User', 'msg_receiver');
    }
 
+   public function replies(){
+    return $this->hasMany('App\Reply','msg_id');
+   }
 
 }

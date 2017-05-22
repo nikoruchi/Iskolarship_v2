@@ -114,6 +114,15 @@ Route::get('/messages/inbox', ['middleware'=>'isguest','uses'=>'MessagesControll
 
 Route::post('/messages/send', ['middleware'=>'isguest','uses'=>'MessagesController@send']);
 
+Route::get('/messages/thread', ['middleware'=>'isguest','uses'=>'MessagesController@showThread']);
+
+Route::get('/messages/compose', ['middleware'=>'isguest','uses'=>'MessagesController@compose']);
+
+Route::delete('/messages/delete', ['middleware'=>'isguest','uses'=>'MessagesController@destroy']);
+
+Route::post('/messages/reply', ['middleware'=>'isguest','uses'=>'MessagesController@sendreply']);
+
+
 // APPLICATION STATUS CHANGES
 Route::post('/application/avail','ApplicationController@avail');
 

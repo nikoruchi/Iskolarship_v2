@@ -1,5 +1,6 @@
 <?php $__env->startSection('content'); ?>
-
+<style>
+</style>
 	<div class="container main-container">
 		<div class="row">
 			<div class="col-sm-3">
@@ -15,7 +16,7 @@
 				<div id="message-form" class="panel panel-default">
 					<div class="panel-body">
 						<div class="form">
-							<div class="form-group">
+							<div class="form-group" id="compose-form">
 							<form name="formMsg" id="formMsg">
 								<?php echo e(csrf_field()); ?>
 
@@ -26,6 +27,7 @@
 									<span class="glyphicon glyphicon-send"></span>
 								</button>
 							</form>
+								
 							</div>
 						</div>
 					</div>
@@ -46,8 +48,13 @@
 									<div class="panel-body">
 										<form class="select-form" id="formDel">
 											<input name="messages[]" data-id="<?php echo e($message->msg_id); ?>" type="checkbox" class="not-clickable select"/>
+									
 										</form>
-										<p class="from"><strong><?php echo e($message->msg_sender); ?></strong></p>
+										<?php if(Auth::user()->hasRole('student')): ?>
+										<p class="from"><strong><?php echo e($message->yourmessages->user_student->student_fname); ?></strong></p>
+										<?php elseif(Auth::user()->hasRole('sponsor')): ?>
+										<p class="from"><strong><?php echo e($message->yourmessages->user_sponsor->sponsor_fname); ?></strong></p>
+										<?php endif; ?>
 										<p class="message-content"><?php echo e($message->msg_content); ?></p>
 										<p class="time-stamp"><?php echo e($message->created_at->diffForHumans()); ?></p>
 									</div>
