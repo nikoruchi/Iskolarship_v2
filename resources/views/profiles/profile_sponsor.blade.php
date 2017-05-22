@@ -67,34 +67,27 @@
 				</div> -->
 				@endif
 				<div>
+					@if($scholarships->count()>0)
 					<h2 class="text-center">Scholarships</h2>
 					<ul class="scholarships">
+					@foreach($scholarships as $scho)
 						<li>
 							<!-- Image of the scholarship is placed here. -->
 							<!-- The H2 here is just a place holder -->
-							<h2 class="first-letter">S</h2>
+							<h2 class="first-letter">{{$scho->scholarship_name[0]}}</h2>
 							<article>
-								<h2 class="name">Scholarship Name</h2>
+								<h2 class="name">{{$scho->scholarship_name}}</h2>
 								<div class="btns">
 									<a href="#" class="edit"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
 									<a href="{{ url('profile sponsor/scholars') }}" class="view_scholars"><span class="glyphicon glyphicon-eye-open"></span> Scholars</a>
 								</div>
 							</article>
 						</li>
-						<li>
-							<!-- Image of the scholarship is placed here. -->
-							<!-- The H2 here is just a place holder -->
-							<h2 class="first-letter">S</h2>
-							<article>
-								<h2 class="name">Scholarship Name</h2>
-								<div class="btns">
-									<a href="#" class="edit"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
-									<!-- We will place the delete inside the edit form. -->
-									<a href="{{ url('profile sponsor/scholars') }}" class="view_scholars"><span class="glyphicon glyphicon-eye-open"></span> Scholars</a>
-								</div>
-							</article>
-						</li>
+					@endforeach
 					</ul>
+					@else
+					<h3 class="text-center">You haven't created any scholarships.</h3>
+					@endif
 				</div>
 			</div>
 		</div>

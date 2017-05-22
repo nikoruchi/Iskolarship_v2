@@ -79,6 +79,6 @@ class ScholarAuthController extends Controller{
         $student ->student_university = $request ->univ;
         $student ->student_universityaddress = $request ->univ_address;
         $student ->save();
-        return redirect('/home');
+        return redirect('/');
     } 
 }

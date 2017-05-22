@@ -44,7 +44,7 @@
 							<?php endif; ?>
 							<?php if(Auth::check()): ?>
 							<li><a href="<?php echo e(url('/messages')); ?>"><span class="glyphicon glyphicon-envelope"></span> Messages</a></li>
-							<li><a href="#"><span class="glyphicon glyphicon-bell"></span> Notifications</a></li>
+							<li><a href="<?php echo e(url('/notifications')); ?>"><span class="glyphicon glyphicon-bell"></span> Notifications</a></li>
 							<?php endif; ?>
 							<?php if(Auth::user()->hasRole('sponsor')): ?>
 							<li><a href="/Sponsor/Account Settings"><span class="glyphicon glyphicon-cog"></span> Account Settings</a></li>

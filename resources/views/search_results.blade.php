@@ -40,7 +40,7 @@
 							<!-- The H2 here is just a place holder -->
 							<h2 class="first-letter">S</h2>
 							<article>
-								<h2 class="name">{{ $spon->sponsor_fname }} {{ $spon->sponsor_fname }}</h2>
+								<h2 class="name">{{ $spon->sponsor_fname }} {{ $spon->sponsor_lname }}</h2>
 								<p class="desc"> {{ $spon->sponsor_job }} </p>
 								<p class="desc"> {{ $spon->sponsor_agency }} </p>
 								<a href="#" class="view">View</a>
