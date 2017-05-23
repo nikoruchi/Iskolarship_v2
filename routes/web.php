@@ -145,3 +145,26 @@ Route::get("/search", function(){
         break;
     }
 });
+
+Route::get("/profile sponsor/{sponsor_id}", function($sponsor_id){
+    switch(Auth::user()->user_type){
+        case 'sponsor':
+          return (new \App\Http\Controllers\SponsorController)->viewSearchfromSponsor($sponsor_id);
+        break;
+        case 'student':
+          return (new \App\Http\Controllers\SponsorController)->viewSearchfromStudent($sponsor_id);
+        break;
+    }
+});
+
+
+// Route::get("/profile sponsor/{sponsor_id}", function($sponsor_id){
+//     switch(Auth::user()->user_type){
+//         case 'sponsor':
+//           return (new \App\Http\Controllers\SponsorController)->viewSearchfromSponsor($sponsor_id);
+//         break;
+//         case 'student':
+//           return (new \App\Http\Controllers\SponsorController)->viewSearchfromStudent($sponsor_id);
+//         break;
+//     }
+// });
