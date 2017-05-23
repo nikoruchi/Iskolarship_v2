@@ -49,12 +49,12 @@
 									<div class="panel-body">
 										<form class="select-form" id="formDel">
 											<input name="messages[]" data-id="{{$message->msg_id}}" type="checkbox" class="not-clickable select"/>
-									
 										</form>
+
 										@if(Auth::user()->hasRole('student'))
-										<p class="from"><strong>{{$message->yourmessages->user_student->student_fname}}</strong></p>
+										<p class="from"><strong>{{$message->sponsorsender->sponsor_fname}}</strong></p>
 										@elseif(Auth::user()->hasRole('sponsor'))
-										<p class="from"><strong>{{$message->yourmessages->user_sponsor->sponsor_fname}}</strong></p>
+										<p class="from"><strong>{{$message->studentsender->student_fname}}</strong></p>
 										@endif
 										<p class="message-content">{{$message->msg_content}}</p>
 										<p class="time-stamp">{{$message->created_at->diffForHumans()}}</p>

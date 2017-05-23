@@ -122,45 +122,91 @@ class MessagesController extends Controller
 
     public function sendreply(Request $request){
         $id = $request->id;
-        return $id;
         $text = $request->text;
-
+        
         $currentTime = Carbon::now()->toDateTimeString();
-        // return $currentTime;
         $user_id = Auth::user()->user_id;
+        
         $reply = new Reply;
+        // return $reply;
         $reply->user_id=$user_id;
         $reply->msg_id=$id;
         $reply->reply_content=$text;
         $reply->created_at=$currentTime;
         $reply->save();
-        return $reply;
+        
+        $parentmsg = Message::find($id);
+        $replies = Reply::where('msg_id','=',$id)->get();
+        $user_id = Auth::user()->user_id;
+        if(Auth::user()->hasRole('student')){
+            $sender = Scholar::where('user_id','=',$user_id)->pluck('student_fname');
+        }elseif(Auth::user()->hasRole('sponsor')){
+            $sender = Sponsor::where('user_id','=',$user_id)->pluck('sponsor_fname');
+        }
+
+        $repliesMsgs[] = array(
+            'content'=>$parentmsg->msg_content,
+            'sender'=>$parentmsg->msg_sender,
+            'sender_name'=>$sender,
+            'id'=>$id,
+            'timestamp'=>$parentmsg->created_at->diffForHumans()
+         );
+        foreach($replies as $reply){
+        $user = User::find($reply->user_id);
+        $id = $reply->user_id;
+        if($user->user_type=='sponsor'){
+            $sender = Sponsor::where('user_id','=',$id)->pluck('sponsor_fname');
+        }elseif($user->user_type=='student'){
+            $sender = Scholar::where('user_id','=',$id)->pluck('student_fname');
+        }
+        $repliesMsgs[] = array(
+            'content'=>$reply->reply_content,
+            'sender'=>$reply->user_id,
+            'sender_name'=>$sender,
+            'id'=>$reply->msg_id,
+            'timestamp'=>$reply->created_at->diffForHumans()
+            );
+        }
+        return $repliesMsgs;
+
     }
 
     public function showThread(Request $request){
         $id = $request->id;
+        $parentmsg = Message::find($id);
         $replies = Reply::where('msg_id','=',$id)->get();
-        $repliesMsgs = array();
+        $user_id = Auth::user()->user_id;
+        if(Auth::user()->hasRole('student')){
+            $sender = Scholar::where('user_id','=',$user_id)->pluck('student_fname');
+        }elseif(Auth::user()->hasRole('sponsor')){
+            $sender = Sponsor::where('user_id','=',$user_id)->pluck('sponsor_fname');
+        }
 
+        $repliesMsgs[] = array(
+            'content'=>$parentmsg->msg_content,
+            'sender'=>$parentmsg->msg_sender,
+            'sender_name'=>$sender,
+            'id'=>$id,
+            'timestamp'=>$parentmsg->created_at->diffForHumans()
+         );
         foreach($replies as $reply){
-            $user = User::find($reply->user_id);
-            $id = $reply->user_id;
-            if($user->user_type=='sponsor'){
-                $sender = Sponsor::where('user_id','=',$id)->pluck('sponsor_fname');
-            }elseif($user->user_type=='student'){
-                $sender = Scholar::where('user_id','=',$id)->pluck('student_fname');
-            }
-            $repliesMsgs[] = array(
-                'content'=>$reply->reply_content,
-                'sender'=>$reply->user_id,
-                'sender_name'=>$sender,
-                'id'=>$reply->msg_id,
-                'timestamp'=>$reply->created_at->diffForHumans()
-                );
+        $user = User::find($reply->user_id);
+        $id = $reply->user_id;
+        if($user->user_type=='sponsor'){
+            $sender = Sponsor::where('user_id','=',$id)->pluck('sponsor_fname');
+        }elseif($user->user_type=='student'){
+            $sender = Scholar::where('user_id','=',$id)->pluck('student_fname');
+        }
+        $repliesMsgs[] = array(
+            'content'=>$reply->reply_content,
+            'sender'=>$reply->user_id,
+            'sender_name'=>$sender,
+            'id'=>$reply->msg_id,
+            'timestamp'=>$reply->created_at->diffForHumans()
+            );
         }
         return $repliesMsgs;
-        
-    }
+    }    
 
     public function destroy(Request $request){
        // $id = $request->
@@ -169,5 +215,14 @@ class MessagesController extends Controller
 
     public function compose(){
         return "yay";
+    }
+
+    public function readMessage(Request $request){
+        $id = $request->id;
+        $message = Message::find($id);
+        $message->msg_status='read';
+        $message->save();
+        return $message;
+        // return redirect()->back();
     }
 }

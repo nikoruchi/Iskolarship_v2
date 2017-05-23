@@ -24,6 +24,12 @@ class Message extends Model
         'msg_date',
         'msg_status',       
     ];
+    public function studentsender(){
+        return $this->belongsTo('App\Scholar','user_id','msg_sender');
+    }
+    public function sponsorsender(){
+        return $this->belongsTo('App\Sponsor','user_id','msg_sender');
+    }
 
    public function yourmessages(){
         return $this->belongsTo('App\User', 'msg_receiver');
