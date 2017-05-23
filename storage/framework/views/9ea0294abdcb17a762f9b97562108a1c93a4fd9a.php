@@ -43,7 +43,7 @@
 								<h2 class="name"><?php echo e($spon->sponsor_fname); ?> <?php echo e($spon->sponsor_lname); ?></h2>
 								<p class="desc"> <?php echo e($spon->sponsor_job); ?> </p>
 								<p class="desc"> <?php echo e($spon->sponsor_agency); ?> </p>
-								<a href="/profile sponsor" class="view">View</a>
+								<a href="/profile sponsor/<?php echo e($spon->sponsor_id); ?>" class="view">View</a>
 							</article>
 						</li>
 					</ul>
@@ -62,7 +62,7 @@
 								<h2 class="name"><?php echo e($schol->student_fname); ?> <?php echo e($schol->student_lname); ?></h2>
 								<p class="desc"> <?php echo e($schol->student_studyfield); ?> </p>
 								<p class="desc"> <?php echo e($schol->student_university); ?> </p>
-								<a href="/profile scholar" class="view">View</a>
+								<a href="/profile scholar/<?php echo e($schol->student_id); ?>" class="view">View</a>
 							</article>
 						</li>
 					</ul>
@@ -75,7 +75,8 @@
 						<li>
 							<!-- Image of the scholarship is placed here. -->
 							<!-- The H2 here is just a place holder -->
-							<h2 class="first-letter"><?php echo e($open->scholarship_name[0]); ?> </h2>
+
+							<h2 class="first-letter"><?php echo e($open->scholarship_name[0]); ?></h2>
 							<article>
 								<h2 class="name"> <?php echo e($open->scholarship_name); ?> </h2>
 								<p class="desc"> <?php echo e($open->scholarship_desc); ?> </p>
@@ -85,7 +86,7 @@
 									<li>Insert another grant.</li>
 									<li>Insert another new grant.</li>
 								</ul>
-								<a href="/profile scholarship/{scholarship_id}" class="view">View</a>
+								<a href="/profile scholarship/<?php echo e($open->scholarship_id); ?>" class="view">View</a>
 							</article>
 						</li>
 					</ul>
