@@ -1,0 +1,123 @@
+.panel-body{
+	/* min-height: 85vh; */
+	position: relative;
+	/* padding-bottom: 1em; */
+}
+
+.next{
+	position: absolute;
+	bottom: 1em;
+	right: 1em;
+}
+
+.grants, .specifications, .questions{
+	padding: 0;
+	list-style: none;
+}
+
+.grants li, .specifications li, .questions li{
+	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+	padding: 0.75em;
+	margin: 0.5em 0;
+	position: relative;
+	padding-right: 5em;
+	font-family: Roboto;
+}
+
+.delete,
+.edit{
+	position: absolute;
+	right: 0.75em;
+	top: 0.75em;
+	width: 2em;
+	height: 2em;
+	border-radius: 10%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition: 0.2s;
+}
+
+.delete > span,
+.edit > span{
+	transform: translate(0, -10%);
+}
+
+.delete{
+	color: #f16868;
+}
+
+.delete:hover{
+	color: white;
+	background-color: #f16868;
+	text-decoration: none;
+}
+
+.edit{
+	display: none;
+	right: 3em;
+	color: #f7d14e;
+}
+
+.edit:hover{
+	color: white;
+	background-color: #f7d14e;
+	text-decoration: none;
+}
+
+.ajax-form{
+	width: 100%;
+	position: relative;
+	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+	margin-top: 2em;
+	margin-bottom: 1em;
+	border-radius: 4px;
+	display: flex;
+	align-items: center;
+}
+
+.ajax-form textarea{
+	border: 0;
+	background-color: transparent;
+	width: 100%;
+	padding: 0.75em;
+	font-family: Roboto;
+	padding-right: 3em;
+}
+
+.ajax-form textarea::placeholder{
+	color: #AAA;
+}
+
+.ajax-form textarea::-webkit-scrollbar{
+	display: none;
+}
+
+.add{
+	position: absolute;
+	right: 0.25em;
+	color: #a3d02b;
+	padding: 3px 8px;
+}
+
+.add:hover{
+	color: white;
+	background-color: #a3d02b;
+}
+
+.start{
+	margin-top: 1em;
+	float: right;
+	font-weight: bold;
+	font-family: "Roboto Light";
+	font-size: 1.1em;
+	letter-spacing: 0.01em;
+}
+
+input[type=text], :not(.ajax-form) > textarea{
+	border-radius: 0;
+	font-family: Roboto;
+	margin: 1em 0;
+	border: 0;
+	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
