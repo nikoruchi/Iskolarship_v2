@@ -73,9 +73,7 @@ Route::get("/profile scholarship/{scholarship_id}", function($scholarship_id){
 
 //=============== FOR FRONT-END PURPOSES =======================
 
-Route::get('/scholarship form', function () {
-    return view('registration/scholarship_form');
-});
+Route::get('/scholarship form', 'ScholarshipsController@createForm');
 
 Route::get('/notifications', 'NotificationsController@viewNotifications');
 
@@ -159,3 +157,14 @@ Route::get("/profile sponsor/{sponsor_id}", function($sponsor_id){
     }
 });
 
+
+// Route::get("/profile sponsor/{sponsor_id}", function($sponsor_id){
+//     switch(Auth::user()->user_type){
+//         case 'sponsor':
+//           return (new \App\Http\Controllers\SponsorController)->viewSearchfromSponsor($sponsor_id);
+//         break;
+//         case 'student':
+//           return (new \App\Http\Controllers\SponsorController)->viewSearchfromStudent($sponsor_id);
+//         break;
+//     }
+// });

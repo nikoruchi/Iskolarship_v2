@@ -62,7 +62,7 @@
 								<h2 class="name"><?php echo e($schol->student_fname); ?> <?php echo e($schol->student_lname); ?></h2>
 								<p class="desc"> <?php echo e($schol->student_studyfield); ?> </p>
 								<p class="desc"> <?php echo e($schol->student_university); ?> </p>
-								<a href="/profile scholar" class="view">View</a>
+								<a href="/profile scholar/<?php echo e($schol->student_id); ?>" class="view">View</a>
 							</article>
 						</li>
 					</ul>

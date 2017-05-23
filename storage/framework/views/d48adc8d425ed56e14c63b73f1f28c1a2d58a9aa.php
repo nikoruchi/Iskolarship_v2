@@ -6,7 +6,7 @@
 
 				<h1 class="user-name"><?php echo e(empty($sponsor1)? $sponsor->sponsor_fname : $sponsor1->sponsor_fname); ?></h1>
 				<h2 class="work"> <?php echo e(empty($sponsor1)? $sponsor->sponsor_agency : $sponsor1->sponsor_agency); ?>, <?php echo e(empty($sponsor1)? $sponsor->sponsor_job : $sponsor1->sponsor_job); ?></h2>
-				<h3 class="user-email"><?php echo e($user->email); ?></h3>
+				<h3 class="user-email"><?php echo e(empty($user1)? $user->email : $user1->email); ?></h3>
 
 				<?php if(Auth::user()->hasRole('sponsor')): ?>
 				<div class="btn-group flex">	
@@ -46,7 +46,7 @@
 					<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 					</ul>
 					<?php else: ?>
-					<?php if(empty($sponsor1)): ?>
+					<?php if( (empty($sponsor1) && $user->user_type == "sponsor") || (empty($sponsor) && $user->user_type == "student") ): ?>
 					<h3 class="text-center">You haven't created any scholarships.</h3>
 					<?php else: ?>
 					<h3 class="text-center">No scholarship to show.</h3>

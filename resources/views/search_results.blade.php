@@ -62,7 +62,7 @@
 								<h2 class="name">{{ $schol->student_fname }} {{ $schol->student_lname }}</h2>
 								<p class="desc"> {{ $schol->student_studyfield }} </p>
 								<p class="desc"> {{ $schol->student_university }} </p>
-								<a href="/profile scholar" class="view">View</a>
+								<a href="/profile scholar/{{$schol->student_id}}" class="view">View</a>
 							</article>
 						</li>
 					</ul>

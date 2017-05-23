@@ -7,8 +7,8 @@
 				<img src="/image/{{ $user->user_imagepath }}" class="img-responsive user-pp img-circle"/>
 
 				<h1 class="user-name">{{ empty($sponsor1)? $sponsor->sponsor_fname : $sponsor1->sponsor_fname }}</h1>
-				<h2 class="work"> {{  empty($sponsor1)? $sponsor->sponsor_agency : $sponsor1->sponsor_agency  }}, {{  empty($sponsor1)? $sponsor->sponsor_job : $sponsor1->sponsor_job  }}</h2>
-				<h3 class="user-email">{{ $user->email }}</h3>
+				<h2 class="work"> {{  empty($sponsor1)? $sponsor->sponsor_agency : $sponsor1->sponsor_agency }}, {{  empty($sponsor1)? $sponsor->sponsor_job : $sponsor1->sponsor_job }}</h2>
+				<h3 class="user-email">{{ empty($user1)? $user->email : $user1->email }}</h3>
 
 				@if(Auth::user()->hasRole('sponsor'))
 				<div class="btn-group flex">	
@@ -48,7 +48,7 @@
 					@endforeach
 					</ul>
 					@else
-					@if(empty($sponsor1))
+					@if( (empty($sponsor1) && $user->user_type == "sponsor") || (empty($sponsor) && $user->user_type == "student") )
 					<h3 class="text-center">You haven't created any scholarships.</h3>
 					@else
 					<h3 class="text-center">No scholarship to show.</h3>
