@@ -34,7 +34,7 @@
 						<?php if(Auth::user()->hasRole('student')): ?>
 							<a href="/profile scholar" class="dropdown-toggle" data-toggle="dropdown"><?php echo e($student->student_fname); ?> <?php echo e($student->student_lname); ?> <span class="caret"></span></a>
 						<?php elseif(Auth::user()->hasRole('sponsor')): ?>
-							<a href="" class="dropdown-toggle" data-toggle="dropdown"><?php echo e($sponsor->sponsor_fname); ?> <?php echo e($sponsor->sponsor_lname); ?> <span class="caret"></span></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo e($sponsor->sponsor_fname); ?> <?php echo e($sponsor->sponsor_lname); ?> <span class="caret"></span></a>
 						<?php endif; ?>
 							<ul class="dropdown-menu">
 							<?php if(Auth::user()->hasRole('sponsor')): ?>
@@ -44,7 +44,7 @@
 							<?php endif; ?>
 							<?php if(Auth::check()): ?>
 							<li><a href="<?php echo e(url('/messages')); ?>"><span class="glyphicon glyphicon-envelope"></span> Messages</a></li>
-							<li><a href="#"><span class="glyphicon glyphicon-bell"></span> Notifications</a></li>
+							<li><a href="<?php echo e(url('/notifications')); ?>"><span class="glyphicon glyphicon-bell"></span> Notifications</a></li>
 							<?php endif; ?>
 							<?php if(Auth::user()->hasRole('sponsor')): ?>
 							<li><a href="/Sponsor/Account Settings"><span class="glyphicon glyphicon-cog"></span> Account Settings</a></li>

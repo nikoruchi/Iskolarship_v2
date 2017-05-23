@@ -74,4 +74,5 @@
 <?php $__env->startPush('styles'); ?>
 	<link rel="stylesheet" type="text/css" href="css/message.css"/>
 <?php $__env->stopPush(); ?>
+
 <?php echo $__env->make("layouts.userTab", array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

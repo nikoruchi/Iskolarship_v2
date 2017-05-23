@@ -206,7 +206,7 @@ form:not(.navbar-form) .input-group {
 
 .btn.btn-success {
     border-color: #6dae27;
-    background-color: #69cc2e;
+    background-color: #8abe3f;
 }
 
 .btn.btn-success:hover {
@@ -520,8 +520,23 @@ form:not(.navbar-form) .input-group {
     background-color: #e3cf24;
 }
 
+.panel-default{
+    border: 0;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.15);
+}
 
+.file-label{
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+    padding: 6px 16px;
+    font-size: 1em;
+    font-family: Roboto;
+    font-weight: normal;
+    cursor: pointer;
+}
 
+.file-label > input{
+    display: none;
+}
 
 
 

@@ -14,8 +14,7 @@ class CreateApplicationParentsinfoTable extends Migration
     public function up()
     {
         Schema::create('application_parentsinfo', function (Blueprint $table) {
-            $table->increments('parent_id');
-            $table->integer('application_id')->references('application_id')->on('application');
+            $table->integer('student_id')->references('student_id')->on('student_account');
             $table->string('father_type');
             $table->string('father_name');
             $table->string('father_occupation');

@@ -13,19 +13,14 @@
 						<li>
 							<!-- Image of the scholarship is placed here. -->
 							<!-- The H2 here is just a place holder -->
-							<h2 class="first-letter">S</h2>
+							<h2 class="first-letter"><?php echo e($scho->scholarship_name[0]); ?></h2>
 							<article>
 								<h2 class="name"><?php echo e($scho->scholarship_name); ?></h2>
 								<p class="desc">
 									<?php echo e($scho->scholarship_desc); ?>
 
 								</p>
-								<ul class="sample-grants">
-									<li>Insert grant.</li>
-									<li>Insert another grant.</li>
-									<li>Insert another new grant.</li>
-								</ul>
-								<a href="#" class="view">View</a>
+								<a href="/profile scholarship/<?php echo e($scho->scholarship_id); ?>" class="view">View</a>
 							</article>
 						</li>
 					</ul>
@@ -38,12 +33,13 @@
 						<li>
 							<!-- Image of the scholarship is placed here. -->
 							<!-- The H2 here is just a place holder -->
-							<h2 class="first-letter">S</h2>
+							<h2 class="first-letter"><?php echo e($spon->sponsor_fname[0]); ?></h2>
 							<article>
-								<h2 class="name"><?php echo e($spon->sponsor_fname); ?> <?php echo e($spon->sponsor_fname); ?></h2>
+								<h2 class="name"><?php echo e($spon->sponsor_fname); ?> <?php echo e($spon->sponsor_lname); ?></h2>
 								<p class="desc"> <?php echo e($spon->sponsor_job); ?> </p>
 								<p class="desc"> <?php echo e($spon->sponsor_agency); ?> </p>
-								<a href="#" class="view">View</a>
+								
+								<a href="/profile sponsor/<?php echo e($spon->sponsor_id); ?>" class="view">View</a>
 							</article>
 						</li>
 					</ul>
@@ -57,12 +53,12 @@
 						<li>
 							<!-- Image of the scholarship is placed here. -->
 							<!-- The H2 here is just a place holder -->
-							<h2 class="first-letter">S</h2>
+							<h2 class="first-letter"><?php echo e($schol->student_fname[0]); ?></h2>
 							<article>
 								<h2 class="name"><?php echo e($schol->student_fname); ?> <?php echo e($schol->student_lname); ?></h2>
 								<p class="desc"> <?php echo e($schol->student_studyfield); ?> </p>
 								<p class="desc"> <?php echo e($schol->student_university); ?> </p>
-								<a href="#" class="view">View</a>
+								<a href="/profile scholar/<?php echo e($schol->student_id); ?>" class="view">View</a>
 							</article>
 						</li>
 					</ul>
@@ -75,17 +71,13 @@
 						<li>
 							<!-- Image of the scholarship is placed here. -->
 							<!-- The H2 here is just a place holder -->
-							<h2 class="first-letter">S</h2>
+							<h2 class="first-letter"><?php echo e($open->scholarship_name[0]); ?></h2>
 							<article>
 								<h2 class="name"> <?php echo e($open->scholarship_name); ?> </h2>
 								<p class="desc"> <?php echo e($open->scholarship_desc); ?> </p>
 								<p class="desc"> Application Deadline: <?php echo e($open->scholarship_deadlineenddate); ?> </p>
-								<ul class="sample-grants">
-									<li>Insert grant.</li>
-									<li>Insert another grant.</li>
-									<li>Insert another new grant.</li>
-								</ul>
-								<a href="#" class="view">View</a>
+								
+								<a href="/profile scholarship/<?php echo e($open->scholarship_id); ?>" class="view">View</a>
 							</article>
 						</li>
 					</ul>

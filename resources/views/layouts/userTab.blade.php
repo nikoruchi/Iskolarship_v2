@@ -34,7 +34,7 @@
 						@if(Auth::user()->hasRole('student'))
 							<a href="/profile scholar" class="dropdown-toggle" data-toggle="dropdown">{{ $student->student_fname }} {{ $student->student_lname}} <span class="caret"></span></a>
 						@elseif(Auth::user()->hasRole('sponsor'))
-							<a href="" class="dropdown-toggle" data-toggle="dropdown">{{ $sponsor->sponsor_fname }} {{$sponsor->sponsor_lname}} <span class="caret"></span></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ $sponsor->sponsor_fname }} {{$sponsor->sponsor_lname}} <span class="caret"></span></a>
 						@endif
 							<ul class="dropdown-menu">
 							@if(Auth::user()->hasRole('sponsor'))
@@ -44,7 +44,7 @@
 							@endif
 							@if(Auth::check())
 							<li><a href="{{ url('/messages') }}"><span class="glyphicon glyphicon-envelope"></span> Messages</a></li>
-							<li><a href="#"><span class="glyphicon glyphicon-bell"></span> Notifications</a></li>
+							<li><a href="{{ url('/notifications') }}"><span class="glyphicon glyphicon-bell"></span> Notifications</a></li>
 							@endif
 							@if(Auth::user()->hasRole('sponsor'))
 							<li><a href="/Sponsor/Account Settings"><span class="glyphicon glyphicon-cog"></span> Account Settings</a></li>

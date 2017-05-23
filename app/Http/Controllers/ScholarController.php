@@ -16,8 +16,8 @@ class ScholarController extends Controller{
         $user_id = Auth::user()->user_id;
         $user = User::findOrFail($user_id);
         
-        $stud_id = Scholar::where('user_id','=', $user_id)->pluck('student_id')->first();
 
+        $stud_id = Scholar::where('user_id','=', $user_id)->pluck('student_id');
         $student = Scholar::findOrFail($stud_id);
 
         return view('home', compact('student', 'user'));
@@ -27,14 +27,14 @@ class ScholarController extends Controller{
     	$user_id = Auth::user()->user_id;
     	$user = User::findOrFail($user_id);
         // dd($user);
-    	$student_id = Scholar::where('user_id','=', $user_id)->pluck('student_id')->first();
+    	$student_id = Scholar::where('user_id','=', $user_id)->pluck('student_id');
     	$student = Scholar::find($student_id);
         $studentProfile = Scholar::find($student_id);
 
 		// $pending = Application::where('student_id','=', $student_id)
-  //   		->where('accept_status', '=','pending')
-  //   		->where('avail_status','=','pending')
-  //   		->get();
+        // ->where('accept_status', '=','pending')
+        // ->where('avail_status','=','pending')
+        // ->get();
 
 		$scholarships = Application::where('student_id', '=', $student_id)
     		->where('accept_status','=','accept')
@@ -45,7 +45,6 @@ class ScholarController extends Controller{
             ->where('accept_status','=','accept')
             ->where('avail_status','=','pending')
             ->get();
-// dd($pendingAvail);
-        return view('profiles.profile_scholar', compact('studentProfile','student', 'user','scholarships','pendingAvail')); 
+            return view('profiles.profile_scholar', compact('studentProfile','student', 'user','scholarships','pendingAvail')); 
     }  
 }
