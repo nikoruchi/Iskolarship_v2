@@ -28,11 +28,14 @@ class SponsorController extends Controller{
         $sponsor_id = Sponsor::where('user_id','=', $user_id)->pluck('sponsor_id')->first();
         $sponsor = Sponsor::find($sponsor_id);
 
+        $user_id1 = Sponsor::where('sponsor_id','=',$sponsor_id)->pluck('user_id');
+        $user1 = User::findOrFail($user_id1);
+
         $scholarships = Scholarship::where('sponsor_id', "=", $sponsor_id)->orderBy('scholarship_name')->get();
 
  
 
-        return view('profiles.profile_sponsor', compact('sponsor', 'user', 'scholarships'));       
+        return view('profiles.profile_sponsor', compact('sponsor', 'user', 'scholarships', 'user1'));       
     } 
 
     public function viewSearchfromStudent($sponsor_id){
