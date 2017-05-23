@@ -14,7 +14,7 @@
 						<li>
 							<!-- Image of the scholarship is placed here. -->
 							<!-- The H2 here is just a place holder -->
-							<h2 class="first-letter">{{ $scho->scholarship_name[0]}}</h2>
+							<h2 class="first-letter">{{ $scho->scholarship_name[0] }}</h2>
 							<article>
 								<h2 class="name">{{ $scho->scholarship_name}}</h2>
 								<p class="desc">
@@ -43,7 +43,7 @@
 								<h2 class="name">{{ $spon->sponsor_fname }} {{ $spon->sponsor_lname }}</h2>
 								<p class="desc"> {{ $spon->sponsor_job }} </p>
 								<p class="desc"> {{ $spon->sponsor_agency }} </p>
-								<a href="/profile sponsor" class="view">View</a>
+								<a href="/profile sponsor/{{$spon->sponsor_id}}" class="view">View</a>
 							</article>
 						</li>
 					</ul>
@@ -62,7 +62,7 @@
 								<h2 class="name">{{ $schol->student_fname }} {{ $schol->student_lname }}</h2>
 								<p class="desc"> {{ $schol->student_studyfield }} </p>
 								<p class="desc"> {{ $schol->student_university }} </p>
-								<a href="/profile scholar" class="view">View</a>
+								<a href="/profile scholar/{{$schol->student_id}}" class="view">View</a>
 							</article>
 						</li>
 					</ul>
@@ -75,7 +75,8 @@
 						<li>
 							<!-- Image of the scholarship is placed here. -->
 							<!-- The H2 here is just a place holder -->
-							<h2 class="first-letter">{{ $open->scholarship_name[0]}} </h2>
+
+							<h2 class="first-letter">{{ $open->scholarship_name[0] }}</h2>
 							<article>
 								<h2 class="name"> {{ $open->scholarship_name}} </h2>
 								<p class="desc"> {{ $open->scholarship_desc }} </p>
@@ -85,7 +86,7 @@
 									<li>Insert another grant.</li>
 									<li>Insert another new grant.</li>
 								</ul>
-								<a href="/profile scholarship/{scholarship_id}" class="view">View</a>
+								<a href="/profile scholarship/{{$open->scholarship_id}}" class="view">View</a>
 							</article>
 						</li>
 					</ul>

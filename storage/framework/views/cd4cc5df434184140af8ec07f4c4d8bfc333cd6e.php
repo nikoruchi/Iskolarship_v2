@@ -1,6 +1,4 @@
-@extends('layouts.userTab')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 
 	<div class="container main-container">
 		<div class="row">
@@ -63,8 +61,10 @@
 		</div>
 	</div>
 
-@endsection
+<?php $__env->stopSection(); ?>
 
-@push('styles')
+<?php $__env->startPush('styles'); ?>
 	<link rel="stylesheet" type="text/css" href="css/scholar_form.css"/>
-@endpush
+<?php $__env->stopPush(); ?>
+
+<?php echo $__env->make('layouts.userTab', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
