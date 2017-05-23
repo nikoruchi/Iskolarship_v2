@@ -143,13 +143,10 @@ class ScholarshipsController extends Controller
                     ->get();
 
         $currentTime = Carbon::now()->toDateTimeString();
-        $deadline = ScholarshipsDeadline::find($scholarship_id)
-                    ->scholarship_deadlineenddate;
+        $deadline = ScholarshipsDeadline::where('scholarship_id','=',$scholarship_id)
+            ->scholarship_deadlineenddate;
 
         return view('/profiles/profile_scholarship', compact('sponsor','user','scholarship', 'deadline', 'currentTime', 'specifications','grants','scholars'));
-
-
-
 
     }
 }

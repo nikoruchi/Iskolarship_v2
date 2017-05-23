@@ -20,11 +20,6 @@
 									<?php echo e($scho->scholarship_desc); ?>
 
 								</p>
-								<ul class="sample-grants">
-									<li>Insert grant.</li>
-									<li>Insert another grant.</li>
-									<li>Insert another new grant.</li>
-								</ul>
 								<a href="/profile scholarship/<?php echo e($scho->scholarship_id); ?>" class="view">View</a>
 							</article>
 						</li>
@@ -43,6 +38,7 @@
 								<h2 class="name"><?php echo e($spon->sponsor_fname); ?> <?php echo e($spon->sponsor_lname); ?></h2>
 								<p class="desc"> <?php echo e($spon->sponsor_job); ?> </p>
 								<p class="desc"> <?php echo e($spon->sponsor_agency); ?> </p>
+								
 								<a href="/profile sponsor/<?php echo e($spon->sponsor_id); ?>" class="view">View</a>
 							</article>
 						</li>
@@ -81,11 +77,7 @@
 								<h2 class="name"> <?php echo e($open->scholarship_name); ?> </h2>
 								<p class="desc"> <?php echo e($open->scholarship_desc); ?> </p>
 								<p class="desc"> Application Deadline: <?php echo e($open->scholarship_deadlineenddate); ?> </p>
-								<ul class="sample-grants">
-									<li>Insert grant.</li>
-									<li>Insert another grant.</li>
-									<li>Insert another new grant.</li>
-								</ul>
+								
 								<a href="/profile scholarship/<?php echo e($open->scholarship_id); ?>" class="view">View</a>
 							</article>
 						</li>
