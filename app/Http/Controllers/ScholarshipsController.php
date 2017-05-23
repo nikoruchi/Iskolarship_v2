@@ -123,7 +123,7 @@ class ScholarshipsController extends Controller
                     ->scholarship_deadlineenddate;
         // $deadline = ScholarshipsDeadline::find($scholarship_id)
                     // ->where('scholarship_deadlineenddate','<',$currentTime)->get();
-        // dd($deadline);
+        // dd($deadline); 
 
         return view('/profiles/profile_scholarship', compact('sponsor','user','scholarship','specifications','grants','scholars','exists','currentTime','deadline'));
     }
@@ -142,7 +142,11 @@ class ScholarshipsController extends Controller
                     ->where('avail_status','=','accept')
                     ->get();
 
-        return view('/profiles/profile_scholarship', compact('sponsor','user','scholarship','specifications','grants','scholars'));
+        $currentTime = Carbon::now()->toDateTimeString();
+        $deadline = ScholarshipsDeadline::find($scholarship_id)
+                    ->scholarship_deadlineenddate;
+
+        return view('/profiles/profile_scholarship', compact('sponsor','user','scholarship', 'deadline', 'currentTime', 'specifications','grants','scholars'));
 
 
 

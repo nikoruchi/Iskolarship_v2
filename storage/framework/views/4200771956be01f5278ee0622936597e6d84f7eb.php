@@ -20,13 +20,13 @@
 				</form>
 			</div>
 		</div>
-		<div class="row">
+		<!-- <div class="row">
 			<div class="col-sm-8 col-sm-offset-2">
 				<ul class="search-results">
-					<li>
+					<li> -->
 						<!-- Image of the scholarship is placed here. -->
 						<!-- The H2 here is just a place holder -->
-						<h2 class="first-letter">S</h2>
+						<!-- <h2 class="first-letter">S</h2>
 						<article>
 							<h2 class="name">Scholarship Name</h2>
 							<p class="desc">
@@ -40,10 +40,10 @@
 							<a href="#" class="view">View</a>
 						</article>
 					</li>
-					<li>
+					<li> -->
 						<!-- Image of the scholarship is placed here. -->
 						<!-- The H2 here is just a place holder -->
-						<h2 class="first-letter">S</h2>
+						<!-- <h2 class="first-letter">S</h2>
 						<article>
 							<h2 class="name">Scholarship Name</h2>
 							<p class="desc">
@@ -57,10 +57,10 @@
 							<a href="#" class="view">View</a>
 						</article>
 					</li>
-					<li>
+					<li> -->
 						<!-- Image of the scholarship is placed here. -->
 						<!-- The H2 here is just a place holder -->
-						<h2 class="first-letter">S</h2>
+						<!-- <h2 class="first-letter">S</h2>
 						<article>
 							<h2 class="name">Scholarship Name</h2>
 							<p class="desc">
@@ -74,10 +74,10 @@
 							<a href="#" class="view">View</a>
 						</article>
 					</li>
-					<li>
+					<li> -->
 						<!-- Image of the scholarship is placed here. -->
 						<!-- The H2 here is just a place holder -->
-						<h2 class="first-letter">S</h2>
+						<!-- <h2 class="first-letter">S</h2>
 						<article>
 							<h2 class="name">Scholarship Name</h2>
 							<p class="desc">
@@ -92,8 +92,8 @@
 						</article>
 					</li>
 				</ul>
-			</div>
-		</div>
+			</div> 
+		</div> -->
 	</div>
 
 <?php $__env->stopSection(); ?>

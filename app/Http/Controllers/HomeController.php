@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use App\Scholarship;
 use App\Sponsor;
 use App\Scholar;
 use App\User;

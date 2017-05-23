@@ -20,11 +20,6 @@
 								<p class="desc">
 									{{ $scho->scholarship_desc }}
 								</p>
-								<ul class="sample-grants">
-									<li>Insert grant.</li>
-									<li>Insert another grant.</li>
-									<li>Insert another new grant.</li>
-								</ul>
 								<a href="/profile scholarship/{{$scho->scholarship_id}}" class="view">View</a>
 							</article>
 						</li>
@@ -43,6 +38,7 @@
 								<h2 class="name">{{ $spon->sponsor_fname }} {{ $spon->sponsor_lname }}</h2>
 								<p class="desc"> {{ $spon->sponsor_job }} </p>
 								<p class="desc"> {{ $spon->sponsor_agency }} </p>
+								
 								<a href="/profile sponsor/{{$spon->sponsor_id}}" class="view">View</a>
 							</article>
 						</li>
@@ -80,11 +76,7 @@
 								<h2 class="name"> {{ $open->scholarship_name}} </h2>
 								<p class="desc"> {{ $open->scholarship_desc }} </p>
 								<p class="desc"> Application Deadline: {{ $open->scholarship_deadlineenddate }} </p>
-								<ul class="sample-grants">
-									<li>Insert grant.</li>
-									<li>Insert another grant.</li>
-									<li>Insert another new grant.</li>
-								</ul>
+								
 								<a href="/profile scholarship/{{$open->scholarship_id}}" class="view">View</a>
 							</article>
 						</li>
