@@ -39,4 +39,4 @@ class ApplicationController extends Controller
        $application->save();
        return redirect()->back();
    	}
-}
+} 

@@ -132,7 +132,7 @@ Route::post('/application/rejectAvail','ApplicationController@rejectAvail');
 
 Route::post('/application/accept','ApplicationController@accept');
 
-Route::post('/application/reject', 'ApplicationController@reject');
+Route::post('/application/reject', 'ApplicationController@reject'); 
 
 // for SEARCH THINGY
 Route::get("/search", function(){
