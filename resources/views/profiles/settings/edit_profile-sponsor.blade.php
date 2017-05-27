@@ -11,8 +11,8 @@
 
 			<form action="/Sponsor/upload" method="POST" enctype="multipart/form-data">
 				{{ csrf_field() }}
-				<div class="input-group  {{ $errors->has('image') ? ' has-error' : '' }} ">
-					<input type="file" class="btn btn-success btn-block" name="image" style="border-radius: 0 0 4px 4px; border-top: 0;" value="Upload New" />
+				<div class="input-group  text-center {{ $errors->has('image') ? ' has-error' : '' }} ">
+					<input type="file" class="btn btn-default btn-block" name="image" style="border-radius: 0; border-top: 0;" value="Upload New" />
 				@if ($errors->has('image'))
 					<span class="help-block">
 						<strong>{{ $errors->first('image') }}</strong>
@@ -25,8 +25,8 @@
 				    <div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span><em> {{ session('success') }}</em></div>
 				@endif
 				
-				<input type="submit" />
-			</div>
+					<button type="submit" class="btn btn-success btn-block" style="border-radius: 4px	; border-top: 0;"><span class="glyphicon glyphicon-upload" ></span>&nbsp;Upload Image</button> 
+				</div>
 			</form>
 
 		</div>
@@ -36,43 +36,44 @@
 					<h1 class="unmargined txt-success">Account Settings</h1>
 				</div>
 			<div class="panel panel-default">
-			<div class="panel-body">
-				<div class="form-group">
-					<form action="/Sponsor/Change Password" method="POST"  id="changePass">
-					    {{ csrf_field() }}
+				<div class="panel-body">
+					<div class="form-group">
+						<form action="/Sponsor/Change Password" method="POST"  id="changePass">
+						    {{ csrf_field() }}
 
-				    	@if(Session::has('success_pass'))
-	    					<div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span><em> {{ session('success_pass') }}</em></div>
-						@endif
-					        <label><span class="glyphicon glyphicon-lock"></span> Password:</label>
-							<div class="input-group {{ $errors->has('password') ? ' has-error' : '' }} ">
-								<input type="password" name="password" placeholder="Create a secure password. Minimum of 6 characters" class="form-control" />
+					    	@if(Session::has('success_pass'))
+		    					<div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span><em> {{ session('success_pass') }}</em></div>
+							@endif
+						        <label><span class="glyphicon glyphicon-lock"></span> Password:</label>
+								<div class="input-group {{ $errors->has('password') ? ' has-error' : '' }} ">
+									<input type="password" name="password" placeholder="Create a secure password. Minimum of 6 characters" class="form-control" />
 
-								@if ($errors->has('password'))
-									<span class="help-block">
-										<strong>{{ $errors->first('password') }}</strong>
-									</span>
-								@endif
+									@if ($errors->has('password'))
+										<span class="help-block">
+											<strong>{{ $errors->first('password') }}</strong>
+										</span>
+									@endif
 
-							</div>
-							<label><span class="glyphicon glyphicon-lock"></span> Re-type Password</label>
-							<div class="input-group {{ $errors->has('repassword') ? ' has-error' : '' }} ">
-								<input type="password" name="repassword" placeholder="Re-type your password" class="form-control" />
+								</div>
+								<label><span class="glyphicon glyphicon-lock"></span> Re-type Password</label>
+								<div class="input-group {{ $errors->has('repassword') ? ' has-error' : '' }} ">
+									<input type="password" name="repassword" placeholder="Re-type your password" class="form-control" />
 
-					 			@if ($errors->has('repassword'))
-									<span class="help-block">
-										<strong>{{ $errors->first('repassword') }}</strong>
-									</span>
-								@endif
-							</div>
-				    	<button type="submit" class="btn btn-success pull-right" style="margin-top: 10px;">
-							<span class="glyphicon glyphicon-refresh"></span>&nbsp;&nbsp;Confirm Password
-						</button> 
-				    </form>
+						 			@if ($errors->has('repassword'))
+										<span class="help-block">
+											<strong>{{ $errors->first('repassword') }}</strong>
+										</span>
+									@endif
+								</div>
+					    	<button type="submit" class="btn btn-success pull-right" style="margin-top: 10px;">
+								<span class="glyphicon glyphicon-refresh"></span>&nbsp;&nbsp;Confirm Password
+							</button> 
+					    </form>
+					</div>
 				</div>
 			</div>
 
-
+			<div class="panel panel-default">
 				<form action="/Sponsor/Update Profile" method="POST" id="editForm">
 					{{ csrf_field() }}
 					<!-- {{ method_field('PUT') }} -->

@@ -10,8 +10,8 @@
 			<form action="/Sponsor/upload" method="POST" enctype="multipart/form-data">
 				<?php echo e(csrf_field()); ?>
 
-				<div class="input-group  <?php echo e($errors->has('image') ? ' has-error' : ''); ?> ">
-					<input type="file" class="btn btn-success btn-block" name="image" style="border-radius: 0 0 4px 4px; border-top: 0;" value="Upload New" />
+				<div class="input-group  text-center <?php echo e($errors->has('image') ? ' has-error' : ''); ?> ">
+					<input type="file" class="btn btn-default btn-block" name="image" style="border-radius: 0; border-top: 0;" value="Upload New" />
 				<?php if($errors->has('image')): ?>
 					<span class="help-block">
 						<strong><?php echo e($errors->first('image')); ?></strong>
@@ -24,8 +24,8 @@
 				    <div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span><em> <?php echo e(session('success')); ?></em></div>
 				<?php endif; ?>
 				
-				<input type="submit" />
-			</div>
+					<button type="submit" class="btn btn-success btn-block" style="border-radius: 4px	; border-top: 0;"><span class="glyphicon glyphicon-upload" ></span>&nbsp;Upload Image</button> 
+				</div>
 			</form>
 
 		</div>
@@ -35,44 +35,45 @@
 					<h1 class="unmargined txt-success">Account Settings</h1>
 				</div>
 			<div class="panel panel-default">
-			<div class="panel-body">
-				<div class="form-group">
-					<form action="/Sponsor/Change Password" method="POST"  id="changePass">
-					    <?php echo e(csrf_field()); ?>
+				<div class="panel-body">
+					<div class="form-group">
+						<form action="/Sponsor/Change Password" method="POST"  id="changePass">
+						    <?php echo e(csrf_field()); ?>
 
 
-				    	<?php if(Session::has('success_pass')): ?>
-	    					<div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span><em> <?php echo e(session('success_pass')); ?></em></div>
-						<?php endif; ?>
-					        <label><span class="glyphicon glyphicon-lock"></span> Password:</label>
-							<div class="input-group <?php echo e($errors->has('password') ? ' has-error' : ''); ?> ">
-								<input type="password" name="password" placeholder="Create a secure password. Minimum of 6 characters" class="form-control" />
+					    	<?php if(Session::has('success_pass')): ?>
+		    					<div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span><em> <?php echo e(session('success_pass')); ?></em></div>
+							<?php endif; ?>
+						        <label><span class="glyphicon glyphicon-lock"></span> Password:</label>
+								<div class="input-group <?php echo e($errors->has('password') ? ' has-error' : ''); ?> ">
+									<input type="password" name="password" placeholder="Create a secure password. Minimum of 6 characters" class="form-control" />
 
-								<?php if($errors->has('password')): ?>
-									<span class="help-block">
-										<strong><?php echo e($errors->first('password')); ?></strong>
-									</span>
-								<?php endif; ?>
+									<?php if($errors->has('password')): ?>
+										<span class="help-block">
+											<strong><?php echo e($errors->first('password')); ?></strong>
+										</span>
+									<?php endif; ?>
 
-							</div>
-							<label><span class="glyphicon glyphicon-lock"></span> Re-type Password</label>
-							<div class="input-group <?php echo e($errors->has('repassword') ? ' has-error' : ''); ?> ">
-								<input type="password" name="repassword" placeholder="Re-type your password" class="form-control" />
+								</div>
+								<label><span class="glyphicon glyphicon-lock"></span> Re-type Password</label>
+								<div class="input-group <?php echo e($errors->has('repassword') ? ' has-error' : ''); ?> ">
+									<input type="password" name="repassword" placeholder="Re-type your password" class="form-control" />
 
-					 			<?php if($errors->has('repassword')): ?>
-									<span class="help-block">
-										<strong><?php echo e($errors->first('repassword')); ?></strong>
-									</span>
-								<?php endif; ?>
-							</div>
-				    	<button type="submit" class="btn btn-success pull-right" style="margin-top: 10px;">
-							<span class="glyphicon glyphicon-refresh"></span>&nbsp;&nbsp;Confirm Password
-						</button> 
-				    </form>
+						 			<?php if($errors->has('repassword')): ?>
+										<span class="help-block">
+											<strong><?php echo e($errors->first('repassword')); ?></strong>
+										</span>
+									<?php endif; ?>
+								</div>
+					    	<button type="submit" class="btn btn-success pull-right" style="margin-top: 10px;">
+								<span class="glyphicon glyphicon-refresh"></span>&nbsp;&nbsp;Confirm Password
+							</button> 
+					    </form>
+					</div>
 				</div>
 			</div>
 
-
+			<div class="panel panel-default">
 				<form action="/Sponsor/Update Profile" method="POST" id="editForm">
 					<?php echo e(csrf_field()); ?>
 
