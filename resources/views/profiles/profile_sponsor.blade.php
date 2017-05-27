@@ -32,27 +32,81 @@
 				
 				@endif
 				<div>
-					@if($scholarships->count()>0)
+					@if($endscholarships->count()>0 || $openscholarships->count()>0)
 					<h2 class="text-center">Scholarships</h2>
 					<ul class="scholarships">
-					@foreach($scholarships as $scho)
-						<li>
-							<h2 class="first-letter">{{$scho->scholarship_name[0]}}</h2>
-							<article>
-								<h2 class="name">{{$scho->scholarship_name}}</h2>
-								@if(Auth::user()->user_id==$user1->user_id)
-									<div class="btns">
-										<a href="#" class="edit"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
-										<a href="{{ url('profile sponsor/scholars') }}" class="view_scholars"><span class="glyphicon glyphicon-eye-open"></span> Scholars</a>
-									</div>
-								@else
-									<div class="btns">
-										<a href="/profile scholarship/{{$scho->scholarship_id}}" class="view_scholars"><span class="glyphicon glyphicon-eye-open"></span> View</a>
-									</div>
-								@endif
-							</article>
-						</li>
-					@endforeach
+					
+					@if(!empty($openscholarships))
+						<h4> Open Scholarships </h4>
+						@foreach($openscholarships as $scho)
+							<li>
+								<h2 class="first-letter">{{$scho->scholarship_name[0]}}</h2>
+								<article>
+									<h2 class="name">{{$scho->scholarship_name}}</h2>
+									@if(Auth::user()->user_id==$user1->user_id)
+										<div class="btns">
+											<a href="#" class="edit"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+											<a href="{{ url('profile sponsor/scholars') }}" class="view_scholars"><span class="glyphicon glyphicon-eye-open"></span> Scholars</a>
+										</div>
+									@else
+										<div class="btns">
+											<a href="/profile scholarship/{{$scho->scholarship_id}}" class="view_scholars"><span class="glyphicon glyphicon-eye-open"></span> View</a>
+										</div>
+									@endif
+								</article>
+							</li>
+						@endforeach
+					@endif
+
+					@if(!empty($endscholarships))
+						<h4> Closed Scholarships </h4>
+						@foreach($endscholarships as $scho)
+							<li>
+								<h2 class="first-letter">{{$scho->scholarship_name[0]}}</h2>
+								<article>
+									<h2 class="name">{{$scho->scholarship_name}}</h2>
+									@if(Auth::user()->user_id==$user1->user_id)
+										<div class="btns">
+											<a href="#" class="edit" data-toggle="modal" data-target="#reOpen"><span class="glyphicon glyphicon-pencil"></span> Re-open</a>
+											<a href="{{ url('profile sponsor/scholars') }}" class="view_scholars"><span class="glyphicon glyphicon-eye-open"></span> Scholars</a>
+										</div>
+									@else
+										<div class="btns">
+											<a href="/profile scholarship/{{$scho->scholarship_id}}" class="view_scholars"><span class="glyphicon glyphicon-eye-open"></span> View</a>
+										</div>
+									@endif
+								</article>
+							</li>
+
+							<!-- RE-OPEN MODAL -->
+							<div id="reOpen" class="modal fade" role="dialog">
+							  	<div class="modal-dialog">
+								    <div class="modal-content">
+								      	<div class="modal-header">
+								        	<button type="button" class="close" data-dismiss="modal">&times;</button>
+								        	<h4 class="modal-title">Re-Open {{$scho->scholarship_name}} Application</h4>
+								      	</div>
+								      	<div class="modal-body">
+								        	<form action="/scholarship/reopen" method="get">
+									        	<div class="input-group">
+													<input type="date" name="new_deadline" class="form-control" />
+													<input type="text" name="scholarship_id" value="{{$scho->scholarship_id}}" style="display:none"/>
+										</div>
+								      	<div class="modal-footer">
+													<div class="input-group-btn">
+														<button class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span> Re-Open</button>
+														<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+													</div>
+												</div>
+								        		
+								        	</form>								        	
+								      	</div>
+								    </div>
+							  	</div>
+							</div>
+
+						@endforeach
+					@endif
 					</ul>
 					@else
 					@if( (empty($sponsor1) && $user->user_type == "sponsor") || (empty($sponsor) && $user->user_type == "student") )
@@ -64,7 +118,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div>	
 
 @endsection
 

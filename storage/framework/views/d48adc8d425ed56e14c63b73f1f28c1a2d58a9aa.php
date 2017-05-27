@@ -30,27 +30,81 @@
 				
 				<?php endif; ?>
 				<div>
-					<?php if($scholarships->count()>0): ?>
+					<?php if($endscholarships->count()>0 || $openscholarships->count()>0): ?>
 					<h2 class="text-center">Scholarships</h2>
 					<ul class="scholarships">
-					<?php $__currentLoopData = $scholarships; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $scho): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-						<li>
-							<h2 class="first-letter"><?php echo e($scho->scholarship_name[0]); ?></h2>
-							<article>
-								<h2 class="name"><?php echo e($scho->scholarship_name); ?></h2>
-								<?php if(Auth::user()->user_id==$user1->user_id): ?>
-									<div class="btns">
-										<a href="#" class="edit"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
-										<a href="<?php echo e(url('profile sponsor/scholars')); ?>" class="view_scholars"><span class="glyphicon glyphicon-eye-open"></span> Scholars</a>
-									</div>
-								<?php else: ?>
-									<div class="btns">
-										<a href="/profile scholarship/<?php echo e($scho->scholarship_id); ?>" class="view_scholars"><span class="glyphicon glyphicon-eye-open"></span> View</a>
-									</div>
-								<?php endif; ?>
-							</article>
-						</li>
-					<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+					
+					<?php if(!empty($openscholarships)): ?>
+						<h4> Open Scholarships </h4>
+						<?php $__currentLoopData = $openscholarships; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $scho): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+							<li>
+								<h2 class="first-letter"><?php echo e($scho->scholarship_name[0]); ?></h2>
+								<article>
+									<h2 class="name"><?php echo e($scho->scholarship_name); ?></h2>
+									<?php if(Auth::user()->user_id==$user1->user_id): ?>
+										<div class="btns">
+											<a href="#" class="edit"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+											<a href="<?php echo e(url('profile sponsor/scholars')); ?>" class="view_scholars"><span class="glyphicon glyphicon-eye-open"></span> Scholars</a>
+										</div>
+									<?php else: ?>
+										<div class="btns">
+											<a href="/profile scholarship/<?php echo e($scho->scholarship_id); ?>" class="view_scholars"><span class="glyphicon glyphicon-eye-open"></span> View</a>
+										</div>
+									<?php endif; ?>
+								</article>
+							</li>
+						<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+					<?php endif; ?>
+
+					<?php if(!empty($endscholarships)): ?>
+						<h4> Closed Scholarships </h4>
+						<?php $__currentLoopData = $endscholarships; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $scho): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+							<li>
+								<h2 class="first-letter"><?php echo e($scho->scholarship_name[0]); ?></h2>
+								<article>
+									<h2 class="name"><?php echo e($scho->scholarship_name); ?></h2>
+									<?php if(Auth::user()->user_id==$user1->user_id): ?>
+										<div class="btns">
+											<a href="#" class="edit" data-toggle="modal" data-target="#reOpen"><span class="glyphicon glyphicon-pencil"></span> Re-open</a>
+											<a href="<?php echo e(url('profile sponsor/scholars')); ?>" class="view_scholars"><span class="glyphicon glyphicon-eye-open"></span> Scholars</a>
+										</div>
+									<?php else: ?>
+										<div class="btns">
+											<a href="/profile scholarship/<?php echo e($scho->scholarship_id); ?>" class="view_scholars"><span class="glyphicon glyphicon-eye-open"></span> View</a>
+										</div>
+									<?php endif; ?>
+								</article>
+							</li>
+
+							<!-- RE-OPEN MODAL -->
+							<div id="reOpen" class="modal fade" role="dialog">
+							  	<div class="modal-dialog">
+								    <div class="modal-content">
+								      	<div class="modal-header">
+								        	<button type="button" class="close" data-dismiss="modal">&times;</button>
+								        	<h4 class="modal-title">Re-Open <?php echo e($scho->scholarship_name); ?> Application</h4>
+								      	</div>
+								      	<div class="modal-body">
+								        	<form action="/scholarship/reopen" method="get">
+									        	<div class="input-group">
+													<input type="date" name="new_deadline" class="form-control" />
+													<input type="text" name="scholarship_id" value="<?php echo e($scho->scholarship_id); ?>" style="display:none"/>
+										</div>
+								      	<div class="modal-footer">
+													<div class="input-group-btn">
+														<button class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span> Re-Open</button>
+														<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+													</div>
+												</div>
+								        		
+								        	</form>								        	
+								      	</div>
+								    </div>
+							  	</div>
+							</div>
+
+						<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+					<?php endif; ?>
 					</ul>
 					<?php else: ?>
 					<?php if( (empty($sponsor1) && $user->user_type == "sponsor") || (empty($sponsor) && $user->user_type == "student") ): ?>
@@ -62,7 +116,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div>	
 
 <?php $__env->stopSection(); ?>
 
