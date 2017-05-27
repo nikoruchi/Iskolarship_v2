@@ -32,13 +32,14 @@
 				
 				@endif
 				<div>
-					@if($endscholarships->count()>0 || $openscholarships->count()>0)
+					@if(!empty($scholarships))
 					<h2 class="text-center">Scholarships</h2>
 					<ul class="scholarships">
 					
-					@if(!empty($openscholarships))
+					<!-- @if($scholarships->count()>0) -->
 						<h4> Open Scholarships </h4>
-						@foreach($openscholarships as $scho)
+						@foreach($scholarships as $scho)
+							@if($scho->scholarship_deadlineenddate > $currentTime)
 							<li>
 								<h2 class="first-letter">{{$scho->scholarship_name[0]}}</h2>
 								<article>
@@ -55,16 +56,18 @@
 									@endif
 								</article>
 							</li>
+							@endif
 						@endforeach
-					@endif
+					<!-- //@endif -->
 
-					@if(!empty($endscholarships))
+					<!-- @if(!empty($scholarships)) -->
 						<h4> Closed Scholarships </h4>
-						@foreach($endscholarships as $scho)
+						@foreach($scholarships as $scho)
+							@if($scho->scholarship_deadlineenddate < $currentTime)
 							<li>
 								<h2 class="first-letter">{{$scho->scholarship_name[0]}}</h2>
 								<article>
-									<h2 class="name">{{$scho->scholarship_name}}</h2>
+									<h2 class="name">{{$scho->scholarship_name}} </h2>
 									@if(Auth::user()->user_id==$user1->user_id)
 										<div class="btns">
 											<a href="#" class="edit" data-toggle="modal" data-target="#reOpen"><span class="glyphicon glyphicon-pencil"></span> Re-open</a>
@@ -77,7 +80,7 @@
 									@endif
 								</article>
 							</li>
-
+							@endif
 							<!-- RE-OPEN MODAL -->
 							<div id="reOpen" class="modal fade" role="dialog">
 							  	<div class="modal-dialog">
@@ -106,7 +109,7 @@
 							</div>
 
 						@endforeach
-					@endif
+					<!-- @endif -->
 					</ul>
 					@else
 					@if( (empty($sponsor1) && $user->user_type == "sponsor") || (empty($sponsor) && $user->user_type == "student") )
