@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Scholarship;
 use App\Scholar;
 use App\Scholarship;
 use App\User;

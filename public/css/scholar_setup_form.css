@@ -1,0 +1,99 @@
+input{
+	margin: 0.5em 0;
+}
+
+.siblings th{
+	width: 33%;
+	text-align: center;
+	border-left: 1px solid #DDD;
+}
+
+.relatives th{
+	width: 25%;
+	text-align: center;
+	border-left: 1px solid #DDD;
+}
+
+.relatives th:last-child,
+.siblings th:last-child{
+	border-right: 1px solid #DDD;
+}
+
+.sibling-form > div{
+	border-left: 1px solid #DDD;
+	border-bottom: 1px solid #DDD;
+	border-top: 1px solid #DDD;
+	padding: 0;
+}
+
+.sibling-form > div:last-child{
+	border-right: 1px solid #DDD;
+}
+
+.sibling-form > div > input{
+	border: 0;
+	margin: 0;
+	box-shadow: none;
+	font-family: Roboto;
+}
+
+.sibling-form > div > input::placeholder{
+	color: #c8e393!important;
+}
+
+.add-rel,
+.add-sib{
+	background-color: #8cb739;
+	border-radius: 0;
+	font-family: Roboto;
+	color: white;
+}
+
+.house-unit-form{
+	margin-top: 1em;
+}
+
+.other-h-text{
+	width: 25%;
+} 
+
+.things td:not(:first-child){
+	padding: 0!important;
+}
+
+.things th,
+.things td{
+	border: 1px solid #DDD;
+	width: 33.33%;
+}
+
+.thing th{
+	text-align: center;
+}
+
+.things input{
+	margin: 0;
+	width: 100%;
+	border-radius: 0;	
+	box-shadow: none!important;
+	border: 0;
+	/* border-color: white #DDD white #DDD; */
+}
+
+/* .things td:first-child{
+	width: 30%;
+}
+
+.things td:nth-child(2){
+	width: 15%;
+} */
+
+.things td:nth-child(2) input{
+	text-align: center
+}
+
+.btn-setup{
+	margin: auto;
+	max-width: 30%;
+	min-width: 200px;
+}

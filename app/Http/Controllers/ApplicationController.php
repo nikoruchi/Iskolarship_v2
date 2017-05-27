@@ -16,6 +16,8 @@ class ApplicationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    // from student 
     public function avail(Request $request){
        $id = $request->input('app_id');
        $application = Application::find($id);
@@ -24,19 +26,46 @@ class ApplicationController extends Controller
        return redirect()->back();
     }
 
-    public function accept(){
-
-    }
-
-    public function reject(){
-
-    }
-
-   	public function rejectAvail(Request $request){
+    public function rejectAvail(Request $request){
        $id = $request->input('app_id');
        $application = Application::find($id);
        $application->avail_status='reject';
        $application->save();
        return redirect()->back();
-   	}
+    }
+
+    // from sponsor
+    public function accept(Request $request){
+       $id = $request->input('app_id');
+       $application = Application::find($id);
+       $application->accept_status='accept';
+       $application->save();
+       return redirect()->back();
+    }
+
+    public function reject(Request $request){
+       $id = $request->input('app_id');
+       $application = Application::find($id);
+       $application->accept_status='reject';
+       $application->save();
+       return redirect()->back();
+    }
+
+    // remove as scholar
+    public function remove(Request $request){
+       $id = $request->input('app_id');
+       $application = Application::find($id);
+       $application->accept_status='reject';
+       $application->avail_status='reject';
+       $application->save();
+       return redirect()->back();
+    }
+
+    public function viewQuestionaire(){
+        $user_id = Auth::user()->user_id;
+        $user = User::findOrFail($user_id);
+        $stud_id = Scholar::where('user_id','=', $user_id)->pluck('student_id')->first();
+        $student = Scholar::findOrFail($stud_id);
+        return view('registration/scholarship_application', compact('student','user'));
+    }
 }

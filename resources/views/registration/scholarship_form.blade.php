@@ -1,7 +1,7 @@
 @extends('layouts.userTab')
 
 @section('content')
-
+ 
 	<div class="container main-container">
 		<div class="row">
 			<div class="col-sm-8 col-sm-offset-2">
@@ -13,7 +13,11 @@
 							<h2>Details</h2>
 							<input type="text" name="scholarship_name" class="form-control" placeholder="Scholarship Name" />
 							<textarea name="description" class="form-control" placeholder="Description"></textarea>
-							<label class="file-label"><span class="glyphicon glyphicon-download-alt"></span> Upload File<input type="file" name="image" class="form-control"/></label>
+							<div class="deadline">
+								<label>Deadline:</label>
+								<input type="date" name="deadline" placeholder="deadline" class="form-control">
+							</div>
+							<label class="file-label"><span class="glyphicon glyphicon-download-alt"></span> Upload scholarship image<input type="file" name="image" class="form-control"/></label>
 							<!-- <img src="/image/default.jpg" class="uploaded-img" /> -->
 							<!-- <button type="submit" class="btn btn-default next">Next <span class="glyphicon glyphicon-arrow-right"></span></button> -->
 							<hr>

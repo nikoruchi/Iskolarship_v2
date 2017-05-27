@@ -10,6 +10,7 @@ use App\Scholarship;
 use Auth;
 use App\Application;
 use DB;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 class SponsorController extends Controller{
 
@@ -35,12 +36,30 @@ class SponsorController extends Controller{
         $user_id1 = Sponsor::where('sponsor_id','=',$sponsor_id)->pluck('user_id');
         $user1 = User::findOrFail($user_id1);
 
-        $scholarships = Scholarship::where('sponsor_id', "=", $sponsor_id)->orderBy('scholarship_name')->get();
+        $currentTime = Carbon::now()->toDateTimeString();
+
+        // $openscholarships = Scholarship::join('scholarship_deadline','Scholarship.scholarship_id','=','Scholarship_deadline.scholarship_id')
+        //             ->where('Scholarship.sponsor_id','=', $sponsor_id)
+        //             ->where('Scholarship_deadline.scholarship_deadlineenddate','>',$currentTime)
+        //             ->orderBy('Scholarship.scholarship_name','asc')
+        //             ->get();
+        // $endscholarships = Scholarship::join('scholarship_deadline','Scholarship.scholarship_id','=','Scholarship_deadline.scholarship_id')
+        //             ->where('Scholarship.sponsor_id','=', $sponsor_id)
+        //             ->where('Scholarship_deadline.scholarship_deadlineenddate','<',$currentTime)
+        //             ->orderBy('Scholarship.scholarship_name','desc')
+        //             ->first()
+        //             ->get();
+
+        $scholarships = Scholarship::join('scholarship_deadline','Scholarship.scholarship_id','=','Scholarship_deadline.scholarship_id')
+                    ->where('Scholarship.sponsor_id','=', $sponsor_id)
+                    ->orderBy('Scholarship.scholarship_name','desc')
+                    ->distinct('Scholarship_deadline.scholarship_id')
+                    ->get();
 
         $user_id1 = Sponsor::where('sponsor_id','=',$sponsor_id)->pluck('user_id')->first();
         $user1 = User::findOrFail($user_id1);
 
-        return view('profiles.profile_sponsor', compact('sponsor', 'user', 'scholarships', 'user1'));       
+        return view('profiles.profile_sponsor', compact('sponsor', 'user', 'scholarships', 'currentTime', 'user1'));       
     } 
 
     public function viewSearchfromStudent($sponsor_id){
@@ -76,5 +95,23 @@ class SponsorController extends Controller{
         return view('profiles.profile_sponsor', compact('sponsor', 'sponsor1', 'user', 'user1', 'scholarships'));       
     } 
 
+    public function scholars(){
+        $user_id = Auth::user()->user_id;
+        $user = User::findOrFail($user_id);
+        $sponsor_id = $user->user_sponsor->sponsor_id;
+        $sponsor = Sponsor::find($sponsor_id);
+        
+        $scholarships = Scholarship::where('sponsor_id','=',$sponsor_id)->pluck('scholarship_id');
 
+        $officialScholars = Application::whereIn('scholarship_id',$scholarships)
+            ->where('accept_status','=','accept')
+            ->where('avail_status','=','accept')
+            ->get();
+        $pendingApplications = Application::whereIn('scholarship_id',$scholarships)
+            ->where('accept_status','=','pending')
+            ->where('avail_status','=','pending')
+            ->get();
+
+        return view('profiles.scholars', compact('user','officialScholars','pendingApplications','sponsor'));
+    }
 }

@@ -217,65 +217,6 @@ form:not(.navbar-form) .input-group {
     color: #69cc2e;
 }
 
-.radio {
-    display: inline-block;
-    border: 1px solid #AAA;
-    border-radius: 4px;
-}
-
-.radio {
-    margin-right: 10px;
-}
-
-.radio input[type=radio] {
-    display: none;
-}
-
-.radio label {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0;
-    padding: 6px 12px;
-    text-indent: 0;
-}
-
-.radio .circle {
-    display: inline-block;
-    position: relative;
-    width: 1.2em;
-    height: 1.2em;
-    border: 0.2em solid #DDD;
-    border-radius: 50%;
-    transition: 0.25s;
-}
-
-.radio .dot {
-    display: inline-block;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    border-radius: 50%;
-    background-color: #2ecc71;
-    transition: 0.25s;
-    transform: translate(-50%, -50%);
-}
-
-.radio input:checked + .circle {
-    border-color: #6dae27;
-}
-
-.radio input:checked + .circle .dot {
-    width: 0.6em;
-    height: 0.6em;
-}
-
-.radio input:checked ~ .label-text {
-    color: #2ecc71;
-}
-
 .img-80,
 .img-50 {
     margin: auto;

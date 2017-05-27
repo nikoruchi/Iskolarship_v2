@@ -8,7 +8,9 @@
 		<div class="row">
 			<div class="col-sm-8 col-sm-offset-2">
 			
+				
 				@if(!empty($scholarships))
+					<h1> Scholarships </h1>
 					@foreach($scholarships as $scho)
 					<ul class="search-results">
 						<li>
@@ -27,7 +29,9 @@
 					@endforeach
 				@endif
 
+				
 				@if(!empty($sponsors))
+					<h1> Sponsors </h1>
 					@foreach($sponsors as $spon)
 					<ul class="search-results">
 						<li>
@@ -47,7 +51,9 @@
 					@endforeach
 				@endif
 
+				
 				@if(!empty($scholars))
+					<h1> Scholars </h1>
 					@foreach($scholars as $schol)
 					<ul class="search-results">
 						<li>
@@ -65,7 +71,9 @@
 					@endforeach
 				@endif
 
+				
 				@if(!empty($opens))
+					<h1> Open Scholarships </h1>
 					@foreach($opens as $open)
 					<ul class="search-results">
 						<li>
