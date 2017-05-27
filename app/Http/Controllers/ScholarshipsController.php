@@ -1,13 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-use Auth;
+use Auth; 
 use App\User;
 use App\Sponsor;
 use App\Scholar;
 use App\Application;
 use App\Scholarship;
-use Illuminate\Http\Request;
+use Illuminate\Http\Request; 
 use Carbon\Carbon;
 use App\ScholarshipsDeadline;
 
@@ -120,7 +120,7 @@ class ScholarshipsController extends Controller
 
         $currentTime = Carbon::now()->toDateTimeString();
         $deadline = ScholarshipsDeadline::find($scholarship_id)
-                    ->scholarship_deadlineenddate;
+                    ->pluck('scholarship_deadlineenddate');
         // $deadline = ScholarshipsDeadline::find($scholarship_id)
                     // ->where('scholarship_deadlineenddate','<',$currentTime)->get();
         // dd($deadline); 
@@ -144,7 +144,7 @@ class ScholarshipsController extends Controller
 
         $currentTime = Carbon::now()->toDateTimeString();
         $deadline = ScholarshipsDeadline::where('scholarship_id','=',$scholarship_id)
-            ->scholarship_deadlineenddate;
+            ->pluck('scholarship_deadlineenddate');
 
         return view('/profiles/profile_scholarship', compact('sponsor','user','scholarship', 'deadline', 'currentTime', 'specifications','grants','scholars'));
 

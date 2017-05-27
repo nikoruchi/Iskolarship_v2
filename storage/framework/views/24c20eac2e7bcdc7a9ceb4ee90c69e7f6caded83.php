@@ -7,6 +7,7 @@
 		<div class="row">
 			<div class="col-sm-8 col-sm-offset-2">
 			
+				<h1> Scholarships </h1>
 				<?php if(!empty($scholarships)): ?>
 					<?php $__currentLoopData = $scholarships; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $scho): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 					<ul class="search-results">
@@ -27,6 +28,7 @@
 					<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 				<?php endif; ?>
 
+				<h1> Sponsors </h1>
 				<?php if(!empty($sponsors)): ?>
 					<?php $__currentLoopData = $sponsors; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $spon): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 					<ul class="search-results">
@@ -47,6 +49,7 @@
 					<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 				<?php endif; ?>
 
+				<h1> Scholars </h1>
 				<?php if(!empty($scholars)): ?>
 					<?php $__currentLoopData = $scholars; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $schol): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 					<ul class="search-results">
@@ -65,12 +68,14 @@
 					<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 				<?php endif; ?>
 
+				<h1> Open Scholarships </h1>
 				<?php if(!empty($opens)): ?>
 					<?php $__currentLoopData = $opens; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $open): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 					<ul class="search-results">
 						<li>
 							<!-- Image of the scholarship is placed here. -->
 							<!-- The H2 here is just a place holder -->
+
 							<h2 class="first-letter"><?php echo e($open->scholarship_name[0]); ?></h2>
 							<article>
 								<h2 class="name"> <?php echo e($open->scholarship_name); ?> </h2>
