@@ -43,7 +43,7 @@ class HomeController extends Controller
         $user_id = Auth::user()->user_id;
         $user = User::findOrFail($user_id);
         
-        $stud_id = Scholar::where('user_id','=', $user_id)->pluck('student_id');
+        $stud_id = Scholar::where('user_id','=', $user_id)->pluck('student_id')->first();
         $student = Scholar::findOrFail($stud_id);
 
         return view('home', compact('student', 'user'));

@@ -1,38 +1,12 @@
 $(document).ready(function(){
 	$(document).on("click", ".unreadbtn", unread);
-});
-
-
-$(document).ready(function(){
 	$(document).on("click",".readbtn",read);
-})
-
-$(document).ready(function(){
 	$(document).on("click",".allbtn",all);
-})
-
-$(document).ready(function(){
 	$(document).on("click",".compose", writeMessage);
-})
-
-$(document).ready(function(){
 	$(document).on("click",".delete", deleteMessage);
-})
-
-$(document).ready(function(){
 	$(document).on("click",".clickable", seeFullMessage);
-})
-
-$(document).ready(function(){
 	$(document).on("click",".mark", markAsRead);
-})
-
-$(document).ready(function(){
 	$(document).on("click",".not-clickable", notClickable);
-})
-
-
-$(document).ready(function(){
 	$(document).on("click", ".reply", sendReply);
 })
 
@@ -54,8 +28,6 @@ $(document).ready(function(){
 	});
 })
 
-
-
 function seeFullMessage(e){
 	e.preventDefault();
 	var id = $(this).attr("data-pg");
@@ -65,12 +37,13 @@ function seeFullMessage(e){
 		type: "GET",
 		data: {id:id},
 		success:function(data){
+			console.log(data);
+			// for()
 			$.each(data, function(key,value){
-
-				if(value['user']==value['sender']){
-					msgs+= '<div class="panel panel-default">pasok';
+				if(value['user']==value['sender']){ 
+					msgs+= '<div class="panel panel-success">';
 				} else {
-					msgs+= '<div class="panel panel-warning">no';
+					msgs+= '<div class="panel panel-danger">';
 				}
 				msgs+= '<div class="panel-body">';
 				msgs+= '<p class="message-sender">' + value['sender_name'] + '</p>';
@@ -97,7 +70,11 @@ function sendReply(){
 		data: {'text':text, 'id':id},
 		success:function(data){
 			$.each(data, function(key,value){
-				msgs+= '<div class="panel panel-default">';
+				if(value['user']==value['sender']){ 
+					msgs+= '<div class="panel panel-success">';
+				} else {
+					msgs+= '<div class="panel panel-danger">';
+				}
 				msgs+= '<div class="panel-body">';
 				msgs+= '<p class="message-sender">' + value['sender_name'] + '</p>';
 				msgs+= '<p class="message-content">' + value['content'] + '</p>';
@@ -127,10 +104,15 @@ function unread(e){
 			console.log(data);
 			$.each(data, function(key,value){
 				msgs+= '<li class="message clickable mark" data-pg="'+value['id']+'">';
+				if(value['user']==value['sender']){ 
+					msgs+= '<div class="panel panel-success">';
+				} else {
+					msgs+= '<div class="panel panel-danger">';
+				}
 				msgs+= '<div class="panel panel-default">';
 				msgs+= '<div class="panel-body">';
 				msgs+= '<form class="select-form">';
-				msgs+= '<input type="checkbox" name="messages[]" value="'+value['id']+'" class="not-clickable select"/>';
+				msgs+= '<input type="checkbox" name="messages[]" value="'+value['id']+'" class="cbox not-clickable select"/>';
 				msgs+= '</form>';
 				msgs+= '<p class="from"><strong>' + value['sender']+ '</strong></p>';
 				msgs+= '<p class="message-content">' + value['content'] + '</p>';
@@ -166,10 +148,14 @@ function read(e){
 			console.log(data);
 			$.each(data, function(key,value){
 				msgs+= '<li class="message clickable" data-pg="'+value['id']+'">';
-				msgs+= '<div class="panel panel-default">';
+				if(value['user']==value['sender']){ 
+					msgs+= '<div class="panel panel-success">';
+				} else {
+					msgs+= '<div class="panel panel-danger">';
+				}
 				msgs+= '<div class="panel-body">';
 				msgs+= '<form class="select-form" id="formDel">';
-				msgs+= '<input type="checkbox" name="messages[]" value="'+value['id']+'" class="not-clickable select"/>';
+				msgs+= '<input type="checkbox" name="messages[]" value="'+value['id']+'" class="cbox not-clickable select"/>';
 				msgs+= '</form>';
 				msgs+= '<p class="from"><strong>' + value['sender']+ '</strong></p>';
 				msgs+= '<p class="message-content">' + value['content'] + '</p>';
@@ -195,10 +181,13 @@ function all(){
 			var msgs = "";
 			$.each(data, function(key,value){
 				msgs+= '<li class="message clickable" data-pg="'+value['id']+'">';
-				msgs+= '<div class="panel panel-default">';
-				msgs+= '<div class="panel-body">';
+				if(value['user']==value['sender']){ 
+					msgs+= '<div class="panel panel-success">';
+				} else {
+					msgs+= '<div class="panel panel-danger">';
+				}				msgs+= '<div class="panel-body">';
 				msgs+= '<form class="select-form">';
-				msgs+= '<input type="checkbox" name="messages[]" value="'+value['id']+'" class="not-clickable select"/>';
+				msgs+= '<input type="checkbox" name="messages[]" value="'+value['id']+'" class="cbox not-clickable select"/>';
 				msgs+= '</form>';
 				msgs+= '<p class="from"><strong>' + value['sender']+ '</strong></p>';
 				msgs+= '<p class="message-content">' + value['content'] + '</p>';
@@ -233,23 +222,37 @@ function writeMessage(e){
 	})
 }
 
-
-
 function deleteMessage(e){
 	e.preventDefault();
-	console.log("delete");
-	var arr = [];
-       $('.ads_Checkbox:checked').each(function () {
-           arr[i++] = $(this).val();
-       });
-    console.log(arr);
-	console.log("data: " + datas);
+	var values = [];
+	$(".cbox:checked").each(function () {
+		values.push($(this).val());
+     });
+	console.log(values);
 	$.ajax({
 		url: "/messages/delete",
-		type: "DELETE",
-		data: $('not-clickable:checked').serialize(),
+		type: "GET",
+		data: {ids:values},
 		success:function(data){
-			console.log(data);
+			var msgs = "";
+			$.each(data, function(key,value){
+				msgs+= '<li class="message clickable" data-pg="'+value['id']+'">';
+				if(value['user']==value['sender']){ 
+					msgs+= '<div class="panel panel-success">';
+				} else {
+					msgs+= '<div class="panel panel-danger">';
+				}				msgs+= '<div class="panel-body">';
+				msgs+= '<form class="select-form">';
+				msgs+= '<input type="checkbox" name="messages[]" value="'+value['id']+'" class="cbox not-clickable select"/>';
+				msgs+= '</form>';
+				msgs+= '<p class="from"><strong>' + value['sender']+ '</strong></p>';
+				msgs+= '<p class="message-content">' + value['content'] + '</p>';
+				msgs+= '<p class="time-stamp">' + value['timestamp'] +'</p>';
+				msgs+= '</div>';
+				msgs+= '</div>';
+				msgs+= '</li>';
+			});
+			$("#messages-container").html(msgs);
 		}
 	})
 }

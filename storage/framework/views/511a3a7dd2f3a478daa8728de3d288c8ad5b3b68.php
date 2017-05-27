@@ -47,13 +47,13 @@
 								<div class="panel panel-default">
 									<div class="panel-body">
 										<form class="select-form" id="formDel">
-											<input name="messages[]" data-id="<?php echo e($message->msg_id); ?>" type="checkbox" class="not-clickable select"/>
+											<input name="messages[]" data-id="<?php echo e($message->msg_id); ?>" type="checkbox" class="not-clickable select cbox" value="<?php echo e($message->msg_id); ?>"/>
 										</form>
 
 										<?php if(Auth::user()->hasRole('student')): ?>
-										<p class="from"><strong><?php echo e($message->sponsorsender->sponsor_fname); ?></strong></p>
+										<p class="from"><strong><?php echo e($message->msg_sender); ?></strong></p>
 										<?php elseif(Auth::user()->hasRole('sponsor')): ?>
-										<p class="from"><strong><?php echo e($message->studentsender->student_fname); ?></strong></p>
+										<p class="from"><strong><?php echo e($message->msg_sender); ?></strong></p>
 										<?php endif; ?>
 										<p class="message-content"><?php echo e($message->msg_content); ?></p>
 										<p class="time-stamp"><?php echo e($message->created_at->diffForHumans()); ?></p>

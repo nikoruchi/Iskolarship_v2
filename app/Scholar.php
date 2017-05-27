@@ -53,6 +53,6 @@ class Scholar extends Model
     }
 
      public function studentsentmessages(){
-        return $this->hasMany('App\Message', 'user_id', 'msg_sender');
+        return $this->hasMany('Message', 'msg_sender', 'user_id');
     }
 }
