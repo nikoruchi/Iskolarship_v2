@@ -37,10 +37,10 @@ class ScholarshipsController extends Controller
     {
         $user_id = Auth::user()->user_id;
         $user = User::findOrFail($user_id);
-        $sponsor_id = Sponsor::where('user_id','=', $user_id)->pluck('sponsor_id')->first();
+        $sponsor_id = Sponsor::where('user_id','=', $user_id)->pluck('sponsor_id');
         $sponsor = Sponsor::find($sponsor_id);
 
-        return view('registration.scholarship_form', compact('user', 'sponsor', 'sponsor_id')); 
+        return view('registration.scholarship_form', compact('user', 'sponsor', 'sponsor_id', 'user_id')); 
     }
 
 
@@ -103,8 +103,9 @@ class ScholarshipsController extends Controller
         $user_id = Auth::user()->user_id;
         $user = User::findOrFail($user_id);
         $stud_id = Scholar::where('user_id','=', $user_id)->pluck('student_id')->first();
+
         $student = Scholar::findOrFail($stud_id);
-        
+
         $scholarship = Scholarship::find($scholarship_id);
         $specifications = Scholarship::find($scholarship_id)->specifications;
         $grants = Scholarship::find($scholarship_id)->grants;
@@ -119,6 +120,10 @@ class ScholarshipsController extends Controller
                     ->count();
 
         $currentTime = Carbon::now()->toDateTimeString();
+
+
+        $deadline = ScholarshipsDeadline::find($scholarship_id)->first()
+                    ->scholarship_deadlineenddate;
 
         $deadline = ScholarshipsDeadline::where('scholarship_id','=',$scholarship_id)
             ->first()->scholarship_deadlineenddate;     
@@ -145,6 +150,5 @@ class ScholarshipsController extends Controller
             ->first()->scholarship_deadlineenddate;
 
         return view('/profiles/profile_scholarship', compact('sponsor','user','scholarship', 'deadline', 'currentTime', 'specifications','grants','scholars'));
-
     }
 }
