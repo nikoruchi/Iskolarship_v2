@@ -44,12 +44,15 @@ class Scholar extends Model
     // protected $hidden = [
     //     'password', 'remember_token',
     // ];
-    public function student()
-    {
+    public function student(){
         return $this->belongsTo('App\User', 'user_id');
     }
 
     public function application(){
         return $this->hasMany('App\Application', 'student_id');
+    }
+
+     public function studentsentmessages(){
+        return $this->hasMany('Message', 'msg_sender', 'user_id');
     }
 }

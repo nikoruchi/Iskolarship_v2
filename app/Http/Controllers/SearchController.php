@@ -105,7 +105,7 @@ class SearchController extends Controller
         $user_id = Auth::user()->user_id;
         $user = User::findOrFail($user_id);
         
-        $spon_id = Sponsor::where('user_id','=', $user_id)->pluck('sponsor_id');
+        $spon_id = Sponsor::where('user_id','=', $user_id)->pluck('sponsor_id')->first();
         $sponsor = Sponsor::findOrFail($spon_id);
 
         if($keyword != ''){
