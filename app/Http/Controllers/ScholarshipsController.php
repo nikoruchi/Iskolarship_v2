@@ -41,27 +41,32 @@ class ScholarshipsController extends Controller
         $scholarship->scholarship_logo='default_logo';
         $scholarship->save();
 
-        for(i=0;i<grants.length;i++){
+        $lastId = $scholarship->scholarship_id;
+
+        $deadline = new ScholarshipsDeadline;
+        $deadline->scholarship_id=$lastId;
+        
+
+        for($i=0;$i<grants.length;$i++){
             $grant = new ScholarshipGrant;
-            $lastId = $scholarship->scholarship_id;
             $grant->scholarship_id = $lastId;
-            $grant->scholarship_grantDesc=$grants[i];
+            $grant->scholarship_grantDesc=$grants[$i];
             $grant->save();
         }
 
-        for(i=0;i<specs.length;i++){
+        for($i=0;$i<specs.length;$i++){
             $spec = new ScholarshipSpecification;
             $lastId = $scholarship->scholarship_id;
-            $spec->scholarship_id = $lastId;
-            $spec->scholarship_specDesc=$specs[i];
+            // $spec->scholarship_id = $lastId;
+            $spec->scholarship_specDesc=$specs[$i];
             $spec->save();
         }
 
-        for(i=0;i<questions.length;i++){
+        for($i=0;$i<questions.length;$i++){
             $question = new EssayQuestions;
             $lastId = $scholarship->scholarship_id;
-            $question->scholarship_id = $lastId;
-            $question->essay_question=$questions[i];
+            // $question->scholarship_id = $lastId;
+            $question->essay_question=$questions[$i];
             $question->save();
         }
     }

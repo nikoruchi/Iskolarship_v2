@@ -16,6 +16,12 @@ function createForm(e){
 	
 	details.push($('#scholarship_name').val());
 	details.push($('#description').val());
+	details.push($('#deadline').val());
+	// console.log($('#deadline').val());
+	// date = $('#deadline').val();
+
+	// newdate = new Date(date);
+	// console.log(newdate);
 	console.log(details)
 	console.log(grantSpec);
 	console.log(specsSpec);

@@ -13,11 +13,11 @@
 							<h2>Details</h2>
 							<input type="text" name="scholarship_name" id="scholarship_name" class="form-control" placeholder="Scholarship Name" />
 							<textarea name="description" id="description" class="form-control" placeholder="Description"></textarea>
-							<label class="file-label"><span class="glyphicon glyphicon-download-alt"></span> Upload File<input type="file" name="image" class="form-control"/></label>
+							<!-- <label class="file-label"><span class="glyphicon glyphicon-download-alt"></span> Upload File<input type="file" name="image" class="form-control"/></label> -->
 
 							<div class="deadline">
 								<label>Deadline:</label>
-								<input type="date" name="deadline" placeholder="deadline" class="form-control">
+								<input type="date" name="deadline" id="deadline" placeholder="deadline" class="form-control">
 							</div>
 							<label class="file-label"><span class="glyphicon glyphicon-download-alt"></span> Upload scholarship image<input type="file" name="image" class="form-control"/></label>
 
