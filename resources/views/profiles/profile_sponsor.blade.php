@@ -44,7 +44,7 @@
 								<h2 class="first-letter">{{$scho->scholarship_name[0]}}</h2>
 								<article>
 									<h2 class="name">{{$scho->scholarship_name}}</h2>
-									<h6><b> Application Deadline: </b><i> {{$scho->scholarship_deadlineenddate}} </i></h6>
+									<h6><b> Application Deadline: </b><i> {{date('m/d/Y', strtotime($scho->scholarship_deadlineenddate))}} </i></h6>
 									@if(Auth::user()->user_id==$user1->user_id)
 										<div class="btns">
 											<a href="#" class="edit"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
@@ -69,7 +69,7 @@
 								<h2 class="first-letter">{{$scho->scholarship_name[0]}}</h2>
 								<article>
 									<h2 class="name">{{$scho->scholarship_name}} </h2>
-									<h6> <b> Application Period: </b> <i> {{$scho->scholarship_deadlinestartdate}} - {{$scho->scholarship_deadlineenddate}} </i> </h6>
+									<h6> <b> Application Period: </b> <i> {{date('m/d/Y', strtotime($scho->scholarship_deadlinestartdate))}} - {{date('m/d/Y', strtotime($scho->scholarship_deadlineenddate))}} </i> </h6>
 									@if(Auth::user()->user_id==$user1->user_id)
 										<div class="btns">
 											<a href="javascript:void(0)" data-target="#reOpen{{$scho->scholarship_id}}" data-pg="{{$scho->scholarship_id}}" class="edit" data-toggle="modal"><span class="glyphicon glyphicon-pencil"></span> Re-open</a>
