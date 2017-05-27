@@ -26,27 +26,35 @@ class ScholarshipsController extends Controller
 
 
     public function createScholarship(Request $request){
- 
+        $currentTime = Carbon::now()->toDateTimeString();
         $details = $request->details;
         $grants = $request->grants;
         $specs = $request->specifications;
         $questions = $request->questions;
+
         $user_id = Auth::user()->user_id;
         $sponsor_id = Sponsor::where('user_id','=',$user_id)->pluck('sponsor_id')->first();
-       
+
+
         $scholarship = new Scholarship;
         $scholarship->sponsor_id = $sponsor_id;
         $scholarship->scholarship_name = $details[0];
-        $scholarship->scholarship_description = $details[1];
+        $scholarship->scholarship_desc = $details[1];
+
         $scholarship->scholarship_logo='default_logo';
         $scholarship->save();
+        
+        // return $scholarship;
 
         $lastId = $scholarship->scholarship_id;
-
+        // return $lastId;
         $deadline = new ScholarshipsDeadline;
         $deadline->scholarship_id=$lastId;
+        $deadline->scholarship_deadlinestartdate=$currentTime;
+        $deadline->scholarship_deadlineenddate=$details[2];
+        $deadline->save();
+        return $deadline;
         
-
         for($i=0;$i<grants.length;$i++){
             $grant = new ScholarshipGrant;
             $grant->scholarship_id = $lastId;
@@ -69,6 +77,8 @@ class ScholarshipsController extends Controller
             $question->essay_question=$questions[$i];
             $question->save();
         }
+
+        return redirect('/profile scholarship/$lastId');
     }
  
     public function scholarshipStudent($scholarship_id){
