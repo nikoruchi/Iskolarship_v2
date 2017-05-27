@@ -42,6 +42,7 @@
 								<h2 class="first-letter"><?php echo e($scho->scholarship_name[0]); ?></h2>
 								<article>
 									<h2 class="name"><?php echo e($scho->scholarship_name); ?></h2>
+									<h6><b> Application Deadline: </b><i> <?php echo e($scho->scholarship_deadlineenddate); ?> </i></h6>
 									<?php if(Auth::user()->user_id==$user1->user_id): ?>
 										<div class="btns">
 											<a href="#" class="edit"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
@@ -66,9 +67,10 @@
 								<h2 class="first-letter"><?php echo e($scho->scholarship_name[0]); ?></h2>
 								<article>
 									<h2 class="name"><?php echo e($scho->scholarship_name); ?> </h2>
+									<h6> <b> Application Period: </b> <i> <?php echo e($scho->scholarship_deadlinestartdate); ?> - <?php echo e($scho->scholarship_deadlineenddate); ?> </i> </h6>
 									<?php if(Auth::user()->user_id==$user1->user_id): ?>
 										<div class="btns">
-											<a href="#" class="edit" data-toggle="modal" data-target="#reOpen"><span class="glyphicon glyphicon-pencil"></span> Re-open</a>
+											<a href="javascript:void(0)" data-target="#reOpen<?php echo e($scho->scholarship_id); ?>" data-pg="<?php echo e($scho->scholarship_id); ?>" class="edit" data-toggle="modal"><span class="glyphicon glyphicon-pencil"></span> Re-open</a>
 											<a href="<?php echo e(url('profile sponsor/scholars')); ?>" class="view_scholars"><span class="glyphicon glyphicon-eye-open"></span> Scholars</a>
 										</div>
 									<?php else: ?>
@@ -78,9 +80,9 @@
 									<?php endif; ?>
 								</article>
 							</li>
-							<?php endif; ?>
+							
 							<!-- RE-OPEN MODAL -->
-							<div id="reOpen" class="modal fade" role="dialog">
+							<div id="reOpen<?php echo e($scho->scholarship_id); ?>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
 							  	<div class="modal-dialog">
 								    <div class="modal-content">
 								      	<div class="modal-header">
@@ -88,8 +90,10 @@
 								        	<h4 class="modal-title">Re-Open <?php echo e($scho->scholarship_name); ?> Application</h4>
 								      	</div>
 								      	<div class="modal-body">
-								        	<form action="/scholarship/reopen" method="get">
+
+								        	<form action="/scholarship/reopen/<?php echo e($scho->scholarship_id); ?>" method="get">
 									        	<div class="input-group">
+									        		<p> <?php echo e($scho->scholarship_id); ?> <?php echo e($scho->scholarship_name); ?> </p>
 													<input type="date" name="new_deadline" class="form-control" />
 													<input type="text" name="scholarship_id" value="<?php echo e($scho->scholarship_id); ?>" style="display:none"/>
 										</div>
@@ -106,6 +110,7 @@
 							  	</div>
 							</div>
 
+							<?php endif; ?>
 						<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 					<!-- <?php endif; ?> -->
 					</ul>

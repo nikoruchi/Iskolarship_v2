@@ -151,7 +151,7 @@ class ScholarshipsController extends Controller
         return view('/profiles/profile_scholarship', compact('sponsor','user','scholarship', 'deadline', 'currentTime', 'specifications','grants','scholars'));
     } 
 
-    public function reopenScholarship(){
+    public function reopenScholarship($scholarship_id){
         $user_id = Auth::user()->user_id;
         $user = User::findOrFail($user_id);
         $spon_id = Sponsor::where('user_id','=', $user_id)->pluck('sponsor_id')->first();

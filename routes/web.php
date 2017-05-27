@@ -160,4 +160,5 @@ Route::get("/profile sponsor/{sponsor_id}", function($sponsor_id){
 //     }
 // });
 
-Route::get('/scholarship/reopen', 'ScholarshipsController@reopenScholarship');
+Route::get('/profile_sponsor/{scholarship_id}', 'SponsorController@profileCont');
+Route::get('/scholarship/reopen/{scholarship_id}', 'ScholarshipsController@reopenScholarship');

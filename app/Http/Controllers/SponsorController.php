@@ -12,6 +12,7 @@ use App\Application;
 use DB;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
+use App\ScholarshipsDeadline;
 class SponsorController extends Controller{
 
      public function viewHome(){
@@ -30,7 +31,7 @@ class SponsorController extends Controller{
         $user_id = Auth::user()->user_id;
         $user = User::findOrFail($user_id);
 
-        $sponsor_id = Sponsor::where('user_id','=', $user_id)->pluck('sponsor_id')->first();
+        $sponsor_id = Sponsor::where('user_id','=', $user_id)->pluck('sponsor_id');
         $sponsor = Sponsor::find($sponsor_id);
 
         $user_id1 = Sponsor::where('sponsor_id','=',$sponsor_id)->pluck('user_id');
@@ -54,6 +55,7 @@ class SponsorController extends Controller{
                     ->where('Scholarship.sponsor_id','=', $sponsor_id)
                     ->orderBy('Scholarship.scholarship_name','desc')
                     ->distinct('Scholarship_deadline.scholarship_id')
+                    ->select('Scholarship_deadline.scholarship_id','Scholarship.scholarship_name','Scholarship_deadline.scholarship_deadlineenddate','Scholarship_deadline.scholarship_deadlinestartdate')
                     ->get();
 
         $user_id1 = Sponsor::where('sponsor_id','=',$sponsor_id)->pluck('user_id')->first();
@@ -114,4 +116,21 @@ class SponsorController extends Controller{
 
         return view('profiles.scholars', compact('user','officialScholars','pendingApplications','sponsor'));
     }
+
+    public function profileCont($scholarship_id){
+        var_dump($scholarship_id);
+        $user_id = Auth::user()->user_id;
+        $user = User::findOrFail($user_id);
+        $sponsor_id = $user->user_sponsor->sponsor_id;
+        $sponsor = Sponsor::find($sponsor_id);
+        
+        $inbox = Scholarship::join('scholarship_deadline','Scholarship.scholarship_id','=','Scholarship_deadline.scholarship_id')
+                    ->where('Scholarship.sponsor_id','=', $sponsor_id)
+                    ->where('Scholarship_deadline.scholarship_id','=',$scholarship_id)
+                    ->get();
+
+        $scholarships = $this->scholarships($inbox);
+        return $scholarships;
+    }
+
 }
