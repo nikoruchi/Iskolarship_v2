@@ -23,6 +23,7 @@
 			</div>
 		</div>
 		<div class="row">
+			<h2 class="text-center">Scholarship Suggestions</h2>
 			<div class="col-sm-8 col-sm-offset-2">
 			@foreach($scholarships as $scho)
 				<ul class="search-results">

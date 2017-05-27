@@ -27,6 +27,7 @@ Route::post('/registration/Student', 'ScholarAuthController@Validation');
 Route::post('/registration/Sponsor', 'SponsorAuthController@Validation');
 //============================ CHECKERS =========================
 // This will be changed as soon as auth and middleware is added
+
 // Route::get('/home', ['middleware']=>'sponsor','uses'=>'HomeController@homeSponsor']);
 // Route::get('/home', 'HomeController@homeGuests');
 Route::get('/profile scholar', 'ScholarController@viewProfile');
@@ -65,8 +66,6 @@ Route::get("/profile scholarship/{scholarship_id}", function($scholarship_id){
 });
 
 //=============== FOR FRONT-END PURPOSES =======================
-
-
 Route::get('/scholarship form', 'ScholarshipsController@createForm'); 
 Route::get('/notifications', 'NotificationsController@viewNotifications');
 Route::get('/scholar setup', 'ProfileSetupController@viewSetup');
@@ -88,6 +87,11 @@ Route::post('/Sponsor/upload', 'EditProfileController_Sponsor@upload');
 
 
 // MESSAGES
+
+
+Route::get('/scholarship form/create', 'ScholarshipsController@createScholarship');
+
+
 Route::get("/messages", function(){
     switch(Auth::user()->user_type){
         case 'sponsor':
@@ -100,21 +104,19 @@ Route::get("/messages", function(){
     }
 });
 
-Route::get('/messages/read', ['middleware'=>'isguest','uses'=>'MessagesController@getReadMsg']);
+Route::group(['middleware' => 'isguest'], function(){
 
-Route::get('/messages/unread', ['middleware'=>'isguest','uses'=>'MessagesController@getUnReadMsg']);
-
-Route::get('/messages/inbox', ['middleware'=>'isguest','uses'=>'MessagesController@getAllMsg']);
-
-Route::post('/messages/send', ['middleware'=>'isguest','uses'=>'MessagesController@send']);
-
-Route::get('/messages/thread', ['middleware'=>'isguest','uses'=>'MessagesController@showThread']);
-
-Route::get('/messages/compose', ['middleware'=>'isguest','uses'=>'MessagesController@compose']);
-
-Route::delete('/messages/delete', ['middleware'=>'isguest','uses'=>'MessagesController@destroy']);
-
-Route::post('/messages/reply', ['middleware'=>'isguest','uses'=>'MessagesController@sendreply']);
+    Route::get('/messages/read', 'MessagesController@getReadMsg');
+    Route::get('/messages/unread', 'MessagesController@getUnReadMsg');
+    Route::get('/messages/inbox', 'MessagesController@getAllMsg');
+    Route::post('/messages/send', 'MessagesController@send');
+    Route::get('/messages/thread', 'MessagesController@showThread');
+    Route::get('/messages/compose', 'MessagesController@compose');
+    Route::get('/messages/reply', 'MessagesController@sendreply');
+    Route::get('/messages/mark', 'MessagesController@readMessage'); 
+    Route::get('/getlessons/{lesson_id}/{page_number}', 'LessonController@getPage');
+    Route::get('/messages/delete', 'MessagesController@destroy');
+});
 
 
 // APPLICATION STATUS CHANGES
