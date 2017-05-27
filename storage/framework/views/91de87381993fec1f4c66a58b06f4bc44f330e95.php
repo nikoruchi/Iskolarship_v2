@@ -65,8 +65,16 @@
 									<small><?php echo e($scholar->scholarship->scholarship_name); ?></small>
 								</h2>
 								<div class="btns">
+
 									<a href="/profile scholar/<?php echo e($scholar->scholar->student_id); ?>" class="view"><span class="glyphicon glyphicon-eye-open"></span> View</a>
-									<a href="#" class="reject"><span class="glyphicon glyphicon-remove"></span> Remove</a>
+
+									<form method="post" action="/scholars/remove">
+											<?php echo e(csrf_field()); ?>
+
+										<input type="hidden" value="<?php echo e($scholar->application_id); ?>" name="app_id" />
+										<button type="submit" class="reject"><span class="glyphicon glyphicon-remove"></span> Remove</button>
+									</form>
+
 								</div>
 							</article>
 						</li>

@@ -50,4 +50,14 @@ class ApplicationController extends Controller
        $application->save();
        return redirect()->back();
     }
+
+    // remove as scholar
+    public function remove(Request $request){
+       $id = $request->input('app_id');
+       $application = Application::find($id);
+       $application->accept_status='reject';
+       $application->avail_status='reject';
+       $application->save();
+       return redirect()->back();
+    }
 }

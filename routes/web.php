@@ -33,8 +33,6 @@ Route::get('/profile scholar', 'ScholarController@viewProfile');
 Route::get('/profile scholar/{student_id}', 'ProfileController@profileNotStudent');
 Route::get('/profile sponsor', 'SponsorController@viewProfile');
 Route::get('/profile sponsor/scholars', 'SponsorController@scholars');
-
-
 	
 // will change into something more elegant. band aid solution
 Route::get("/home", function(){
@@ -68,12 +66,8 @@ Route::get("/profile scholarship/{scholarship_id}", function($scholarship_id){
 
 //=============== FOR FRONT-END PURPOSES =======================
 
-<<<<<<< HEAD
-Route::get('/scholarship form', 'ScholarshipsController@createForm');
-=======
-Route::get('/scholarship form', 'ScholarshipsController@createForm'); 
 
->>>>>>> dc7ef099c3bb8bb9e9a1479e54e9fe7239ec3e0b
+Route::get('/scholarship form', 'ScholarshipsController@createForm'); 
 Route::get('/notifications', 'NotificationsController@viewNotifications');
 Route::get('/scholar setup', 'ProfileSetupController@viewSetup');
 Route::get('/scholar setup form', 'ProfileSetupController@viewSetupForm');
@@ -122,12 +116,9 @@ Route::group(['middleware' => 'isguest'], function(){
 Route::post('/application/avail','ApplicationController@avail');
 Route::post('/application/rejectAvail','ApplicationController@rejectAvail');
 Route::post('/application/accept','ApplicationController@accept');
-<<<<<<< HEAD
 Route::post('/application/reject', 'ApplicationController@reject');
-=======
+Route::post('/scholars/remove', 'ApplicationController@remove');
 
-Route::post('/application/reject', 'ApplicationController@reject'); 
->>>>>>> dc7ef099c3bb8bb9e9a1479e54e9fe7239ec3e0b
 
 // for SEARCH THINGY
 Route::get("/search", function(){
