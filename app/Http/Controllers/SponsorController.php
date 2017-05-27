@@ -77,9 +77,28 @@ class SponsorController extends Controller{
         $sponsor_id1 = Sponsor::where('sponsor_id','=', $sponsor_id)->pluck('sponsor_id');
         $sponsor = Sponsor::find($sponsor_id1);
 
-        $scholarships = Scholarship::where('sponsor_id', "=", $sponsor_id1)->orderBy('scholarship_name')->get();
+        $currentTime = Carbon::now()->toDateTimeString();
 
-        return view('profiles.profile_sponsor', compact('sponsor', 'student', 'user', 'scholarships'));       
+        //$scholarships = Scholarship::where('sponsor_id', "=", $sponsor_id1)->orderBy('scholarship_name')->get();
+        $openscholarships = Scholarship::join('scholarship_deadline','Scholarship.scholarship_id','=','Scholarship_deadline.scholarship_id')
+                    ->where('Scholarship.sponsor_id','=', $sponsor_id1)
+                    ->where('Scholarship_deadline.scholarship_deadlineenddate','>',$currentTime)
+                    ->orderBy('Scholarship.scholarship_name','asc')
+                    ->distinct('Scholarship_deadline.scholarship_id')
+                    ->select('Scholarship_deadline.scholarship_id','Scholarship.scholarship_name','Scholarship_deadline.scholarship_deadlineenddate','Scholarship_deadline.scholarship_deadlinestartdate')
+                    ->get();
+        $endscholarships = Scholarship::join('scholarship_deadline','Scholarship.scholarship_id','=','Scholarship_deadline.scholarship_id')
+                    ->where('Scholarship.sponsor_id','=', $sponsor_id1)
+                    ->where('Scholarship_deadline.scholarship_deadlineenddate','<',$currentTime)
+                    ->orderBy('Scholarship.scholarship_name','desc')
+                    ->distinct('Scholarship_deadline.scholarship_id')
+                    ->select('Scholarship_deadline.scholarship_id','Scholarship.scholarship_name','Scholarship_deadline.scholarship_deadlineenddate','Scholarship_deadline.scholarship_deadlinestartdate')
+                    ->get();
+
+        $user_id1 = Sponsor::where('sponsor_id','=',$sponsor_id)->pluck('user_id')->first();
+        $user1 = User::findOrFail($user_id1);
+
+        return view('profiles.profile_sponsor', compact('sponsor', 'student', 'user', 'openscholarships', 'endscholarships', 'currentTime', 'user1'));       
     } 
 
     public function viewSearchfromSponsor($sponsor_id){
