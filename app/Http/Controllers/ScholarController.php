@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Log;
 class ScholarController extends Controller{
 
     public function viewHome(){
-        $scholarships = Scholarship::->orderByRaw("RAND()")
+        $scholarships = Scholarship::orderByRaw("RAND()")
             ->take(5)
             ->get();
 

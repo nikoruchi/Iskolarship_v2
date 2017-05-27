@@ -14,7 +14,9 @@ use Illuminate\Support\Facades\Log;
 class SponsorController extends Controller{
 
      public function viewHome(){
-        $scholarships = Scholarship::all();
+        $scholarships = Scholarship::orderByRaw("RAND()")
+            ->take(5)
+            ->get();
 
         $user_id = Auth::user()->user_id;
         $user = User::findOrFail($user_id);
