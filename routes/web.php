@@ -30,11 +30,15 @@ Route::post('/registration/Sponsor', 'SponsorAuthController@Validation');
 
 // Route::get('/home', ['middleware']=>'sponsor','uses'=>'HomeController@homeSponsor']);
 // Route::get('/home', 'HomeController@homeGuests');
+
 Route::get('/profile scholar', 'ScholarController@viewProfile');
 Route::get('/profile scholar/{student_id}', 'ProfileController@profileNotStudent');
+Route::get('/setup form', 'ProfileSetupController@viewSetupForm');
+Route::get('/setup', 'ProfileSetupController@viewSetup');
+
 Route::get('/profile sponsor', 'SponsorController@viewProfile');
 Route::get('/profile sponsor/scholars', 'SponsorController@scholars');
-	
+  
 // will change into something more elegant. band aid solution
 Route::get("/home", function(){
     switch(Auth::user()->user_type){
@@ -67,11 +71,9 @@ Route::get("/profile scholarship/{scholarship_id}", function($scholarship_id){
 
 //=============== FOR FRONT-END PURPOSES =======================
 
-
 Route::get('/scholarship form', 'ScholarshipsController@createForm'); 
 Route::get('/notifications', 'NotificationsController@viewNotifications');
 Route::get('/scholar setup', 'ProfileSetupController@viewSetup');
-Route::get('/scholar setup form', 'ProfileSetupController@viewSetupForm');
 Route::get('/scholar questionaire', 'ApplicationController@viewQuestionaire');
 
 //=============== END FOR FRONT-END PURPOSES =======================

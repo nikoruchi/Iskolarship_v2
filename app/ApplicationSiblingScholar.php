@@ -17,7 +17,7 @@ class ApplicationSiblingsScholar extends Model
      * @var array
      */
     protected $fillable = [
- 		'application_id',
+ 		'student_id',
     	'sibling_name',
         'sibling_scholarship' ,
         'sibling_courseschool',       

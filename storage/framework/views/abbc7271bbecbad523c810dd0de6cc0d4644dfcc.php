@@ -1,11 +1,10 @@
-@extends('layouts.userTab')
-@section('content')
+<?php $__env->startSection('content'); ?>
 	<div class="container main-container">
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="panel panel-default">
 					<div class="panel-body">
-						<form id="setup-form">
+						<form id="setup_form">
 							<h1 class="text-center">Account Setup</h1>
 							<hr>
 							<h3 class="text-center">Family Background</h3>
@@ -218,12 +217,13 @@
 			</div>
 		</div>
 	</div>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@push('styles')
-	<link rel="stylesheet" type="text/css" href="{{asset('css/scholar_setup_form.css')}}"/>
-@endpush
+<?php $__env->startPush('styles'); ?>
+	<link rel="stylesheet" type="text/css" href="<?php echo e(asset('css/scholar_setup_form.css')); ?>"/>
+<?php $__env->stopPush(); ?>
 
-@push('scripts')
-	<script type="text/javascript" src="{{asset('js/scholar_setup.js')}}"></script>
-@endpush
+<?php $__env->startPush('scripts'); ?>
+	<script type="text/javascript" src="<?php echo e(asset('js/scholar_setup.js')); ?>"></script>
+<?php $__env->stopPush(); ?>
+<?php echo $__env->make('layouts.userTab', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

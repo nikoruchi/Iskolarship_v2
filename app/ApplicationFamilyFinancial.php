@@ -16,7 +16,7 @@ class ApplicationFamilyFinancial extends Model
      * @var array
      */
     protected $fillable = [
- 		'application_id',
+ 		'student_id',
     	'father_employername',
         'father_employeraddress' ,
         'father_AGincome',
