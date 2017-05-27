@@ -14,7 +14,7 @@
 							<input type="text" name="scholarship_name" class="form-control" placeholder="Scholarship Name" />
 							<textarea name="description" class="form-control" placeholder="Description"></textarea>
 							<label class="file-label"><span class="glyphicon glyphicon-download-alt"></span> Upload File<input type="file" name="image" class="form-control"/></label>
-							<img src="#" class="uploaded-img" />
+							<!-- <img src="/image/default.jpg" class="uploaded-img" /> -->
 							<!-- <button type="submit" class="btn btn-default next">Next <span class="glyphicon glyphicon-arrow-right"></span></button> -->
 							<hr>
 							<h2>Grants</h2>

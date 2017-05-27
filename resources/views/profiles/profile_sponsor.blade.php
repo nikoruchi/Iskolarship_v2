@@ -5,7 +5,7 @@
 		<div class="row">
 			<div class="col-sm-8 col-sm-offset-2">
 
-				<img src="/image/{{ $user1->user_imagepath }}" class="img-responsive user-pp img-circle"/>
+				<img src="/image/{{ $user->user_imagepath }}" class="img-responsive user-pp img-circle"/>
 
 				<h1 class="user-name">{{ empty($sponsor1)? $sponsor->sponsor_fname : $sponsor1->sponsor_fname }}</h1>
 				<h2 class="work"> {{  empty($sponsor1)? $sponsor->sponsor_agency : $sponsor1->sponsor_agency }}, {{  empty($sponsor1)? $sponsor->sponsor_job : $sponsor1->sponsor_job }}</h2>
@@ -37,8 +37,6 @@
 					<ul class="scholarships">
 					@foreach($scholarships as $scho)
 						<li>
-							<!-- Image of the scholarship is placed here. -->
-							<!-- The H2 here is just a place holder -->
 							<h2 class="first-letter">{{$scho->scholarship_name[0]}}</h2>
 							<article>
 								<h2 class="name">{{$scho->scholarship_name}}</h2>

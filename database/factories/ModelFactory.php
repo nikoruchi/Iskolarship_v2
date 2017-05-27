@@ -40,7 +40,7 @@ $factory->define(App\Sponsor::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Scholarships::class, function (Faker\Generator $faker) {
+$factory->define(App\Scholarship::class, function (Faker\Generator $faker) {
 
     return [
         'sponsor_id' => App\Sponsor::all()->random()->sponsor_id,
@@ -55,7 +55,7 @@ $factory->define(App\Scholarships::class, function (Faker\Generator $faker) {
 $factory->define(App\ScholarshipGrant::class, function (Faker\Generator $faker) {
 
     return [
-        'scholarship_id' => App\Scholarships::all()->random()->scholarship_id,
+        'scholarship_id' => App\Scholarship::all()->random()->scholarship_id,
         'scholarship_grantDesc' => "Lorem ipsum keme keme keme 8 years shonget at nang at ang matod at.",
     ];
 });
@@ -63,7 +63,7 @@ $factory->define(App\ScholarshipGrant::class, function (Faker\Generator $faker) 
 $factory->define(App\ScholarshipSpecification::class, function (Faker\Generator $faker) {
 
     return [
-        'scholarship_id' => App\Scholarships::all()->random()->scholarship_id,
+        'scholarship_id' => App\Scholarship::all()->random()->scholarship_id,
         'scholarship_specDesc' => "Lorem ipsum keme keme keme 4 years na ang borta sa ano waz jowa.",
     ];
 });
@@ -71,7 +71,7 @@ $factory->define(App\ScholarshipSpecification::class, function (Faker\Generator 
 $factory->define(App\ScholarshipsDeadline::class, function (Faker\Generator $faker) {
 
     return [
-        'scholarship_id' => App\Scholarships::all()->random()->scholarship_id,
+        'scholarship_id' => App\Scholarship::all()->random()->scholarship_id,
         'scholarship_deadlinestartdate' => $faker->dateTimeBetween('+0 days', '+4 days'),
         'scholarship_deadlineenddate' => $faker->dateTimeBetween('+5 days', '+1 week'),
     ];
