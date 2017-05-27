@@ -23,7 +23,23 @@ $(document).ready(function(){
 				msgs+='<h3>' + data.msg_subject + '<span class="email" style="font-size: 15px"> &lt;' + data.user_email +'&gt;</span></h3>';
 				msgs+='<p>'+ data.msg_content + '</p>';
 				$("#compose-form").html(msgs);
-			}
+			},
+			error: function(jqXhr, json, errorThrown){
+		        var errors = JSON.parse( jqXhr.responseText );
+		        var msgs =  document.getElementsByClassName('help-block');
+		       	if(errors.errors['subject']==undefined){
+		       		msgs[0].style.display="none";
+		       	}
+		       	if(errors.errors['to']==undefined){
+		       		msgs[1].style.display="none";
+		       	}
+		       	if(errors.errors['content']==undefined){
+		       		msgs[2].style.display="none";
+		       	}
+		        msgs[0].innerHTML = "<strong>"+errors.errors['subject']+"</strong>";
+		        msgs[1].innerHTML = "<strong>"+ errors.errors['to']+"</strong>";
+		        msgs[2].innerHTML = "<strong>"+ errors.errors['content']+"</strong>";
+		    }
 		})
 	});
 })
@@ -54,6 +70,7 @@ function seeFullMessage(e){
 				
 			});
 			msgs += '<textarea id="reply_message" class="form-control" placeholder="Send a reply!"></textarea>';
+			msgs += '<span id="reply_msg"></span>';
 			msgs += '<button data-pg="'+ id +'"class="pull-right btn btn-primary reply">Reply</button>';
 			$("#compose-form").html(msgs);''
 		}
@@ -83,9 +100,19 @@ function sendReply(){
 				msgs+= '</div>';
 			});
 			msgs += '<textarea id="reply_message" class="form-control" placeholder="Send a reply!"></textarea>';
+			msgs += '<span id="reply_msg"></span>';
 			msgs += '<button data-pg="'+ id +'"class="pull-right btn btn-primary reply">Reply</button>';
 			$("#compose-form").html(msgs);''
-		}
+		},
+			error: function(jqXhr, json, errorThrown){ 
+		        var errors = JSON.parse( jqXhr.responseText );
+		        var msgs =  document.getElementById('reply_msg');
+		        console.log("error: ", errors);
+		       	if(errors.errors['text']==undefined){
+		       		msgs.style.display="none";
+		       	}    
+		        msgs.innerHTML = "<strong>"+ errors.errors['text']+"</strong>";
+		    }
 	})
 }
 

@@ -127,6 +127,10 @@ return [
         'job_title'  => [
             'required'  => 'Please input your job title on the Agency you are currently working for',
         ],
+
+        'text'    => [
+            'required'  => 'Your message needs to have content',
+        ]
     ],
 
     /*
@@ -156,6 +160,7 @@ return [
         'degree_att'    => 'Degree Attained',
         'field'         => 'Study Field',
         'degree_st'     => 'Degree Sought',
+        'to'            => 'email recipient',      
 
     ],
 
