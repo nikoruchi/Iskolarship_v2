@@ -30,13 +30,14 @@
 				
 				<?php endif; ?>
 				<div>
-					<?php if($endscholarships->count()>0 || $openscholarships->count()>0): ?>
+					<?php if(!empty($scholarships)): ?>
 					<h2 class="text-center">Scholarships</h2>
 					<ul class="scholarships">
 					
-					<?php if(!empty($openscholarships)): ?>
+					<!-- <?php if($scholarships->count()>0): ?> -->
 						<h4> Open Scholarships </h4>
-						<?php $__currentLoopData = $openscholarships; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $scho): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+						<?php $__currentLoopData = $scholarships; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $scho): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+							<?php if($scho->scholarship_deadlineenddate > $currentTime): ?>
 							<li>
 								<h2 class="first-letter"><?php echo e($scho->scholarship_name[0]); ?></h2>
 								<article>
@@ -53,16 +54,18 @@
 									<?php endif; ?>
 								</article>
 							</li>
+							<?php endif; ?>
 						<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-					<?php endif; ?>
+					<!-- //<?php endif; ?> -->
 
-					<?php if(!empty($endscholarships)): ?>
+					<!-- <?php if(!empty($scholarships)): ?> -->
 						<h4> Closed Scholarships </h4>
-						<?php $__currentLoopData = $endscholarships; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $scho): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+						<?php $__currentLoopData = $scholarships; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $scho): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+							<?php if($scho->scholarship_deadlineenddate < $currentTime): ?>
 							<li>
 								<h2 class="first-letter"><?php echo e($scho->scholarship_name[0]); ?></h2>
 								<article>
-									<h2 class="name"><?php echo e($scho->scholarship_name); ?></h2>
+									<h2 class="name"><?php echo e($scho->scholarship_name); ?> </h2>
 									<?php if(Auth::user()->user_id==$user1->user_id): ?>
 										<div class="btns">
 											<a href="#" class="edit" data-toggle="modal" data-target="#reOpen"><span class="glyphicon glyphicon-pencil"></span> Re-open</a>
@@ -75,7 +78,7 @@
 									<?php endif; ?>
 								</article>
 							</li>
-
+							<?php endif; ?>
 							<!-- RE-OPEN MODAL -->
 							<div id="reOpen" class="modal fade" role="dialog">
 							  	<div class="modal-dialog">
@@ -104,7 +107,7 @@
 							</div>
 
 						<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-					<?php endif; ?>
+					<!-- <?php endif; ?> -->
 					</ul>
 					<?php else: ?>
 					<?php if( (empty($sponsor1) && $user->user_type == "sponsor") || (empty($sponsor) && $user->user_type == "student") ): ?>
