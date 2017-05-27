@@ -13,92 +13,58 @@ use App\ScholarshipsDeadline;
 
 class ScholarshipsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     public function createForm()
     {
         $user_id = Auth::user()->user_id;
         $user = User::findOrFail($user_id);
-        $sponsor_id = Sponsor::where('user_id','=', $user_id)->pluck('sponsor_id');
+        $sponsor_id = Sponsor::where('user_id','=', $user_id)->pluck('sponsor_id')->first();
         $sponsor = Sponsor::find($sponsor_id);
-
         return view('registration.scholarship_form', compact('user', 'sponsor', 'sponsor_id', 'user_id')); 
     }
 
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+    public function createScholarship(Request $request){
+ 
+        $details = $request->details;
+        $grants = $request->grants;
+        $specs = $request->specifications;
+        $questions = $request->questions;
+        $user_id = Auth::user()->user_id;
+        $sponsor_id = Sponsor::where('user_id','=',$user_id)->pluck('sponsor_id')->first();
+       
+        $scholarship = new Scholarship;
+        $scholarship->sponsor_id = $sponsor_id;
+        $scholarship->scholarship_name = $details[0];
+        $scholarship->scholarship_description = $details[1];
+        $scholarship->scholarship_logo='default_logo';
+        $scholarship->save();
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+        for(i=0;i<grants.length;i++){
+            $grant = new ScholarshipGrant;
+            $lastId = $scholarship->scholarship_id;
+            $grant->scholarship_id = $lastId;
+            $grant->scholarship_grantDesc=$grants[i];
+            $grant->save();
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+        for(i=0;i<specs.length;i++){
+            $spec = new ScholarshipSpecification;
+            $lastId = $scholarship->scholarship_id;
+            $spec->scholarship_id = $lastId;
+            $spec->scholarship_specDesc=$specs[i];
+            $spec->save();
+        }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+        for(i=0;i<questions.length;i++){
+            $question = new EssayQuestions;
+            $lastId = $scholarship->scholarship_id;
+            $question->scholarship_id = $lastId;
+            $question->essay_question=$questions[i];
+            $question->save();
+        }
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+ 
     public function scholarshipStudent($scholarship_id){
         $user_id = Auth::user()->user_id;
         $user = User::findOrFail($user_id);
@@ -150,4 +116,5 @@ class ScholarshipsController extends Controller
 
         return view('/profiles/profile_scholarship', compact('sponsor','user','scholarship', 'deadline', 'currentTime', 'specifications','grants','scholars'));
     }
+
 }

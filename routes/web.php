@@ -65,8 +65,6 @@ Route::get("/profile scholarship/{scholarship_id}", function($scholarship_id){
 });
 
 //=============== FOR FRONT-END PURPOSES =======================
-
-
 Route::get('/scholarship form', 'ScholarshipsController@createForm'); 
 Route::get('/notifications', 'NotificationsController@viewNotifications');
 Route::get('/scholar setup', 'ProfileSetupController@viewSetup');
@@ -86,6 +84,11 @@ Route::post('/Sponsor/upload', 'EditProfileController_Sponsor@upload');
 
 
 // MESSAGES
+
+
+Route::get('/scholarship form/create', 'ScholarshipsController@createScholarship');
+
+
 Route::get("/messages", function(){
     switch(Auth::user()->user_type){
         case 'sponsor':
@@ -99,6 +102,7 @@ Route::get("/messages", function(){
 });
 
 Route::group(['middleware' => 'isguest'], function(){
+
     Route::get('/messages/read', 'MessagesController@getReadMsg');
     Route::get('/messages/unread', 'MessagesController@getUnReadMsg');
     Route::get('/messages/inbox', 'MessagesController@getAllMsg');
