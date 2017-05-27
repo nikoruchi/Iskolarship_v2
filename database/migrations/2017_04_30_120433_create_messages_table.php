@@ -18,7 +18,7 @@ class CreateMessagesTable extends Migration
             $table->integer('msg_receiver')->references('user_id')->on('users');
             $table->integer('msg_sender')->references('user_id')->on('users');
             $table->text('msg_subject');
-            $table->string('msg_content');
+            $table->text('msg_content');
             $table->timestamp('msg_date');
             $table->string('msg_status');
             $table->timestamps();
