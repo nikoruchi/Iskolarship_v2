@@ -115,7 +115,7 @@ Route::get('/messages/compose', ['middleware'=>'isguest','uses'=>'MessagesContro
 
 Route::delete('/messages/delete', ['middleware'=>'isguest','uses'=>'MessagesController@destroy']);
 
-Route::post('/messages/reply', ['middleware'=>'isguest','uses'=>'MessagesController@sendreply']);
+Route::post('/messages/reply', ['middleware'=>'isguest','uses'=>'MessagesController@sendReply']);
 
 
 // APPLICATION STATUS CHANGES
