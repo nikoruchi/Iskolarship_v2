@@ -27,6 +27,7 @@ Route::post('/registration/Student', 'ScholarAuthController@Validation');
 Route::post('/registration/Sponsor', 'SponsorAuthController@Validation');
 //============================ CHECKERS =========================
 // This will be changed as soon as auth and middleware is added
+
 // Route::get('/home', ['middleware']=>'sponsor','uses'=>'HomeController@homeSponsor']);
 // Route::get('/home', 'HomeController@homeGuests');
 Route::get('/profile scholar', 'ScholarController@viewProfile');
