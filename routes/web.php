@@ -69,8 +69,10 @@ Route::get('/scholarship form', 'ScholarshipsController@createForm');
 Route::get('/notifications', 'NotificationsController@viewNotifications');
 Route::get('/scholar setup', 'ProfileSetupController@viewSetup');
 Route::get('/scholar setup form', 'ProfileSetupController@viewSetupForm');
+Route::get('/scholar questionaire', 'ApplicationController@viewQuestionaire');
 
 //=============== END FOR FRONT-END PURPOSES =======================
+
 
 Route::get('/Scholar/Account Settings', 'EditProfileController_Scholar@show');
 Route::post('/Scholar/Update Profile', 'EditProfileController_Scholar@ValidationScholar');
@@ -114,6 +116,22 @@ Route::group(['middleware' => 'isguest'], function(){
     Route::get('/getlessons/{lesson_id}/{page_number}', 'LessonController@getPage');
     Route::get('/messages/delete', 'MessagesController@destroy');
 });
+Route::get('/messages/read', ['middleware'=>'isguest','uses'=>'MessagesController@getReadMsg']);
+
+Route::get('/messages/unread', ['middleware'=>'isguest','uses'=>'MessagesController@getUnReadMsg']);
+
+Route::get('/messages/inbox', ['middleware'=>'isguest','uses'=>'MessagesController@getAllMsg']);
+
+Route::post('/messages/send', ['middleware'=>'isguest','uses'=>'MessagesController@send']);
+
+Route::get('/messages/thread', ['middleware'=>'isguest','uses'=>'MessagesController@showThread']);
+
+Route::get('/messages/compose', ['middleware'=>'isguest','uses'=>'MessagesController@compose']);
+
+Route::delete('/messages/delete', ['middleware'=>'isguest','uses'=>'MessagesController@destroy']);
+
+Route::post('/messages/reply', ['middleware'=>'isguest','uses'=>'MessagesController@sendreply']);
+>>>>>>> c7243d100aec8eec415214284ac42d8b8c2a8ea8
 
 
 // APPLICATION STATUS CHANGES
@@ -159,4 +177,4 @@ Route::get("/profile sponsor/{sponsor_id}", function($sponsor_id){
 //     }
 // });
 
- 
+Route::get('/scholarship/reopen', 'ScholarshipsController@reopenScholarship');

@@ -14,6 +14,13 @@
 							<input type="text" name="scholarship_name" id="scholarship_name" class="form-control" placeholder="Scholarship Name" />
 							<textarea name="description" id="description" class="form-control" placeholder="Description"></textarea>
 							<label class="file-label"><span class="glyphicon glyphicon-download-alt"></span> Upload File<input type="file" name="image" class="form-control"/></label>
+
+							<div class="deadline">
+								<label>Deadline:</label>
+								<input type="date" name="deadline" placeholder="deadline" class="form-control">
+							</div>
+							<label class="file-label"><span class="glyphicon glyphicon-download-alt"></span> Upload scholarship image<input type="file" name="image" class="form-control"/></label>
+
 							<!-- <img src="/image/default.jpg" class="uploaded-img" /> -->
 							<!-- <button type="submit" class="btn btn-default next">Next <span class="glyphicon glyphicon-arrow-right"></span></button> -->
 							<hr>
