@@ -76,5 +76,23 @@ class SponsorController extends Controller{
         return view('profiles.profile_sponsor', compact('sponsor', 'sponsor1', 'user', 'user1', 'scholarships'));       
     } 
 
+    public function scholars(){
+        $user_id = Auth::user()->user_id;
+        $user = User::findOrFail($user_id);
+        $sponsor_id = $user->user_sponsor->sponsor_id;
+        $sponsor = Sponsor::find($sponsor_id);
+        
+        $scholarships = Scholarship::where('sponsor_id','=',$sponsor_id)->pluck('scholarship_id');
 
+        $officialScholars = Application::whereIn('scholarship_id',$scholarships)
+            ->where('accept_status','=','accept')
+            ->where('avail_status','=','accept')
+            ->get();
+        $pendingApplications = Application::whereIn('scholarship_id',$scholarships)
+            ->where('accept_status','=','pending')
+            ->where('avail_status','=','pending')
+            ->get();
+
+        return view('profiles.scholars', compact('user','officialScholars','pendingApplications','sponsor'));
+    }
 }

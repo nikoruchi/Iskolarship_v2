@@ -15,65 +15,71 @@
 			<div class="col-sm-8 col-sm-offset-2">
 				<div>
 					<h2 class="text-center scholars">Scholars</h2>
+
+					@if(($pendingApplications->count())>0)
 					<h3 class="text-center" id="pend">Pending</h3>
 					<ul class="scholarships">
+
+						@foreach($pendingApplications as $application)
 						<li>
 							<!-- Image of the scholarship is placed here. -->
 							<!-- The H2 here is just a place holder -->
-							<h2 class="first-letter">C</h2>
+							<h2 class="first-letter">{{ $application->scholar->student_fname[0] }}</h2>
 							<article>
-								<h2 class="name">Clyde Joshua Delgado</h2>
+								<h2 class="name">{{$application->scholar->student_fname}} {{$application->scholar->student_lname}}
+									<small>{{$application->scholarship->scholarship_name}}</small>
+								</h2>
 								<div class="btns">
-									<a href="#" class="accept"><span class="glyphicon glyphicon-ok"></span> Accept</a>
+									<form method="post" action="/application/accept">
+											{{ csrf_field() }}
+										<input type="hidden" value="{{$application->application_id}}" name="app_id" />
+										<button type="submit" class="accept"><span class="glyphicon glyphicon-remove"></span> Accept</button>
+									</form>
+
 									<a href="#" class="view"><span class="glyphicon glyphicon-eye-open"></span> View</a>
-									<a href="#" class="reject"><span class="glyphicon glyphicon-remove"></span> Remove</a>
+									<form method="post" action="/application/reject">
+											{{ csrf_field() }}
+										<input type="hidden" value="{{$application->application_id}}" name="app_id" />
+										<button type="submit" class="reject"><span class="glyphicon glyphicon-remove"></span> Reject</button>
+									</form>
+
 								</div>
 							</article>
 						</li>
-						<li>
-							<!-- Image of the scholarship is placed here. -->
-							<!-- The H2 here is just a place holder -->
-							<h2 class="first-letter">N</h2>
-							<article>
-								<h2 class="name">Nicole Beatriz Pascasio</h2>
-								<div class="btns">
-									<a href="#" class="accept"><span class="glyphicon glyphicon-ok"></span> Accept</a>
-									<a href="#" class="view"><span class="glyphicon glyphicon-eye-open"></span> View</a>
-									<a href="#" class="reject"><span class="glyphicon glyphicon-remove"></span> Remove</a>
-								</div>
-							</article>
-						</li>
+						@endforeach
 					</ul>
+					@else 
+						<h2 class="text-center">No pending applications.</h2>
+					@endif
+
+					@if(($pendingApplications->count())>0)
 					<h3 class="text-center" id="offic">Official</h3>
 					<ul class="scholarships">
+						@foreach($officialScholars as $scholar)
 						<li>
-							<!-- Image of the scholarship is placed here. -->
-							<!-- The H2 here is just a place holder -->
-							<h2 class="first-letter">A</h2>
+							<h2 class="first-letter">{{ $scholar->scholar->student_fname[0] }}</h2>
 							<article>
-								<h2 class="name">Allyn Joy Calcaben</h2>
+								<h2 class="name">{{$scholar->scholar->student_fname}} {{$scholar->scholar->student_lname}}
+									<small>{{$scholar->scholarship->scholarship_name}}</small>
+								</h2>
 								<div class="btns">
-									<a href="#" class="edit"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
-									<a href="#" class="view"><span class="glyphicon glyphicon-eye-open"></span> View</a>
-									<a href="#" class="reject"><span class="glyphicon glyphicon-remove"></span> Remove</a>
+
+									<a href="/profile scholar/{{ $scholar->scholar->student_id }}" class="view"><span class="glyphicon glyphicon-eye-open"></span> View</a>
+
+									<form method="post" action="/scholars/remove">
+											{{ csrf_field() }}
+										<input type="hidden" value="{{$scholar->application_id}}" name="app_id" />
+										<button type="submit" class="reject"><span class="glyphicon glyphicon-remove"></span> Remove</button>
+									</form>
+
 								</div>
 							</article>
 						</li>
-						<li>
-							<!-- Image of the scholarship is placed here. -->
-							<!-- The H2 here is just a place holder -->
-							<h2 class="first-letter">M</h2>
-							<article>
-								<h2 class="name">Maria Angelica Talabucon</h2>
-								<div class="btns">
-									<a href="#" class="edit"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
-									<a href="#" class="view"><span class="glyphicon glyphicon-eye-open"></span> View</a>
-									<!-- We will place the delete inside the edit form. -->
-									<a href="#" class="reject"><span class="glyphicon glyphicon-remove"></span> Remove</a>
-								</div>
-							</article>
-						</li>
+						@endforeach
 					</ul>
+					@else
+						<h2 class="text-center">No official scholars.</h2>
+					@endif
 				</div>
 			</div>
 		</div>

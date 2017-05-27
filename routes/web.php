@@ -27,19 +27,12 @@ Route::post('/registration/Student', 'ScholarAuthController@Validation');
 Route::post('/registration/Sponsor', 'SponsorAuthController@Validation');
 //============================ CHECKERS =========================
 // This will be changed as soon as auth and middleware is added
-Route::get('/profile scholar', 'ProfileController@profileStudent');
 // Route::get('/home', ['middleware']=>'sponsor','uses'=>'HomeController@homeSponsor']);
 // Route::get('/home', 'HomeController@homeGuests');
-
 Route::get('/profile scholar', 'ScholarController@viewProfile');
-
 Route::get('/profile scholar/{student_id}', 'ProfileController@profileNotStudent');
-
 Route::get('/profile sponsor', 'SponsorController@viewProfile');
-
-Route::get('/profile sponsor/scholars', 'ProfileController@viewScholars');
-
-
+Route::get('/profile sponsor/scholars', 'SponsorController@scholars');
 	
 // will change into something more elegant. band aid solution
 Route::get("/home", function(){
@@ -73,12 +66,10 @@ Route::get("/profile scholarship/{scholarship_id}", function($scholarship_id){
 
 //=============== FOR FRONT-END PURPOSES =======================
 
-Route::get('/scholarship form', 'ScholarshipsController@createForm');
 
+Route::get('/scholarship form', 'ScholarshipsController@createForm'); 
 Route::get('/notifications', 'NotificationsController@viewNotifications');
-
 Route::get('/scholar setup', 'ProfileSetupController@viewSetup');
-
 Route::get('/scholar setup form', 'ProfileSetupController@viewSetupForm');
 
 //=============== END FOR FRONT-END PURPOSES =======================
@@ -123,12 +114,11 @@ Route::group(['middleware' => 'isguest'], function(){
 
 // APPLICATION STATUS CHANGES
 Route::post('/application/avail','ApplicationController@avail');
-
 Route::post('/application/rejectAvail','ApplicationController@rejectAvail');
-
 Route::post('/application/accept','ApplicationController@accept');
-
 Route::post('/application/reject', 'ApplicationController@reject');
+Route::post('/scholars/remove', 'ApplicationController@remove');
+
 
 // for SEARCH THINGY
 Route::get("/search", function(){
@@ -164,3 +154,5 @@ Route::get("/profile sponsor/{sponsor_id}", function($sponsor_id){
 //         break;
 //     }
 // });
+
+ 
