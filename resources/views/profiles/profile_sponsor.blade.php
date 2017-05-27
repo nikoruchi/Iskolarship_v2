@@ -32,15 +32,15 @@
 				
 				@endif
 				<div>
-					@if(!empty($scholarships))
+					@if(!empty($openscholarships) || !empty($endscholarships))
 					<h2 class="text-center">Scholarships</h2>
 					<ul class="scholarships">
 					
-					<!-- @if($scholarships->count()>0) -->
-						<h4> Open Scholarships </h4>
-						@foreach($scholarships as $scho)
-							@if($scho->scholarship_deadlineenddate > $currentTime)
+					<h4> Open Scholarships </h4>
+					@if(!empty($openscholarships))						
+						@foreach($openscholarships as $scho)
 							<li>
+								
 								<h2 class="first-letter">{{$scho->scholarship_name[0]}}</h2>
 								<article>
 									<h2 class="name">{{$scho->scholarship_name}}</h2>
@@ -56,16 +56,22 @@
 										</div>
 									@endif
 								</article>
+								
 							</li>
-							@endif
 						@endforeach
-					<!-- //@endif -->
+					@else
+						@if( (empty($sponsor1) && $user->user_type == "sponsor") || (empty($sponsor) && $user->user_type == "student") )
+							<h5 class="text-center">You haven't created any open scholarships.</h5>
+						@else
+							<h5 class="text-center">No open scholarship to show.</h5>
+						@endif
+					@endif
 
-					<!-- @if(!empty($scholarships)) -->
-						<h4> Closed Scholarships </h4>
-						@foreach($scholarships as $scho)
-							@if($scho->scholarship_deadlineenddate < $currentTime)
+					<h4> Closed Scholarships </h4>
+					@if(!empty($endscholarships))
+						@foreach($endscholarships as $scho)
 							<li>
+
 								<h2 class="first-letter">{{$scho->scholarship_name[0]}}</h2>
 								<article>
 									<h2 class="name">{{$scho->scholarship_name}} </h2>
@@ -81,6 +87,7 @@
 										</div>
 									@endif
 								</article>
+															
 							</li>
 							
 							<!-- RE-OPEN MODAL -->
@@ -111,17 +118,21 @@
 								    </div>
 							  	</div>
 							</div>
-
-							@endif
 						@endforeach
-					<!-- @endif -->
+					@else
+						@if( (empty($sponsor1) && $user->user_type == "sponsor") || (empty($sponsor) && $user->user_type == "student") )
+							<h5 class="text-center">You haven't created any open scholarships.</h5>
+						@else
+							<h5 class="text-center">No open scholarship to show.</h5>
+						@endif
+					@endif
 					</ul>
 					@else
-					@if( (empty($sponsor1) && $user->user_type == "sponsor") || (empty($sponsor) && $user->user_type == "student") )
-					<h3 class="text-center">You haven't created any scholarships.</h3>
-					@else
-					<h3 class="text-center">No scholarship to show.</h3>
-					@endif
+						@if( (empty($sponsor1) && $user->user_type == "sponsor") || (empty($sponsor) && $user->user_type == "student") )
+						<h3 class="text-center">You haven't created any scholarships.</h3>
+						@else
+						<h3 class="text-center">No scholarship to show.</h3>
+						@endif
 					@endif
 				</div>
 			</div>

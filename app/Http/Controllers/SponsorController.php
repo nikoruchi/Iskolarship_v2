@@ -39,29 +39,32 @@ class SponsorController extends Controller{
 
         $currentTime = Carbon::now()->toDateTimeString();
 
-        // $openscholarships = Scholarship::join('scholarship_deadline','Scholarship.scholarship_id','=','Scholarship_deadline.scholarship_id')
-        //             ->where('Scholarship.sponsor_id','=', $sponsor_id)
-        //             ->where('Scholarship_deadline.scholarship_deadlineenddate','>',$currentTime)
-        //             ->orderBy('Scholarship.scholarship_name','asc')
-        //             ->get();
-        // $endscholarships = Scholarship::join('scholarship_deadline','Scholarship.scholarship_id','=','Scholarship_deadline.scholarship_id')
-        //             ->where('Scholarship.sponsor_id','=', $sponsor_id)
-        //             ->where('Scholarship_deadline.scholarship_deadlineenddate','<',$currentTime)
-        //             ->orderBy('Scholarship.scholarship_name','desc')
-        //             ->first()
-        //             ->get();
-
-        $scholarships = Scholarship::join('scholarship_deadline','Scholarship.scholarship_id','=','Scholarship_deadline.scholarship_id')
+        $openscholarships = Scholarship::join('scholarship_deadline','Scholarship.scholarship_id','=','Scholarship_deadline.scholarship_id')
                     ->where('Scholarship.sponsor_id','=', $sponsor_id)
+                    ->where('Scholarship_deadline.scholarship_deadlineenddate','>',$currentTime)
+                    ->orderBy('Scholarship.scholarship_name','asc')
+                    ->distinct('Scholarship_deadline.scholarship_id')
+                    ->select('Scholarship_deadline.scholarship_id','Scholarship.scholarship_name','Scholarship_deadline.scholarship_deadlineenddate','Scholarship_deadline.scholarship_deadlinestartdate')
+                    ->get();
+        $endscholarships = Scholarship::join('scholarship_deadline','Scholarship.scholarship_id','=','Scholarship_deadline.scholarship_id')
+                    ->where('Scholarship.sponsor_id','=', $sponsor_id)
+                    ->where('Scholarship_deadline.scholarship_deadlineenddate','<',$currentTime)
                     ->orderBy('Scholarship.scholarship_name','desc')
                     ->distinct('Scholarship_deadline.scholarship_id')
                     ->select('Scholarship_deadline.scholarship_id','Scholarship.scholarship_name','Scholarship_deadline.scholarship_deadlineenddate','Scholarship_deadline.scholarship_deadlinestartdate')
                     ->get();
 
+        // $scholarships = Scholarship::join('scholarship_deadline','Scholarship.scholarship_id','=','Scholarship_deadline.scholarship_id')
+        //             ->where('Scholarship.sponsor_id','=', $sponsor_id)
+        //             ->orderBy('Scholarship.scholarship_name','desc')
+        //             ->distinct('Scholarship_deadline.scholarship_id')
+        //             ->select('Scholarship_deadline.scholarship_id','Scholarship.scholarship_name','Scholarship_deadline.scholarship_deadlineenddate','Scholarship_deadline.scholarship_deadlinestartdate')
+        //             ->get();
+
         $user_id1 = Sponsor::where('sponsor_id','=',$sponsor_id)->pluck('user_id')->first();
         $user1 = User::findOrFail($user_id1);
 
-        return view('profiles.profile_sponsor', compact('sponsor', 'user', 'scholarships', 'currentTime', 'user1'));       
+        return view('profiles.profile_sponsor', compact('sponsor', 'user', 'openscholarships', 'endscholarships', 'currentTime', 'user1'));       
     } 
 
     public function viewSearchfromStudent($sponsor_id){
@@ -92,9 +95,25 @@ class SponsorController extends Controller{
         $user_id1 = Sponsor::where('sponsor_id','=',$sponsor_id)->pluck('user_id')->first();
         $user1 = User::findOrFail($user_id1);
 
-        $scholarships = Scholarship::where('sponsor_id', "=", $sponsor_id2)->orderBy('scholarship_name')->get();
+        $currentTime = Carbon::now()->toDateTimeString();
+        //$scholarships = Scholarship::where('sponsor_id', "=", $sponsor_id2)->orderBy('scholarship_name')->get();
 
-        return view('profiles.profile_sponsor', compact('sponsor', 'sponsor1', 'user', 'user1', 'scholarships'));       
+        $openscholarships = Scholarship::join('scholarship_deadline','Scholarship.scholarship_id','=','Scholarship_deadline.scholarship_id')
+            ->where('Scholarship.sponsor_id','=', $sponsor_id2)
+            ->where('Scholarship_deadline.scholarship_deadlineenddate','>',$currentTime)
+            ->orderBy('Scholarship.scholarship_name','asc')
+            ->distinct('Scholarship_deadline.scholarship_id')
+            ->select('Scholarship_deadline.scholarship_id','Scholarship.scholarship_name','Scholarship_deadline.scholarship_deadlineenddate','Scholarship_deadline.scholarship_deadlinestartdate')
+            ->get();
+        $endscholarships = Scholarship::join('scholarship_deadline','Scholarship.scholarship_id','=','Scholarship_deadline.scholarship_id')
+            ->where('Scholarship.sponsor_id','=', $sponsor_id2)
+            ->where('Scholarship_deadline.scholarship_deadlineenddate','<',$currentTime)
+            ->orderBy('Scholarship.scholarship_name','desc')
+            ->distinct('Scholarship_deadline.scholarship_id')
+            ->select('Scholarship_deadline.scholarship_id','Scholarship.scholarship_name','Scholarship_deadline.scholarship_deadlineenddate','Scholarship_deadline.scholarship_deadlinestartdate')
+            ->get();
+
+        return view('profiles.profile_sponsor', compact('sponsor', 'sponsor1', 'currentTime', 'user', 'user1', 'openscholarships', 'endscholarships'));       
     } 
 
     public function scholars(){

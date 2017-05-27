@@ -30,15 +30,15 @@
 				
 				<?php endif; ?>
 				<div>
-					<?php if(!empty($scholarships)): ?>
+					<?php if(!empty($openscholarships) || !empty($endscholarships)): ?>
 					<h2 class="text-center">Scholarships</h2>
 					<ul class="scholarships">
 					
-					<!-- <?php if($scholarships->count()>0): ?> -->
-						<h4> Open Scholarships </h4>
-						<?php $__currentLoopData = $scholarships; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $scho): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-							<?php if($scho->scholarship_deadlineenddate > $currentTime): ?>
+					<h4> Open Scholarships </h4>
+					<?php if(!empty($openscholarships)): ?>						
+						<?php $__currentLoopData = $openscholarships; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $scho): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 							<li>
+								<?php if($scho->scholarship_name!=''): ?>
 								<h2 class="first-letter"><?php echo e($scho->scholarship_name[0]); ?></h2>
 								<article>
 									<h2 class="name"><?php echo e($scho->scholarship_name); ?></h2>
@@ -54,16 +54,28 @@
 										</div>
 									<?php endif; ?>
 								</article>
+								<?php else: ?> 
+									<?php if( (empty($sponsor1) && $user->user_type == "sponsor") || (empty($sponsor) && $user->user_type == "student") ): ?>
+										<h5 class="text-center">You haven't created any open scholarships.</h5>
+									<?php else: ?>
+										<h5 class="text-center">No open scholarship to show.</h5>
+									<?php endif; ?>
+								<?php endif; ?>
 							</li>
-							<?php endif; ?>
 						<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-					<!-- //<?php endif; ?> -->
+					<?php else: ?>
+						<?php if( (empty($sponsor1) && $user->user_type == "sponsor") || (empty($sponsor) && $user->user_type == "student") ): ?>
+							<h5 class="text-center">You haven't created any open scholarships.</h5>
+						<?php else: ?>
+							<h5 class="text-center">No open scholarship to show.</h5>
+						<?php endif; ?>
+					<?php endif; ?>
 
-					<!-- <?php if(!empty($scholarships)): ?> -->
-						<h4> Closed Scholarships </h4>
-						<?php $__currentLoopData = $scholarships; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $scho): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-							<?php if($scho->scholarship_deadlineenddate < $currentTime): ?>
+					<h4> Closed Scholarships </h4>
+					<?php if(!empty($endscholarships)): ?>
+						<?php $__currentLoopData = $endscholarships; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $scho): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 							<li>
+								<?php if($scho->scholarship_name != null): ?>
 								<h2 class="first-letter"><?php echo e($scho->scholarship_name[0]); ?></h2>
 								<article>
 									<h2 class="name"><?php echo e($scho->scholarship_name); ?> </h2>
@@ -79,6 +91,13 @@
 										</div>
 									<?php endif; ?>
 								</article>
+								<?php else: ?> 
+									<?php if( (empty($sponsor1) && $user->user_type == "sponsor") || (empty($sponsor) && $user->user_type == "student") ): ?>
+										<h5 class="text-center">You haven't created any open scholarships.</h5>
+									<?php else: ?>
+										<h5 class="text-center">No open scholarship to show.</h5>
+									<?php endif; ?>
+								<?php endif; ?>								
 							</li>
 							
 							<!-- RE-OPEN MODAL -->
@@ -109,17 +128,21 @@
 								    </div>
 							  	</div>
 							</div>
-
-							<?php endif; ?>
 						<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-					<!-- <?php endif; ?> -->
+					<?php else: ?>
+						<?php if( (empty($sponsor1) && $user->user_type == "sponsor") || (empty($sponsor) && $user->user_type == "student") ): ?>
+							<h5 class="text-center">You haven't created any open scholarships.</h5>
+						<?php else: ?>
+							<h5 class="text-center">No open scholarship to show.</h5>
+						<?php endif; ?>
+					<?php endif; ?>
 					</ul>
 					<?php else: ?>
-					<?php if( (empty($sponsor1) && $user->user_type == "sponsor") || (empty($sponsor) && $user->user_type == "student") ): ?>
-					<h3 class="text-center">You haven't created any scholarships.</h3>
-					<?php else: ?>
-					<h3 class="text-center">No scholarship to show.</h3>
-					<?php endif; ?>
+						<?php if( (empty($sponsor1) && $user->user_type == "sponsor") || (empty($sponsor) && $user->user_type == "student") ): ?>
+						<h3 class="text-center">You haven't created any scholarships.</h3>
+						<?php else: ?>
+						<h3 class="text-center">No scholarship to show.</h3>
+						<?php endif; ?>
 					<?php endif; ?>
 				</div>
 			</div>
