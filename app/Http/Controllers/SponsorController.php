@@ -14,11 +14,13 @@ use Illuminate\Support\Facades\Log;
 class SponsorController extends Controller{
 
      public function viewHome(){
+        $scholarships = Scholarship::all();
+
         $user_id = Auth::user()->user_id;
         $user = User::findOrFail($user_id);
         $spon_id = Sponsor::where('user_id','=', $user_id)->pluck('sponsor_id');
         $sponsor = Sponsor::findOrFail($spon_id);
-        return view('home', compact('sponsor', 'user'));
+        return view('home', compact('sponsor', 'user', 'scholarships'));
     }
    
     public function viewProfile(){

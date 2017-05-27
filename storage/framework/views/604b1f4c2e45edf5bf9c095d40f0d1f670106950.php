@@ -20,80 +20,23 @@
 				</form>
 			</div>
 		</div>
-		<!-- <div class="row">
+		<div class="row">
 			<div class="col-sm-8 col-sm-offset-2">
+			<?php $__currentLoopData = $scholarships; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $scho): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 				<ul class="search-results">
-					<li> -->
-						<!-- Image of the scholarship is placed here. -->
-						<!-- The H2 here is just a place holder -->
-						<!-- <h2 class="first-letter">S</h2>
+					<li>
+						<h2 class="first-letter"><?php echo e($scho->scholarship_name[0]); ?></h2>
 						<article>
-							<h2 class="name">Scholarship Name</h2>
+							<h2 class="name"><?php echo e($scho->scholarship_name); ?></h2>
 							<p class="desc">
-								This is a description of the scholarship. Anything entered here is just to fill in as to nothing is to be fetched or presented here. I don't know what I am saying.
+								<?php echo e($scho->scholarship_desc); ?>
+
 							</p>
-							<ul class="sample-grants">
-								<li>This is a sample grant.</li>
-								<li>Have 1000000 as your allowance.</li>
-								<li>Maximum of 3 grants to be previewed.</li>
-							</ul>
-							<a href="#" class="view">View</a>
-						</article>
-					</li>
-					<li> -->
-						<!-- Image of the scholarship is placed here. -->
-						<!-- The H2 here is just a place holder -->
-						<!-- <h2 class="first-letter">S</h2>
-						<article>
-							<h2 class="name">Scholarship Name</h2>
-							<p class="desc">
-								This is a description of the scholarship. Anything entered here is just to fill in as to nothing is to be fetched or presented here. I don't know what I am saying.
-							</p>
-							<ul class="sample-grants">
-								<li>This is a sample grant.</li>
-								<li>Have 1000000 as your allowance.</li>
-								<li>Maximum of 3 grants to be previewed.</li>
-							</ul>
-							<a href="#" class="view">View</a>
-						</article>
-					</li>
-					<li> -->
-						<!-- Image of the scholarship is placed here. -->
-						<!-- The H2 here is just a place holder -->
-						<!-- <h2 class="first-letter">S</h2>
-						<article>
-							<h2 class="name">Scholarship Name</h2>
-							<p class="desc">
-								This is a description of the scholarship. Anything entered here is just to fill in as to nothing is to be fetched or presented here. I don't know what I am saying.
-							</p>
-							<ul class="sample-grants">
-								<li>This is a sample grant.</li>
-								<li>Have 1000000 as your allowance.</li>
-								<li>Maximum of 3 grants to be previewed.</li>
-							</ul>
-							<a href="#" class="view">View</a>
-						</article>
-					</li>
-					<li> -->
-						<!-- Image of the scholarship is placed here. -->
-						<!-- The H2 here is just a place holder -->
-						<!-- <h2 class="first-letter">S</h2>
-						<article>
-							<h2 class="name">Scholarship Name</h2>
-							<p class="desc">
-								This is a description of the scholarship. Anything entered here is just to fill in as to nothing is to be fetched or presented here. I don't know what I am saying.
-							</p>
-							<ul class="sample-grants">
-								<li>This is a sample grant.</li>
-								<li>Have 1000000 as your allowance.</li>
-								<li>Maximum of 3 grants to be previewed.</li>
-							</ul>
 							<a href="#" class="view">View</a>
 						</article>
 					</li>
 				</ul>
-			</div> 
-		</div> -->
+			<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 	</div>
 
 <?php $__env->stopSection(); ?>

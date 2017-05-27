@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Log;
 class ScholarController extends Controller{
 
     public function viewHome(){
+        $scholarships = Scholarship::->orderByRaw("RAND()")
+            ->take(5)
+            ->get();
+
         $user_id = Auth::user()->user_id;
         $user = User::findOrFail($user_id);
         
@@ -20,7 +24,7 @@ class ScholarController extends Controller{
         $stud_id = Scholar::where('user_id','=', $user_id)->pluck('student_id');
         $student = Scholar::findOrFail($stud_id);
 
-        return view('home', compact('student', 'user'));
+        return view('home', compact('student', 'user', 'scholarships'));
     }
     
     public function viewProfile(){
