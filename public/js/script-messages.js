@@ -83,7 +83,7 @@ function sendReply(){
 	var msgs = "";
 	$.ajax({
 		url: "/messages/reply",
-		type: "POST",
+		type: "GET",
 		data: {'text':text, 'id':id},
 		success:function(data){
 			$.each(data, function(key,value){
@@ -104,15 +104,15 @@ function sendReply(){
 			msgs += '<button data-pg="'+ id +'"class="pull-right btn btn-primary reply">Reply</button>';
 			$("#compose-form").html(msgs);''
 		},
-		error: function(jqXhr, json, errorThrown){ 
-	        var errors = JSON.parse( jqXhr.responseText );
-	        console.log("errors: " + errors);
-	        var emsgs =  document.getElementById('reply_msg');
-	       	if(errors.errors['text']==undefined){
-	       		emsgs.style.display="none";
-	       	}    
-	        emsgs.innerHTML = "<strong>"+ errors.errors['text']+"</strong>";
-	    },
+			error: function(jqXhr, json, errorThrown){ 
+		        var errors = JSON.parse( jqXhr.responseText );
+		        var msgs =  document.getElementById('reply_msg');
+		        console.log("error: ", errors);
+		       	if(errors.errors['text']==undefined){
+		       		msgs.style.display="none";
+		       	}    
+		        msgs.innerHTML = "<strong>"+ errors.errors['text']+"</strong>";
+		    }
 	})
 }
 

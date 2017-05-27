@@ -24,23 +24,23 @@
 									<input class="form-control" type="text" name="subject" id="subject" placeholder="Subject" value="<?php echo e(old('subject')); ?>"/>
 
 										<span class="help-block">
+											<!-- <strong></strong> -->
 										</span>
 
 
 								</div>
 								<div class="">
 									<input class="form-control" type="text" name="to" id="to" placeholder="To" value="<?php echo e(old('to')); ?>"/>
-
-										<span class="help-block">
-											
-										</span>
-										
+									<span class="help-block">
+										<!-- <strong></strong> -->
+									</span>
 								</div>
 								<div class="<?php echo e($errors->has('content') ? ' has-error' : ''); ?> ">
 									<textarea class="form-control" placeholder="Message" name="content" id="message_content" value="<?php echo e(old('content')); ?>"></textarea>
 
 							
 										<span class="help-block">
+											<!-- <strong></strong> -->
 										</span>
 
 								</div>
