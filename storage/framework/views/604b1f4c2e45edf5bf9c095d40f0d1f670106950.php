@@ -21,6 +21,7 @@
 			</div>
 		</div>
 		<div class="row">
+			<h2 class="text-center">Scholarship Suggestions</h2>
 			<div class="col-sm-8 col-sm-offset-2">
 			<?php $__currentLoopData = $scholarships; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $scho): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 				<ul class="search-results">

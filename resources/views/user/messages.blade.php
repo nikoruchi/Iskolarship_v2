@@ -17,20 +17,41 @@
 			<div class="col-sm-9">
 				<div id="message-form" class="panel panel-default">
 					<div class="panel-body">
-						<div class="form">
-							<div class="form-group" id="compose-form">
+						<!-- <div class="form"> -->
+							<div id="compose-form">
 							<form name="formMsg" id="formMsg">
 								{{ csrf_field() }}
-								<input class="form-control" type="text" name="subject" id="subject" placeholder="Subject"/>
-								<input class="form-control" type="text" name="to" id="to" placeholder="To"/>
-								<textarea class="form-control" placeholder="Message" name="content" id="message_content"></textarea>
+								<div class="">
+									<input class="form-control" type="text" name="subject" id="subject" placeholder="Subject" value="{{ old('subject') }}"/>
+
+										<span class="help-block">
+											<!-- <strong></strong> -->
+										</span>
+
+
+								</div>
+								<div class="">
+									<input class="form-control" type="text" name="to" id="to" placeholder="To" value="{{ old('to') }}"/>
+									<span class="help-block">
+										<!-- <strong></strong> -->
+									</span>
+								</div>
+								<div class="{{ $errors->has('content') ? ' has-error' : '' }} ">
+									<textarea class="form-control" placeholder="Message" name="content" id="message_content" value="{{ old('content') }}"></textarea>
+
+							
+										<span class="help-block">
+											<!-- <strong></strong> -->
+										</span>
+
+								</div>
 								<button class="btn btn-primary pull-right send" type="submit" name="send_message" id="send_message" href="javascript:void(0)">
 									<span class="glyphicon glyphicon-send"></span>
 								</button>
 							</form>
 								
 							</div>
-						</div>
+						<!-- </div> -->
 					</div>
 				</div>
 			</div>

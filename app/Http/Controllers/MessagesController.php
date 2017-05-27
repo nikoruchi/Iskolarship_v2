@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\MessageBag;
 use Auth;
 use App\Scholar;
 use App\User;
@@ -76,22 +78,42 @@ class MessagesController extends Controller
     }
 
     public function send(Request $request){
-        $currentTime = Carbon::now()->toDateTimeString();
-        $receiver = $request->to;
-        $receiver_id = Auth::user()->where('email','=',$receiver)->pluck('user_id')->first();
-        $user_id = Auth::user()->user_id;
-        $message = new Message;
-        $message->msg_sender=$user_id;
-        $message->msg_receiver=$receiver_id;
-        $message->msg_content=$request->content;
-        $message->msg_status='unread';
-        $message->msg_date=$currentTime;
-        $message->msg_subject=$request->subject;
+        $validator = Validator::make($request->all(),[
+            'to' => 'exists:users,email',
+            'content' => 'required',
+            'subject' => 'required'
+            ]);
+        if ($validator->fails()) {
+             if($request->ajax()){
+                return response()->json(array(
+                    'success' => false,
+                    'errors' => $validator->getMessageBag()->toArray()
+                ), 422);
+            }
 
-        $message->save();
-        $email = Auth::user()->email;
-        $message->user_email=$email;
-        return $message;
+            $this->throwValidationException(
+                $request, $validator
+            );
+        }
+        else{
+            
+            $currentTime = Carbon::now()->toDateTimeString();
+            $receiver = $request->to;
+            $receiver_id = Auth::user()->where('email','=',$receiver)->pluck('user_id')->first();
+            $user_id = Auth::user()->user_id;
+            $message = new Message;
+            $message->msg_sender=$user_id;
+            $message->msg_receiver=$receiver_id;
+            $message->msg_content=$request->content;
+            $message->msg_status='unread';
+            $message->msg_date=$currentTime;
+            $message->msg_subject=$request->subject;
+
+            $message->save();
+            $email = Auth::user()->email;
+            $message->user_email=$email;
+            return $message;
+        }
     }
 
     public function messageAndReplies($id){
@@ -138,20 +160,38 @@ class MessagesController extends Controller
     }
 
     public function sendreply(Request $request){
-        $id = $request->id;
-        $text = $request->text;        
-        $currentTime = Carbon::now()->toDateTimeString();
-        $user_id = Auth::user()->user_id;
 
-        $reply = new Reply;
-        $reply->user_id=$user_id;
-        $reply->msg_id=$id;
-        $reply->reply_content=$text;
-        $reply->created_at=$currentTime;
-        $reply->save();
-        
-        $thread = $this->messageAndReplies($id);
-        return $thread;
+        $validator = Validator::make($request->all(),[
+            'text' => 'required',
+            ]);
+        if ($validator->fails()) {
+             if($request->ajax()){
+                return response()->json(array(
+                    'success' => false,
+                    'errors' => $validator->getMessageBag()->toArray()
+                ), 422);
+            }
+
+            $this->throwValidationException(
+                $request, $validator
+            );
+        }
+        else{
+            $id = $request->id;
+            $text = $request->text;        
+            $currentTime = Carbon::now()->toDateTimeString();
+            $user_id = Auth::user()->user_id;
+
+            $reply = new Reply;
+            $reply->user_id=$user_id;
+            $reply->msg_id=$id;
+            $reply->reply_content=$text;
+            $reply->created_at=$currentTime;
+            $reply->save();
+            
+            $thread = $this->messageAndReplies($id);
+            return $thread;
+        }
     }
 
     public function showThread(Request $request){
