@@ -75,6 +75,7 @@ Route::get('/scholar questionaire', 'ApplicationController@viewQuestionaire');
 
 //=============== END FOR FRONT-END PURPOSES =======================
 
+
 Route::get('/Scholar/Account Settings', 'EditProfileController_Scholar@show');
 Route::post('/Scholar/Update Profile', 'EditProfileController_Scholar@ValidationScholar');
 Route::post('/Scholar/Change Password', 'EditProfileController_Scholar@validatePassword');
@@ -99,18 +100,21 @@ Route::get("/messages", function(){
     }
 });
 
-Route::group(['middleware' => 'isguest'], function(){
-    Route::get('/messages/read', 'MessagesController@getReadMsg');
-    Route::get('/messages/unread', 'MessagesController@getUnReadMsg');
-    Route::get('/messages/inbox', 'MessagesController@getAllMsg');
-    Route::post('/messages/send', 'MessagesController@send');
-    Route::get('/messages/thread', 'MessagesController@showThread');
-    Route::get('/messages/compose', 'MessagesController@compose');
-    Route::get('/messages/reply', 'MessagesController@sendreply');
-    Route::get('/messages/mark', 'MessagesController@readMessage'); 
-    Route::get('/getlessons/{lesson_id}/{page_number}', 'LessonController@getPage');
-    Route::get('/messages/delete', 'MessagesController@destroy');
-});
+Route::get('/messages/read', ['middleware'=>'isguest','uses'=>'MessagesController@getReadMsg']);
+
+Route::get('/messages/unread', ['middleware'=>'isguest','uses'=>'MessagesController@getUnReadMsg']);
+
+Route::get('/messages/inbox', ['middleware'=>'isguest','uses'=>'MessagesController@getAllMsg']);
+
+Route::post('/messages/send', ['middleware'=>'isguest','uses'=>'MessagesController@send']);
+
+Route::get('/messages/thread', ['middleware'=>'isguest','uses'=>'MessagesController@showThread']);
+
+Route::get('/messages/compose', ['middleware'=>'isguest','uses'=>'MessagesController@compose']);
+
+Route::delete('/messages/delete', ['middleware'=>'isguest','uses'=>'MessagesController@destroy']);
+
+Route::post('/messages/reply', ['middleware'=>'isguest','uses'=>'MessagesController@sendreply']);
 
 
 // APPLICATION STATUS CHANGES
@@ -156,4 +160,4 @@ Route::get("/profile sponsor/{sponsor_id}", function($sponsor_id){
 //     }
 // });
 
- 
+Route::get('/scholarship/reopen', 'ScholarshipsController@reopenScholarship');

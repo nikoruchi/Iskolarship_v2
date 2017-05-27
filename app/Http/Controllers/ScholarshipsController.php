@@ -10,6 +10,7 @@ use App\Scholarship;
 use Illuminate\Http\Request; 
 use Carbon\Carbon;
 use App\ScholarshipsDeadline;
+use Illuminate\Support\Facades\Input;
 
 class ScholarshipsController extends Controller
 {
@@ -144,10 +145,28 @@ class ScholarshipsController extends Controller
                     ->get();
 
         $currentTime = Carbon::now()->toDateTimeString();
-
         $deadline = ScholarshipsDeadline::where('scholarship_id','=',$scholarship_id)
             ->pluck('scholarship_deadlineenddate');
 
         return view('/profiles/profile_scholarship', compact('sponsor','user','scholarship', 'deadline', 'currentTime', 'specifications','grants','scholars'));
+    } 
+
+    public function reopenScholarship(){
+        $user_id = Auth::user()->user_id;
+        $user = User::findOrFail($user_id);
+        $spon_id = Sponsor::where('user_id','=', $user_id)->pluck('sponsor_id')->first();
+        $sponsor = Sponsor::findOrFail($spon_id);
+
+        $newdate = Input::get('new_deadline');
+        $scholarship_id = Input::get('scholarship_id');
+
+        $new_deadline = new ScholarshipsDeadline;
+        $new_deadline->scholarship_id = $scholarship_id;
+        $new_deadline->scholarship_deadlinestartdate = Carbon::now();
+        $new_deadline->scholarship_deadlineenddate = $newdate;
+        $new_deadline->save();
+
+       // return redirect()->route('/profile sponsor', );
+        return redirect()->action('SponsorController@viewProfile');
     }
 }
