@@ -4,6 +4,7 @@
 	<div class="container main-container">
 		<div class="row">
 			<div class="col-sm-8 col-sm-offset-2">
+
 				<img src="/image/{{ $user->user_imagepath }}" class="img-responsive user-pp img-circle"/>
 
 				<h1 class="user-name">{{ empty($sponsor1)? $sponsor->sponsor_fname : $sponsor1->sponsor_fname }}</h1>
@@ -11,14 +12,16 @@
 				<h3 class="user-email">{{ empty($user1)? $user->email : $user1->email }}</h3>
 
 				@if(Auth::user()->hasRole('sponsor'))
-				<div class="btn-group flex">	
-					<a href="/Sponsor/Account Settings" class="btn btn-default acc_settings">
-						<span class="glyphicon glyphicon-cog"></span> Account Settings
-					</a>
-					<a href="#" class="btn btn-success acc_settings">
-						<span class="glyphicon glyphicon-plus"></span> Create Scholarship
-					</a>
-				</div>
+					@if(Auth::user()->user_id==$user1->user_id)
+					<div class="btn-group flex">	
+						<a href="/Sponsor/Account Settings" class="btn btn-default acc_settings">
+							<span class="glyphicon glyphicon-cog"></span> Account Settings
+						</a>
+						<a href="#" class="btn btn-success acc_settings">
+							<span class="glyphicon glyphicon-plus"></span> Create Scholarship
+						</a>
+					</div>
+					@endif
 				@endif
 				@if(Auth::user()->hasRole('student'))
 				<div class="btn-group flex">
@@ -34,15 +37,19 @@
 					<ul class="scholarships">
 					@foreach($scholarships as $scho)
 						<li>
-							<!-- Image of the scholarship is placed here. -->
-							<!-- The H2 here is just a place holder -->
 							<h2 class="first-letter">{{$scho->scholarship_name[0]}}</h2>
 							<article>
 								<h2 class="name">{{$scho->scholarship_name}}</h2>
-								<div class="btns">
-									<a href="#" class="edit"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
-									<a href="{{ url('profile sponsor/scholars') }}" class="view_scholars"><span class="glyphicon glyphicon-eye-open"></span> Scholars</a>
-								</div>
+								@if(Auth::user()->user_id==$user1->user_id)
+									<div class="btns">
+										<a href="#" class="edit"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+										<a href="{{ url('profile sponsor/scholars') }}" class="view_scholars"><span class="glyphicon glyphicon-eye-open"></span> Scholars</a>
+									</div>
+								@else
+									<div class="btns">
+										<a href="/profile scholarship/{{$scho->scholarship_id}}" class="view_scholars"><span class="glyphicon glyphicon-eye-open"></span> View</a>
+									</div>
+								@endif
 							</article>
 						</li>
 					@endforeach

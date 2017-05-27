@@ -13,21 +13,23 @@ use Illuminate\Support\Facades\Log;
 class ScholarController extends Controller{
 
     public function viewHome(){
+        $scholarships = Scholarship::->orderByRaw("RAND()")
+            ->take(5)
+            ->get();
+
         $user_id = Auth::user()->user_id;
         $user = User::findOrFail($user_id);
         
-
-        $stud_id = Scholar::where('user_id','=', $user_id)->pluck('student_id');
+        $stud_id = Scholar::where('user_id','=', $user_id)->pluck('student_id')->first();
         $student = Scholar::findOrFail($stud_id);
 
-        return view('home', compact('student', 'user'));
+        return view('home', compact('student', 'user', 'scholarships'));
     }
     
     public function viewProfile(){
     	$user_id = Auth::user()->user_id;
     	$user = User::findOrFail($user_id);
-        // dd($user);
-    	$student_id = Scholar::where('user_id','=', $user_id)->pluck('student_id');
+    	$student_id = Scholar::where('user_id','=', $user_id)->pluck('student_id')->first();
     	$student = Scholar::find($student_id);
         $studentProfile = Scholar::find($student_id);
 

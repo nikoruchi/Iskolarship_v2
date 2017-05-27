@@ -17,7 +17,7 @@ class CreateMessagesRepliesTable extends Migration
             $table->increments('reply_id');
             $table->integer('user_id')->references('user_id')->on('users');
             $table->integer('msg_id')->references('msg_id')->on('messages');
-            $table->string('reply_content');
+            $table->text('reply_content');
             $table->timestamps();
         });
     }

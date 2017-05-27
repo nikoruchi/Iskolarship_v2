@@ -7,7 +7,7 @@
 			<div class="col-sm-8 col-sm-offset-2">
 				<div class="panel">
 					<div class="panel-heading">
-						<img src="uploads/dost.png" class="img-responsive scholarship-logo"/>
+						<img src="/image/{{$scholarship->scholarship_logo}}" class="img-responsive scholarship-logo"/>
 						<h1 class="scholarship-name">{{$scholarship->scholarship_name}}</h1>
 						<p class="scholarship-description">{{$scholarship->scholarship_desc}}</p>
 						<div class="flex">
