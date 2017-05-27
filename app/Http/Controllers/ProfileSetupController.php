@@ -26,7 +26,7 @@ class ProfileSetupController extends Controller{
         $student_id = Scholar::where('user_id','=', $user_id)->pluck('student_id')->first();
         $student = Scholar::find($student_id);
 
-        return view('profiles.scholar_setup', compact('user', 'student', 'student_id')); 
+        return view('profiles.profile_scholar_setup', compact('user', 'student', 'student_id')); 
     }  
 }  
 
