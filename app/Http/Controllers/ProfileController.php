@@ -10,14 +10,7 @@ use Auth;
 use App\Application;
 
 class ProfileController extends Controller{
-    public function viewScholars(){
-        $user_id = Auth::user()->user_id;
-        $user = User::findOrFail($user_id);
-        $sponsor_id = Sponsor::where('user_id','=', $user_id)->pluck('sponsor_id')->first();
-        $sponsor = Sponsor::find($sponsor_id);
-        return view('profiles.scholars', compact('sponsor', 'user'));       
-    }   
-
+    
    public function profileNotStudent($student_id){
         $user_id = Auth::user()->user_id;
         $user = User::findOrFail($user_id);

@@ -34,3 +34,61 @@ label{
 	font-size: 0.8em;
 }
 
+:not(.house-unit-form) > .radio {
+    display: inline-block;
+    border: 1px solid #AAA;
+    border-radius: 4px;
+}
+
+:not(.house-unit-form) > .radio {
+    margin-right: 10px;
+}
+
+:not(.house-unit-form) > .radio input[type=radio] {
+    display: none;
+}
+
+:not(.house-unit-form) > .radio label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 6px 12px;
+    text-indent: 0;
+}
+
+:not(.house-unit-form) > .radio .circle {
+    display: inline-block;
+    position: relative;
+    width: 1.2em;
+    height: 1.2em;
+    border: 0.2em solid #DDD;
+    border-radius: 50%;
+    transition: 0.25s;
+}
+
+:not(.house-unit-form) > .radio .dot {
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background-color: #2ecc71;
+    transition: 0.25s;
+    transform: translate(-50%, -50%);
+}
+
+:not(.house-unit-form) > .radio input:checked + .circle {
+    border-color: #6dae27;
+}
+
+:not(.house-unit-form) > .radio input:checked + .circle .dot {
+    width: 0.6em;
+    height: 0.6em;
+}
+
+:not(.house-unit-form) > .radio input:checked ~ .label-text {
+    color: #2ecc71;
+}

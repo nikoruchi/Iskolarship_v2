@@ -13,6 +13,7 @@
 			<div class="col-sm-8 col-sm-offset-2">
 				<div>
 					<h2 class="text-center scholars">Scholars</h2>
+<<<<<<< HEAD
 					<h3 class="text-center" id="pend">Pending</h3>
 					<ul class="scholarships">
 						<li>
@@ -72,6 +73,78 @@
 							</article>
 						</li>
 					</ul>
+=======
+
+					<?php if(($pendingApplications->count())>0): ?>
+					<h3 class="text-center" id="pend">Pending</h3>
+					<ul class="scholarships">
+
+						<?php $__currentLoopData = $pendingApplications; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $application): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+						<li>
+							<!-- Image of the scholarship is placed here. -->
+							<!-- The H2 here is just a place holder -->
+							<h2 class="first-letter"><?php echo e($application->scholar->student_fname[0]); ?></h2>
+							<article>
+								<h2 class="name"><?php echo e($application->scholar->student_fname); ?> <?php echo e($application->scholar->student_lname); ?>
+
+									<small><?php echo e($application->scholarship->scholarship_name); ?></small>
+								</h2>
+								<div class="btns">
+									<form method="post" action="/application/accept">
+											<?php echo e(csrf_field()); ?>
+
+										<input type="hidden" value="<?php echo e($application->application_id); ?>" name="app_id" />
+										<button type="submit" class="accept"><span class="glyphicon glyphicon-remove"></span> Accept</button>
+									</form>
+
+									<a href="#" class="view"><span class="glyphicon glyphicon-eye-open"></span> View</a>
+									<form method="post" action="/application/reject">
+											<?php echo e(csrf_field()); ?>
+
+										<input type="hidden" value="<?php echo e($application->application_id); ?>" name="app_id" />
+										<button type="submit" class="reject"><span class="glyphicon glyphicon-remove"></span> Reject</button>
+									</form>
+
+								</div>
+							</article>
+						</li>
+						<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+					</ul>
+					<?php else: ?> 
+						<h2 class="text-center">No pending applications.</h2>
+					<?php endif; ?>
+
+					<?php if(($pendingApplications->count())>0): ?>
+					<h3 class="text-center" id="offic">Official</h3>
+					<ul class="scholarships">
+						<?php $__currentLoopData = $officialScholars; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $scholar): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+						<li>
+							<h2 class="first-letter"><?php echo e($scholar->scholar->student_fname[0]); ?></h2>
+							<article>
+								<h2 class="name"><?php echo e($scholar->scholar->student_fname); ?> <?php echo e($scholar->scholar->student_lname); ?>
+
+									<small><?php echo e($scholar->scholarship->scholarship_name); ?></small>
+								</h2>
+								<div class="btns">
+
+									<a href="/profile scholar/<?php echo e($scholar->scholar->student_id); ?>" class="view"><span class="glyphicon glyphicon-eye-open"></span> View</a>
+
+									<form method="post" action="/scholars/remove">
+											<?php echo e(csrf_field()); ?>
+
+										<input type="hidden" value="<?php echo e($scholar->application_id); ?>" name="app_id" />
+										<button type="submit" class="reject"><span class="glyphicon glyphicon-remove"></span> Remove</button>
+									</form>
+
+								</div>
+							</article>
+						</li>
+						<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+					</ul>
+					<?php else: ?>
+						<h2 class="text-center">No official scholars.</h2>
+					<?php endif; ?>
+>>>>>>> 499bdc89585ad80e5dde5f826668a1461e570a4e
 				</div>
 			</div>
 		</div>
