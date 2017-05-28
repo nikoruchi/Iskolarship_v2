@@ -43,7 +43,7 @@
 									<h6><b> Application Deadline: </b><i> <?php echo e(date('m/d/Y', strtotime($scho->scholarship_deadlineenddate))); ?> </i></h6>
 									<?php if(Auth::user()->user_id==$user1->user_id): ?>
 										<div class="btns">
-											<a href="#" class="edit"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+											<a href="/profile scholarship/<?php echo e($scho->scholarship_id); ?>" class="edit"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
 											<a href="<?php echo e(url('profile sponsor/scholars')); ?>" class="view_scholars"><span class="glyphicon glyphicon-eye-open"></span> Scholars</a>
 										</div>
 									<?php else: ?>
