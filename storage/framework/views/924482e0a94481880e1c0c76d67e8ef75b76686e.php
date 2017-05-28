@@ -57,7 +57,7 @@
 								<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 						</ul>
 						<?php else: ?>
-							<h2 class="text-center">No pending scholarships for avail</h2>
+							<h5 class="text-center">No pending scholarships for avail</h5>
 						<?php endif; ?>
 					<?php endif; ?>
 				</div>
