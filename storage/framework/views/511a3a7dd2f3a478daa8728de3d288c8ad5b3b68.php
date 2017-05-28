@@ -7,13 +7,8 @@
 				<div class="panel panel-default">
 					<div class="panel-body">
 						<h3 class="text-center">Messages</h3>
-<<<<<<< HEAD
-						<button class="compose btn btn-success btn-block" href="javascript:void(0)">COMPOSE</button>
-						<button class="delete btn btn-danger btn-block" href="javascript:void(0)">DELETE</button>
-=======
 						<button class="compose" href="javascript:void(0)"><span class="glyphicon glyphicon-pencil"></span> Compose</button>
 						<button class="delete" href="javascript:void(0)"><span class="glyphicon glyphicon-trash"></span> Delete</button>
->>>>>>> bb26dc19fbfa58805ff87fcfce56fcbdd56089b7
 					</div>
 				</div>
 			</div>
@@ -99,11 +94,11 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startPush('scripts'); ?>
-	<script type="text/javascript" src="/js/script-messages.js"></script>
+	<script type="text/javascript" src="<?php echo e(asset('js/script-messages.js')); ?>"></script>
 <?php $__env->stopPush(); ?>
 
 <?php $__env->startPush('styles'); ?>
-	<link rel="stylesheet" type="text/css" href="css/message.css"/>
+	<link rel="stylesheet" type="text/css" href="<?php echo e(asset('css/message.css')); ?>"/>
 <?php $__env->stopPush(); ?>
 
 <?php echo $__env->make("layouts.userTab", array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -95,9 +95,9 @@
 @endsection
 
 @push('scripts')
-	<script type="text/javascript" src="/js/script-messages.js"></script>
+	<script type="text/javascript" src="{{asset('js/script-messages.js')}}"></script>
 @endpush
 
 @push('styles')
-	<link rel="stylesheet" type="text/css" href="css/message.css"/>
+	<link rel="stylesheet" type="text/css" href="{{asset('css/message.css')}}"/>
 @endpush

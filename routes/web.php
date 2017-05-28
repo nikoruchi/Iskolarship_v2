@@ -106,7 +106,7 @@ Route::get("/messages", function(){
 });
 
 Route::group(['middleware' => 'isguest'], function(){
-    Route::get('/messages/{sponsor}', 'MessagesController@autofillMsgSponsor');
+    Route::get('/messages/sp/{sponsor}', 'MessagesController@autofillMsgSponsor');
     Route::get('/messages/s/{studentProfile}', 'MessagesController@autofillMsgScholar');
     Route::get('/messages/read', 'MessagesController@getReadMsg');
     Route::get('/messages/unread', 'MessagesController@getUnReadMsg');
@@ -116,7 +116,7 @@ Route::group(['middleware' => 'isguest'], function(){
     Route::get('/messages/compose', 'MessagesController@compose');
     Route::get('/messages/reply', 'MessagesController@sendreply');
     Route::get('/messages/mark', 'MessagesController@readMessage'); 
-    Route::get('/getlessons/{lesson_id}/{page_number}', 'LessonController@getPage');
+    // Route::get('/getlessons/{lesson_id}/{page_number}', 'LessonController@getPage');
     Route::get('/messages/delete', 'MessagesController@destroy');
 });
 

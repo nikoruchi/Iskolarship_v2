@@ -25,7 +25,7 @@
 				@endif
 				@if(Auth::user()->hasRole('student'))
 				<div class="btn-group flex">
-					<a href="{{ url('/messages',[$sponsor->sponsor_id])}}">
+					<a href="{{ url('/messages/sp',[$sponsor->sponsor_id])}}">
 						<button class="btn btn-primary"> <span class="glyphicon glyphicon-envelope"></span> Message</button>
 					</a>
 				</div>
