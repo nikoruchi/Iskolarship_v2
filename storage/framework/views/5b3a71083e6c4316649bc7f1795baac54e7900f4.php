@@ -9,11 +9,20 @@
 						<h1 class="scholarship-name"><?php echo e($scholarship->scholarship_name); ?></h1>
 						<p class="scholarship-description"><?php echo e($scholarship->scholarship_desc); ?></p>
 						<div class="flex">
+<<<<<<< HEAD
+						<!-- pa edit lang di design sang paragraph. -->
+						<?php if($deadline < $currentTime): ?>
+							<p class ="text-center">Submission for application is over.</p>
+						<?php elseif((Auth::user()->hasRole('student')) && ($exists>0)): ?>
+							<p class="text-center">You have applied already. Please wait until the agency reviews your application.</p>
+						<?php elseif((Auth::user()->hasRole('student')) && ($exists==0)): ?>
+=======
 						<?php if($deadline < $currentTime): ?>
 							<p class ="text-center">Submission for application is over.</p>
 						<?php elseif((Auth::user()->hasRole('student')) && $exists!=0): ?>
 							<p class="text-center">You have applied already. Please wait until the agency reviews your application.</p>
 						<?php elseif((Auth::user()->hasRole('student')) && $exists==0): ?>
+>>>>>>> dd2265359f315b115e2ad585df266a08777ba7c7
 							<a href="/scholar questionaire/<?php echo e($scholarship->scholarship_id); ?>" class="btn btn-success btn-lg apply-btn"><span class="glyphicon glyphicon-education"><span class="glyphicon glyphicon-plus"></span></span>&nbsp;&nbsp;Apply</a>
 						<?php elseif(Auth::guest()): ?>
 							<p class="text-center">You must be <a href="/">logged in</a> to apply.</p>

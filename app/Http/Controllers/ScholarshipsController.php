@@ -114,8 +114,8 @@ class ScholarshipsController extends Controller
                     ->where('avail_status','=','accept')
                     ->get();
         $exists = Application::where('scholarship_id','=',$scholarship_id)
-                    ->where('accept_status','=','accept')
-                    ->where('avail_status','=','accept')
+                    // ->where('accept_status','=','pending')
+                    // ->where('avail_status','=','pending')
                     ->where('student_id','=',$stud_id)
                     ->count();
 
