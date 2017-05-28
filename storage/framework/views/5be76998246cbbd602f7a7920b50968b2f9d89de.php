@@ -10,6 +10,7 @@
 				<li><a href="#"><span class="glyphicon glyphicon-unchecked"></span> Unread</a></li>
 				<li class="delete"><a href="#"><span class="glyphicon glyphicon-trash"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Delete All Notifications</a></li>
 			</ul>
+<<<<<<< HEAD
 			<div class="col-sm-6 col-sm-offset-3">
 				<div class="panel panel-default">
 					<div class="panel-body">
@@ -40,13 +41,56 @@
 								<img src="<?php echo e(asset('image/default.jpg')); ?>" class="img-responsive"/>
 								<p>A student applied for <span class="sship-name">DOST</span>. <a href="#" class="view">View Application</a></p>
 							</li>
+=======
+
+			<div class="col-sm-6 col-smo-offset-3">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<ul class="list-unstyled notifs-container">
+						<?php if($notification->count() > 0): ?>
+							<?php $__currentLoopData = $notification; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $notif): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+								<?php if($user->user_type == 'sponsor' && str_contains($notif->notification_desc, "A student applied for")): ?>
+								<li class="notif">
+									<a href="#" class="remove"><span class="glyphicon glyphicon-remove"></span></a>
+									<img src="<?php echo e(asset('image/default.jpg')); ?>" class="img-responsive"/>
+									<p><?php echo e($notif->notification_desc); ?> <a href="/profile scholarship/<?php echo e($notif->scholarship_id); ?>" class="view">View Application</a> <br/>
+									<i><?php echo e($notif->notification_date); ?></i></p>
+								</li>
+
+								<?php elseif($user->user_type == 'sponsor' && str_contains($notif->notification_desc, "his slot in")): ?>
+								<li class="notif">
+									<a href="#" class="remove"><span class="glyphicon glyphicon-remove"></span></a>
+									<img src="<?php echo e(asset('image/default.jpg')); ?>" class="img-responsive"/>
+									<p> <?php echo e($notif->notification_desc); ?> <a href="/profile scholar/<?php echo e($notif->student_id); ?>" class="view">View Scholar</a> <br/>
+									<i><?php echo e($notif->notification_date); ?></i></p>
+								</li>
+
+								<?php elseif($user->user_type == 'student'): ?>
+								<li class="notif">
+									<a href="#" class="remove"><span class="glyphicon glyphicon-remove"></span></a>
+									<img src="<?php echo e(asset('image/spon_def.png')); ?>" class="img-responsive"/>
+									<p><?php echo e($notif->notification_desc); ?> <a href="/profile scholarship/<?php echo e($notif->scholarship_id); ?>" class="view">View Scholarship</a> <br/>
+									<i><?php echo e($notif->notification_date); ?></i></p>									
+								</li>
+
+								
+								
+								<?php endif; ?>
+							<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+						<?php else: ?>
+							<li class="notif no-notif"> You currently have no notifications. </li>
+						<?php endif; ?>
+>>>>>>> 180d04ed10f5b3b58aa8063966f87b962c825efb
 						</ul>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 180d04ed10f5b3b58aa8063966f87b962c825efb
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startPush('styles'); ?>

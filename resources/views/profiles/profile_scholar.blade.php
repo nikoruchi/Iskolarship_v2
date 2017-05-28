@@ -18,9 +18,11 @@
 					</a>
 				</div>
 				@endif
-				@if(Auth::user()->user_id != $studentProfile->user_id)
+				@if((Auth::user()->user_id != $studentProfile->user_id))
 				<div class="btn-group flex">
+				<a href="{{ url('/messages/s',[$studentProfile->student_id])}}">
 					<button class="btn btn-primary"> <span class="glyphicon glyphicon-envelope"></span> Message</button>
+				</a>
 				</div>
 				@endif
 				<div>

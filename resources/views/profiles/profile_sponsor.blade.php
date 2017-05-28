@@ -17,7 +17,7 @@
 						<a href="/Sponsor/Account Settings" class="btn btn-default acc_settings">
 							<span class="glyphicon glyphicon-cog"></span> Account Settings
 						</a>
-						<a href="#" class="btn btn-success acc_settings">
+						<a href="{{ url('/scholarship form') }}" class="btn btn-success acc_settings">
 							<span class="glyphicon glyphicon-plus"></span> Create Scholarship
 						</a>
 					</div>
@@ -25,11 +25,10 @@
 				@endif
 				@if(Auth::user()->hasRole('student'))
 				<div class="btn-group flex">
-					<button class="btn btn-primary"> <span class="glyphicon glyphicon-envelope"></span> Message</button>
+					<a href="{{ url('/messages',[$sponsor->sponsor_id])}}">
+						<button class="btn btn-primary"> <span class="glyphicon glyphicon-envelope"></span> Message</button>
+					</a>
 				</div>
-				@endif
-				@if(Auth::user()->hasRole('student'))
-				
 				@endif
 				<div>
 					@if(!empty($openscholarships) || !empty($endscholarships))
@@ -40,7 +39,6 @@
 					@if(!empty($openscholarships))						
 						@foreach($openscholarships as $scho)
 							<li>
-								
 								<h2 class="first-letter">{{$scho->scholarship_name[0]}}</h2>
 								<article>
 									<h2 class="name">{{$scho->scholarship_name}}</h2>

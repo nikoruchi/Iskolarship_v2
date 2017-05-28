@@ -73,7 +73,6 @@ Route::get("/profile scholarship/{scholarship_id}", function($scholarship_id){
 //=============== FOR FRONT-END PURPOSES =======================
 
 Route::get('/scholarship form', 'ScholarshipsController@createForm'); 
-Route::get('/notifications', 'NotificationsController@viewNotifications');
 Route::get('/scholar setup', 'ProfileSetupController@viewSetup');
 Route::get('/scholar questionaire', 'ApplicationController@viewQuestionaire');
 
@@ -95,6 +94,7 @@ Route::post('/Sponsor/upload', 'EditProfileController_Sponsor@upload');
 
 
 Route::get('/scholarship form/create', 'ScholarshipsController@createScholarship');
+Route::post('/upload/logo', 'ScholarshipsController@uploadLogo');
 
 
 Route::get("/messages", function(){
@@ -110,7 +110,8 @@ Route::get("/messages", function(){
 });
 
 Route::group(['middleware' => 'isguest'], function(){
-
+    Route::get('/messages/{sponsor}', 'MessagesController@autofillMsgSponsor');
+    Route::get('/messages/s/{studentProfile}', 'MessagesController@autofillMsgScholar');
     Route::get('/messages/read', 'MessagesController@getReadMsg');
     Route::get('/messages/unread', 'MessagesController@getUnReadMsg');
     Route::get('/messages/inbox', 'MessagesController@getAllMsg');
@@ -169,3 +170,17 @@ Route::get("/profile sponsor/{sponsor_id}", function($sponsor_id){
 
 Route::get('/profile_sponsor/{scholarship_id}', 'SponsorController@profileCont');
 Route::get('/scholarship/reopen/{scholarship_id}', 'ScholarshipsController@reopenScholarship');
+//Route::get('/');
+
+// FOR NOTIFICATIONS
+Route::get("/notifications", function(){
+    switch(Auth::user()->user_type){
+        case 'sponsor':
+          return (new \App\Http\Controllers\NotificationsController)->viewNotificationsFrSponsor();
+        break;
+
+        case 'student':
+          return (new \App\Http\Controllers\NotificationsController)->viewNotifications();
+        break;
+    }
+});

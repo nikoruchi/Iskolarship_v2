@@ -21,26 +21,36 @@
 								<?php echo e(csrf_field()); ?>
 
 								<div class="">
-									<input class="form-control" type="text" name="subject" id="subject" placeholder="Subject" value="<?php echo e(old('subject')); ?>"/>
+									<input class="form-control" type="text" name="subject" id="subject" placeholder="Subject" value=""/>
 
 										<span class="help-block">
+											<!-- <strong></strong> -->
 										</span>
 
 
 								</div>
 								<div class="">
-									<input class="form-control" type="text" name="to" id="to" placeholder="To" value="<?php echo e(old('to')); ?>"/>
+<<<<<<< HEAD:storage/framework/views/511a3a7dd2f3a478daa8728de3d288c8ad5b3b68.php
+								
+									<input class="form-control" type="text" name="to" id="to" placeholder="To" value="<?php echo e(isset($email) ? $email : old('to')); ?>"/>
 
 										<span class="help-block">
 											
 										</span>
 										
+=======
+									<input class="form-control" type="text" name="to" id="to" placeholder="To" value="<?php echo e(empty($email)? '': $email[0]); ?>"/>
+									<span class="help-block">
+										<!-- <strong></strong> -->
+									</span>
+>>>>>>> f0c61e824889768a2c2ef02652eaadb137493b51:storage/framework/views/44c68a8d8cec81246039e5b8693112b4984797b4.php
 								</div>
-								<div class="<?php echo e($errors->has('content') ? ' has-error' : ''); ?> ">
-									<textarea class="form-control" placeholder="Message" name="content" id="message_content" value="<?php echo e(old('content')); ?>"></textarea>
+								<div class="">
+									<textarea class="form-control" placeholder="Message" name="content" id="message_content" value=""></textarea>
 
 							
 										<span class="help-block">
+											<!-- <strong></strong> -->
 										</span>
 
 								</div>
@@ -91,6 +101,10 @@
 	</div>
 
 <?php $__env->stopSection(); ?>
+
+<?php $__env->startPush('scripts'); ?>
+	<script type="text/javascript" src="/js/script-messages.js"></script>
+<?php $__env->stopPush(); ?>
 
 <?php $__env->startPush('styles'); ?>
 	<link rel="stylesheet" type="text/css" href="css/message.css"/>

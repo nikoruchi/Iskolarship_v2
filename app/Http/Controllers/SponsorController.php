@@ -32,10 +32,10 @@ class SponsorController extends Controller{
         $user = User::findOrFail($user_id);
 
         $sponsor_id = Sponsor::where('user_id','=', $user_id)->pluck('sponsor_id');
-        $sponsor = Sponsor::find($sponsor_id);
+        $sponsor = Sponsor::find($sponsor_id)->first(); 
 
         $user_id1 = Sponsor::where('sponsor_id','=',$sponsor_id)->pluck('user_id');
-        $user1 = User::findOrFail($user_id1);
+        $user1 = User::findOrFail($user_id1)->first();
 
         $currentTime = Carbon::now()->toDateTimeString();
 

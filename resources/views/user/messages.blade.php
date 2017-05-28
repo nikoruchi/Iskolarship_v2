@@ -22,26 +22,27 @@
 							<form name="formMsg" id="formMsg">
 								{{ csrf_field() }}
 								<div class="">
-									<input class="form-control" type="text" name="subject" id="subject" placeholder="Subject" value="{{ old('subject') }}"/>
+									<input class="form-control" type="text" name="subject" id="subject" placeholder="Subject" value=""/>
 
 										<span class="help-block">
+											<!-- <strong></strong> -->
 										</span>
 
 
 								</div>
 								<div class="">
-									<input class="form-control" type="text" name="to" id="to" placeholder="To" value="{{ old('to') }}"/>
 
-										<span class="help-block">
-											
-										</span>
-										
+									<input class="form-control" type="text" name="to" id="to" placeholder="To" value="{{empty($email)? '': $email[0]}}"/>
+									<span class="help-block">
+										<!-- <strong></strong> -->
+									</span>
 								</div>
-								<div class="{{ $errors->has('content') ? ' has-error' : '' }} ">
-									<textarea class="form-control" placeholder="Message" name="content" id="message_content" value="{{ old('content') }}"></textarea>
+								<div class="">
+									<textarea class="form-control" placeholder="Message" name="content" id="message_content" value=""></textarea>
 
 							
 										<span class="help-block">
+											<!-- <strong></strong> -->
 										</span>
 
 								</div>
@@ -92,6 +93,10 @@
 	</div>
 
 @endsection
+
+@push('scripts')
+	<script type="text/javascript" src="/js/script-messages.js"></script>
+@endpush
 
 @push('styles')
 	<link rel="stylesheet" type="text/css" href="css/message.css"/>
