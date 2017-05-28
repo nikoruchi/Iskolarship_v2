@@ -189,4 +189,4 @@ Route::get("/notifications", function(){
     }
 });
 
-Route::get('/notif_delete/{notification_id}', 'NotificationsController@deleteNotif');
+Route::get('/notif_delete', 'NotificationsController@deleteNotif');

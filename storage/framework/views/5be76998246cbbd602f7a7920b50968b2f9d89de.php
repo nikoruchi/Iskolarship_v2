@@ -11,7 +11,11 @@
 				<li class="delete"><a href="#"><span class="glyphicon glyphicon-trash"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Delete All Notifications</a></li>
 			</ul>
 
+<<<<<<< HEAD
 			<div class="col-sm-6 col-sm-offset-3">
+=======
+			<div class="col-sm-6 col-smo-offset-3">
+>>>>>>> 7d81aa56a90b37c4524483810b5360603f2bd793
 				<div class="panel panel-default">
 					<div class="panel-body">
 						<ul class="list-unstyled notifs-container">
@@ -19,7 +23,11 @@
 							<?php $__currentLoopData = $notification; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $notif): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> 
 								<?php if($user->user_type == 'sponsor' && str_contains($notif->notification_desc, "A student applied for")): ?>
 								<li class="notif">
+<<<<<<< HEAD
 									<a href="javascript:void(0)" data-pg="$notif->notification_id" class="remove"><span class="glyphicon glyphicon-remove"></span></a>
+=======
+									<a href="javascript:void(0)" data-pg="<?php echo e($notif->notification_id); ?>" class="remove"><span class="glyphicon glyphicon-remove"></span></a>
+>>>>>>> 7d81aa56a90b37c4524483810b5360603f2bd793
 									<img src="<?php echo e(asset('image/default.jpg')); ?>" class="img-responsive"/>
 									<p><?php echo e($notif->notification_desc); ?> <a href="/profile scholarship/<?php echo e($notif->scholarship_id); ?>" class="view">View Application</a> <br/>
 									<i><?php echo e($notif->notification_date); ?></i></p>
@@ -27,7 +35,11 @@
 
 								<?php elseif($user->user_type == 'sponsor' && str_contains($notif->notification_desc, "his slot in")): ?>
 								<li class="notif">
+<<<<<<< HEAD
 									<a href="javascript:void(0)" data-pg="$notif->notification_id" class="remove"><span class="glyphicon glyphicon-remove"></span></a>
+=======
+									<a href="javascript:void(0)" data-pg="<?php echo e($notif->notification_id); ?>" class="remove"><span class="glyphicon glyphicon-remove"></span></a>
+>>>>>>> 7d81aa56a90b37c4524483810b5360603f2bd793
 									<img src="<?php echo e(asset('image/default.jpg')); ?>" class="img-responsive"/>
 									<p><?php echo e($notif->notification_desc); ?> <a href="/profile scholar/<?php echo e($notif->student_id); ?>" class="view">View Scholar</a> <br/>
 									<i><?php echo e($notif->notification_date); ?></i></p>
@@ -35,7 +47,11 @@
 
 								<?php elseif($user->user_type == 'student'): ?>
 								<li class="notif">
+<<<<<<< HEAD
 									<a href="javascript:void(0)" data-pg="$notif->notification_id" class="remove"><span class="glyphicon glyphicon-remove"></span></a>
+=======
+									<a href="javascript:void(0)" data-pg="<?php echo e($notif->notification_id); ?>" class="remove"><span class="glyphicon glyphicon-remove"></span></a>
+>>>>>>> 7d81aa56a90b37c4524483810b5360603f2bd793
 									<img src="<?php echo e(asset('image/spon_def.png')); ?>" class="img-responsive"/>
 									<p><?php echo e($notif->notification_desc); ?> <a href="/profile scholarship/<?php echo e($notif->scholarship_id); ?>" class="view">View Scholarship</a> <br/>
 									<i><?php echo e($notif->notification_date); ?></i></p>									

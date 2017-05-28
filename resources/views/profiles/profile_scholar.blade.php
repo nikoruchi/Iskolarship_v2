@@ -8,7 +8,7 @@
 				<h2 class="education"> {{ $studentProfile->student_studyfield }}, {{ $studentProfile->student_university }}</h2>
 				<h3 class="user-email">{{ $studentProfile->student->email }}</h3>
 				<h3 class="about-me">{{ $studentProfile->student->user_aboutme }}</h3>
-				@if(Auth::user()->hasRole('student'))
+				@if(Auth::user()->hasRole('student') && (Auth::user()->user_id)==($studentProfile->user_id))
 				<div class="btn-group flex">
 					<a href="/Scholar/Account Settings" class="acc_settings">
 						<button class="btn btn-default"><span class="glyphicon glyphicon-cog"></span> Account Settings</button>
@@ -28,7 +28,7 @@
 				<div>
 					@if((Auth::user()->user_id)==($studentProfile->user_id))
 						@if(($pendingAvail->count())>0)
-							<h2 class="text-center">Scholarships</h2>
+							<h2 class="text-center">Pending Scholarships</h2>
 							<ul class="scholarships">
 								@foreach($pendingAvail as $scholarshipAvail)
 								<li>
@@ -54,10 +54,27 @@
 									</article>
 								</li>
 								@endforeach
-						</ul>
+							</ul>
 						@else
 							<h2 class="text-center no-pending">No pending scholarships</h2>
 						@endif
+					@endif
+					@if(($scholarships->count())>0)
+						<h2 class="text-center">Scholarships</h2>
+						<ul class="scholarships">
+							@foreach($scholarships as $scho)
+							<li>
+								<!-- Image of the scholarship is placed here. -->
+								<!-- The H2 here is just a place holder -->
+								<h2 class="first-letter">{{$scho->scholarship_name[0]}}</h2>
+								<article>
+									<h2 class="name">{{$scho->scholarship_name}}</h2>
+									<h5>{{$scho->scholarship_desc}}</h5>
+									<a href="/profile scholarship/{{ $scho->scholarship_id }}" class="view"><span class="glyphicon glyphicon-eye-open"></span> View</a>
+								</article>
+							</li>
+							@endforeach
+						</ul>
 					@endif
 				</div>
 			</div>
