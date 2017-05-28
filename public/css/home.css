@@ -43,6 +43,16 @@
 	margin: 0;
 }
 
+.search-results{
+	margin-top: 0;
+}
+
+.suggestions-header{
+	font-size: 2.5em;
+	margin-bottom: 0.5em;
+	margin-top: 1.5em;
+}
+
 /*#accordion{
 	margin-bottom: 0;
 }

@@ -44,4 +44,7 @@ class ApplicationFamilyAppliances extends Model
      * @var array
      */
 
+    public function applicationstudent(){
+        return $this->belongsTo('App\Scholar','student_id');
+    }
 }

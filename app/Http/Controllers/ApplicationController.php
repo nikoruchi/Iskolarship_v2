@@ -9,14 +9,15 @@ use App\User;
 use App\Application;
 use App\Scholarship;
 use App\Notification;
-use Carbon\Carbon;
 use App\Sponsor;
-use App\Scholarship;
 use App\EssayQuestions;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\MessageBag;
 use Carbon\Carbon;
 use App\EssayAnswer;
+use App\ApplicationSiblingScholar;
+use App\ApplicationRelativeContribution;
+use App\ApplicationFamilyFinancial;
 class ApplicationController extends Controller
 {
     /**
@@ -171,5 +172,24 @@ class ApplicationController extends Controller
         
         dd("bad");
       }
+    }
+
+    public function viewApplication($app_id){
+        $user_id = Auth::user()->user_id;
+        $user = User::findOrFail($user_id);
+        $spon_id = Sponsor::where('user_id','=', $user_id)->pluck('sponsor_id')->first();
+        $sponsor = Sponsor::findOrFail($spon_id);
+        $app = Application::find($app_id);
+        $scholarship_id = $app->scholarship_id;
+        $stud_id = $app->student_id;
+        $siblings = ApplicationSiblingScholar::where('student_id','=',$stud_id)->first();
+        $relatives = ApplicationRelativeContribution::where('student_id','=',$stud_id)->first();
+        $four = ApplicationFamilyFinancial::where('student_id','=',$stud_id)->pluck('beneficiary_dswd4ps')->first();
+        $type = ApplicationFamilyFinancial::where('student_id','=',$stud_id)->pluck('housing_ownershiptype')->first();
+        $answers = EssayAnswer::where('application_id','=',$app_id)->get();
+        $questions = EssayQuestions::where('scholarship_id','=',$scholarship_id)->get();
+        $i = 0;
+                // $four = ApplicationFamilyFinancial::where('student_id','=',$stud_id)->pluck('beneficiary_dswd4ps')->first();
+        return view('profiles/application', compact('questions','answers','sponsor','user','app','siblings','relatives','four','type'));
     }
 }

@@ -11,6 +11,10 @@
 							<h2>Details</h2>
 							<input type="text" name="scholarship_name" id="scholarship_name" class="form-control" placeholder="Scholarship Name" />
 							<textarea name="description" id="description" class="form-control" placeholder="Description"></textarea>
+<<<<<<< HEAD
+=======
+							<!-- <label class="file-label"><span class="glyphicon glyphicon-download-alt"></span> Upload File<input type="file" name="image" class="form-control"/></label> -->
+>>>>>>> 56ed5ce528a5b74f93cf66ffbf1e74d03518407a
 
 							<div class="deadline">
 								<label>Deadline:</label>

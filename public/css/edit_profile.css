@@ -1,0 +1,78 @@
+body.container,
+:not(nav) > .container{
+	width: 100%!important;
+	background-color: white;
+}
+
+.account-set{
+	margin: 0 0 0.75em 0;
+	text-align: center;
+	display: none;
+}
+
+.sex-label{
+	margin-right: 1em;
+}
+
+.input-group{
+	width: 100%;
+}
+
+.input-group label{
+	color: #AAA;
+	font-family: Roboto;
+	font-weight: normal;
+}
+
+.input-group label .glyphicon{
+	color: #7ebcd9;
+}
+
+.input-group:not(.sex) input,
+.input-group:not(.sex) textarea,
+.input-group:not(.sex) select{
+	display: block;
+	width: 100%;
+	border: 0;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+	border-radius: 0;
+	font-family: Roboto;
+	color: #777;
+}
+
+.input-group.name label{
+	display: block;
+}
+
+.input-group.name input{
+	width: 50%;
+}
+
+.input-group.name input:first-of-type{
+	width: 49%;
+	margin-right: 1%;
+}
+
+.file-label{
+	display: block;
+}
+
+.file-label input[type="file"]{
+	display: none;
+}
+
+.square-img{
+	position: relative;
+	display: block;
+	padding-top: 100%; 
+}
+
+.square-img > img{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	object-fit: cover;
+	object-position: center;
+}

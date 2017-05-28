@@ -69,6 +69,8 @@ Route::get("/profile scholarship/{scholarship_id}", function($scholarship_id){
 Route::get('/scholarship form', 'ScholarshipsController@createForm'); 
 Route::get('/scholar setup', 'ProfileSetupController@viewSetup');
 
+Route::get('/application/{app_id}', 'ApplicationController@viewApplication');
+
 //=============== END FOR FRONT-END PURPOSES =======================
 
 

@@ -8,6 +8,10 @@
 				<form action="/registration/Sponsor" method="post">
 					<?php echo e(csrf_field()); ?>
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 56ed5ce528a5b74f93cf66ffbf1e74d03518407a
 					<div class="panel-body">
 						<h2 class="unmargined"><small><span class="glyphicon glyphicon-list-alt"></span> Personal Information</small><span class="section well">1</span></h2>
 						<div class="form-group">

@@ -155,6 +155,7 @@ class SponsorController extends Controller{
             ->where('avail_status','=','pending')
             ->get();
 
+
         return view('profiles.scholars', compact('user','officialScholars','pendingApplications','sponsor'));
     }
 

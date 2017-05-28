@@ -37,7 +37,7 @@
 										<button type="submit" class="accept"><span class="glyphicon glyphicon-remove"></span> Accept</button>
 									</form>
 
-									<a href="/profile scholar/<?php echo e($application->student_id); ?>" class="view"><span class="glyphicon glyphicon-eye-open"></span> View</a>
+									<a href="/application/<?php echo e($application->application_id); ?>"" class="view"><span class="glyphicon glyphicon-eye-open"></span> View</a>
 									<form method="get" action="/application/reject">
 											<?php echo e(csrf_field()); ?>
 

@@ -2,12 +2,10 @@
 
 @section('content')
 	<div class="container main-container">
-		<div class="col-sm-4 col-sm-offset-1">
-			<div class="affix panel panel-default" style="position: relative; margin-bottom: 0; border-radius: 4px 4px 0 0;">
-				<div class="panel-body">
-					<img src="/image/{{$user->user_imagepath}}" class="img-circle img-responsive" style="background-size: cover;" />
-				</div>
-			</div>
+		<div class="col-sm-2">
+			<span class="square-img">
+				<img src="/image/{{$user->user_imagepath}}" class="img-circle img-responsive" style="background-size: cover;" />
+			</span>
 
 			<form action="/Sponsor/upload" method="POST" enctype="multipart/form-data">
 				{{ csrf_field() }}
@@ -162,12 +160,10 @@
 @endsection
 
 @push('styles')
-    <link rel="stylesheet" type="text/css" href="/css/main.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/index.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/register.css"/>
-	<link rel="stylesheet" type="text/css" href="css/edit_profile.css"/>
+    <link rel="stylesheet" type="text/css" href="{{asset('css/main.css')}}"/>
+	<link rel="stylesheet" type="text/css" href="{{asset('css/edit_profile.css')}}"/>
 @endpush
 
 @push('scripts')
-	<script src="js/default_img.js"></script>
+	<script src="{{asset('js/upload_img.js')}}"></script>
 @endpush
