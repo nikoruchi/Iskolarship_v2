@@ -175,7 +175,9 @@ class MessagesController extends Controller
         $replies = Reply::where('msg_id','=',$id)->get();   
         
         $sender_id = $parentmsg->msg_sender;
+        $receiver_id = $parentmsg->msg_receiver;
         $sender = User::find($sender_id);
+        $receiver = User::find($receiver_id);
         // append original message in beggining of array
         $user_id = Auth::user()->user_id;
         if($sender->user_type=='student'){
@@ -183,31 +185,52 @@ class MessagesController extends Controller
         }elseif($sender->user_type=='sponsor'){
             $sender = Sponsor::where('user_id','=',$sender_id)->pluck('sponsor_fname');
         }
+
+        if($receiver->user_type=='student'){
+            $receiver_name = Scholar::where('user_id','=',$receiver_id)->pluck('student_fname');
+        }elseif($receiver->user_type=='sponsor'){
+            $receiver_name = Sponsor::where('user_id','=',$receiver_id)->pluck('sponsor_fname');
+        }
+
         $repliesMsgs[] = array(
             'content'=>$parentmsg->msg_content,
             'sender'=>$parentmsg->msg_sender,
             'sender_name'=>$sender,
             'id'=>$id,
             'timestamp'=>$parentmsg->created_at->diffForHumans(),
-            'user'=>$user_id
+            'user'=>$user_id,
+            'receiver_name'=>$receiver_name
         );
 
         // replies append on array
         foreach($replies as $reply){
             $senderArray = User::find($reply->user_id);
             $id = $reply->user_id;
+
+            // $receiver_id = $parentmsg->msg_receiver;
+            // $receiver = User::find($receiver_id);
+
+
             if($senderArray->user_type=='sponsor'){
                 $sender = Sponsor::where('user_id','=',$id)->pluck('sponsor_fname');
             }elseif($senderArray->user_type=='student'){
                 $sender = Scholar::where('user_id','=',$id)->pluck('student_fname');
             }
+
+
+            // if($receiver->user_type=='student'){
+            //     $receiver_name = Scholar::where('user_id','=',$receiver_id)->pluck('student_fname');
+            // }elseif($receiver->user_type=='sponsor'){
+            //     $sender_name = Sponsor::where('user_id','=',$receiver_id)->pluck('sponsor_fname');
+            // }
             $repliesMsgs[] = array(
                 'content'=>$reply->reply_content,
                 'sender'=>$reply->user_id,
                 'sender_name'=>$sender,
                 'id'=>$reply->msg_id,
                 'timestamp'=>$reply->created_at->diffForHumans(),
-                'user'=>$user_id
+                'user'=>$user_id,
+                'receiver_name'=>$receiver_name
                 );
             }
         return $repliesMsgs;
@@ -250,7 +273,7 @@ class MessagesController extends Controller
 
     public function showThread(Request $request){
         $id = $request->id;
-        $auth = Auth::user()->user_id;      
+        // $auth = Auth::user()->user_id;      
         $thread = $this->messageAndReplies($id);
         return $thread;
     }    

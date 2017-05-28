@@ -35,6 +35,7 @@ function sent(e){
 				msgs+= '<form class="select-form">';
 				msgs+= '<input type="checkbox" name="messages[]" value="'+value['id']+'" class="cbox not-clickable select"/>';
 				msgs+= '</form>';
+				// msgs+= '<p class="to"><strong>' + value['receiver_name']+ '</strong></p>';
 				msgs+= '<p class="from"><strong>' + value['sender_name']+ '</strong></p>';
 				msgs+= '<p class="message-content">' + value['content'] + '</p>';
 				msgs+= '<p class="time-stamp">' + value['timestamp'] +'</p>';
@@ -101,6 +102,8 @@ function seeFullMessage(e){
 					msgs+= '<div class="thread-message their-message">';
 				}
 				msgs+= '<div class="panel-body">';
+								msgs+= '<p class="to"><strong>' + value['receiver_name']+ '</strong></p>';
+
 				msgs+= '<p class="message-sender">' + value['sender_name'] + '</p>';
 				msgs+= '<p class="message-content">' + value['content'] + '</p>';
 				msgs+= '<p class="time-stamp">' + value['timestamp'] +'</p>';
@@ -256,6 +259,7 @@ function all(){
 				msgs+= '<form class="select-form">';
 				msgs+= '<input type="checkbox" name="messages[]" value="'+value['id']+'" class="cbox not-clickable select"/>';
 				msgs+= '</form>';
+	
 				msgs+= '<p class="from"><strong>' + value['sender_name']+ '</strong></p>';
 				msgs+= '<p class="message-content">' + value['content'] + '</p>';
 				msgs+= '<p class="time-stamp">' + value['timestamp'] +'</p>';
