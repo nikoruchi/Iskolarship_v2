@@ -14,7 +14,34 @@ use Carbon\Carbon;
 use App\Reply;
 class MessagesController extends Controller
 {
- 
+    public function autofillMsgSponsor($sponsor){
+        $user_id = Auth::user()->user_id;
+        $user = User::findOrFail($user_id);
+        $stud_id = Scholar::where('user_id','=', $user_id)->pluck('student_id')->first();
+        $student = Scholar::findOrFail($stud_id);
+
+        $data['sponsor']=$sponsor;
+        $user1 = Sponsor::where('sponsor_id', '=', $data['sponsor'])->pluck('user_id')->first();
+
+        $email = User::where('user_id','=',$user1)->pluck('email');
+        $inbox = Message::where('msg_receiver','=',$user_id)->get();
+        return view('/user/messages', compact('sponsor', 'student','user', 'email', 'inbox'));
+    }
+
+    public function autofillMsgScholar($student){
+        $user_id = Auth::user()->user_id;
+        $user = User::findOrFail($user_id);
+        $spon_id = Sponsor::where('user_id','=', $user_id)->pluck('sponsor_id')->first();
+        $sponsor = Sponsor::findOrFail($spon_id);
+
+        $data['student']=$student;
+        $user1 = Scholar::where('student_id', '=', $data['student'])->pluck('user_id')->first();
+
+        $email = User::where('user_id','=',$user1)->pluck('email');
+        $inbox = Message::where('msg_receiver','=',$user_id)->get();
+        return view('/user/messages', compact('sponsor', 'student','user', 'email', 'inbox'));
+    }
+
     public function indexSponsor()
     {
         $user_id = Auth::user()->user_id;

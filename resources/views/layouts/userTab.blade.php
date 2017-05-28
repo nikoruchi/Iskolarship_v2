@@ -10,16 +10,11 @@
 
 	<script type="text/javascript" src="/js/js.js"></script>
     <script type="text/javascript" src="/js/script-messages.js"></script>
-<<<<<<< HEAD
     <script type="text/javascript" src="/js/reopen_script.js"></script>
-=======
     <script type="text/javascript" src="/js/script-form.js"></script>
 
->>>>>>> 06e4d51ba619429dcb5bc9ae16780800b692a035
- 	<!-- <script type="text/javascript" src="/js/script.js"></script> -->
     <meta name="csrf_token" content = "{{ csrf_token() }}">
 
-	<!-- <link rel="stylesheet" type="text/css" href="css/scholarship_page.css"/> -->
 	@stack('styles')
 </head>
 <body class="container">

@@ -23,25 +23,29 @@
 				<?php endif; ?>
 				<?php if(Auth::user()->hasRole('student')): ?>
 				<div class="btn-group flex">
-					<button class="btn btn-primary"> <span class="glyphicon glyphicon-envelope"></span> Message</button>
+					<a href="<?php echo e(url('/messages',[$sponsor->sponsor_id])); ?>">
+						<button class="btn btn-primary"> <span class="glyphicon glyphicon-envelope"></span> Message</button>
+						
+					</a>
 				</div>
 				<?php endif; ?>
 				<?php if(Auth::user()->hasRole('student')): ?>
 				
 				<?php endif; ?>
 				<div>
-					<?php if(!empty($scholarships)): ?>
+					<?php if(!empty($openscholarships) || !empty($endscholarships)): ?>
 					<h2 class="text-center">Scholarships</h2>
 					<ul class="scholarships">
 					
-					<!-- <?php if($scholarships->count()>0): ?> -->
-						<h4> Open Scholarships </h4>
-						<?php $__currentLoopData = $scholarships; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $scho): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-							<?php if($scho->scholarship_deadlineenddate > $currentTime): ?>
+					<h4> Open Scholarships </h4>
+					<?php if(!empty($openscholarships)): ?>						
+						<?php $__currentLoopData = $openscholarships; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $scho): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 							<li>
+								
 								<h2 class="first-letter"><?php echo e($scho->scholarship_name[0]); ?></h2>
 								<article>
 									<h2 class="name"><?php echo e($scho->scholarship_name); ?></h2>
+									<h6><b> Application Deadline: </b><i> <?php echo e(date('m/d/Y', strtotime($scho->scholarship_deadlineenddate))); ?> </i></h6>
 									<?php if(Auth::user()->user_id==$user1->user_id): ?>
 										<div class="btns">
 											<a href="#" class="edit"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
@@ -53,22 +57,29 @@
 										</div>
 									<?php endif; ?>
 								</article>
+								
 							</li>
-							<?php endif; ?>
 						<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-					<!-- //<?php endif; ?> -->
+					<?php else: ?>
+						<?php if( (empty($sponsor1) && $user->user_type == "sponsor") || (empty($sponsor) && $user->user_type == "student") ): ?>
+							<h5 class="text-center">You haven't created any open scholarships.</h5>
+						<?php else: ?>
+							<h5 class="text-center">No open scholarship to show.</h5>
+						<?php endif; ?>
+					<?php endif; ?>
 
-					<!-- <?php if(!empty($scholarships)): ?> -->
-						<h4> Closed Scholarships </h4>
-						<?php $__currentLoopData = $scholarships; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $scho): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-							<?php if($scho->scholarship_deadlineenddate < $currentTime): ?>
+					<h4> Closed Scholarships </h4>
+					<?php if(!empty($endscholarships)): ?>
+						<?php $__currentLoopData = $endscholarships; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $scho): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 							<li>
+
 								<h2 class="first-letter"><?php echo e($scho->scholarship_name[0]); ?></h2>
 								<article>
 									<h2 class="name"><?php echo e($scho->scholarship_name); ?> </h2>
+									<h6> <b> Application Period: </b> <i> <?php echo e(date('m/d/Y', strtotime($scho->scholarship_deadlinestartdate))); ?> - <?php echo e(date('m/d/Y', strtotime($scho->scholarship_deadlineenddate))); ?> </i> </h6>
 									<?php if(Auth::user()->user_id==$user1->user_id): ?>
 										<div class="btns">
-											<a href="#" class="edit" data-toggle="modal" data-target="#reOpen"><span class="glyphicon glyphicon-pencil"></span> Re-open</a>
+											<a href="javascript:void(0)" data-target="#reOpen<?php echo e($scho->scholarship_id); ?>" data-pg="<?php echo e($scho->scholarship_id); ?>" class="edit" data-toggle="modal"><span class="glyphicon glyphicon-pencil"></span> Re-open</a>
 											<a href="<?php echo e(url('profile sponsor/scholars')); ?>" class="view_scholars"><span class="glyphicon glyphicon-eye-open"></span> Scholars</a>
 										</div>
 									<?php else: ?>
@@ -77,10 +88,11 @@
 										</div>
 									<?php endif; ?>
 								</article>
+															
 							</li>
-							<?php endif; ?>
+							
 							<!-- RE-OPEN MODAL -->
-							<div id="reOpen" class="modal fade" role="dialog">
+							<div id="reOpen<?php echo e($scho->scholarship_id); ?>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
 							  	<div class="modal-dialog">
 								    <div class="modal-content">
 								      	<div class="modal-header">
@@ -88,8 +100,10 @@
 								        	<h4 class="modal-title">Re-Open <?php echo e($scho->scholarship_name); ?> Application</h4>
 								      	</div>
 								      	<div class="modal-body">
-								        	<form action="/scholarship/reopen" method="get">
+
+								        	<form action="/scholarship/reopen/<?php echo e($scho->scholarship_id); ?>" method="get">
 									        	<div class="input-group">
+									        		<p> <?php echo e($scho->scholarship_id); ?> <?php echo e($scho->scholarship_name); ?> </p>
 													<input type="date" name="new_deadline" class="form-control" />
 													<input type="text" name="scholarship_id" value="<?php echo e($scho->scholarship_id); ?>" style="display:none"/>
 										</div>
@@ -105,16 +119,21 @@
 								    </div>
 							  	</div>
 							</div>
-
 						<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-					<!-- <?php endif; ?> -->
+					<?php else: ?>
+						<?php if( (empty($sponsor1) && $user->user_type == "sponsor") || (empty($sponsor) && $user->user_type == "student") ): ?>
+							<h5 class="text-center">You haven't created any open scholarships.</h5>
+						<?php else: ?>
+							<h5 class="text-center">No open scholarship to show.</h5>
+						<?php endif; ?>
+					<?php endif; ?>
 					</ul>
 					<?php else: ?>
-					<?php if( (empty($sponsor1) && $user->user_type == "sponsor") || (empty($sponsor) && $user->user_type == "student") ): ?>
-					<h3 class="text-center">You haven't created any scholarships.</h3>
-					<?php else: ?>
-					<h3 class="text-center">No scholarship to show.</h3>
-					<?php endif; ?>
+						<?php if( (empty($sponsor1) && $user->user_type == "sponsor") || (empty($sponsor) && $user->user_type == "student") ): ?>
+						<h3 class="text-center">You haven't created any scholarships.</h3>
+						<?php else: ?>
+						<h3 class="text-center">No scholarship to show.</h3>
+						<?php endif; ?>
 					<?php endif; ?>
 				</div>
 			</div>
