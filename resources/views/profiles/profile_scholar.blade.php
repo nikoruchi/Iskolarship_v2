@@ -15,10 +15,11 @@
 					</a>
 				</div>
 				@endif
-				@if(Auth::user()->user_id != $studentProfile->user_id)
+				@if((Auth::user()->user_id != $studentProfile->user_id) || (Auth::user()->hasRole('sponsor')))
 				<div class="btn-group flex">
-
-					<a class="btn btn-primary" href="{{ route('email', ['emailadd' => $user->email]) }}"> <span class="glyphicon glyphicon-envelope"></span> Message</a>
+				
+				<button class="btn btn-primary"> <span class="glyphicon glyphicon-envelope"></span> Message</button>
+				
 				</div>
 				@endif
 				<div>

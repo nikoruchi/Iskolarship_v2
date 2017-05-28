@@ -8,6 +8,8 @@ $(document).ready(function(){
 	$(document).on("click",".mark", markAsRead);
 	$(document).on("click",".not-clickable", notClickable);
 	$(document).on("click", ".reply", sendReply);
+	$(document).on("click", ".edit", edit);
+	$(document).on("click", ".delete", deleteNotif);
 })
 
 $(document).ready(function(){

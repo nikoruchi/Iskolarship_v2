@@ -57,11 +57,12 @@ function createForm(e){
 			data: {grants:grantSpec, 
 				specifications:specsSpec, 
 				questions:questions, 
-				details:details, 
+				details:details
 				// formData:formData },
 			},
 			success:function(data){
-				console.log("Data from send: " +data);
+				window.location.href = '/profile scholarship/'+data;
+				// console.log("Data from send: " +data);
 			},
 			error:function(data){
 				console.log("Error: " +data);

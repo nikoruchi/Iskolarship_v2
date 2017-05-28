@@ -14,14 +14,11 @@
 					</a>
 				</div>
 				<?php endif; ?>
-				<?php if(Auth::user()->user_id != $studentProfile->user_id): ?>
+				<?php if(Auth::user()->hasRole('sponsor')): ?>
 				<div class="btn-group flex">
-<<<<<<< HEAD
-
-					<a class="btn btn-primary" href="<?php echo e(route('email', ['emailadd' => $user->email])); ?>"> <span class="glyphicon glyphicon-envelope"></span> Message</a>
-=======
-					<button class="btn btn-primary"> <span class="glyphicon glyphicon-envelope"></span> Message</button>
->>>>>>> f0c61e824889768a2c2ef02652eaadb137493b51
+					<a href="<?php echo e(url('/messages',[$student->student_id])); ?>">
+						<button class="btn btn-primary"> <span class="glyphicon glyphicon-envelope"></span> Message</button>
+					</a>
 				</div>
 				<?php endif; ?>
 				<div>

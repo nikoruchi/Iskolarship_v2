@@ -67,7 +67,6 @@ Route::get("/profile scholarship/{scholarship_id}", function($scholarship_id){
 
 //=============== FOR FRONT-END PURPOSES =======================
 Route::get('/scholarship form', 'ScholarshipsController@createForm'); 
-Route::get('/notifications', 'NotificationsController@viewNotifications');
 Route::get('/scholar setup', 'ProfileSetupController@viewSetup');
 Route::get('/scholar setup form', 'ProfileSetupController@viewSetupForm');
 Route::get('/scholar questionaire', 'ApplicationController@viewQuestionaire');
@@ -106,6 +105,8 @@ Route::get("/messages", function(){
 });
 
 Route::group(['middleware' => 'isguest'], function(){
+    Route::get('/messages/{sponsor}', 'MessagesController@autofillMsgSponsor');
+    // Route::get('/messages/{student}', 'MessagesController@autofillMsgScholar');
     Route::get('/messages/read', 'MessagesController@getReadMsg');
     Route::get('/messages/unread', 'MessagesController@getUnReadMsg');
     Route::get('/messages/inbox', 'MessagesController@getAllMsg');
@@ -116,7 +117,6 @@ Route::group(['middleware' => 'isguest'], function(){
     Route::get('/messages/mark', 'MessagesController@readMessage'); 
     Route::get('/getlessons/{lesson_id}/{page_number}', 'LessonController@getPage');
     Route::get('/messages/delete', 'MessagesController@destroy');
-    Route::get('email/{emailadd}','MessagesController@sendSpecific')->name('email');
 });
 
 
@@ -163,4 +163,19 @@ Route::get("/profile sponsor/{sponsor_id}", function($sponsor_id){
 //     }
 // });
 
-Route::get('/scholarship/reopen', 'ScholarshipsController@reopenScholarship');
+Route::get('/profile_sponsor/{scholarship_id}', 'SponsorController@profileCont');
+Route::get('/scholarship/reopen/{scholarship_id}', 'ScholarshipsController@reopenScholarship');
+//Route::get('/');
+
+// FOR NOTIFICATIONS
+Route::get("/notifications", function(){
+    switch(Auth::user()->user_type){
+        case 'sponsor':
+          return (new \App\Http\Controllers\NotificationsController)->viewNotificationsFrSponsor();
+        break;
+
+        case 'student':
+          return (new \App\Http\Controllers\NotificationsController)->viewNotifications();
+        break;
+    }
+});

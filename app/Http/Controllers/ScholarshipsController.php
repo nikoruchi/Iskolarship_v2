@@ -28,76 +28,74 @@ class ScholarshipsController extends Controller
     }
 
     public function createScholarship(Request $request){
-        // $currentTime = Carbon::now()->toDateTimeString();
-        // $details = $request->details;
-        // $grants = $request->grants;
-        // $specs = $request->specifications;
-        // $questions = $request->questions;
-        $file = Input::file('image');
+        $currentTime = Carbon::now()->toDateTimeString();
+        $details = $request->details;
+        $grants = $request->grants;
+        $specs = $request->specifications;
+        $questions = $request->questions;
        
-        // $user_id = Auth::user()->user_id;
-        // $sponsor_id = Sponsor::where('user_id','=',$user_id)->pluck('sponsor_id')->first();
+        $user_id = Auth::user()->user_id;
+        $sponsor_id = Sponsor::where('user_id','=',$user_id)->pluck('sponsor_id')->first();
 
-        // $scholarship = new Scholarship;
-        // $scholarship->sponsor_id = $sponsor_id;
-        // $scholarship->scholarship_name = $details[0];
-        // $scholarship->scholarship_desc = $details[1];
-        // $scholarship->save();
+        $scholarship = new Scholarship;
+        $scholarship->sponsor_id = $sponsor_id;
+        $scholarship->scholarship_name = $details[0];
+        $scholarship->scholarship_desc = $details[1];
+        $scholarship->scholarship_logo = 'defaultlogo.jpg';
+        $scholarship->save();
     
-        // $lastId = $scholarship->scholarship_id;
+        $lastId = $scholarship->scholarship_id;
     
-        // $deadline = new ScholarshipsDeadline;
-        // $deadline->scholarship_id=$lastId;
-        // $deadline->scholarship_deadlinestartdate=$currentTime;
-        // $deadline->scholarship_deadlineenddate=$details[2];
-        // $deadline->save();
+        $deadline = new ScholarshipsDeadline;
+        $deadline->scholarship_id=$lastId;
+        $deadline->scholarship_deadlinestartdate=$currentTime;
+        $deadline->scholarship_deadlineenddate=$details[2];
+        $deadline->save();
+
+        for($i=0;$i<(count($grants));$i++){
+            $grant = new ScholarshipGrant;
+            $grant->scholarship_id = $lastId;
+            $grant->scholarship_grantDesc=$grants[$i];
+            $grant->save();
+        }
+
+        for($i=0;$i<(count($specs));$i++){
+            $spec = new ScholarshipSpecification;
+            $spec->scholarship_id = $lastId;
+            $spec->scholarship_specDesc=$specs[$i];
+            $spec->save();
+        }
+
+        for($i=0;$i<(count($questions));$i++){
+            $question = new EssayQuestions;
+            $question->scholarship_id = $lastId;
+            $question->essay_question=$questions[$i];
+            $question->save();
+        }
 
 
-        // for($i=0;$i<(count($grants));$i++){
-        //     $grant = new ScholarshipGrant;
-        //     $grant->scholarship_id = $lastId;
-        //     $grant->scholarship_grantDesc=$grants[$i];
-        //     $grant->save();
-        // }
-
-        // for($i=0;$i<(count($specs));$i++){
-        //     $spec = new ScholarshipSpecification;
-        //     $spec->scholarship_id = $lastId;
-        //     $spec->scholarship_specDesc=$specs[$i];
-        //     $spec->save();
-        // }
-
-        // for($i=0;$i<(count($questions));$i++){
-        //     $question = new EssayQuestions;
-        //     $question->scholarship_id = $lastId;
-        //     $question->essay_question=$questions[$i];
-        //     $question->save();
-        // }
-
-        $scholarship=Scholarship::find(28);
+        // $file = Input::file('image');
         // $input = array('image' => $file);
         // $rules = array(
         // );
         // $image=$file;
-        $validator = Validator::make([
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
+        // $validator = Validator::make([
+        //     'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        // ]);
         
-        if ( $validator->fails() )
-        {
-            return Response::json(['success' => false, 'errors' => $validator->getMessageBag()->toArray()]);
-        } else {
-            $destinationPath = '/logo';
-            $filename = $file->getClientOriginalName();
-            Input::file('image')->move($destinationPath, $filename);
-            $scholarship->scholarship_logo=$filename;
-            $scholarship->save();
-            return Response::json(['success' => true, 'file' => asset($destinationPath.$filename)]);
-        }
+        // if ( $validator->fails() )
+        // {
+        //     return Response::json(['success' => false, 'errors' => $validator->getMessageBag()->toArray()]);
+        // } else {
+        //     $destinationPath = '/logo';
+        //     $filename = $file->getClientOriginalName();
+        //     Input::file('image')->move($destinationPath, $filename);
+        //     $scholarship->scholarship_logo=$filename;
+        //     $scholarship->save();
+        //     return Response::json(['success' => true, 'file' => asset($destinationPath.$filename)]);
+        // }
         
-        // $lastId=20;
-        
-        // return redirect()->route('scholarship', ['scholarship_id' => $lastId]);
+        return $lastId;
     }
  
     public function scholarshipStudent($scholarship_id){
@@ -151,7 +149,7 @@ class ScholarshipsController extends Controller
         return view('/profiles/profile_scholarship', compact('sponsor','user','scholarship', 'deadline', 'currentTime', 'specifications','grants','scholars'));
     } 
 
-    public function reopenScholarship(){
+    public function reopenScholarship($scholarship_id){
         $user_id = Auth::user()->user_id;
         $user = User::findOrFail($user_id);
         $spon_id = Sponsor::where('user_id','=', $user_id)->pluck('sponsor_id')->first();

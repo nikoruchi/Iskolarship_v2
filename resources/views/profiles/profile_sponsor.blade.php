@@ -25,25 +25,24 @@
 				@endif
 				@if(Auth::user()->hasRole('student'))
 				<div class="btn-group flex">
-					<button class="btn btn-primary"> <span class="glyphicon glyphicon-envelope"></span> Message</button>
+					<a href="{{ url('/messages',[$sponsor->sponsor_id])}}">
+						<button class="btn btn-primary"> <span class="glyphicon glyphicon-envelope"></span> Message</button>
+					</a>
 				</div>
 				@endif
-				@if(Auth::user()->hasRole('student'))
-				
-				@endif
 				<div>
-					@if(!empty($scholarships))
+					@if(!empty($openscholarships) || !empty($endscholarships))
 					<h2 class="text-center">Scholarships</h2>
 					<ul class="scholarships">
 					
-					<!-- @if($scholarships->count()>0) -->
-						<h4> Open Scholarships </h4>
-						@foreach($scholarships as $scho)
-							@if($scho->scholarship_deadlineenddate > $currentTime)
+					<h4> Open Scholarships </h4>
+					@if(!empty($openscholarships))						
+						@foreach($openscholarships as $scho)
 							<li>
 								<h2 class="first-letter">{{$scho->scholarship_name[0]}}</h2>
 								<article>
 									<h2 class="name">{{$scho->scholarship_name}}</h2>
+									<h6><b> Application Deadline: </b><i> {{date('m/d/Y', strtotime($scho->scholarship_deadlineenddate))}} </i></h6>
 									@if(Auth::user()->user_id==$user1->user_id)
 										<div class="btns">
 											<a href="#" class="edit"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
@@ -55,22 +54,29 @@
 										</div>
 									@endif
 								</article>
+								
 							</li>
-							@endif
 						@endforeach
-					<!-- //@endif -->
+					@else
+						@if( (empty($sponsor1) && $user->user_type == "sponsor") || (empty($sponsor) && $user->user_type == "student") )
+							<h5 class="text-center">You haven't created any open scholarships.</h5>
+						@else
+							<h5 class="text-center">No open scholarship to show.</h5>
+						@endif
+					@endif
 
-					<!-- @if(!empty($scholarships)) -->
-						<h4> Closed Scholarships </h4>
-						@foreach($scholarships as $scho)
-							@if($scho->scholarship_deadlineenddate < $currentTime)
+					<h4> Closed Scholarships </h4>
+					@if(!empty($endscholarships))
+						@foreach($endscholarships as $scho)
 							<li>
+
 								<h2 class="first-letter">{{$scho->scholarship_name[0]}}</h2>
 								<article>
 									<h2 class="name">{{$scho->scholarship_name}} </h2>
+									<h6> <b> Application Period: </b> <i> {{date('m/d/Y', strtotime($scho->scholarship_deadlinestartdate))}} - {{date('m/d/Y', strtotime($scho->scholarship_deadlineenddate))}} </i> </h6>
 									@if(Auth::user()->user_id==$user1->user_id)
 										<div class="btns">
-											<a href="#" class="edit" data-toggle="modal" data-target="#reOpen"><span class="glyphicon glyphicon-pencil"></span> Re-open</a>
+											<a href="javascript:void(0)" data-target="#reOpen{{$scho->scholarship_id}}" data-pg="{{$scho->scholarship_id}}" class="edit" data-toggle="modal"><span class="glyphicon glyphicon-pencil"></span> Re-open</a>
 											<a href="{{ url('profile sponsor/scholars') }}" class="view_scholars"><span class="glyphicon glyphicon-eye-open"></span> Scholars</a>
 										</div>
 									@else
@@ -79,10 +85,11 @@
 										</div>
 									@endif
 								</article>
+															
 							</li>
-							@endif
+							
 							<!-- RE-OPEN MODAL -->
-							<div id="reOpen" class="modal fade" role="dialog">
+							<div id="reOpen{{$scho->scholarship_id}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
 							  	<div class="modal-dialog">
 								    <div class="modal-content">
 								      	<div class="modal-header">
@@ -90,8 +97,10 @@
 								        	<h4 class="modal-title">Re-Open {{$scho->scholarship_name}} Application</h4>
 								      	</div>
 								      	<div class="modal-body">
-								        	<form action="/scholarship/reopen" method="get">
+
+								        	<form action="/scholarship/reopen/{{$scho->scholarship_id}}" method="get">
 									        	<div class="input-group">
+									        		<p> {{$scho->scholarship_id}} {{$scho->scholarship_name}} </p>
 													<input type="date" name="new_deadline" class="form-control" />
 													<input type="text" name="scholarship_id" value="{{$scho->scholarship_id}}" style="display:none"/>
 										</div>
@@ -107,16 +116,21 @@
 								    </div>
 							  	</div>
 							</div>
-
 						@endforeach
-					<!-- @endif -->
+					@else
+						@if( (empty($sponsor1) && $user->user_type == "sponsor") || (empty($sponsor) && $user->user_type == "student") )
+							<h5 class="text-center">You haven't created any open scholarships.</h5>
+						@else
+							<h5 class="text-center">No open scholarship to show.</h5>
+						@endif
+					@endif
 					</ul>
 					@else
-					@if( (empty($sponsor1) && $user->user_type == "sponsor") || (empty($sponsor) && $user->user_type == "student") )
-					<h3 class="text-center">You haven't created any scholarships.</h3>
-					@else
-					<h3 class="text-center">No scholarship to show.</h3>
-					@endif
+						@if( (empty($sponsor1) && $user->user_type == "sponsor") || (empty($sponsor) && $user->user_type == "student") )
+						<h3 class="text-center">You haven't created any scholarships.</h3>
+						@else
+						<h3 class="text-center">No scholarship to show.</h3>
+						@endif
 					@endif
 				</div>
 			</div>
