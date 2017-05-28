@@ -118,4 +118,12 @@ class ApplicationController extends Controller
         $student = Scholar::findOrFail($stud_id);
         return view('registration/scholarship_application', compact('student','user'));
     }
+
+    public function viewApplication(){
+        $user_id = Auth::user()->user_id;
+        $user = User::findOrFail($user_id);
+        $spon_id = Sponsor::where('user_id','=', $user_id)->pluck('sponsor_id')->first();
+        $sponsor = Sponsor::findOrFail($spon_id);
+        return view('profiles/application', compact('sponsor','user'));
+    }
 }

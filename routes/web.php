@@ -76,6 +76,8 @@ Route::get('/scholarship form', 'ScholarshipsController@createForm');
 Route::get('/scholar setup', 'ProfileSetupController@viewSetup');
 Route::get('/scholar questionaire', 'ApplicationController@viewQuestionaire');
 
+Route::get('/application', 'ApplicationController@viewApplication');
+
 //=============== END FOR FRONT-END PURPOSES =======================
 
 
