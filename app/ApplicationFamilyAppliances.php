@@ -19,7 +19,7 @@ class ApplicationFamilyAppliances extends Model
     protected $fillable = [
  		'student_id',
     	'aircon_num',
-        'aircon_acquisitiion' ,
+        'aircon_acquisition' ,
         // 'aircon_year',
         'camera_num',
         'camera_acquisition',

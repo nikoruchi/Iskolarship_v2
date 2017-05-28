@@ -24,7 +24,7 @@ class CreateApplicationFamilyfinancialTable extends Migration
             $table->string('mother_AGincome');
             $table->string('mother_selfAGincome');
             $table->string('beneficiary_dswd4ps');
-            $table->string('housing_onwershiptype');
+            $table->string('housing_ownershiptype');
             $table->string('housing_rental');
             $table->string('housing_amortization');
             $table->timestamps();

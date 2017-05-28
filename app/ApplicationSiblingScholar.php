@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 
-class ApplicationSiblingsScholar extends Model
+class ApplicationSiblingScholar extends Model
 {
      use Notifiable;
     protected $primaryKey = 'sibling_id';

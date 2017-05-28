@@ -3,27 +3,27 @@
 		<div class="row">
 			<div class="col-sm-8 col-sm-offset-2">
 				<img src="/image/<?php echo e($user->user_imagepath); ?>" class="img-responsive user-pp img-circle"/>
-				<h1 class="user-name"><?php echo e($student->student_fname); ?></h1>
-				<h2 class="education"> <?php echo e($student->student_studyfield); ?>, <?php echo e($student->student_university); ?></h2>
-				<h3 class="user-email"><?php echo e($student->student->email); ?></h3>
-				<h3 class="about-me"><?php echo e($student->student->user_aboutme); ?></h3>
+				<h1 class="user-name"><?php echo e($studentProfile->student_fname); ?></h1>
+				<h2 class="education"> <?php echo e($studentProfile->student_studyfield); ?>, <?php echo e($studentProfile->student_university); ?></h2>
+				<h3 class="user-email"><?php echo e($studentProfile->student->email); ?></h3>
+				<h3 class="about-me"><?php echo e($studentProfile->student->user_aboutme); ?></h3>
 				<?php if(Auth::user()->hasRole('student')): ?>
 				<div class="btn-group flex">
 					<a href="/Scholar/Account Settings" class="acc_settings">
 						<button class="btn btn-default"><span class="glyphicon glyphicon-cog"></span> Account Settings</button>
 					</a>
-					<a href="/profile scholar/setup form">
+					<a href="/setup form">
 						<button class="btn btn-default"><span class="glyphicon glyphicon-cog"></span> Account Setup</button>
 					</a>
 				</div>
 				<?php endif; ?>
-				<?php if(Auth::user()->user_id != $student->user_id): ?>
+				<?php if(Auth::user()->user_id != $studentProfile->user_id): ?>
 				<div class="btn-group flex">
 					<button class="btn btn-primary"> <span class="glyphicon glyphicon-envelope"></span> Message</button>
 				</div>
 				<?php endif; ?>
 				<div>
-					<?php if((Auth::user()->user_id)==($student->user_id)): ?>
+					<?php if((Auth::user()->user_id)==($studentProfile->user_id)): ?>
 						<?php if(($pendingAvail->count())>0): ?>
 							<h2 class="text-center">Scholarships</h2>
 							<ul class="scholarships">

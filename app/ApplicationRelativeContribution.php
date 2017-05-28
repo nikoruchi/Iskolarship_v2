@@ -18,6 +18,7 @@ class ApplicationRelativeContribution extends Model
      */
     protected $fillable = [
  		'student_id',
+        'relative_name',
     	'relative_natureofcontribution',
         'relative_relationship' ,
         'relative_averagecontribution',       

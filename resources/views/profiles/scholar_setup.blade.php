@@ -66,7 +66,7 @@
 									<input class="form-control" name="sib_school" type="text" placeholder="Course & College/University">
 								</div>
 							</div>
-							<button class="btn btn-success btn-block add-sib">Add Sibling <span class="glyphicon glyphicon-plus"></span></button>
+							<button type="button" class="btn btn-success btn-block add-sib">Add Sibling <span class="glyphicon glyphicon-plus"></span></button>
 							<hr>
 							<h3>Financial and Socio-economic Information</h3>
 							<div class="row">
@@ -127,7 +127,7 @@
 											<input class="form-control" name="rel_con" type="text" placeholder="Average Contribution">
 										</div>
 									</div>
-									<button class="btn btn-success btn-block add-rel">Add Relative <span class="glyphicon glyphicon-plus"></span></button>
+									<button type="button" class="btn btn-success btn-block add-rel">Add Relative <span class="glyphicon glyphicon-plus"></span></button>
 								</div>
 							</div>
 							<hr>

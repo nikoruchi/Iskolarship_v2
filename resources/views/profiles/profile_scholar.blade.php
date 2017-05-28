@@ -13,7 +13,7 @@
 					<a href="/Scholar/Account Settings" class="acc_settings">
 						<button class="btn btn-default"><span class="glyphicon glyphicon-cog"></span> Account Settings</button>
 					</a>
-					<a href="/profile scholar/setup form">
+					<a href="/setup form">
 						<button class="btn btn-default"><span class="glyphicon glyphicon-cog"></span> Account Setup</button>
 					</a>
 				</div>
