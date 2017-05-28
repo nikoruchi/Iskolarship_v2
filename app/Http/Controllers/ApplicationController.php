@@ -1,5 +1,5 @@
 <?php
-
+ 
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -43,16 +43,14 @@ class ApplicationController extends Controller
        $application = Application::find($id);
        $application->accept_status='accept';
 
-       $scholarship = Scholarship::join('application', 'Scholarship.scholarship_id', '=', 'Application.scholarship_id')
-          ->where('Application.application_id','=',$request->id)
-          ->select('Scholarship.scholarship_name')
-          ->get();
+       $scholarship = Scholarship::findOrFail($application->scholarship_id);
+       $student = Scholar::findOrFail($application->student_id);
 
        $notif = new Notification;
-       $notif->notification_desc = "Your application in ".$scholarship." has been accepted";
+       $notif->notification_desc = "Your application in ".$scholarship->scholarship_name." has been accepted.";
        $notif->notification_status = 'unread';
        $notif->application_id = $id;
-       $notif->account_id = $application->student_id;
+       $notif->account_id = $student->user_id;
 
        $notif->save();
        $application->save();
@@ -64,6 +62,17 @@ class ApplicationController extends Controller
        $id = $request->input('app_id');
        $application = Application::find($id);
        $application->accept_status='reject';
+
+       $scholarship = Scholarship::findOrFail($application->scholarship_id);
+       $student = Scholar::findOrFail($application->student_id);
+
+       $notif = new Notification;
+       $notif->notification_desc = "Your application in ".$scholarship->scholarship_name." has been rejected.";
+       $notif->notification_status = 'unread';
+       $notif->application_id = $id;
+       $notif->account_id = $student->user_id;
+
+       $notif->save();
        $application->save();
        return redirect()->back();
     }
