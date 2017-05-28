@@ -9,7 +9,7 @@
 					<div class="panel-heading">
 						<img src="/image/{{$scholarship->scholarship_logo}}" class="img-responsive scholarship-logo"/>
 										
-							<form action="{{url('/edit', [$scholarship->scholarship_id])}}" method="POST" enctype="multipart/form-data">
+							<form action="{{url('/edit', [$scholarship->scholarship_id])}}" method="GET" enctype="multipart/form-data">
 								{{ method_field('PUT') }}
 								{{ csrf_field() }}
 								<div class="input-group text-center {{ $errors->has('image') ? ' has-error' : '' }} center-block">

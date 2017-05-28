@@ -67,7 +67,7 @@ Route::get("/profile scholarship/{scholarship_id}", function($scholarship_id){
 
 // Route::resource('edit','UploadImgScholarships');
 // Route::get('/edit/{scholarship_id}', 'UploadImgScholarships@showImg');
-// Route::post('/edit/upload/{scholarship_id}', 'UploadImgScholarships@uploadImg');
+// Route::get('/edit/upload/{scholarship_id}', 'UploadImgScholarships@uploadImg');
 
 
 //=============== FOR FRONT-END PURPOSES =======================

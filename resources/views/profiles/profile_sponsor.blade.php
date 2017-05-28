@@ -33,36 +33,6 @@
 				<div>
 					@if(count($openscholarships) > 0 || count($endscholarships) > 0)
 					<h2 class="text-center">Scholarships</h2>
-<<<<<<< HEAD
-					<ul class="scholarships">
-					
-					
-					@if(!empty($openscholarships))
-					<h4> Open Scholarships </h4>						
-						@foreach($openscholarships as $scho)
-							<li>
-								<h2 class="first-letter">{{$scho->scholarship_name[0]}}</h2>
-								<article>
-									<h2 class="name">{{$scho->scholarship_name}}</h2>
-									<h6><b> Application Deadline: </b><i> {{date('m/d/Y', strtotime($scho->scholarship_deadlineenddate))}} </i></h6>
-									@if(Auth::user()->user_id==$user1->user_id)
-										<div class="btns">
-											<a href="/profile scholarship/{{$scho->scholarship_id}}" class="edit"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
-											<a href="{{ url('profile sponsor/scholars') }}" class="view_scholars"><span class="glyphicon glyphicon-eye-open"></span> Scholars</a>
-										</div>
-									@else
-										<div class="btns">
-											<a href="/profile scholarship/{{$scho->scholarship_id}}" class="view_scholars"><span class="glyphicon glyphicon-eye-open"></span> View</a>
-										</div>
-									@endif
-								</article>
-								
-							</li>
-						@endforeach
-					@else
-						@if( (empty($sponsor1) && $user->user_type == "sponsor") || (empty($sponsor) && $user->user_type == "student") )
-							<h5 class="text-center">You haven't created any open scholarships.</h5>
-=======
 					<ul class="scholarships">					
 						@if(count($openscholarships) > 0)						
 							<h4 class="text-center"> Open Scholarships </h4>
@@ -86,8 +56,7 @@
 									
 								</li>
 							@endforeach
->>>>>>> bb26dc19fbfa58805ff87fcfce56fcbdd56089b7
-						@else
+						<!-- @else -->
 							@if( (empty($sponsor1) && $user->user_type == "sponsor") || (empty($sponsor) && $user->user_type == "student") )
 								<h5 class="text-center">You haven't created any open scholarships.</h5>
 							@else
@@ -95,18 +64,10 @@
 							@endif
 						@endif
 
-<<<<<<< HEAD
-					
-					@if(!empty($endscholarships))
-					<h4> Closed Scholarships </h4>
-						@foreach($endscholarships as $scho)
-							<li>
-=======
 						@if(count($endscholarships) > 0)
 							<h4 class="text-center"> Closed Scholarships </h4>
 							@foreach($endscholarships as $scho)
 								<li>
->>>>>>> bb26dc19fbfa58805ff87fcfce56fcbdd56089b7
 
 									<h2 class="first-letter">{{$scho->scholarship_name[0]}}</h2>
 									<article>
