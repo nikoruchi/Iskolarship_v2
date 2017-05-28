@@ -2,11 +2,11 @@
 
 	<div class="container main-container">
 		<div class="row">
-			<div class="center-el col eight-height col-sm-6 col-sm-offset-3">
+			<div class="center-el col col-sm-6 col-sm-offset-3">
 				<form class="home-search" method="get" action="/search">
 				 <?php echo e(csrf_field()); ?> 
 					<div class="input-group">
-						<input type="text" name="keyword" class="form-control" placeholder="Find the most suitable choice for you." />
+						<input type="text" name="keyword" class="form-control" placeholder="Search here!" />
 						<div class="input-group-btn">
 							<button class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
 						</div>
@@ -21,7 +21,7 @@
 			</div>
 		</div>
 		<div class="row">
-			<h2 class="text-center">Scholarship Suggestions</h2>
+			<h2 class="text-center suggestions-header">Scholarship Suggestions</h2>
 			<div class="col-sm-8 col-sm-offset-2">
 			<?php $__currentLoopData = $scholarships; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $scho): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 				<ul class="search-results">

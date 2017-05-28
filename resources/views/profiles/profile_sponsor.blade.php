@@ -125,12 +125,10 @@
 						@endif
 					@endif
 					</ul>
+					@if( (empty($sponsor1) && $user->user_type == "sponsor") || (empty($sponsor) && $user->user_type == "student") )
+					<h3 class="text-center">You haven't created any scholarships.</h3>
 					@else
-						@if( (empty($sponsor1) && $user->user_type == "sponsor") || (empty($sponsor) && $user->user_type == "student") )
-						<h3 class="text-center">You haven't created any scholarships.</h3>
-						@else
-						<h3 class="text-center">No scholarship to show.</h3>
-						@endif
+					<h3 class="text-center">No scholarship to show.</h3>
 					@endif
 				</div>
 			</div>

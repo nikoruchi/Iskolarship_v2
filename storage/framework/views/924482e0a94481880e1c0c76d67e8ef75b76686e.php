@@ -12,26 +12,16 @@
 					<a href="/Scholar/Account Settings" class="acc_settings">
 						<button class="btn btn-default"><span class="glyphicon glyphicon-cog"></span> Account Settings</button>
 					</a>
-<<<<<<< HEAD
 					<a href="/setup form">
 						<button class="btn btn-default"><span class="glyphicon glyphicon-cog"></span> Account Setup</button>
 					</a>
-=======
->>>>>>> 180d04ed10f5b3b58aa8063966f87b962c825efb
 				</div>
 				<?php endif; ?>
-				<?php if(Auth::user()->user_id != $studentProfile->user_id): ?>
+				<?php if((Auth::user()->user_id != $studentProfile->user_id)): ?>
 				<div class="btn-group flex">
-<<<<<<< HEAD
+				<a href="<?php echo e(url('/messages/s',[$studentProfile->student_id])); ?>">
 					<button class="btn btn-primary"> <span class="glyphicon glyphicon-envelope"></span> Message</button>
-=======
-<<<<<<< HEAD
-
-					<a class="btn btn-primary" href="<?php echo e(route('email', ['emailadd' => $user->email])); ?>"> <span class="glyphicon glyphicon-envelope"></span> Message</a>
-=======
-					<button class="btn btn-primary"> <span class="glyphicon glyphicon-envelope"></span> Message</button>
->>>>>>> f0c61e824889768a2c2ef02652eaadb137493b51
->>>>>>> 180d04ed10f5b3b58aa8063966f87b962c825efb
+				</a>
 				</div>
 				<?php endif; ?>
 				<div>
@@ -67,7 +57,7 @@
 								<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 						</ul>
 						<?php else: ?>
-							<h2 class="text-center">No pending scholarships for avail</h2>
+							<h2 class="text-center no-pending">No pending scholarships</h2>
 						<?php endif; ?>
 					<?php endif; ?>
 				</div>
