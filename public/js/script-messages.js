@@ -256,7 +256,7 @@ function deleteMessage(e){
 	var values = [];
 	$(".cbox:checked").each(function () {
 		values.push($(this).val());
-     });
+     }); 
 	console.log(values);
 	$.ajax({
 		url: "/messages/delete",

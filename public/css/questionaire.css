@@ -54,6 +54,7 @@ form > label{
 
 form > label .question-mark{
 	color: #227ed5;
+	display: none;
 }
 
 section{

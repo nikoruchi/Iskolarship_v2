@@ -9,8 +9,8 @@
 				<div class="panel panel-default">
 					<div class="panel-body">
 						<h3 class="text-center">Messages</h3>
-						<button class="compose btn btn-success btn-block" href="javascript:void(0)">COMPOSE</button>
-						<button class="delete btn btn-danger btn-block" href="javascript:void(0)">DELETE</button>
+						<button class="compose" href="javascript:void(0)"><span class="glyphicon glyphicon-pencil"></span> Compose</button>
+						<button class="delete" href="javascript:void(0)"><span class="glyphicon glyphicon-trash"></span> Delete</button>
 					</div>
 				</div>
 			</div>
