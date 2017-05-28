@@ -29,7 +29,7 @@
 									<small><?php echo e($application->scholarship->scholarship_name); ?></small>
 								</h2>
 								<div class="btns">
-									<form method="post" action="/application/accept">
+									<form method="get" action="/application/accept">
 											<?php echo e(csrf_field()); ?>
 
 										<input type="hidden" value="<?php echo e($application->application_id); ?>" name="app_id" />
@@ -37,7 +37,7 @@
 									</form>
 
 									<a href="#" class="view"><span class="glyphicon glyphicon-eye-open"></span> View</a>
-									<form method="post" action="/application/reject">
+									<form method="get" action="/application/reject">
 											<?php echo e(csrf_field()); ?>
 
 										<input type="hidden" value="<?php echo e($application->application_id); ?>" name="app_id" />
@@ -68,7 +68,7 @@
 
 									<a href="/profile scholar/<?php echo e($scholar->scholar->student_id); ?>" class="view"><span class="glyphicon glyphicon-eye-open"></span> View</a>
 
-									<form method="post" action="/scholars/remove">
+									<form method="get" action="/scholars/remove">
 											<?php echo e(csrf_field()); ?>
 
 										<input type="hidden" value="<?php echo e($scholar->application_id); ?>" name="app_id" />

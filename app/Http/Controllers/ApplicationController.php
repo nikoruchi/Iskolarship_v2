@@ -7,6 +7,9 @@ use Auth;
 use App\Scholar;
 use App\User;
 use App\Application;
+use App\Scholarship;
+use App\Notification;
+use Carbon\Carbon;
 use App\Sponsor;
 // use 
 class ApplicationController extends Controller
@@ -39,7 +42,21 @@ class ApplicationController extends Controller
        $id = $request->input('app_id');
        $application = Application::find($id);
        $application->accept_status='accept';
+
+       $scholarship = Scholarship::join('application', 'Scholarship.scholarship_id', '=', 'Application.scholarship_id')
+          ->where('Application.application_id','=',$request->id)
+          ->select('Scholarship.scholarship_name')
+          ->get();
+
+       $notif = new Notification;
+       $notif->notification_desc = "Your application in ".$scholarship." has been accepted";
+       $notif->notification_status = 'unread';
+       $notif->application_id = $id;
+       $notif->account_id = $application->student_id;
+
+       $notif->save();
        $application->save();
+
        return redirect()->back();
     }
 

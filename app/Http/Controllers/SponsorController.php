@@ -13,6 +13,9 @@ use DB;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 use App\ScholarshipsDeadline;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\MessageBag;
+
 class SponsorController extends Controller{
 
      public function viewHome(){
@@ -135,7 +138,7 @@ class SponsorController extends Controller{
         return view('profiles.profile_sponsor', compact('sponsor', 'sponsor1', 'currentTime', 'user', 'user1', 'openscholarships', 'endscholarships'));       
     } 
 
-    public function scholars(){
+    public function scholars(){ 
         $user_id = Auth::user()->user_id;
         $user = User::findOrFail($user_id);
         $sponsor_id = $user->user_sponsor->sponsor_id;
