@@ -9,8 +9,44 @@ $(document).ready(function(){
 	$(document).on("click",".not-clickable", notClickable);
 	$(document).on("click", ".reply", sendReply);
 	$(document).on("click", ".edit", edit);
+	$(document).on("click", ".sent", sent);
 	// $(document).on("click", ".delete", deleteNotif);
 })
+
+function sent(e){
+	e.preventDefault();
+	console.log('ha');
+	$.ajax({
+		url: "/messages/sent",
+		type: "GET",
+		// data: {'text':text, 'id':id},
+		success:function(data){
+			var msgs = "";
+			console.log(data);
+			$.each(data, function(key,value){
+				msgs+= '<li class="message clickable mark" data-pg="'+value['id']+'">';
+				if(value['user']==value['sender']){ 
+					msgs+= '<div class="thread-message your-message">';
+				} else {
+					msgs+= '<div class="thread-message their-message">';
+				}
+				msgs+= '<div class="panel panel-default">';
+				msgs+= '<div class="panel-body">';
+				msgs+= '<form class="select-form">';
+				msgs+= '<input type="checkbox" name="messages[]" value="'+value['id']+'" class="cbox not-clickable select"/>';
+				msgs+= '</form>';
+				msgs+= '<p class="from"><strong>' + value['sender_name']+ '</strong></p>';
+				msgs+= '<p class="message-content">' + value['content'] + '</p>';
+				msgs+= '<p class="time-stamp">' + value['timestamp'] +'</p>';
+				msgs+= '</div>';
+				msgs+= '</div>';
+				msgs+= '</li>';
+			});
+			$("#messages-container").html(msgs);
+		}
+	})
+
+}
 
 $(document).ready(function(){
 	$('#formMsg').submit(function(event){

@@ -100,6 +100,13 @@ class MessagesController extends Controller
         return $messages;
     }
 
+     public function sentMessages(){
+        $user_id = Auth::user()->user_id;
+        $inbox = Message::where('msg_sender','=',$user_id)->get();
+        $messages = $this->messages($inbox);
+        return $messages;
+    }
+
     public function messages($data){
 
         $user_id = Auth::user()->user_id;
