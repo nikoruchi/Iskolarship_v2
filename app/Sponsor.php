@@ -30,6 +30,9 @@ class Sponsor extends Model{
         return $this->hasMany('App\Message', 'msg_sender', 'user_id');
     }
 
+    public function owns(){
+        return $this->hasMany('App\Scholarship','sponsor_id');
+    }
     // public function fullname(){
     //     return $this->attributes['sponsor_fname'] . ' ' . $this->attributes['sponsor_lname'];
     // }

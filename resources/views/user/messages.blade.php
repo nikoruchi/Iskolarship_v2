@@ -11,6 +11,7 @@
 						<h3 class="text-center">Messages</h3>
 						<button class="compose" href="javascript:void(0)"><span class="glyphicon glyphicon-pencil"></span> Compose</button>
 						<button class="delete" href="javascript:void(0)"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+						<button class="sent" href="javascript:void(0)"><span class="glyphicon glyphicon-send"></span> Sent</button>
 					</div>
 				</div>
 			</div>
@@ -47,7 +48,7 @@
 
 								</div>
 								<button class="btn btn-primary pull-right send" type="submit" name="send_message" id="send_message" href="javascript:void(0)">
-									<span class="glyphicon glyphicon-send"></span>
+									<span class="glyphicon glyphicon-send"></span> Send
 								</button>
 							</form>
 								
@@ -95,9 +96,9 @@
 @endsection
 
 @push('scripts')
-	<script type="text/javascript" src="/js/script-messages.js"></script>
+	<script type="text/javascript" src="{{asset('js/script-messages.js')}}"></script>
 @endpush
 
 @push('styles')
-	<link rel="stylesheet" type="text/css" href="css/message.css"/>
+	<link rel="stylesheet" type="text/css" href="{{asset('css/message.css')}}"/>
 @endpush

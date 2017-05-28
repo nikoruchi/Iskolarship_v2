@@ -35,5 +35,7 @@ class ApplicationParentsInfo extends Model
      *
      * @var array
      */
-
+    public function parent(){
+        return $this->belongsTo('App\Scholar','student_id');
+    }
 }

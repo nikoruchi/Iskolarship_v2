@@ -18,6 +18,7 @@ class MessagesController extends Controller
         $user_id = Auth::user()->user_id;
         $user = User::findOrFail($user_id);
         $stud_id = Scholar::where('user_id','=', $user_id)->pluck('student_id')->first();
+        // dd($stud_id);
         $student = Scholar::findOrFail($stud_id);
 
         $data['sponsor']=$sponsor;
@@ -98,6 +99,7 @@ class MessagesController extends Controller
     }
 
     public function messages($data){
+        $user_id = Auth::user()->user_id;
         $messages = array();
         foreach($data as $message){
             $user = User::find($message->msg_sender);
@@ -110,8 +112,10 @@ class MessagesController extends Controller
             $messages[] = array(
                 'content'=>$message->msg_content,
                 'id'=>$message->msg_id,
-                'sender'=>$sender,
-                'timestamp'=>$message->created_at->diffForHumans()
+                'sender'=>$message->msg_sender,
+                'sender_name'=>$sender,
+                'timestamp'=>$message->created_at->diffForHumans(),
+                'user'=>$user_id
                 );
         }
         return $messages;

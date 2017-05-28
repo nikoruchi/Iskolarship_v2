@@ -55,4 +55,23 @@ class Scholar extends Model
      public function studentsentmessages(){
         return $this->hasMany('Message', 'msg_sender', 'user_id');
     }
+    public function parents(){
+        return $this->hasOne('App\ApplicationParentsInfo','student_id');
+    }
+
+     public function financial(){
+        return $this->hasOne('App\ApplicationFamilyFinancial','student_id');
+    }
+
+     public function appliances(){
+        return $this->hasOne('App\ApplicationFamilyAppliances','student_id');
+    }
+
+    public function relative(){
+        return $this->hasOne('App\ApplicationRelativeContribution','student_id');
+    }
+
+    public function siblings(){
+        return $this->hasOne('App\ApplicationSiblingScholar','student_id');
+    }
 }

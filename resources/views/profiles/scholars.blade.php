@@ -36,7 +36,7 @@
 										<button type="submit" class="accept"><span class="glyphicon glyphicon-remove"></span> Accept</button>
 									</form>
 
-									<a href="/profile scholar/{{$application->student_id}}" class="view"><span class="glyphicon glyphicon-eye-open"></span> View</a>
+									<a href="/application/{{$application->application_id}}"" class="view"><span class="glyphicon glyphicon-eye-open"></span> View</a>
 									<form method="get" action="/application/reject">
 											{{ csrf_field() }}
 										<input type="hidden" value="{{$application->application_id}}" name="app_id" />

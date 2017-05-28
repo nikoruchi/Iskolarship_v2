@@ -9,7 +9,6 @@
 				</div>
 				<form action="/registration/Sponsor" method="post">
 					{{ csrf_field() }}
-
 					<div class="panel-body">
 						<h2 class="unmargined"><small><span class="glyphicon glyphicon-list-alt"></span> Personal Information</small><span class="section well">1</span></h2>
 						<div class="form-group">

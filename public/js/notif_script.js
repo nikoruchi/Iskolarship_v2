@@ -19,6 +19,6 @@ function deleteNotif() {
             }else{
                 alert("can't delete the row");
             }
-        }
+        } 
 	});
 }

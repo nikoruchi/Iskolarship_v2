@@ -38,4 +38,5 @@ class Application extends Model
     public function scholar(){
         return $this->belongsTo('App\Scholar', 'student_id');
     }
+ 
 }

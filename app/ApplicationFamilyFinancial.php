@@ -36,5 +36,7 @@ class ApplicationFamilyFinancial extends Model
      *
      * @var array
      */
-
+    public function applicationfinance(){
+        return $this->belongsTo('App\Scholar','student_id');
+    }
 }
