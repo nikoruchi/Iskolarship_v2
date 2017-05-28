@@ -12,7 +12,8 @@
     <script type="text/javascript" src="/js/script-messages.js"></script>
     <script type="text/javascript" src="/js/reopen_script.js"></script>
     <script type="text/javascript" src="/js/script-form.js"></script>
-
+    <script type="text/javascript" src="/js/notif_script.js"></script>
+ 	<!-- <script type="text/javascript" src="/js/script.js"></script> -->
     <meta name="csrf_token" content = "{{ csrf_token() }}">
 
 	@stack('styles')

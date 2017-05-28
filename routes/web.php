@@ -67,7 +67,6 @@ Route::get("/profile scholarship/{scholarship_id}", function($scholarship_id){
 
 //=============== FOR FRONT-END PURPOSES =======================
 Route::get('/scholarship form', 'ScholarshipsController@createForm'); 
-Route::get('/notifications', 'NotificationsController@viewNotifications');
 Route::get('/scholar setup', 'ProfileSetupController@viewSetup');
 Route::get('/scholar setup form', 'ProfileSetupController@viewSetupForm');
 Route::get('/scholar questionaire', 'ApplicationController@viewQuestionaire');
@@ -166,3 +165,17 @@ Route::get("/profile sponsor/{sponsor_id}", function($sponsor_id){
 
 Route::get('/profile_sponsor/{scholarship_id}', 'SponsorController@profileCont');
 Route::get('/scholarship/reopen/{scholarship_id}', 'ScholarshipsController@reopenScholarship');
+//Route::get('/');
+
+// FOR NOTIFICATIONS
+Route::get("/notifications", function(){
+    switch(Auth::user()->user_type){
+        case 'sponsor':
+          return (new \App\Http\Controllers\NotificationsController)->viewNotificationsFrSponsor();
+        break;
+
+        case 'student':
+          return (new \App\Http\Controllers\NotificationsController)->viewNotifications();
+        break;
+    }
+});
