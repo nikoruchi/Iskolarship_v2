@@ -56,7 +56,7 @@
 								@endforeach
 						</ul>
 						@else
-							<h2 class="text-center">No pending scholarships for avail</h2>
+							<h2 class="text-center no-pending">No pending scholarships</h2>
 						@endif
 					@endif
 				</div>

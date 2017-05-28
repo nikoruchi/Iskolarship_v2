@@ -66,6 +66,40 @@
 	text-align: right;
 }
 
+.compose,
+.delete{
+	width: 100%;
+	display: block;
+	text-align: left;
+	background-color: transparent;
+	font-family: Roboto;
+	font-size: 1em;
+	margin: 1em 0;
+	border: 0;
+	padding: 6px 20px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+	text-transform: capitalize;
+}
+
+.compose{
+	color: #6ec31b;
+}
+
+.delete{
+	color: #cd1919;
+}
+
+#formMsg input,
+#formMsg textarea{
+	border: 0;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+	border-radius: 0px;
+	font-family: Roboto;
+}
+
+.message{
+	
+}
 
 /*.message-filters li{
 }

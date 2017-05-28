@@ -1,5 +1,5 @@
 <?php
-
+ 
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -7,6 +7,9 @@ use Auth;
 use App\Scholar;
 use App\User;
 use App\Application;
+use App\Scholarship;
+use App\Notification;
+use Carbon\Carbon;
 use App\Sponsor;
 // use 
 class ApplicationController extends Controller
@@ -22,6 +25,18 @@ class ApplicationController extends Controller
        $id = $request->input('app_id');
        $application = Application::find($id);
        $application->avail_status='accept';
+
+       $scholarship = Scholarship::findOrFail($application->scholarship_id);
+       $student = Scholar::findOrFail($application->student_id);
+       $sponsor = Sponsor::findOrFail($scholarship->sponsor_id);
+
+       $notif = new Notification;
+       $notif->notification_desc = $student->student_fname." ".$student->student_lname." confirmed his slot in".$scholarship->scholarship_name.".";
+       $notif->notification_status = 'unread';
+       $notif->application_id = $id;
+       $notif->account_id = $sponsor->user_id;
+
+       $notif->save();
        $application->save();
        return redirect()->back();
     }
@@ -30,6 +45,18 @@ class ApplicationController extends Controller
        $id = $request->input('app_id');
        $application = Application::find($id);
        $application->avail_status='reject';
+
+       $scholarship = Scholarship::findOrFail($application->scholarship_id);
+       $student = Scholar::findOrFail($application->student_id);
+       $sponsor = Sponsor::findOrFail($scholarship->sponsor_id);
+
+       $notif = new Notification;
+       $notif->notification_desc = $student->student_fname." ".$student->student_lname." rejected his slot in".$scholarship->scholarship_name.".";
+       $notif->notification_status = 'unread';
+       $notif->application_id = $id;
+       $notif->account_id = $sponsor->user_id;
+
+       $notif->save();
        $application->save();
        return redirect()->back();
     }
@@ -39,7 +66,19 @@ class ApplicationController extends Controller
        $id = $request->input('app_id');
        $application = Application::find($id);
        $application->accept_status='accept';
+
+       $scholarship = Scholarship::findOrFail($application->scholarship_id);
+       $student = Scholar::findOrFail($application->student_id);
+
+       $notif = new Notification;
+       $notif->notification_desc = "Your application in ".$scholarship->scholarship_name." has been accepted.";
+       $notif->notification_status = 'unread';
+       $notif->application_id = $id;
+       $notif->account_id = $student->user_id;
+
+       $notif->save();
        $application->save();
+
        return redirect()->back();
     }
 
@@ -47,6 +86,17 @@ class ApplicationController extends Controller
        $id = $request->input('app_id');
        $application = Application::find($id);
        $application->accept_status='reject';
+
+       $scholarship = Scholarship::findOrFail($application->scholarship_id);
+       $student = Scholar::findOrFail($application->student_id);
+
+       $notif = new Notification;
+       $notif->notification_desc = "Your application in ".$scholarship->scholarship_name." has been rejected.";
+       $notif->notification_status = 'unread';
+       $notif->application_id = $id;
+       $notif->account_id = $student->user_id;
+
+       $notif->save();
        $application->save();
        return redirect()->back();
     }
@@ -67,5 +117,13 @@ class ApplicationController extends Controller
         $stud_id = Scholar::where('user_id','=', $user_id)->pluck('student_id')->first();
         $student = Scholar::findOrFail($stud_id);
         return view('registration/scholarship_application', compact('student','user'));
+    }
+
+    public function viewApplication(){
+        $user_id = Auth::user()->user_id;
+        $user = User::findOrFail($user_id);
+        $spon_id = Sponsor::where('user_id','=', $user_id)->pluck('sponsor_id')->first();
+        $sponsor = Sponsor::findOrFail($spon_id);
+        return view('profiles/application', compact('sponsor','user'));
     }
 }
