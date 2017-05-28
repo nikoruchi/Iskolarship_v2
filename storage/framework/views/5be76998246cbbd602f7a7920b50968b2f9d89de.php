@@ -19,7 +19,7 @@
 							<?php $__currentLoopData = $notification; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $notif): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> 
 								<?php if($user->user_type == 'sponsor' && str_contains($notif->notification_desc, "A student applied for")): ?>
 								<li class="notif">
-									<a href="javascript:void(0)" data-pg="$notif->notification_id" class="remove"><span class="glyphicon glyphicon-remove"></span></a>
+									<a href="javascript:void(0)" data-pg="<?php echo e($notif->notification_id); ?>" class="remove"><span class="glyphicon glyphicon-remove"></span></a>
 									<img src="<?php echo e(asset('image/default.jpg')); ?>" class="img-responsive"/>
 									<p><?php echo e($notif->notification_desc); ?> <a href="/profile scholarship/<?php echo e($notif->scholarship_id); ?>" class="view">View Application</a> <br/>
 									<i><?php echo e($notif->notification_date); ?></i></p>
@@ -27,7 +27,7 @@
 
 								<?php elseif($user->user_type == 'sponsor' && str_contains($notif->notification_desc, "his slot in")): ?>
 								<li class="notif">
-									<a href="javascript:void(0)" data-pg="$notif->notification_id" class="remove"><span class="glyphicon glyphicon-remove"></span></a>
+									<a href="javascript:void(0)" data-pg="<?php echo e($notif->notification_id); ?>" class="remove"><span class="glyphicon glyphicon-remove"></span></a>
 									<img src="<?php echo e(asset('image/default.jpg')); ?>" class="img-responsive"/>
 									<p><?php echo e($notif->notification_desc); ?> <a href="/profile scholar/<?php echo e($notif->student_id); ?>" class="view">View Scholar</a> <br/>
 									<i><?php echo e($notif->notification_date); ?></i></p>
@@ -35,7 +35,7 @@
 
 								<?php elseif($user->user_type == 'student'): ?>
 								<li class="notif">
-									<a href="javascript:void(0)" data-pg="$notif->notification_id" class="remove"><span class="glyphicon glyphicon-remove"></span></a>
+									<a href="javascript:void(0)" data-pg="<?php echo e($notif->notification_id); ?>" class="remove"><span class="glyphicon glyphicon-remove"></span></a>
 									<img src="<?php echo e(asset('image/spon_def.png')); ?>" class="img-responsive"/>
 									<p><?php echo e($notif->notification_desc); ?> <a href="/profile scholarship/<?php echo e($notif->scholarship_id); ?>" class="view">View Scholarship</a> <br/>
 									<i><?php echo e($notif->notification_date); ?></i></p>									

@@ -4,20 +4,20 @@ $(document).ready(function(){
 
 //doesn't have to have a query since it won't be submitted int the first place - リン
 function deleteNotif() {
-	console.log($(this).parent().parent());
 	var id=$(this).attr('data-pg');
-    var $element = $(this).parent().remove();
-    console.log(id);
+    var element = $(this).parent().remove();
+    console.log("id is "+id);
     $.ajax({
-    	url:"/notif_delete/"+id,
+    	url:"/notif_delete",
+    	type:"GET",
     	cache:false,
-    	data:id,
+    	data: {id:id},
    		success: function(data){
             if(data=="YES"){
-                $element.fadeOut().remove();
+                element.fadeOut().remove();
                 console.log("row deleted");
             }else{
-                alert("can't delete the row")
+                alert("can't delete the row");
             }
         }
 	});
