@@ -31,7 +31,7 @@ class SponsorController extends Controller{
         $user_id = Auth::user()->user_id;
         $user = User::findOrFail($user_id);
 
-        $sponsor_id = Sponsor::where('user_id','=', $user_id)->pluck('sponsor_id');
+        $sponsor_id = Sponsor::where('user_id','=', $user_id)->pluck('sponsor_id')->first();
         $sponsor = Sponsor::find($sponsor_id); 
 
         $user_id1 = Sponsor::where('sponsor_id','=',$sponsor_id)->pluck('user_id');
@@ -71,10 +71,10 @@ class SponsorController extends Controller{
         $user_id = Auth::user()->user_id;
         $user = User::findOrFail($user_id);
 
-        $stud_id = Scholar::where('user_id','=', $user_id)->pluck('student_id');
+        $stud_id = Scholar::where('user_id','=', $user_id)->pluck('student_id')->first();
         $student = Scholar::findOrFail($stud_id);
 
-        $sponsor_id1 = Sponsor::where('sponsor_id','=', $sponsor_id)->pluck('sponsor_id');
+        $sponsor_id1 = Sponsor::where('sponsor_id','=', $sponsor_id)->pluck('sponsor_id')->first();
         $sponsor = Sponsor::find($sponsor_id1);
 
         $currentTime = Carbon::now()->toDateTimeString();

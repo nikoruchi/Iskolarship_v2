@@ -68,7 +68,6 @@ Route::get("/profile scholarship/{scholarship_id}", function($scholarship_id){
 
 Route::get('/scholarship form', 'ScholarshipsController@createForm'); 
 Route::get('/scholar setup', 'ProfileSetupController@viewSetup');
-Route::get('/scholar questionaire', 'ApplicationController@viewQuestionaire');
 
 //=============== END FOR FRONT-END PURPOSES =======================
 
@@ -86,7 +85,8 @@ Route::post('/Sponsor/upload', 'EditProfileController_Sponsor@upload');
 
 // MESSAGES
 
-
+Route::get('/scholar questionaire/{scholarship_id}', 'ApplicationController@viewQuestionaire');
+Route::post('/scholar questionaire/send', 'ApplicationController@sendApplication');
 Route::get('/scholarship form/create', 'ScholarshipsController@createScholarship');
 // Route::post('/upload/logo', 'ScholarshipsController@uploadLogo');
 

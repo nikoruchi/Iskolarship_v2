@@ -33,7 +33,8 @@
 								<?php echo e($scho->scholarship_desc); ?>
 
 							</p>
-							<a href="#" class="view">View</a>
+							<a href="/profile scholarship/<?php echo e($scho->scholarship_id); ?>"
+						 	class="view">View</a>
 						</article>
 					</li>
 				</ul>

@@ -8,24 +8,34 @@
 					<hr>
 					<div class="heading">
 						<div class="img-container">
-							<img src="<?php echo e(asset('image/spon_def.png')); ?>" alt="sponsor-img">
-							<img src="<?php echo e(asset('image/spon_def.png')); ?>" alt="scholarship-img">
+							<img src="/image/<?php echo e($user->user_imagepath); ?>" alt="sponsor-img">
+							<img src="/image/<?php echo e($scholarship->scholarship_logo); ?>" alt="scholarship-img">
 						</div>
 						<article>
-							<h2>DOST</h2>
+							<h2><?php echo e($scholarship->scholarship_name); ?></h2>
 							<!-- Sponsor Name -->
-							<p class="sponsor">Sponsor: Clyde Joshua Delgado</p>
-							<p class="quest-no">3 questions</p>
+							<p class="sponsor">Sponsor: <?php echo e($scholarship->ownedBy->sponsor_fname); ?> <?php echo e($scholarship->ownedBy->sponsor_lname); ?></p>
+							<p class="quest-no"><?php echo e(count($questions)); ?> questions</p>
 						</article>
 					</div>
 					<hr>
-					<form>
-						<label> When will this semester end<span class="question-mark">?</span></label>
-						<textarea class="form-control" placeholder="Answer"></textarea>
-						<label> What will you do after this semester<span class="question-mark">?</span></label>
-						<textarea class="form-control" placeholder="Answer"></textarea>
-						<label> Kapoy na kami<span class="question-mark">?</span></label>
-						<textarea class="form-control" placeholder="Answer"></textarea>
+					<form id="apply-form" action="/scholar questionaire/send" method="POST">
+						<?php echo e(csrf_field()); ?>
+
+						<input type="hidden" name="scholarshipID" value="<?php echo e($scholarship->scholarship_id); ?>" /> 
+						<?php $__currentLoopData = $questions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $qn): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+							<label><?php echo e($qn->essay_question); ?></label>
+							<input type="hidden" name="qnID[]" value="<?php echo e($qn->essay_questionsID); ?>" /> 
+							<div class="input-group <?php echo e($errors->has('answer') ? ' has-error' : ''); ?> ">
+								<textarea name="answer[]" class="form-control" placeholder="Answer"></textarea>
+							</div>
+							<?php if($errors->has('answer')): ?>
+									<span class="help-block">
+										<strong><?php echo e($errors->first('answer')); ?></strong>
+									</span>
+							<?php endif; ?>
+
+						<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 						<section>
 							<label><input type="checkbox" name="agreement" value="agreed"> I agree to submit my account information, family background, and financial and socio-economic information with this application.</label>
 						</section>
