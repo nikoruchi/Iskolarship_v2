@@ -21,26 +21,27 @@
 								<?php echo e(csrf_field()); ?>
 
 								<div class="">
-									<input class="form-control" type="text" name="subject" id="subject" placeholder="Subject" value="<?php echo e(old('subject')); ?>"/>
+									<input class="form-control" type="text" name="subject" id="subject" placeholder="Subject" value=""/>
 
 										<span class="help-block">
+											<!-- <strong></strong> -->
 										</span>
 
 
 								</div>
 								<div class="">
-									<input class="form-control" type="text" name="to" id="to" placeholder="To" value="<?php echo e(old('to')); ?>"/>
 
-										<span class="help-block">
-											
-										</span>
-										
+									<input class="form-control" type="text" name="to" id="to" placeholder="To" value="<?php echo e(empty($email)? '': $email[0]); ?>"/>
+									<span class="help-block">
+										<!-- <strong></strong> -->
+									</span>
 								</div>
-								<div class="<?php echo e($errors->has('content') ? ' has-error' : ''); ?> ">
-									<textarea class="form-control" placeholder="Message" name="content" id="message_content" value="<?php echo e(old('content')); ?>"></textarea>
+								<div class="">
+									<textarea class="form-control" placeholder="Message" name="content" id="message_content" value=""></textarea>
 
 							
 										<span class="help-block">
+											<!-- <strong></strong> -->
 										</span>
 
 								</div>
@@ -91,6 +92,10 @@
 	</div>
 
 <?php $__env->stopSection(); ?>
+
+<?php $__env->startPush('scripts'); ?>
+	<script type="text/javascript" src="/js/script-messages.js"></script>
+<?php $__env->stopPush(); ?>
 
 <?php $__env->startPush('styles'); ?>
 	<link rel="stylesheet" type="text/css" href="css/message.css"/>

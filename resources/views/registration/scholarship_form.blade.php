@@ -7,7 +7,7 @@
 			<div class="col-sm-8 col-sm-offset-2">
 				<div class="panel panel-default">
 					<div class="panel-body">
-						<form id="create-form">
+						<form id="create-form" method="get">
 							<h1 class="text-center">Create Scholarship</h1>
 							<hr>
 							<h2>Details</h2>
@@ -19,10 +19,15 @@
 								<label>Deadline:</label>
 								<input type="date" name="deadline" id="deadline" placeholder="deadline" class="form-control">
 							</div>
-							<label class="file-label"><span class="glyphicon glyphicon-download-alt"></span> Upload scholarship image<input type="file" name="image" class="form-control"/></label>
 
-							<!-- <img src="/image/default.jpg" class="uploaded-img" /> -->
-							<!-- <button type="submit" class="btn btn-default next">Next <span class="glyphicon glyphicon-arrow-right"></span></button> -->
+							<div class="deadline">
+
+								<label  >How many DAYS will your scholarship last on contract?</label>
+								<input type="number" name="coverage" id="coverage"  class="form-control" min="0"/>
+
+							</div>
+							
+
 							<hr>
 							<h2>Grants</h2>
 							<ul class="grants">
@@ -33,6 +38,8 @@
 								<textarea name="grant[]" id="grant-content" placeholder="Add a Grant"></textarea>
 								<button class="btn btn-default add add_grant"><span class="glyphicon glyphicon-plus"></span></button>
 							</div>
+							<span class="grant-help-block"></span>
+
 							<!-- <a class="btn btn-default next">Next <span class="glyphicon glyphicon-arrow-right"></span></a> -->
 							<hr>
 							<h2>Specifications</h2>
@@ -43,6 +50,8 @@
 								<textarea name="spec[]" id="spec-content" placeholder="Add a Specification"></textarea>
 								<button class="btn btn-default add add_spec"><span class="glyphicon glyphicon-plus"></span></button>
 							</div>
+							<span class="spec-help-block"></span>
+
 
 							<hr>
 							<h2>Question</h2>
@@ -54,8 +63,13 @@
 								<textarea name="question[]" id="qn-content" placeholder="Add a Question"></textarea>
 								<button class="btn btn-default add add_question"><span class="glyphicon glyphicon-plus"></span></button>
 							</div>
+							<span class="qn-help-block"></span>
+
 							<button class="btn btn-success start" type="submit">Start Scholarship <span class="glyphicon glyphicon-play-circle"></span></button>
-							<!-- <a href="#" class="btn btn-default next">Next <span class="glyphicon glyphicon-arrow-right"></span></a> -->
+
+							<span class="text-warning all-help-block"></span>
+
+							
 						</form>
 					</div>
 				</div>
@@ -67,4 +81,8 @@
 
 @push('styles')
 	<link rel="stylesheet" type="text/css" href="css/scholarship_form.css"/>
+@endpush
+
+@push('scripts')
+    <script type="text/javascript" src="/js/script-form.js"></script>
 @endpush

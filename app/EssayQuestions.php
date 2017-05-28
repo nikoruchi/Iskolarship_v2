@@ -5,11 +5,11 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 
-class Scholarships extends Model
+class EssayQuestions extends Model
 {
      use Notifiable;
-    protected $primaryKey = 'essay_questionID';
-    protected $table = 'essay_question';
+    protected $primaryKey = 'essay_questionsID';
+    protected $table = 'essay_questions';
 
     /**
      * The attributes that are mass assignable.

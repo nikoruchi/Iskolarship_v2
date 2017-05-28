@@ -2,6 +2,10 @@
 @section('content')
 	<div class="container main-container">
 		<div class="row">
+			<div class="col-sm-6">
+			</div>
+			<div class="col-sm-6">
+			</div>
 			<div class="col-sm-12">
 				<div class="panel panel-default">
 					<div class="panel-body">
@@ -18,6 +22,9 @@
 											<label class="radio-inline"><input type="radio" name="father_status" value="dec">Deceased</label>
 											<label class="radio-inline"><input type="radio" name="father_status" value="step">Stepfather</label>
 										</div>
+										Joepet Ardales
+										Self-employed
+										Dsiadiasdo
 										<input type="text" class="form-control" name="father_name" placeholder="Name"/>
 										<input type="text" class="form-control" name="father_occ" placeholder="Occupation"/>
 										<input type="text" class="form-control" name="father_edu" placeholder="Educational Attainment"/>
@@ -66,7 +73,7 @@
 									<input class="form-control" name="sib_school" type="text" placeholder="Course & College/University">
 								</div>
 							</div>
-							<button type="button" class="btn btn-success btn-block add-sib">Add Sibling <span class="glyphicon glyphicon-plus"></span></button>
+							<button class="btn btn-success btn-block add-sib">Add Sibling <span class="glyphicon glyphicon-plus"></span></button>
 							<hr>
 							<h3>Financial and Socio-economic Information</h3>
 							<div class="row">
@@ -127,7 +134,7 @@
 											<input class="form-control" name="rel_con" type="text" placeholder="Average Contribution">
 										</div>
 									</div>
-									<button type="button" class="btn btn-success btn-block add-rel">Add Relative <span class="glyphicon glyphicon-plus"></span></button>
+									<button class="btn btn-success btn-block add-rel">Add Relative <span class="glyphicon glyphicon-plus"></span></button>
 								</div>
 							</div>
 							<hr>
@@ -231,5 +238,8 @@
 	</div>
 @endsection
 @push('styles')
-	<link rel="stylesheet" type="text/css" href="{{asset('css/scholar_setup_form.css')}}"/>
+	<link rel="stylesheet" type="text/css" href="{{asset('css/profile_page.css')}}"/>
+@endpush
+@push('scripts')
+	<script src="js/default_img.js"></script>
 @endpush

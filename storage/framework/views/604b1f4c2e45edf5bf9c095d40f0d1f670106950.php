@@ -1,12 +1,10 @@
-@extends("layouts.userTab")
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 
 	<div class="container main-container">
 		<div class="row">
 			<div class="center-el col eight-height col-sm-6 col-sm-offset-3">
 				<form class="home-search" method="get" action="/search">
-				 {{ csrf_field() }} 
+				 <?php echo e(csrf_field()); ?> 
 					<div class="input-group">
 						<input type="text" name="keyword" class="form-control" placeholder="Find the most suitable choice for you." />
 						<div class="input-group-btn">
@@ -25,25 +23,29 @@
 		<div class="row">
 			<h2 class="text-center">Scholarship Suggestions</h2>
 			<div class="col-sm-8 col-sm-offset-2">
-			@foreach($scholarships as $scho)
+			<?php $__currentLoopData = $scholarships; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $scho): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 				<ul class="search-results">
 					<li>
-						<h2 class="first-letter">{{$scho->scholarship_name[0]}}</h2>
+						<h2 class="first-letter"><?php echo e($scho->scholarship_name[0]); ?></h2>
 						<article>
-							<h2 class="name">{{$scho->scholarship_name}}</h2>
+							<h2 class="name"><?php echo e($scho->scholarship_name); ?></h2>
 							<p class="desc">
-								{{$scho->scholarship_desc}}
+								<?php echo e($scho->scholarship_desc); ?>
+
 							</p>
-							<a href="/profile scholarship/{{$scho->scholarship_id}}"
-						 	class="view">View</a>
+							<a href="/profile scholarship/<?php echo e($scho->scholarship_id); ?>"
+						 	class="view">View</a> <?php echo e($scho->scholarship_id); ?>
+
 						</article>
 					</li>
 				</ul>
-			@endforeach
+			<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 	</div>
 
-@endsection
+<?php $__env->stopSection(); ?>
 
-@push('styles')
+<?php $__env->startPush('styles'); ?>
 	<link rel="stylesheet" type="text/css" href="css/home.css"/>
-@endpush
+<?php $__env->stopPush(); ?>
+
+<?php echo $__env->make("layouts.userTab", array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -30,11 +30,16 @@ Route::post('/registration/Sponsor', 'SponsorAuthController@Validation');
 
 // Route::get('/home', ['middleware']=>'sponsor','uses'=>'HomeController@homeSponsor']);
 // Route::get('/home', 'HomeController@homeGuests');
+
 Route::get('/profile scholar', 'ScholarController@viewProfile');
 Route::get('/profile scholar/{student_id}', 'ProfileController@profileNotStudent');
+Route::get('/setup form', 'ProfileSetupController@viewSetupForm');
+Route::get('/setup form/register', 'ProfileSetupController@editSetup');
+Route::get('/setup', 'ProfileSetupController@viewSetup');
+
 Route::get('/profile sponsor', 'SponsorController@viewProfile');
 Route::get('/profile sponsor/scholars', 'SponsorController@scholars');
-	
+  
 // will change into something more elegant. band aid solution
 Route::get("/home", function(){
     switch(Auth::user()->user_type){
@@ -66,9 +71,9 @@ Route::get("/profile scholarship/{scholarship_id}", function($scholarship_id){
 });
 
 //=============== FOR FRONT-END PURPOSES =======================
+
 Route::get('/scholarship form', 'ScholarshipsController@createForm'); 
 Route::get('/scholar setup', 'ProfileSetupController@viewSetup');
-Route::get('/scholar setup form', 'ProfileSetupController@viewSetupForm');
 Route::get('/scholar questionaire', 'ApplicationController@viewQuestionaire');
 
 //=============== END FOR FRONT-END PURPOSES =======================
@@ -89,6 +94,7 @@ Route::post('/Sponsor/upload', 'EditProfileController_Sponsor@upload');
 
 
 Route::get('/scholarship form/create', 'ScholarshipsController@createScholarship');
+// Route::post('/upload/logo', 'ScholarshipsController@uploadLogo');
 
 
 Route::get("/messages", function(){
@@ -104,7 +110,8 @@ Route::get("/messages", function(){
 });
 
 Route::group(['middleware' => 'isguest'], function(){
-
+    Route::get('/messages/{sponsor}', 'MessagesController@autofillMsgSponsor');
+    Route::get('/messages/s/{studentProfile}', 'MessagesController@autofillMsgScholar');
     Route::get('/messages/read', 'MessagesController@getReadMsg');
     Route::get('/messages/unread', 'MessagesController@getUnReadMsg');
     Route::get('/messages/inbox', 'MessagesController@getAllMsg');

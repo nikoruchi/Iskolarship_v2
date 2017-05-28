@@ -17,7 +17,7 @@ class CreateScholarshipTable extends Migration
             $table->increments('scholarship_id');
             $table->integer('sponsor_id')->references('sponsor_id')->on('sponsor_account');
             $table->string('scholarship_name');
-            $table->string('scholarship_coverage');
+            $table->bigint('scholarship_coverage');
             $table->text('scholarship_desc');
             $table->string('scholarship_logo');
             $table->timestamps();
