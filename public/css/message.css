@@ -181,6 +181,42 @@
 	background-color: #fff9a3;
 }
 
+.msg-sent-success{
+	color: #8dcb2c;
+	font-family: Roboto;
+}
+
+.msg-subject-sent{
+	margin-top: 0.5em;
+	color: #1ea2df;
+	font-family: Roboto;
+}
+
+.msg-subject-sent .email{
+	font-size: 0.5em;
+	color: #AAA;
+	font-family: Roboto;
+	font-style: italic;
+	font-weight: normal;
+}
+.msg-content-sent{
+	font-family: Roboto;
+	text-indent: 1em;
+}
+
+.msg-timestamp-sent{
+	position: absolute;
+	top: 1em;
+	right: 1em;
+	color: #abdd23;
+	font-family: Roboto;
+	font-size: 0.9em;
+}
+
+#message-form > .panel-body{
+	position: relative;
+}
+
 /*.message-filters li{
 }
 

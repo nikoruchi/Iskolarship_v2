@@ -59,8 +59,10 @@ $(document).ready(function(){
 			data: $(this).serialize(),
 			success:function(data){
 				console.log("Data s send: " +data);
-				msgs+='<h3>' + data.msg_subject + '<span class="email" style="font-size: 15px"> &lt;' + data.user_email +'&gt;</span></h3>';
-				msgs+='<p>'+ data.msg_content + '</p>';
+				msgs+='<p class="msg-sent-success"><span class="glyphicon glyphicon-ok-circle"></span> Message sent successfully</p>'
+				msgs+='<h3 class="msg-subject-sent">' + data.msg_subject + '<span class="email" style="font-size: 15px"> &lt;' + data.user_email +'&gt;</span></h3>';
+				msgs+='<p class="msg-content-sent">'+ data.msg_content + '</p>'
+				msgs+='<span class="msg-timestamp-sent"><span class="glyphicon glyphicon-dashboard"></span> Just now</span>';
 				$("#compose-form").html(msgs);
 			},
 			error: function(jqXhr, json, errorThrown){
