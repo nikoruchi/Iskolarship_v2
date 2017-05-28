@@ -13,7 +13,7 @@
 				<li class="delete"><a href="#"><span class="glyphicon glyphicon-trash"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Delete All Notifications</a></li>
 			</ul>
 
-			<div class="col-sm-6 col-smo-offset-3">
+			<div class="col-sm-6 col-sm-offset-3">
 				<div class="panel panel-default">
 					<div class="panel-body">
 						<ul class="list-unstyled notifs-container">

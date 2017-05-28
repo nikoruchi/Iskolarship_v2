@@ -7,11 +7,13 @@
 		<div class="row">
 			<div class="col-sm-3">
 				<div class="panel panel-default">
-					<div class="panel-body">
-						<h3 class="text-center">Messages</h3>
+					<div class="panel-body message-options">
+						<h3 class="text-center messages-heading">Messages</h3>
 						<button class="compose" href="javascript:void(0)"><span class="glyphicon glyphicon-pencil"></span> Compose</button>
-						<button class="delete" href="javascript:void(0)"><span class="glyphicon glyphicon-trash"></span> Delete</button>
 						<button class="sent" href="javascript:void(0)"><span class="glyphicon glyphicon-send"></span> Sent</button>
+						<button class="delete" href="javascript:void(0)"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+						<button class="markall" href="javascript:void(0)"><span class="glyphicon glyphicon-check"></span> Mark all</button>
+						<button class="unmarkall" href="javascript:void(0)"><span class="glyphicon glyphicon-unchecked"></span> Unmark all</button>
 					</div>
 				</div>
 			</div>
