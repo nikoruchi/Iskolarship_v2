@@ -27,6 +27,7 @@
 			</form>
 			<form action="/Scholar/Change Password" method="POST"  id="changePass">
 			    {{ csrf_field() }}
+			    
 			    	@if(Session::has('success_pass'))
 					    <div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span><em> {{ session('success_pass') }}</em></div>
 					@endif
