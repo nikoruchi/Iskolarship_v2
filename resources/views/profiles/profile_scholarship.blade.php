@@ -11,6 +11,8 @@
 						<h1 class="scholarship-name">{{$scholarship->scholarship_name}}</h1>
 						<p class="scholarship-description">{{$scholarship->scholarship_desc}}</p>
 						<div class="flex">
+						<!-- <a href="{{url('/edit', [$scholarship->scholarship_id])}}" ><button class="btn btn-primary">Change Icon</button></a> -->
+						<!-- <a href="{{url('/profile scholarship/edit', [$scholarship->scholarship_id])}}" ></a> -->
 						<!-- pa edit lang di design sang paragraph. -->
 						@if($deadline < $currentTime)
 							<p class ="text-center">Submission for application is over.</p>
@@ -24,8 +26,10 @@
 							<a href="/profile sponsor/scholars" class="btn btn-primary"><span class="glyphicon glyphicon-education"><span class="glyphicon glyphicon-plus"></span></span>&nbsp;&nbsp;Your Scholars</a>
 						@endif
 
-
 						</div>
+
+						
+
 						<h2 class="scholar-count"><span class="glyphicon glyphicon-education"></span> Scholars: {{$scholars->count()}}</h2>
 						<ul class="list-unstyled further-details">
 							<li><button class="btn btn-default btn-md"><span class="glyphicon glyphicon-briefcase"></span></button></li>

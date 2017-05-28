@@ -59,16 +59,16 @@ Route::get("/profile scholarship/{scholarship_id}", function($scholarship_id){
           return (new \App\Http\Controllers\ScholarshipsController)->scholarshipSponsor($scholarship_id);
         break;
 
-// Route::get('/profile scholarship/{scholarship_id}', 'ProfileController@homeSponsor');
-
         case 'student':
           return (new \App\Http\Controllers\ScholarshipsController)->scholarshipStudent($scholarship_id);
         break;
     }
-    // if(Auth::guest()){
-        // return view('profiles.profile_scholarship');
-    // }
 });
+
+// Route::resource('edit','UploadImgScholarships');
+// Route::get('/edit/{scholarship_id}', 'UploadImgScholarships@showImg');
+// Route::post('/edit/upload/{scholarship_id}', 'UploadImgScholarships@uploadImg');
+
 
 //=============== FOR FRONT-END PURPOSES =======================
 
@@ -94,7 +94,6 @@ Route::post('/Sponsor/upload', 'EditProfileController_Sponsor@upload');
 
 
 Route::get('/scholarship form/create', 'ScholarshipsController@createScholarship');
-// Route::post('/upload/logo', 'ScholarshipsController@uploadLogo');
 
 
 Route::get("/messages", function(){
@@ -156,17 +155,6 @@ Route::get("/profile sponsor/{sponsor_id}", function($sponsor_id){
     }
 });
 
-
-// Route::get("/profile sponsor/{sponsor_id}", function($sponsor_id){
-//     switch(Auth::user()->user_type){
-//         case 'sponsor':
-//           return (new \App\Http\Controllers\SponsorController)->viewSearchfromSponsor($sponsor_id);
-//         break;
-//         case 'student':
-//           return (new \App\Http\Controllers\SponsorController)->viewSearchfromStudent($sponsor_id);
-//         break;
-//     }
-// });
 
 Route::get('/profile_sponsor/{scholarship_id}', 'SponsorController@profileCont');
 Route::get('/scholarship/reopen/{scholarship_id}', 'ScholarshipsController@reopenScholarship');

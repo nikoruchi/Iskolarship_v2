@@ -35,8 +35,9 @@
 					<h2 class="text-center">Scholarships</h2>
 					<ul class="scholarships">
 					
-					<h4> Open Scholarships </h4>
-					@if(!empty($openscholarships))						
+					
+					@if(!empty($openscholarships))
+					<h4> Open Scholarships </h4>						
 						@foreach($openscholarships as $scho)
 							<li>
 								<h2 class="first-letter">{{$scho->scholarship_name[0]}}</h2>
@@ -65,8 +66,9 @@
 						@endif
 					@endif
 
-					<h4> Closed Scholarships </h4>
+					
 					@if(!empty($endscholarships))
+					<h4> Closed Scholarships </h4>
 						@foreach($endscholarships as $scho)
 							<li>
 

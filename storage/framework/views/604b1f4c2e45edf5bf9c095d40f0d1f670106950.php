@@ -34,8 +34,7 @@
 
 							</p>
 							<a href="/profile scholarship/<?php echo e($scho->scholarship_id); ?>"
-						 	class="view">View</a> <?php echo e($scho->scholarship_id); ?>
-
+						 	class="view">View</a>
 						</article>
 					</li>
 				</ul>

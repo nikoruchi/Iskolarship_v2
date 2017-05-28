@@ -33,8 +33,9 @@
 					<h2 class="text-center">Scholarships</h2>
 					<ul class="scholarships">
 					
-					<h4> Open Scholarships </h4>
-					<?php if(!empty($openscholarships)): ?>						
+					
+					<?php if(!empty($openscholarships)): ?>
+					<h4> Open Scholarships </h4>						
 						<?php $__currentLoopData = $openscholarships; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $scho): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 							<li>
 								<h2 class="first-letter"><?php echo e($scho->scholarship_name[0]); ?></h2>
@@ -63,8 +64,9 @@
 						<?php endif; ?>
 					<?php endif; ?>
 
-					<h4> Closed Scholarships </h4>
+					
 					<?php if(!empty($endscholarships)): ?>
+					<h4> Closed Scholarships </h4>
 						<?php $__currentLoopData = $endscholarships; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $scho): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 							<li>
 
