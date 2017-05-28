@@ -18,10 +18,10 @@
 					<div class="panel-body">
 						<ul class="list-unstyled notifs-container">
 						@if($notification->count() > 0)
-							@foreach($notification as $notif)
+							@foreach($notification as $notif) 
 								@if($user->user_type == 'sponsor' && str_contains($notif->notification_desc, "A student applied for"))
 								<li class="notif">
-									<a href="#" class="remove"><span class="glyphicon glyphicon-remove"></span></a>
+									<a href="javascript:void(0)" data-pg="$notif->notification_id" class="remove"><span class="glyphicon glyphicon-remove"></span></a>
 									<img src="{{asset('image/default.jpg')}}" class="img-responsive"/>
 									<p>{{$notif->notification_desc}} <a href="/profile scholarship/{{$notif->scholarship_id}}" class="view">View Application</a> <br/>
 									<i>{{$notif->notification_date}}</i></p>
@@ -29,15 +29,15 @@
 
 								@elseif($user->user_type == 'sponsor' && str_contains($notif->notification_desc, "his slot in"))
 								<li class="notif">
-									<a href="#" class="remove"><span class="glyphicon glyphicon-remove"></span></a>
+									<a href="javascript:void(0)" data-pg="$notif->notification_id" class="remove"><span class="glyphicon glyphicon-remove"></span></a>
 									<img src="{{asset('image/default.jpg')}}" class="img-responsive"/>
-									<p> {{$notif->notification_desc}} <a href="/profile scholar/{{$notif->student_id}}" class="view">View Scholar</a> <br/>
+									<p>{{$notif->notification_desc}} <a href="/profile scholar/{{$notif->student_id}}" class="view">View Scholar</a> <br/>
 									<i>{{$notif->notification_date}}</i></p>
 								</li>
 
 								@elseif($user->user_type == 'student')
 								<li class="notif">
-									<a href="#" class="remove"><span class="glyphicon glyphicon-remove"></span></a>
+									<a href="javascript:void(0)" data-pg="$notif->notification_id" class="remove"><span class="glyphicon glyphicon-remove"></span></a>
 									<img src="{{asset('image/spon_def.png')}}" class="img-responsive"/>
 									<p>{{$notif->notification_desc}} <a href="/profile scholarship/{{$notif->scholarship_id}}" class="view">View Scholarship</a> <br/>
 									<i>{{$notif->notification_date}}</i></p>									
