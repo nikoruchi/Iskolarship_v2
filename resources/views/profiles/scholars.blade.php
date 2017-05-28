@@ -1,5 +1,5 @@
 @extends('layouts.userTab')
-
+  
 @section('content')
 	<ul class="scholar-links">
 	@if(Auth::user()->hasRole('sponsor'))
