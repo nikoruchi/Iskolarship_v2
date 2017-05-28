@@ -7,7 +7,7 @@
 				<div class="panel-heading">
 					<h1 class="unmargined txt-success">Register<small> as a Sponsor <span class="glyphicon glyphicon-briefcase"></span></small></h1>
 				</div>
-				<form action="/registration/Sponsor">
+				<form action="/registration/Sponsor" method="post">
 					{{ csrf_field() }}
 					<div class="panel-body">
 						<h2 class="unmargined"><small><span class="glyphicon glyphicon-list-alt"></span> Personal Information</small><span class="section well">1</span></h2>

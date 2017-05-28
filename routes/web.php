@@ -54,20 +54,14 @@ Route::get("/home", function(){
 
 Route::get("/profile scholarship/{scholarship_id}", function($scholarship_id){
     switch(Auth::user()->user_type){
-    // if(Auth::user()->user_type)
         case 'sponsor':
           return (new \App\Http\Controllers\ScholarshipsController)->scholarshipSponsor($scholarship_id);
         break;
-
-// Route::get('/profile scholarship/{scholarship_id}', 'ProfileController@homeSponsor');
 
         case 'student':
           return (new \App\Http\Controllers\ScholarshipsController)->scholarshipStudent($scholarship_id);
         break;
     }
-    // if(Auth::guest()){
-        // return view('profiles.profile_scholarship');
-    // }
 });
 
 //=============== FOR FRONT-END PURPOSES =======================

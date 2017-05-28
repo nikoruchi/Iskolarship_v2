@@ -63,8 +63,10 @@ class ApplicationController extends Controller
 
     public function viewQuestionaire(){
         $user_id = Auth::user()->user_id;
+        dd($user_id);
         $user = User::findOrFail($user_id);
         $stud_id = Scholar::where('user_id','=', $user_id)->pluck('student_id')->first();
+
         $student = Scholar::findOrFail($stud_id);
         return view('registration/scholarship_application', compact('student','user'));
     }

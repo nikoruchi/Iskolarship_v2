@@ -69,7 +69,6 @@
 					@if(!empty($endscholarships))
 						@foreach($endscholarships as $scho)
 							<li>
-
 								<h2 class="first-letter">{{$scho->scholarship_name[0]}}</h2>
 								<article>
 									<h2 class="name">{{$scho->scholarship_name}} </h2>
