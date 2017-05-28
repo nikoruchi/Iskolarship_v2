@@ -30,20 +30,11 @@
 
 								</div>
 								<div class="">
-<<<<<<< HEAD:storage/framework/views/511a3a7dd2f3a478daa8728de3d288c8ad5b3b68.php
-								
-									<input class="form-control" type="text" name="to" id="to" placeholder="To" value="<?php echo e(isset($email) ? $email : old('to')); ?>"/>
 
-										<span class="help-block">
-											
-										</span>
-										
-=======
 									<input class="form-control" type="text" name="to" id="to" placeholder="To" value="<?php echo e(empty($email)? '': $email[0]); ?>"/>
 									<span class="help-block">
 										<!-- <strong></strong> -->
 									</span>
->>>>>>> f0c61e824889768a2c2ef02652eaadb137493b51:storage/framework/views/44c68a8d8cec81246039e5b8693112b4984797b4.php
 								</div>
 								<div class="">
 									<textarea class="form-control" placeholder="Message" name="content" id="message_content" value=""></textarea>

@@ -1,6 +1,4 @@
-@extends('layouts.userTab')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
  
 	<div class="container main-container">
 		<div class="row">
@@ -13,6 +11,7 @@
 							<h2>Details</h2>
 							<input type="text" name="scholarship_name" id="scholarship_name" class="form-control" placeholder="Scholarship Name" />
 							<textarea name="description" id="description" class="form-control" placeholder="Description"></textarea>
+							<!-- <label class="file-label"><span class="glyphicon glyphicon-download-alt"></span> Upload File<input type="file" name="image" class="form-control"/></label> -->
 
 							<div class="deadline">
 								<label>Deadline:</label>
@@ -76,12 +75,13 @@
 		</div>
 	</div>
 
-@endsection
+<?php $__env->stopSection(); ?>
 
-@push('styles')
+<?php $__env->startPush('styles'); ?>
 	<link rel="stylesheet" type="text/css" href="css/scholarship_form.css"/>
-@endpush
+<?php $__env->stopPush(); ?>
 
-@push('scripts')
+<?php $__env->startPush('scripts'); ?>
     <script type="text/javascript" src="/js/script-form.js"></script>
-@endpush
+<?php $__env->stopPush(); ?>
+<?php echo $__env->make('layouts.userTab', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
