@@ -1,3 +1,7 @@
+.messages-heading{
+	margin: 0.5em 0;
+}
+
 .form-group > *{
 	margin-bottom: 10px; 
 }
@@ -89,17 +93,19 @@
 
 .compose,
 .delete,
-.sent{
+.sent,
+.markall,
+.unmarkall{
 	width: 100%;
 	display: block;
 	text-align: left;
-	background-color: transparent;
+	background-color: white;
 	font-family: Roboto;
 	font-size: 1em;
-	margin: 1em 0;
+	/* margin: 1em 0; */
 	border: 0;
 	padding: 6px 20px;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
 	text-transform: capitalize;
 }
 
@@ -108,26 +114,39 @@
 }
 
 .delete{
-	color: #cd1919;
+	color: #cd3232;
 }
 
 .sent{
 	color: #10a7e6;
 }
 
+.markall{
+	color: #e8b65f;
+}
+
+.unmarkall{
+	color: #e8dd5f;
+}
+
 #compose-form textarea,
 #formMsg input,
 #formMsg textarea{
 	border: 0;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 	border-radius: 0px;
 	font-family: Roboto;
 }
 
 .thread-message{
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-	margin: 1em 0;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	margin: 0 0;
 	position: relative;
+	background-color: white;
+}
+
+#compose-form .thread-message{
+	margin: 1em 0;
 }
 
 .message-sender{
@@ -215,6 +234,12 @@
 
 #message-form > .panel-body{
 	position: relative;
+}
+
+.message-options{
+	padding: 0;
+	overflow: hidden;
+	border-radius: 4px;
 }
 
 /*.message-filters li{
