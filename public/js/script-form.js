@@ -44,6 +44,7 @@ function createForm(e){
 	details.push($('#scholarship_name').val());
 	details.push($('#description').val());
 	details.push($('#deadline').val());
+	details.push($('#coverage').val());
 
 	if(spec_count <= 0 || grant_count<=0  || qn_count <= 0){
 		$('.all-help-block').html("Grants, Specifications and Questions must not be empty.")

@@ -89,7 +89,7 @@ Route::post('/Sponsor/upload', 'EditProfileController_Sponsor@upload');
 
 
 Route::get('/scholarship form/create', 'ScholarshipsController@createScholarship');
-Route::post('/upload/logo', 'ScholarshipsController@uploadLogo');
+// Route::post('/upload/logo', 'ScholarshipsController@uploadLogo');
 
 
 Route::get("/messages", function(){
