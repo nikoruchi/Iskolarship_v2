@@ -49,10 +49,10 @@
 						@endforeach
 					</ul>
 					@else 
-						<h2 class="text-center">No pending applications.</h2>
+						<h5 class="text-center">No pending applications.</h5>
 					@endif
 
-					@if(($pendingApplications->count())>0)
+					@if(($officialScholars->count())>0)
 					<h3 class="text-center" id="offic">Official</h3>
 					<ul class="scholarships">
 						@foreach($officialScholars as $scholar)
@@ -78,7 +78,7 @@
 						@endforeach
 					</ul>
 					@else
-						<h2 class="text-center">No official scholars.</h2>
+						<h5 class="text-center">No official scholars.</h5>
 					@endif
 				</div>
 			</div>

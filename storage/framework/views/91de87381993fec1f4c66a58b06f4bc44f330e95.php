@@ -51,10 +51,10 @@
 						<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 					</ul>
 					<?php else: ?> 
-						<h2 class="text-center">No pending applications.</h2>
+						<h5 class="text-center">No pending applications.</h5>
 					<?php endif; ?>
 
-					<?php if(($pendingApplications->count())>0): ?>
+					<?php if(($officialScholars->count())>0): ?>
 					<h3 class="text-center" id="offic">Official</h3>
 					<ul class="scholarships">
 						<?php $__currentLoopData = $officialScholars; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $scholar): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -82,7 +82,7 @@
 						<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 					</ul>
 					<?php else: ?>
-						<h2 class="text-center">No official scholars.</h2>
+						<h5 class="text-center">No official scholars.</h5>
 					<?php endif; ?>
 				</div>
 			</div>
