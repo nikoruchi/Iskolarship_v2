@@ -1,0 +1,21 @@
+.profile-picture{
+	width: 30%;
+	display: block;
+	margin: auto;
+}
+
+h2.heading{
+	margin: 0;
+	font-size: 1.5em;
+}
+
+h2:not(.heading){
+	text-align: center;
+	font-size: 1.5em;
+	color: #12a6eb;
+	margin-top: 1.5em;
+}
+
+h3{
+	text-align: center;
+}

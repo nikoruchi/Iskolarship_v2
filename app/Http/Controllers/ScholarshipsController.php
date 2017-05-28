@@ -41,7 +41,8 @@ class ScholarshipsController extends Controller
         $scholarship->sponsor_id = $sponsor_id;
         $scholarship->scholarship_name = $details[0];
         $scholarship->scholarship_desc = $details[1];
-        $scholarship->scholarship_logo = 'defaultlogo.jpg';
+        $scholarship->scholarship_coverage = $details[3];
+        $scholarship->scholarship_logo = 'default.jpg';
         $scholarship->save();
     
         $lastId = $scholarship->scholarship_id;

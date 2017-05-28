@@ -5,7 +5,7 @@
 			<div class="col-sm-8 col-sm-offset-2">
 				<div class="panel panel-default">
 					<div class="panel-body">
-						<form id="create-form" method="post">
+						<form id="create-form" method="get">
 							<h1 class="text-center">Create Scholarship</h1>
 							<hr>
 							<h2>Details</h2>
@@ -18,10 +18,14 @@
 								<input type="date" name="deadline" id="deadline" placeholder="deadline" class="form-control">
 							</div>
 
-							<img src="/image/default.jpg" class="uploaded-img" width="50%" />
-							<label class="file-label"><span class="glyphicon glyphicon-download-alt"></span> Upload scholarship image<input type="file" id="imagefile" name="image" class="form-control"/></label>
+							<div class="deadline">
 
-							<!-- <button type="submit" class="btn btn-default next">Next <span class="glyphicon glyphicon-arrow-right"></span></button> -->
+								<label  >How many DAYS will your scholarship last on contract?</label>
+								<input type="number" name="coverage" id="coverage"  class="form-control" min="0"/>
+
+							</div>
+							
+
 							<hr>
 							<h2>Grants</h2>
 							<ul class="grants">
@@ -63,7 +67,7 @@
 
 							<span class="text-warning all-help-block"></span>
 
-							<!-- <a href="#" class="btn btn-default next">Next <span class="glyphicon glyphicon-arrow-right"></span></a> -->
+							
 						</form>
 					</div>
 				</div>

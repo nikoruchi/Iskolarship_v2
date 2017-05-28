@@ -1,5 +1,5 @@
 <?php
-/*
+/* 
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
@@ -76,6 +76,8 @@ Route::get('/scholarship form', 'ScholarshipsController@createForm');
 Route::get('/scholar setup', 'ProfileSetupController@viewSetup');
 Route::get('/scholar questionaire', 'ApplicationController@viewQuestionaire');
 
+Route::get('/application', 'ApplicationController@viewApplication');
+
 //=============== END FOR FRONT-END PURPOSES =======================
 
 
@@ -94,7 +96,7 @@ Route::post('/Sponsor/upload', 'EditProfileController_Sponsor@upload');
 
 
 Route::get('/scholarship form/create', 'ScholarshipsController@createScholarship');
-Route::post('/upload/logo', 'ScholarshipsController@uploadLogo');
+// Route::post('/upload/logo', 'ScholarshipsController@uploadLogo');
 
 
 Route::get("/messages", function(){
@@ -128,9 +130,9 @@ Route::group(['middleware' => 'isguest'], function(){
 // APPLICATION STATUS CHANGES
 Route::post('/application/avail','ApplicationController@avail');
 Route::post('/application/rejectAvail','ApplicationController@rejectAvail');
-Route::post('/application/accept','ApplicationController@accept');
-Route::post('/application/reject', 'ApplicationController@reject');
-Route::post('/scholars/remove', 'ApplicationController@remove');
+Route::get('/application/accept','ApplicationController@accept');
+Route::get('/application/reject', 'ApplicationController@reject');
+Route::get('/scholars/remove', 'ApplicationController@remove');
 
 
 // for SEARCH THINGY
