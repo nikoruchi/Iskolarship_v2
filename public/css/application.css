@@ -19,3 +19,19 @@ h2:not(.heading){
 h3{
 	text-align: center;
 }
+
+.answers-container li{
+	box-shadow: 0 0 10px rgba(0,0,0,0.2);
+	margin: 0.5em 0;
+	padding: 1em;
+}
+
+.question{
+	color: #12a6eb;
+}
+
+.answer{
+	color: #888;
+	margin-left: 1em;
+	text-indent: 1em;
+}

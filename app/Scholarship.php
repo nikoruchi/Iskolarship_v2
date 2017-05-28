@@ -42,4 +42,12 @@ class Scholarship extends Model
     public function grants(){
         return $this->hasMany('App\ScholarshipGrant','scholarship_id');
     }
+
+    public function ownedBy(){
+        return $this->belongsTo('App\Sponsor', 'sponsor_id');
+    }
+
+    public function questions(){
+        return $this->hasMany('App\EssayQuestions','scholarship_id');
+    }
 }

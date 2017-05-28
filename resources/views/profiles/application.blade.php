@@ -10,59 +10,75 @@
 						<a href="/profile sponsor/scholars" class="back-link btn btn-primary"><span class="glyphicon glyphicon-arrow-left"></span> Back to Scholars</a>
 						</div>
 						<img src="/image/default.jpg" class="profile-picture">
-						<h1 class="text-center">Clyde</h1>
-						<h2 class="heading text-center">Bs in Computer Science</h2>
-						<h2 class="heading text-center">University of the Philippines</h2>
-						<h4 class="text-center">cjubs.delgado@gmail.com</h3>
-						<p class="text-center">About me chu chu.</p>
+						<h1 class="text-center">{{$app->scholar->student_fname}} {{$app->scholar->student_lname}}</h1>
+						<h2 class="heading text-center">{{$app->scholar->study_field}}</h2>
+						<h2 class="heading text-center">{{$app->scholar->student_university}}</h2>
+						<h4 class="text-center">{{$app->scholar->student->email}}</h3>
+						<p class="text-center">{{$app->scholar->student->user_aboutme}}</p>
 						<h2>Family Background</h2>
 						<div class="row">
 							<div class="col-sm-6">
 								<h3>Father</h3>		
-								<p>Father Name</p>
-								<p>Work</p>
-								<p>Education</p>
-								<p>Tribal Affi</p>
-								<p>Employer Name</p>
-								<p>Employer Address</p>
-								<p>Annual Gross Income</p>
-								<p>Self Annual Gross Income</p>
+								<p>{{$app->scholar->parents->father_name}}</p>
+								<p>{{$app->scholar->parents->father_occupation}}</p>
+								<p>{{$app->scholar->parents->father_education}}</p>
+								<p>{{$app->scholar->parents->father_tribe}}</p>
+								<p>{{$app->scholar->financial->father_employername}}</p>
+								<p>{{$app->scholar->financial->father_employeraddress}}</p>
+								<p>{{$app->scholar->financial->father_AGincome}}</p>
+								<p>{{$app->scholar->financial->father_selfAGincome}}</p>
 							</div>
 							<div class="col-sm-6">
 								<h3>Mother</h3>		
-								<p>Father Name</p>
-								<p>Work</p>
-								<p>Education</p>
-								<p>Tribal Affi</p>
-								<p>Employer Name</p>
-								<p>Employer Address</p>
-								<p>Annual Gross Income</p>
-								<p>Self Annual Gross Income</p>
+								<p>{{$app->scholar->parents->mother_name}}</p>
+								<p>{{$app->scholar->parents->mother_occupation}}</p>
+								<p>{{$app->scholar->parents->mother_education}}</p>
+								<p>{{$app->scholar->parents->mother_tribe}}</p>
+								<p>{{$app->scholar->financial->mother_employername}}</p>
+								<p>{{$app->scholar->financial->mother_employeraddress}}</p>
+								<p>{{$app->scholar->financial->mother_AGincome}}</p>
+								<p>{{$app->scholar->financial->mother_selfAGincome}}</p>
 							</div>
 						</div>
 						<h2>Siblings enjoying Scholarships</h2>
 						<table class="table">
+							@if($siblings->count()>0)
 							<tr>
-								<th>Name</th>
-								<th>Scholarship</th>
-								<th>Course &amp; College/University</th>
+								<th>{{$siblings->sibling_name}}</th>
+								<th>{{$siblings->sibling_scholarship}}</th>
+								<th>{{$siblings->sibling_courseschool}}</th>
 							</tr>
+							@endif
 							<!-- Echo sibling here -->
 						</table>
 						<h2>Relatives Contributing</h2>
 						<table class="table">
+							@if($relatives->count()>0)
 							<tr>
-								<th>Relative's Name</th>
-								<th>Nature of Financial Contribution</th>
-								<th>Relationship with the Applicant</th>
-								<th>Average Contribution</th>
+								<th>{{$relatives->relative_name}}</th>
+								<th>{{$relatives->relative_natureofcontribution}}</th>
+								<th>{{$relatives->relative_relationship}}</th>
+								<th>{{$relatives->relative_averagecontribution}}</th>
 							</tr>
+							@endif
+							
 							<!-- Echo relaties Here -->
 						</table>
+						@if($four=='yes')
 						<p>Is a beneficiary of Pantawid Pamilyang Pilipino Program (4ps)</p>
-						<p>The housing unit is rent free or with relatives.</p>
-						<p>Monthly rental</p>
-						<p>Monthly amortization</p>
+						@endif
+						@if($type=='own_paid')
+						<p>The house is owned and fully paid.</p>
+						@elseif($type=='own_amo')
+						<p>The house is owned and was amortized.</p>
+						@elseif($type=='own_ren')
+						<p>The housing unit us rented.</p>
+						@elseif($type=='own_fre')
+						<p>The housing unit rent is free or with relatives.</p>
+						@endif
+
+						<p>Monthly rental: {{$app->scholar->financial->housing_rental}}</p>
+						<p>Monthly amortization: {{$app->scholar->financial->housing_amortization}}</p>
 						<table class="table">
 							<tr>
 								<th>Appliances/Vehicle</th>
@@ -71,45 +87,55 @@
 							</tr>
 							<tr>
 								<td>Aircondition</td>
-								<td></td>
-								<td></td>
+								<td>{{$app->scholar->appliances->aircon_num}}</td>
+								<td>{{$app->scholar->appliances->aircon_acquisition}}</td>
 							</tr>
 							<tr>
 								<td>Video Camera/Movie Camera</td>
-								<td></td>
-								<td></td>
+								<td>{{$app->scholar->appliances->camera_num}}</td>
+								<td>{{$app->scholar->appliances->camera_aquisition}}</td>
 							</tr>
 							<tr>
 								<td>Car/Van/Pajero/Other similar vehicle</td>
-								<td></td>
-								<td></td>
+								<td>{{$app->scholar->appliances->vehicle_num}}</td>
+								<td>{{$app->scholar->appliances->vehicle_acquisition}}</td>
 							</tr>
 							<tr>
 								<td>Jeepney (AUV/Owner Type)</td>
-								<td></td>
-								<td></td>
+								<td>{{$app->scholar->appliances->jeep_num}}</td>
+								<td>{{$app->scholar->appliances->jeep_acquisition}}</td>
 							</tr>
 							<tr>
 								<td>Ipad/Ipod</td>
-								<td></td>
-								<td></td>
+								<td>{{$app->scholar->appliances->ipad_num}}</td>
+								<td>{{$app->scholar->appliances->ipad_acquisition}}</td>
 							</tr>
 							<tr>
 								<td>Industrial Freezer</td>
-								<td></td>
-								<td></td>
+								<td>{{$app->scholar->appliances->freezer_num}}</td>
+								<td>{{$app->scholar->appliances->freezer_acquisition}}</td>
 							</tr>
 							<tr>
 								<td>Industrial Dryer</td>
-								<td></td>
-								<td></td>
+								<td>{{$app->scholar->appliances->dryer_num}}</td>
+								<td>{{$app->scholar->appliances->dryer_acquisition}}</td>
 							</tr>
 							<tr>
 								<td>Electric water pump</td>
-								<td></td>
-								<td></td>
+								<td>{{$app->scholar->appliances->pump_num}}</td>
+								<td>{{$app->scholar->appliances->pump_acquisition}}</td>
 							</tr>
 						</table>
+						<h2>Answers to questions</h2>
+						<ul class="list-unstyled answers-container">
+							@for($i=0; $i<($questions->count());$i++)
+							<!-- $questions as $qn, $answers as $ans) -->
+							<li>
+								<p class="question">{{$questions[$i]->essay_question}}</p>
+								<p class="answer">{{$answers[$i]->essay_answer}}</p>
+							</li>
+							@endfor
+						</ul>
 					</div>
 				</div>
 			</div>

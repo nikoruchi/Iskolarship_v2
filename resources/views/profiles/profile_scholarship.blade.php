@@ -16,7 +16,7 @@
 						@elseif((Auth::user()->hasRole('student')) && $exists!=0)
 							<p class="text-center">You have applied already. Please wait until the agency reviews your application.</p>
 						@elseif((Auth::user()->hasRole('student')) && $exists==0)
-							<a href="#" class="btn btn-success btn-lg apply-btn"><span class="glyphicon glyphicon-education"><span class="glyphicon glyphicon-plus"></span></span>&nbsp;&nbsp;Apply</a>
+							<a href="/scholar questionaire/{{$scholarship->scholarship_id}}" class="btn btn-success btn-lg apply-btn"><span class="glyphicon glyphicon-education"><span class="glyphicon glyphicon-plus"></span></span>&nbsp;&nbsp;Apply</a>
 						@elseif(Auth::guest())
 							<p class="text-center">You must be <a href="/">logged in</a> to apply.</p>
 						@elseif($user->user_id == ($scholarship->sponsor_id))

@@ -9,6 +9,7 @@
 						<h3 class="text-center">Messages</h3>
 						<button class="compose" href="javascript:void(0)"><span class="glyphicon glyphicon-pencil"></span> Compose</button>
 						<button class="delete" href="javascript:void(0)"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+						<button class="sent" href="javascript:void(0)"><span class="glyphicon glyphicon-send"></span> Sent</button>
 					</div>
 				</div>
 			</div>
@@ -46,7 +47,7 @@
 
 								</div>
 								<button class="btn btn-primary pull-right send" type="submit" name="send_message" id="send_message" href="javascript:void(0)">
-									<span class="glyphicon glyphicon-send"></span>
+									<span class="glyphicon glyphicon-send"></span> Send
 								</button>
 							</form>
 								
@@ -94,11 +95,11 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startPush('scripts'); ?>
-	<script type="text/javascript" src="/js/script-messages.js"></script>
+	<script type="text/javascript" src="<?php echo e(asset('js/script-messages.js')); ?>"></script>
 <?php $__env->stopPush(); ?>
 
 <?php $__env->startPush('styles'); ?>
-	<link rel="stylesheet" type="text/css" href="css/message.css"/>
+	<link rel="stylesheet" type="text/css" href="<?php echo e(asset('css/message.css')); ?>"/>
 <?php $__env->stopPush(); ?>
 
 <?php echo $__env->make("layouts.userTab", array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
