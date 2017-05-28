@@ -139,6 +139,10 @@ form:not(.navbar-form) .input-group{
 	 transform: scale(1.2,1.2); 
 }
 
+.tagline{
+	font-family: Roboto!important;
+}
+
 @media screen and (min-width: 768px){
 	#login{
 		padding: 2em 0;

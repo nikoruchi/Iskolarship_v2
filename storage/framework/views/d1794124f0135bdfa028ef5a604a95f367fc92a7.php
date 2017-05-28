@@ -26,6 +26,7 @@
 						<?php $__currentLoopData = $questions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $qn): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 							<label><?php echo e($qn->essay_question); ?></label>
 							<input type="hidden" name="qnID[]" value="<?php echo e($qn->essay_questionsID); ?>" /> 
+<<<<<<< HEAD
 							<!-- <div class="input-group <?php echo e($errors->has('answer') ? ' has-error' : ''); ?> "> -->
 								<textarea name="answer[]" class="form-control" placeholder="Answer"></textarea>
 							<!-- </div> -->
@@ -34,6 +35,16 @@
 										<strong><?php echo e($errors->first('answer')); ?></strong>
 									</span>
 							<?php endif; ?> -->
+=======
+							<div class="input-group <?php echo e($errors->has('answer') ? ' has-error' : ''); ?> ">
+								<textarea name="answer[]" class="form-control" placeholder="Answer"></textarea>
+							</div>
+							<?php if($errors->has('answer')): ?>
+									<span class="help-block">
+										<strong><?php echo e($errors->first('answer')); ?></strong>
+									</span>
+							<?php endif; ?>
+>>>>>>> dd2265359f315b115e2ad585df266a08777ba7c7
 
 						<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 						<section>

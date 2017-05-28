@@ -101,7 +101,8 @@ class MessagesController extends Controller
     }
 
     public function messages($data){
-        $user_id=Auth::user()->user_id;
+
+        $user_id = Auth::user()->user_id;
         $messages = array();
         foreach($data as $message){
             $user = User::find($message->msg_sender);
@@ -114,7 +115,7 @@ class MessagesController extends Controller
             $messages[] = array(
                 'content'=>$message->msg_content,
                 'id'=>$message->msg_id,
-                'sender'=>$msg_sender,
+                'sender'=>$message->msg_sender,
                 'sender_name'=>$sender,
                 'timestamp'=>$message->created_at->diffForHumans(),
                 'user'=>$user_id

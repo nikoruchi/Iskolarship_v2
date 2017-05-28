@@ -12,6 +12,7 @@
 .heading .img-container > img{
 	width: 100%;
 	margin: 0!important;
+		
 }
 
 .heading .img-container > img[alt="sponsor-img"]{
@@ -19,6 +20,8 @@
 	position: absolute;
 	bottom: 0;
 	right: 0;
+	height: 1.5em;
+	width: 1.5em;
 }
 
 .heading > article{

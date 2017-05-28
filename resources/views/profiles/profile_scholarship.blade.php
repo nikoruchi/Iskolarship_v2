@@ -11,7 +11,6 @@
 						<h1 class="scholarship-name">{{$scholarship->scholarship_name}}</h1>
 						<p class="scholarship-description">{{$scholarship->scholarship_desc}}</p>
 						<div class="flex">
-						<!-- pa edit lang di design sang paragraph. -->
 						@if($deadline < $currentTime)
 							<p class ="text-center">Submission for application is over.</p>
 						@elseif((Auth::user()->hasRole('student')) && ($exists>0))
