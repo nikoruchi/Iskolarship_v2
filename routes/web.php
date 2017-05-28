@@ -106,7 +106,7 @@ Route::get("/messages", function(){
 
 Route::group(['middleware' => 'isguest'], function(){
     Route::get('/messages/{sponsor}', 'MessagesController@autofillMsgSponsor');
-    // Route::get('/messages/{student}', 'MessagesController@autofillMsgScholar');
+    Route::get('/messages/s/{studentProfile}', 'MessagesController@autofillMsgScholar');
     Route::get('/messages/read', 'MessagesController@getReadMsg');
     Route::get('/messages/unread', 'MessagesController@getUnReadMsg');
     Route::get('/messages/inbox', 'MessagesController@getAllMsg');
