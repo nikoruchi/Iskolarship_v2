@@ -45,7 +45,7 @@
 									<h6><b> Application Deadline: </b><i> {{date('m/d/Y', strtotime($scho->scholarship_deadlineenddate))}} </i></h6>
 									@if(Auth::user()->user_id==$user1->user_id)
 										<div class="btns">
-											<a href="#" class="edit"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+											<a href="/profile scholarship/{{$scho->scholarship_id}}" class="edit"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
 											<a href="{{ url('profile sponsor/scholars') }}" class="view_scholars"><span class="glyphicon glyphicon-eye-open"></span> Scholars</a>
 										</div>
 									@else

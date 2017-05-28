@@ -34,7 +34,8 @@
 							<p class="desc">
 								{{$scho->scholarship_desc}}
 							</p>
-							<a href="#" class="view">View</a>
+							<a href="/profile scholarship/{{$scho->scholarship_id}}"
+						 	class="view">View</a>
 						</article>
 					</li>
 				</ul>
