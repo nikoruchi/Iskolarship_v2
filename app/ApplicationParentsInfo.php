@@ -17,7 +17,7 @@ class ApplicationParentsInfo extends Model
      * @var array
      */
     protected $fillable = [
- 		'application_id',
+ 		'student_id',
     	'father_type',
         'father_name' ,
         'father_occupation',
