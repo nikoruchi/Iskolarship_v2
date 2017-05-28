@@ -215,7 +215,8 @@ function all(){
 					msgs+= '<div class="panel panel-success">';
 				} else {
 					msgs+= '<div class="panel panel-danger">';
-				}				msgs+= '<div class="panel-body">';
+				}				
+				msgs+= '<div class="panel-body">';
 				msgs+= '<form class="select-form">';
 				msgs+= '<input type="checkbox" name="messages[]" value="'+value['id']+'" class="cbox not-clickable select"/>';
 				msgs+= '</form>';

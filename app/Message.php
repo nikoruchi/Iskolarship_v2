@@ -24,13 +24,17 @@ class Message extends Model
         'msg_date',
         'msg_status',       
     ];
-    public function sender(){
-        return $this->belongsToMany('App\Scholar','App\Sponsor','user_id','user_id');
+    // public function sender(){
+        // return $this->belongsToMany('App\Scholar','App\Sponsor','user_id','user_id');
+    // }
+
+    public function senderstudent(){
+        return $this->belongsTo('App\Scholar','msg_sender');
     }
 
-    // public function sponsorsender(){
-    //     return $this->belongsTo('App\Sponsor','user_id');
-    // }
+    public function sendersponsor(){
+        return $this->belongsTo('App\Sponsor','msg_sender');
+    }
 
 
    public function yourmessages(){

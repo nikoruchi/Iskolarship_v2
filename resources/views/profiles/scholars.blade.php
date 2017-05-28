@@ -30,14 +30,14 @@
 									<small>{{$application->scholarship->scholarship_name}}</small>
 								</h2>
 								<div class="btns">
-									<form method="get" action="/application/accept">
+									<form method="POST" action="/application/accept">
 											{{ csrf_field() }}
 										<input type="hidden" value="{{$application->application_id}}" name="app_id" />
 										<button type="submit" class="accept"><span class="glyphicon glyphicon-remove"></span> Accept</button>
 									</form>
 
 									<a href="/application/{{$application->application_id}}"" class="view"><span class="glyphicon glyphicon-eye-open"></span> View</a>
-									<form method="get" action="/application/reject">
+									<form method="POST" action="/application/reject">
 											{{ csrf_field() }}
 										<input type="hidden" value="{{$application->application_id}}" name="app_id" />
 										<button type="submit" class="reject"><span class="glyphicon glyphicon-remove"></span> Reject</button>

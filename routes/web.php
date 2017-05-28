@@ -16,6 +16,10 @@ Route::get('/', function () {
     return view('auth.login');
 })->middleware('guest');
 
+Route::get('/home', function () {
+    return view('home');
+})->middleware('guest');
+
 Auth::routes();
 Route::get('/registration/Student Form', function () {
     return view('registration/scholar_form');
@@ -48,6 +52,9 @@ Route::get("/home", function(){
         break;
         case 'student':
           return (new \App\Http\Controllers\ScholarController)->viewHome();
+        break;
+        default:
+          return (new \App\Http\Controllers\GuestController)->viewHome();
         break;
     }
 });
@@ -124,9 +131,9 @@ Route::group(['middleware' => 'isguest'], function(){
 // APPLICATION STATUS CHANGES
 Route::post('/application/avail','ApplicationController@avail');
 Route::post('/application/rejectAvail','ApplicationController@rejectAvail');
-Route::get('/application/accept','ApplicationController@accept');
-Route::get('/application/reject', 'ApplicationController@reject');
-Route::get('/scholars/remove', 'ApplicationController@remove');
+Route::post('/application/accept','ApplicationController@accept');
+Route::post('/application/reject', 'ApplicationController@reject');
+Route::post('/scholars/remove', 'ApplicationController@remove');
 
 
 // for SEARCH THINGY

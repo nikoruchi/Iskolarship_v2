@@ -60,6 +60,8 @@ class MessagesController extends Controller
         $stud_id = Scholar::where('user_id','=', $user_id)->pluck('student_id')->first();
         $student = Scholar::findOrFail($stud_id);
         $inbox = Message::where('msg_receiver','=',$user_id)->get();
+        // $sender = User::
+        // $senderName = 
         return view('/user/messages', compact('student','user','inbox'));
     }
 
@@ -99,6 +101,7 @@ class MessagesController extends Controller
     }
 
     public function messages($data){
+        $user_id=Auth::user()->user_id;
         $messages = array();
         foreach($data as $message){
             $user = User::find($message->msg_sender);
@@ -111,8 +114,10 @@ class MessagesController extends Controller
             $messages[] = array(
                 'content'=>$message->msg_content,
                 'id'=>$message->msg_id,
-                'sender'=>$sender,
-                'timestamp'=>$message->created_at->diffForHumans()
+                'sender'=>$msg_sender,
+                'sender_name'=>$sender,
+                'timestamp'=>$message->created_at->diffForHumans(),
+                'user'=>$user_id
                 );
         }
         return $messages;
