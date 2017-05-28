@@ -10,24 +10,33 @@
 					<hr>
 					<div class="heading">
 						<div class="img-container">
-							<img src="{{asset('image/spon_def.png')}}" alt="sponsor-img">
-							<img src="{{asset('image/spon_def.png')}}" alt="scholarship-img">
+							<img src="/image/{{$user->user_imagepath}}" alt="sponsor-img">
+							<img src="/image/{{$scholarship->scholarship_logo}}" alt="scholarship-img">
 						</div>
 						<article>
-							<h2>DOST</h2>
+							<h2>{{$scholarship->scholarship_name}}</h2>
 							<!-- Sponsor Name -->
-							<p class="sponsor">Sponsor: Clyde Joshua Delgado</p>
-							<p class="quest-no">3 questions</p>
+							<p class="sponsor">Sponsor: {{$scholarship->ownedBy->sponsor_fname}} {{$scholarship->ownedBy->sponsor_lname}}</p>
+							<p class="quest-no">{{count($questions)}} questions</p>
 						</article>
 					</div>
 					<hr>
-					<form>
-						<label> When will this semester end<span class="question-mark">?</span></label>
-						<textarea class="form-control" placeholder="Answer"></textarea>
-						<label> What will you do after this semester<span class="question-mark">?</span></label>
-						<textarea class="form-control" placeholder="Answer"></textarea>
-						<label> Kapoy na kami<span class="question-mark">?</span></label>
-						<textarea class="form-control" placeholder="Answer"></textarea>
+					<form id="apply-form" action="/scholar questionaire/send" method="POST">
+						{{ csrf_field() }}
+						<input type="hidden" name="scholarshipID" value="{{ $scholarship->scholarship_id}}" /> 
+						@foreach($questions as $qn)
+							<label>{{$qn->essay_question}}</label>
+							<input type="hidden" name="qnID[]" value="{{ $qn->essay_questionsID  }}" /> 
+							<div class="input-group {{ $errors->has('answer') ? ' has-error' : '' }} ">
+								<textarea name="answer[]" class="form-control" placeholder="Answer"></textarea>
+							</div>
+							@if ($errors->has('answer'))
+									<span class="help-block">
+										<strong>{{ $errors->first('answer') }}</strong>
+									</span>
+							@endif
+
+						@endforeach
 						<section>
 							<label><input type="checkbox" name="agreement" value="agreed"> I agree to submit my account information, family background, and financial and socio-economic information with this application.</label>
 						</section>

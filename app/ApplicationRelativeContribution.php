@@ -29,5 +29,8 @@ class ApplicationRelativeContribution extends Model
      *
      * @var array
      */
+      public function applicationsrelative(){
+        return $this->belongsTo('App\Scholar','student_id');
+    }
 
 }

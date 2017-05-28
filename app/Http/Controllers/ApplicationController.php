@@ -9,9 +9,15 @@ use App\User;
 use App\Application;
 use App\Scholarship;
 use App\Notification;
-use Carbon\Carbon;
 use App\Sponsor;
-// use 
+use App\EssayQuestions;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\MessageBag;
+use Carbon\Carbon;
+use App\EssayAnswer;
+use App\ApplicationSiblingScholar;
+use App\ApplicationRelativeContribution;
+use App\ApplicationFamilyFinancial;
 class ApplicationController extends Controller
 {
     /**
@@ -111,19 +117,79 @@ class ApplicationController extends Controller
        return redirect()->back();
     }
 
-    public function viewQuestionaire(){
+    public function viewQuestionaire($scholarship_id){
         $user_id = Auth::user()->user_id;
+        // dd($user_id);
+        $scholarship = Scholarship::find($scholarship_id);
         $user = User::findOrFail($user_id);
         $stud_id = Scholar::where('user_id','=', $user_id)->pluck('student_id')->first();
         $student = Scholar::findOrFail($stud_id);
-        return view('registration/scholarship_application', compact('student','user'));
+        $questions = EssayQuestions::where('scholarship_id','=',$scholarship_id)->get();
+        return view('registration/scholarship_application', compact('questions','scholarship','student','user'));
     }
 
-    public function viewApplication(){
+    public function sendApplication(Request $request){
+      $agree = $request->agreement;
+      $currentTime = Carbon::now()->toDateTimeString();
+      $id = $request->scholarshipID;
+      $user_id = Auth::user()->user_id;
+      $student_id = Scholar::where('user_id','=',$user_id)->pluck('student_id')->first();
+      if($agree!=null){
+
+          // $validator = Validator::make($request->all(),[
+          //     'answer.*' => 'required',
+          // ])->validate()->withErrors($validator)->withInput();
+
+          // if (!($validator->fails())) {
+          //   return redirect('/registration/scholarship_application/$id')
+          //               ->withErrors($validator)
+          //               ->withInput();
+          // }
+            $answers = $request->answer;
+            $questions = $request->qnID;
+            $application = new Application;
+            $application->scholarship_id=$id;
+            $application->student_id=$student_id;
+            $application->application_date=$currentTime;
+            $application->accept_status='pending';
+            $application->avail_status='pending';
+            $application->save();
+            $app_id = $application->application_id;
+
+            for($i=0;$i<count($answers);$i++){
+              $answer = new EssayAnswer;
+              $answer->essay_questionsID=$questions[$i];
+              $answer->application_id=$app_id;
+              $answer->essay_answer=$answers[$i];
+              $answer->save();
+            }
+            return redirect('profile scholar');
+            // return redirect('/profile scholarship/{$id}');
+
+            // }
+      } else {
+        // did not agree
+        
+        dd("bad");
+      }
+    }
+
+    public function viewApplication($app_id){
         $user_id = Auth::user()->user_id;
         $user = User::findOrFail($user_id);
         $spon_id = Sponsor::where('user_id','=', $user_id)->pluck('sponsor_id')->first();
         $sponsor = Sponsor::findOrFail($spon_id);
-        return view('profiles/application', compact('sponsor','user'));
+        $app = Application::find($app_id);
+        $scholarship_id = $app->scholarship_id;
+        $stud_id = $app->student_id;
+        $siblings = ApplicationSiblingScholar::where('student_id','=',$stud_id)->first();
+        $relatives = ApplicationRelativeContribution::where('student_id','=',$stud_id)->first();
+        $four = ApplicationFamilyFinancial::where('student_id','=',$stud_id)->pluck('beneficiary_dswd4ps')->first();
+        $type = ApplicationFamilyFinancial::where('student_id','=',$stud_id)->pluck('housing_ownershiptype')->first();
+        $answers = EssayAnswer::where('application_id','=',$app_id)->get();
+        $questions = EssayQuestions::where('scholarship_id','=',$scholarship_id)->get();
+        $i = 0;
+                // $four = ApplicationFamilyFinancial::where('student_id','=',$stud_id)->pluck('beneficiary_dswd4ps')->first();
+        return view('profiles/application', compact('questions','answers','sponsor','user','app','siblings','relatives','four','type'));
     }
 }

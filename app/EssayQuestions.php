@@ -26,5 +26,8 @@ class EssayQuestions extends Model
      *
      * @var array
      */
+    public function scholarshipquestions(){
+        return $this->belongsTo('App\Scholarship','scholarship_id');
+    }
 
 }

@@ -28,5 +28,8 @@ class ApplicationSiblingScholar extends Model
      *
      * @var array
      */
+      public function applicationsiblings(){
+        return $this->belongsTo('App\Scholar','student_id');
+    }
 
 }

@@ -190,7 +190,6 @@ class ProfileSetupController extends Controller{
             $sib_scho->sibling_courseschool = $sibUniv[$i];
             $sib_scho->save();
         }
-
         return redirect('/profile scholar');
     }
 }  

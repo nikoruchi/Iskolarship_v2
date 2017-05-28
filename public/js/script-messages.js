@@ -9,6 +9,10 @@ $(document).ready(function(){
 	$(document).on("click",".not-clickable", notClickable);
 	$(document).on("click", ".reply", sendReply);
 	$(document).on("click", ".edit", edit);
+<<<<<<< HEAD
+=======
+	// $(document).on("click", ".delete", deleteNotif);
+>>>>>>> 68b7a64a70007952c56e5a60f5c6bfa83436884d
 })
 
 $(document).ready(function(){
@@ -46,6 +50,7 @@ $(document).ready(function(){
 })
 
 function seeFullMessage(e){
+	// console.log('yay');
 	e.preventDefault();
 	var id = $(this).attr("data-pg");
 	var msgs = "";
@@ -231,23 +236,24 @@ function all(){
 // fix this
 function writeMessage(e){
 	var msgs = "";
-	$.ajax({
-		url: "/messages/compose",
-		type: "GET",
-		data: $('not-clickable:checked').serialize(),
-		success:function(data){
-			console.log(data);
-			msgs+= '<form name="formMsg" id="formMsg">';
-			msgs+= '{{ csrf_field() }}';
-			msgs+= '<input class="form-control" type="text" name="subject" id="subject" placeholder="Subject" />';
-			msgs+= '<input class="form-control" type="text" name="to" id="to" placeholder="To" />';
-			msgs+= '<textarea class="form-control" placeholder="Message" name="content" id="message_content"></textarea>';
-			msgs+= '<button class="btn btn-primary pull-right send" type="submit" name="send_message" id="send_message" href="javascript:void(0)"><span class="glyphicon glyphicon-send"></span></button>';
-			msgs+= '</form>';
-			$("#compose-form").html(msgs);
+	// $.ajax({
+	// 	url: "/messages/compose",
+	// 	type: "GET",
+	// 	data: $('not-clickable:checked').serialize(),
+	// 	success:function(data){
+			// console.log(data);
+			// msgs+= '<form name="formMsg" id="formMsg">';
+			// msgs+= '{{ csrf_field() }}';
+			// msgs+= '<input class="form-control" type="text" name="subject" id="subject" placeholder="Subject" />';
+			// msgs+= '<input class="form-control" type="text" name="to" id="to" placeholder="To" />';
+			// msgs+= '<textarea class="form-control" placeholder="Message" name="content" id="message_content"></textarea>';
+			// msgs+= '<button class="btn btn-primary pull-right send" type="submit" name="send_message" id="send_message" href="javascript:void(0)"><span class="glyphicon glyphicon-send"></span></button>';
+			// msgs+= '</form>';
+			// $("#compose-form").html(msgs);
+			window.location.href="/messages";
 
-		}
-	})
+		// }
+	// })
 }
 
 function deleteMessage(e){

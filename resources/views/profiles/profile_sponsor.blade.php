@@ -25,7 +25,7 @@
 				@endif
 				@if(Auth::user()->hasRole('student'))
 				<div class="btn-group flex">
-					<a href="{{ url('/messages',[$sponsor->sponsor_id])}}">
+					<a href="{{ url('/messages/sp',[$sponsor->sponsor_id])}}">
 						<button class="btn btn-primary"> <span class="glyphicon glyphicon-envelope"></span> Message</button>
 					</a>
 				</div>
@@ -63,6 +63,7 @@
 								<h5 class="text-center">No open scholarship to show.</h5>
 							@endif
 						@endif
+
 
 						@if(count($endscholarships) > 0)
 							<h4 class="text-center"> Closed Scholarships </h4>
