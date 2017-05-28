@@ -62,7 +62,7 @@ label{
     position: relative;
     width: 1.2em;
     height: 1.2em;
-    border: 0.2em solid #DDD;
+    border: 2px solid #DDD;
     border-radius: 50%;
     transition: 0.25s;
 }
@@ -75,7 +75,7 @@ label{
     width: 0;
     height: 0;
     border-radius: 50%;
-    background-color: #2ecc71;
+    background-color: #66bf2b;
     transition: 0.25s;
     transform: translate(-50%, -50%);
 }

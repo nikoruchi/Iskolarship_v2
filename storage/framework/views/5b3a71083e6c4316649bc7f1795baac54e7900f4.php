@@ -9,7 +9,6 @@
 						<h1 class="scholarship-name"><?php echo e($scholarship->scholarship_name); ?></h1>
 						<p class="scholarship-description"><?php echo e($scholarship->scholarship_desc); ?></p>
 						<div class="flex">
-						<!-- pa edit lang di design sang paragraph. -->
 						<?php if($deadline < $currentTime): ?>
 							<p class ="text-center">Submission for application is over.</p>
 						<?php elseif((Auth::user()->hasRole('student')) && $exists!=0): ?>

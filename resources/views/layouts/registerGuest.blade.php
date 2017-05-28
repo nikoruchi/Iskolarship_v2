@@ -15,7 +15,7 @@
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
-                    <a href="/" class="navbar-brand">Iskolarship</a>
+                    <a href="/" class="navbar-brand"><span class="isko">Isko</span></a>
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -24,8 +24,8 @@
                 </div>
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="active"><a href="/" data-toggle="tooltip" data-placement="bottom" title="Login"><span class="glyphicon glyphicon-log-in"></span>&nbsp;Login</a></li>
-                        <li class="dropdown">
+                        <li><a href="/" data-toggle="tooltip" data-placement="bottom" title="Login"><span class="glyphicon glyphicon-log-in"></span>&nbsp;Login</a></li>
+                        <li class="dropdown active">
                             <a href="#" data-toggle="dropdown"><span class="glyphicon glyphicon-user register"><span class="register-icon">+</span></span>&nbsp;&nbsp;Register <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li class="dropdown-header">Register as?</li>
