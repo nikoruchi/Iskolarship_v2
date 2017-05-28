@@ -30,9 +30,6 @@
 					</a>
 				</div>
 				@endif
-				@if(Auth::user()->hasRole('student'))
-				
-				@endif
 				<div>
 					@if(!empty($openscholarships) || !empty($endscholarships))
 					<h2 class="text-center">Scholarships</h2>

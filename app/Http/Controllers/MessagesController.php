@@ -28,18 +28,18 @@ class MessagesController extends Controller
         return view('/user/messages', compact('sponsor', 'student','user', 'email', 'inbox'));
     }
 
-    public function autofillMsgScholar($student){
+    public function autofillMsgScholar($studentProfile){
         $user_id = Auth::user()->user_id;
         $user = User::findOrFail($user_id);
         $spon_id = Sponsor::where('user_id','=', $user_id)->pluck('sponsor_id')->first();
         $sponsor = Sponsor::findOrFail($spon_id);
 
-        $data['student']=$student;
-        $user1 = Scholar::where('student_id', '=', $data['student'])->pluck('user_id')->first();
+        $data['studentProfile']=$studentProfile;
+        $user1 = Scholar::where('student_id', '=', $data['studentProfile'])->pluck('user_id');
 
         $email = User::where('user_id','=',$user1)->pluck('email');
         $inbox = Message::where('msg_receiver','=',$user_id)->get();
-        return view('/user/messages', compact('sponsor', 'student','user', 'email', 'inbox'));
+        return view('/user/messages', compact('sponsor','user', 'email', 'inbox','studentProfile'));
     }
 
     public function indexSponsor()
