@@ -114,7 +114,7 @@
 	letter-spacing: 0.01em;
 }
 
-input[type=text], input[type=date], :not(.ajax-form) > textarea{
+input[type=text], input[type=date], input[type=number], :not(.ajax-form) > textarea{
 	border-radius: 0;
 	font-family: Roboto;
 	margin: 1em 0;
