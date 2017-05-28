@@ -25,6 +25,18 @@ class ApplicationController extends Controller
        $id = $request->input('app_id');
        $application = Application::find($id);
        $application->avail_status='accept';
+
+       $scholarship = Scholarship::findOrFail($application->scholarship_id);
+       $student = Scholar::findOrFail($application->student_id);
+       $sponsor = Sponsor::findOrFail($scholarship->sponsor_id);
+
+       $notif = new Notification;
+       $notif->notification_desc = $student->student_fname." ".$student->student_lname." confirmed his slot in".$scholarship->scholarship_name.".";
+       $notif->notification_status = 'unread';
+       $notif->application_id = $id;
+       $notif->account_id = $sponsor->user_id;
+
+       $notif->save();
        $application->save();
        return redirect()->back();
     }
@@ -33,6 +45,18 @@ class ApplicationController extends Controller
        $id = $request->input('app_id');
        $application = Application::find($id);
        $application->avail_status='reject';
+
+       $scholarship = Scholarship::findOrFail($application->scholarship_id);
+       $student = Scholar::findOrFail($application->student_id);
+       $sponsor = Sponsor::findOrFail($scholarship->sponsor_id);
+
+       $notif = new Notification;
+       $notif->notification_desc = $student->student_fname." ".$student->student_lname." rejected his slot in".$scholarship->scholarship_name.".";
+       $notif->notification_status = 'unread';
+       $notif->application_id = $id;
+       $notif->account_id = $sponsor->user_id;
+
+       $notif->save();
        $application->save();
        return redirect()->back();
     }
