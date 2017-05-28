@@ -17,7 +17,7 @@
 						<a href="/Sponsor/Account Settings" class="btn btn-default acc_settings">
 							<span class="glyphicon glyphicon-cog"></span> Account Settings
 						</a>
-						<a href="#" class="btn btn-success acc_settings">
+						<a href="{{ url('/scholarship form') }}" class="btn btn-success acc_settings">
 							<span class="glyphicon glyphicon-plus"></span> Create Scholarship
 						</a>
 					</div>

@@ -35,6 +35,19 @@ class MessagesController extends Controller
         return view('/user/messages', compact('student','user','inbox'));
     }
 
+
+    public function sendSpecific($emailadd){
+        $email = $emailadd;
+        $user_id = Auth::user()->user_id;
+        $user = User::findOrFail($user_id);
+        $id = Sponsor::where('user_id','=', $user_id)->pluck('sponsor_id')->first();
+        $sponsor = Sponsor::findOrFail($id);
+        $inbox = Message::where('msg_receiver','=',$user_id)->get();
+
+        return view('/user/messages', compact('sponsor','email','user','inbox'));
+
+    }
+
     public function getReadMsg(){
         $user_id = Auth::user()->user_id;
         $read = Message::where('msg_receiver','=',$user_id)->where('msg_status','=','read')->get();
@@ -223,4 +236,5 @@ class MessagesController extends Controller
         return $message;
         // return redirect()->back();
     }
+
 }

@@ -30,7 +30,8 @@
 
 								</div>
 								<div class="">
-									<input class="form-control" type="text" name="to" id="to" placeholder="To" value="{{ old('to') }}"/>
+								
+									<input class="form-control" type="text" name="to" id="to" placeholder="To" value="{{ $email or old('to') }}"/>
 
 										<span class="help-block">
 											
@@ -92,6 +93,10 @@
 	</div>
 
 @endsection
+
+@push('scripts')
+	<script type="text/javascript" src="/js/script-messages.js"></script>
+@endpush
 
 @push('styles')
 	<link rel="stylesheet" type="text/css" href="css/message.css"/>

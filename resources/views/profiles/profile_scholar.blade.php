@@ -17,7 +17,8 @@
 				@endif
 				@if(Auth::user()->user_id != $studentProfile->user_id)
 				<div class="btn-group flex">
-					<button class="btn btn-primary"> <span class="glyphicon glyphicon-envelope"></span> Message</button>
+
+					<a class="btn btn-primary" href="{{ route('email', ['emailadd' => $user->email]) }}"> <span class="glyphicon glyphicon-envelope"></span> Message</a>
 				</div>
 				@endif
 				<div>

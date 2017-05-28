@@ -90,6 +90,7 @@ Route::post('/Sponsor/upload', 'EditProfileController_Sponsor@upload');
 
 
 Route::get('/scholarship form/create', 'ScholarshipsController@createScholarship');
+Route::post('/upload/logo', 'ScholarshipsController@uploadLogo');
 
 
 Route::get("/messages", function(){
@@ -105,7 +106,6 @@ Route::get("/messages", function(){
 });
 
 Route::group(['middleware' => 'isguest'], function(){
-
     Route::get('/messages/read', 'MessagesController@getReadMsg');
     Route::get('/messages/unread', 'MessagesController@getUnReadMsg');
     Route::get('/messages/inbox', 'MessagesController@getAllMsg');
@@ -116,6 +116,7 @@ Route::group(['middleware' => 'isguest'], function(){
     Route::get('/messages/mark', 'MessagesController@readMessage'); 
     Route::get('/getlessons/{lesson_id}/{page_number}', 'LessonController@getPage');
     Route::get('/messages/delete', 'MessagesController@destroy');
+    Route::get('email/{emailadd}','MessagesController@sendSpecific')->name('email');
 });
 
 

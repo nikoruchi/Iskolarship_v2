@@ -29,7 +29,8 @@
 
 								</div>
 								<div class="">
-									<input class="form-control" type="text" name="to" id="to" placeholder="To" value="<?php echo e(old('to')); ?>"/>
+								
+									<input class="form-control" type="text" name="to" id="to" placeholder="To" value="<?php echo e(isset($email) ? $email : old('to')); ?>"/>
 
 										<span class="help-block">
 											
@@ -91,6 +92,10 @@
 	</div>
 
 <?php $__env->stopSection(); ?>
+
+<?php $__env->startPush('scripts'); ?>
+	<script type="text/javascript" src="/js/script-messages.js"></script>
+<?php $__env->stopPush(); ?>
 
 <?php $__env->startPush('styles'); ?>
 	<link rel="stylesheet" type="text/css" href="css/message.css"/>
