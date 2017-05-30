@@ -9,11 +9,47 @@ $(document).ready(function(){
 	$(document).on("click",".not-clickable", notClickable);
 	$(document).on("click", ".reply", sendReply);
 	$(document).on("click", ".edit", edit);
-<<<<<<< HEAD
-=======
+
+	$(document).on("click", ".sent", sent);
+
 	// $(document).on("click", ".delete", deleteNotif);
->>>>>>> 68b7a64a70007952c56e5a60f5c6bfa83436884d
 })
+
+function sent(e){
+	e.preventDefault();
+	console.log('ha');
+	$.ajax({
+		url: "/messages/sent",
+		type: "GET",
+		// data: {'text':text, 'id':id},
+		success:function(data){
+			var msgs = "";
+			console.log(data);
+			$.each(data, function(key,value){
+				msgs+= '<li class="message clickable mark" data-pg="'+value['id']+'">';
+				if(value['user']==value['sender']){ 
+					msgs+= '<div class="thread-message your-message">';
+				} else {
+					msgs+= '<div class="thread-message their-message">';
+				}
+				msgs+= '<div class="panel panel-default">';
+				msgs+= '<div class="panel-body">';
+				msgs+= '<form class="select-form">';
+				msgs+= '<input type="checkbox" name="messages[]" value="'+value['id']+'" class="cbox not-clickable select"/>';
+				msgs+= '</form>';
+				// msgs+= '<p class="to"><strong>' + value['receiver_name']+ '</strong></p>';
+				msgs+= '<p class="from"><strong>' + value['sender_name']+ '</strong></p>';
+				msgs+= '<p class="message-content">' + value['content'] + '</p>';
+				msgs+= '<p class="time-stamp">' + value['timestamp'] +'</p>';
+				msgs+= '</div>';
+				msgs+= '</div>';
+				msgs+= '</li>';
+			});
+			$("#messages-container").html(msgs);
+		}
+	})
+
+}
 
 $(document).ready(function(){
 	$('#formMsg').submit(function(event){
@@ -24,9 +60,11 @@ $(document).ready(function(){
 			type: "POST",
 			data: $(this).serialize(),
 			success:function(data){
-				console.log("Data from send: " +data);
-				msgs+='<h3>' + data.msg_subject + '<span class="email" style="font-size: 15px"> &lt;' + data.user_email +'&gt;</span></h3>';
-				msgs+='<p>'+ data.msg_content + '</p>';
+				console.log("Data s send: " +data);
+				msgs+='<p class="msg-sent-success"><span class="glyphicon glyphicon-ok-circle"></span> Message sent successfully</p>'
+				msgs+='<h3 class="msg-subject-sent">' + data.msg_subject + '<span class="email" style="font-size: 15px"> &lt;' + data.user_email +'&gt;</span></h3>';
+				msgs+='<p class="msg-content-sent">'+ data.msg_content + '</p>'
+				msgs+='<span class="msg-timestamp-sent"><span class="glyphicon glyphicon-dashboard"></span> Just now</span>';
 				$("#compose-form").html(msgs);
 			},
 			error: function(jqXhr, json, errorThrown){
@@ -63,11 +101,13 @@ function seeFullMessage(e){
 			// for()
 			$.each(data, function(key,value){
 				if(value['user']==value['sender']){ 
-					msgs+= '<div class="panel panel-success">';
+					msgs+= '<div class="thread-message your-message">';
 				} else {
-					msgs+= '<div class="panel panel-danger">';
+					msgs+= '<div class="thread-message their-message">';
 				}
 				msgs+= '<div class="panel-body">';
+								msgs+= '<p class="to"><strong>' + value['receiver_name']+ '</strong></p>';
+
 				msgs+= '<p class="message-sender">' + value['sender_name'] + '</p>';
 				msgs+= '<p class="message-content">' + value['content'] + '</p>';
 				msgs+= '<p class="time-stamp">' + value['timestamp'] +'</p>';
@@ -77,7 +117,7 @@ function seeFullMessage(e){
 			});
 			msgs += '<textarea id="reply_message" class="form-control" placeholder="Send a reply!"></textarea>';
 			msgs += '<span id="reply_msg"></span>';
-			msgs += '<button data-pg="'+ id +'"class="pull-right btn btn-primary reply">Reply</button>';
+			msgs += '<button data-pg="'+ id +'"class="pull-right btn btn-primary reply"><span class="glyphicon glyphicon-send"></span> Reply</button>';
 			$("#compose-form").html(msgs);''
 		}
 	})
@@ -94,9 +134,9 @@ function sendReply(){
 		success:function(data){
 			$.each(data, function(key,value){
 				if(value['user']==value['sender']){ 
-					msgs+= '<div class="panel panel-success">';
+					msgs+= '<div class="thread-message your-message">';
 				} else {
-					msgs+= '<div class="panel panel-danger">';
+					msgs+= '<div class="thread-message their-message">';
 				}
 				msgs+= '<div class="panel-body">';
 				msgs+= '<p class="message-sender">' + value['sender_name'] + '</p>';
@@ -138,16 +178,16 @@ function unread(e){
 			$.each(data, function(key,value){
 				msgs+= '<li class="message clickable mark" data-pg="'+value['id']+'">';
 				if(value['user']==value['sender']){ 
-					msgs+= '<div class="panel panel-success">';
+					msgs+= '<div class="thread-message your-message">';
 				} else {
-					msgs+= '<div class="panel panel-danger">';
+					msgs+= '<div class="thread-message their-message">';
 				}
 				msgs+= '<div class="panel panel-default">';
 				msgs+= '<div class="panel-body">';
 				msgs+= '<form class="select-form">';
 				msgs+= '<input type="checkbox" name="messages[]" value="'+value['id']+'" class="cbox not-clickable select"/>';
 				msgs+= '</form>';
-				msgs+= '<p class="from"><strong>' + value['sender']+ '</strong></p>';
+				msgs+= '<p class="from"><strong>' + value['sender_name']+ '</strong></p>';
 				msgs+= '<p class="message-content">' + value['content'] + '</p>';
 				msgs+= '<p class="time-stamp">' + value['timestamp'] +'</p>';
 				msgs+= '</div>';
@@ -182,15 +222,15 @@ function read(e){
 			$.each(data, function(key,value){
 				msgs+= '<li class="message clickable" data-pg="'+value['id']+'">';
 				if(value['user']==value['sender']){ 
-					msgs+= '<div class="panel panel-success">';
+					msgs+= '<div class="thread-message your-message">';
 				} else {
-					msgs+= '<div class="panel panel-danger">';
+					msgs+= '<div class="thread-message their-message">';
 				}
 				msgs+= '<div class="panel-body">';
 				msgs+= '<form class="select-form" id="formDel">';
 				msgs+= '<input type="checkbox" name="messages[]" value="'+value['id']+'" class="cbox not-clickable select"/>';
 				msgs+= '</form>';
-				msgs+= '<p class="from"><strong>' + value['sender']+ '</strong></p>';
+				msgs+= '<p class="from"><strong>' + value['sender_name']+ '</strong></p>';
 				msgs+= '<p class="message-content">' + value['content'] + '</p>';
 				msgs+= '<p class="time-stamp">' + value['timestamp'] +'</p>';
 				msgs+= '</div>';
@@ -215,14 +255,16 @@ function all(){
 			$.each(data, function(key,value){
 				msgs+= '<li class="message clickable" data-pg="'+value['id']+'">';
 				if(value['user']==value['sender']){ 
-					msgs+= '<div class="panel panel-success">';
+					msgs+= '<div class="thread-message your-message">';
 				} else {
-					msgs+= '<div class="panel panel-danger">';
+					msgs+= '<div class="thread-message their-message">';
 				}				msgs+= '<div class="panel-body">';
+
 				msgs+= '<form class="select-form">';
 				msgs+= '<input type="checkbox" name="messages[]" value="'+value['id']+'" class="cbox not-clickable select"/>';
 				msgs+= '</form>';
-				msgs+= '<p class="from"><strong>' + value['sender']+ '</strong></p>';
+	
+				msgs+= '<p class="from"><strong>' + value['sender_name']+ '</strong></p>';
 				msgs+= '<p class="message-content">' + value['content'] + '</p>';
 				msgs+= '<p class="time-stamp">' + value['timestamp'] +'</p>';
 				msgs+= '</div>';
@@ -272,14 +314,14 @@ function deleteMessage(e){
 			$.each(data, function(key,value){
 				msgs+= '<li class="message clickable" data-pg="'+value['id']+'">';
 				if(value['user']==value['sender']){ 
-					msgs+= '<div class="panel panel-success">';
+					msgs+= '<div class="thread-message your-message">';
 				} else {
-					msgs+= '<div class="panel panel-danger">';
+					msgs+= '<div class="thread-message their-message">';
 				}				msgs+= '<div class="panel-body">';
 				msgs+= '<form class="select-form">';
 				msgs+= '<input type="checkbox" name="messages[]" value="'+value['id']+'" class="cbox not-clickable select"/>';
 				msgs+= '</form>';
-				msgs+= '<p class="from"><strong>' + value['sender']+ '</strong></p>';
+				msgs+= '<p class="from"><strong>' + value['sender_name']+ '</strong></p>';
 				msgs+= '<p class="message-content">' + value['content'] + '</p>';
 				msgs+= '<p class="time-stamp">' + value['timestamp'] +'</p>';
 				msgs+= '</div>';

@@ -54,20 +54,42 @@
 	margin-left: 10px;
 	width: 20%;
 	display: inline;
+	color: #94d11d;
+	overflow: hidden;
 }
 
 .message-content{
 	margin-left: 10px;
-	width: 67.5%;
+	margin-bottom: 0;
+	font-family: Roboto;
+	color: #555;
+}
+
+.messages-container .message-content{
+	width: 60%;
+	overflow: hidden;
 }
 
 .time-stamp{
-	width: 9%;
+	/* width: 9%; */
 	text-align: right;
+	position: absolute;
+	right: 0.5em;
+	font-family: Roboto;
+	color: #AAA;
+}
+
+.clickable{
+	cursor: pointer;
+}
+
+.clickable:hover .panel-body{
+	background-color: rgba(0, 0, 0, 0.03);
 }
 
 .compose,
-.delete{
+.delete,
+.sent{
 	width: 100%;
 	display: block;
 	text-align: left;
@@ -89,6 +111,11 @@
 	color: #cd1919;
 }
 
+.sent{
+	color: #10a7e6;
+}
+
+#compose-form textarea,
 #formMsg input,
 #formMsg textarea{
 	border: 0;
@@ -97,8 +124,97 @@
 	font-family: Roboto;
 }
 
-.message{
+.thread-message{
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+	margin: 1em 0;
+	position: relative;
+}
+
+.message-sender{
+	margin: 0;
+	font-family: Roboto;
+	font-size: 1.5em;
+}
+
+.thread-message .time-stamp{
+	position: absolute;
+	top: 0.5em;
+	right: 0.5em;
+	font-family: Roboto;
+	font-size: 0.9em;
+	color: #AAA;
+}
+
+.your-message{
 	
+}
+
+.your-message .message-sender{
+	color: #189ce7;
+}
+
+.their-message{
+
+}
+
+.their-message .message-sender{
+	color: #93c632;
+}
+
+.send,
+.reply{
+	margin-top: 0.5em;
+	font-family: Roboto;
+	border-radius: 0!important;
+	background-color: #169ae5; 
+}
+
+.mark{
+	padding: 0;
+}
+
+.mark .panel-body{
+	background-color: #fffccf;
+}
+
+.mark:hover .panel-body{
+	background-color: #fff9a3;
+}
+
+.msg-sent-success{
+	color: #8dcb2c;
+	font-family: Roboto;
+}
+
+.msg-subject-sent{
+	margin-top: 0.5em;
+	color: #1ea2df;
+	font-family: Roboto;
+}
+
+.msg-subject-sent .email{
+	font-size: 0.5em;
+	color: #AAA;
+	font-family: Roboto;
+	font-style: italic;
+	font-weight: normal;
+}
+.msg-content-sent{
+	font-family: Roboto;
+	text-indent: 1em;
+}
+
+.msg-timestamp-sent{
+	position: absolute;
+	top: 1em;
+	right: 1em;
+	color: #abdd23;
+	font-family: Roboto;
+	font-size: 0.9em;
+}
+
+#message-form > .panel-body{
+	position: relative;
 }
 
 /*.message-filters li{

@@ -5,7 +5,7 @@
 		<div class="col-sm-6 col-sm-offset-3 headline">
 			<div class="text-center">
 				<h1><span class="isko">Hello World</span></h1>
-				<h3><small>Ang iyong kaagabay sa broke mong buhay.</small></h3>
+				<h3 class="tagline"><small>Ang iyong kaagabay sa broke mong buhay.</small></h3>
 			</div>
 
 			<form action="login" method="POST" id="login" class="overflow-a">
@@ -51,3 +51,7 @@
 	</div>
 
 @endsection
+
+@push('styles')
+	<link rel="stylesheet" type="text/css" href="{{asset('css/index.css')}}">
+@endpush

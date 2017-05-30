@@ -27,14 +27,14 @@
 						@foreach($questions as $qn)
 							<label>{{$qn->essay_question}}</label>
 							<input type="hidden" name="qnID[]" value="{{ $qn->essay_questionsID  }}" /> 
-							<div class="input-group {{ $errors->has('answer') ? ' has-error' : '' }} ">
+							<!-- <div class="input-group {{ $errors->has('answer') ? ' has-error' : '' }} "> -->
 								<textarea name="answer[]" class="form-control" placeholder="Answer"></textarea>
-							</div>
-							@if ($errors->has('answer'))
+							<!-- </div> -->
+						<!-- 	@if ($errors->has('answer'))
 									<span class="help-block">
 										<strong>{{ $errors->first('answer') }}</strong>
 									</span>
-							@endif
+							@endif -->
 
 						@endforeach
 						<section>

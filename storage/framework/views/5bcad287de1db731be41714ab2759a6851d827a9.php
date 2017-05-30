@@ -4,10 +4,10 @@
     <title>Iskolarship</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link rel="stylesheet" type="text/css" href="{{asset('css/app.css')}}"/>
-    <link rel="stylesheet" type="text/css" href="{{asset('css/font-awesome/css/font-awesome.min.css')}}"/>
-    <link rel="stylesheet" type="text/css" href="{{asset('css/main.css')}}"/>
-    <link rel="stylesheet" type="text/css" href="{{asset('css/index.css')}}"/>
+    <link rel="stylesheet" type="text/css" href="<?php echo e(asset('css/app.css')); ?>"/>
+    <link rel="stylesheet" type="text/css" href="<?php echo e(asset('css/font-awesome/css/font-awesome.min.css')); ?>"/>
+    <link rel="stylesheet" type="text/css" href="<?php echo e(asset('css/main.css')); ?>"/>
+    <link rel="stylesheet" type="text/css" href="<?php echo e(asset('css/index.css')); ?>"/>
 </head>
 <body>
     <!-- <div id="app">
@@ -38,7 +38,7 @@
         </nav>
     </div> -->
   
-    @yield('content')
+    <?php echo $__env->yieldContent('content'); ?>
 
     <script type="text/javascript" src="/js/jquery.min.js"></script>
     <script type="text/javascript" src="/js/app.js"></script>
