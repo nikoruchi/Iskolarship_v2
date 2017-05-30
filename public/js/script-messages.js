@@ -11,13 +11,9 @@ $(document).ready(function(){
 	$(document).on("click", ".edit", edit);
 
 	$(document).on("click", ".sent", sent);
-<<<<<<< HEAD
 
-	// $(document).on("click", ".delete", deleteNotif);
-=======
 	$(document).on("click", ".markall", mark);
 	$(document).on("click", ".unmarkall", unmark);
->>>>>>> a858fc4f0878ea8563bb0ee29c73b3201a882eb1
 })
 
 function mark(e){

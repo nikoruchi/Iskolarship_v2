@@ -1,9 +1,12 @@
 @extends('layouts.userTab')
+
 @section('content')
 	<div class="container main-container">
 		<div class="row">
 			<div class="col-sm-8 col-sm-offset-2">
+
 				<img src="/image/{{ $user->user_imagepath }}" class="img-responsive user-pp img-circle"/>
+
 				<h1 class="user-name">{{ $studentProfile->student_fname }}</h1>
 				<h2 class="education"> {{ $studentProfile->student_studyfield }}, {{ $studentProfile->student_university }}</h2>
 				<h3 class="user-email">{{ $studentProfile->student->email }}</h3>
@@ -81,9 +84,7 @@
 		</div>
 	</div>
 @endsection
+
 @push('styles')
-	<link rel="stylesheet" type="text/css" href="{{asset('css/profile_page.css')}}"/>
-@endpush
-@push('scripts')
-	<script src="js/default_img.js"></script>
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/profile_page.css') }}"/>
 @endpush

@@ -126,6 +126,7 @@ Route::group(['middleware' => 'isguest'], function(){
     Route::get('/messages/compose', 'MessagesController@compose');
     Route::get('/messages/reply', 'MessagesController@sendreply');
     Route::get('/messages/mark', 'MessagesController@readMessage'); 
+    Route::get('/messages/delete', 'MessagesController@destroy'); 
     // Route::get('/messages/mark', 'MessagesController@readMessage'); 
     // Route::get('/getlessons/{lesson_id}/{page_number}', 'LessonController@getPage');
     Route::get('/messages/sent', 'MessagesController@sentMessages');

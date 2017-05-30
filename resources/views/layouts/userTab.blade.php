@@ -35,7 +35,7 @@
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown">
 						@if(Auth::user()->hasRole('student'))
-							<a href="/profile scholar" class="dropdown-toggle" data-toggle="dropdown"><img src="/image/{{ $user->user_imagepath }}" class="dropdown-pp img-circle"/> {{ $student->student_fname }} {{ $student->student_lname}} <span class="caret"></span></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="/image/{{ $user->user_imagepath }}" class="dropdown-pp img-circle"/> {{ $student->student_fname }} {{ $student->student_lname}} <span class="caret"></span></a>
 						@elseif(Auth::user()->hasRole('sponsor'))
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown"> <img src="/image/{{ $user->user_imagepath }}" class="dropdown-pp img-circle"/> {{ $sponsor->sponsor_fname }} {{$sponsor->sponsor_lname}} <span class="caret"></span></a>
 						@endif
@@ -74,8 +74,8 @@
 	@yield('content')
 
 	@stack('scripts')
-	<script type="text/javascript" src="/js/jquery.min.js"></script>
-    <script type="text/javascript" src="/js/app.js"></script>
+	<script type="text/javascript" src="{{asset('js/jquery.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/app.js')}}"></script>
     <script>
         $(document).ready(function(){$('[data-toggle="popover"]').popover();});
         $(document).ready(function(){$('[data-toggle="tooltip"]').tooltip();});

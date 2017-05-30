@@ -39,11 +39,7 @@
 					</li>
 				</ul>
 			<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-<<<<<<< HEAD
 		</div>
-=======
-	</div>
->>>>>>> 3fbee04672ff224d7e4aff47c0a99389ebd0d450
 
 <?php $__env->stopSection(); ?>
 
