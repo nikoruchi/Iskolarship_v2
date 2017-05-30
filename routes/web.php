@@ -37,8 +37,7 @@ Route::post('/registration/Sponsor', 'SponsorAuthController@Validation');
 
 Route::get('/profile scholar', 'ScholarController@viewProfile');
 Route::get('/profile scholar/{student_id}', 'ProfileController@profileNotStudent');
-Route::get('/setup form', 'ProfileSetupController@viewSetupForm');
-Route::get('/setup form/register', 'ProfileSetupController@editSetup');
+
 Route::get('/setup', 'ProfileSetupController@viewSetup');
 
 Route::get('/profile sponsor', 'SponsorController@viewProfile');
@@ -130,6 +129,9 @@ Route::group(['middleware' => 'isguest'], function(){
     // Route::get('/messages/mark', 'MessagesController@readMessage'); 
     // Route::get('/getlessons/{lesson_id}/{page_number}', 'LessonController@getPage');
     Route::get('/messages/sent', 'MessagesController@sentMessages');
+
+    Route::get('/setup form', 'ProfileSetupController@viewSetupForm');
+    Route::get('/setup form/register', 'ProfileSetupController@editSetup'); 
 });
 
 

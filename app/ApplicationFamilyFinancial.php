@@ -8,7 +8,7 @@ use Illuminate\Notifications\Notifiable;
 class ApplicationFamilyFinancial extends Model
 {
      use Notifiable;
-    protected $primaryKey = 'financial_id';
+    // protected $primaryKey = 'financial_id';
     protected $table = 'application_familyfinancial';
     /**
      * The attributes that are mass assignable.

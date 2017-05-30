@@ -8,7 +8,7 @@ use Illuminate\Notifications\Notifiable;
 class ApplicationFamilyAppliances extends Model
 {
     use Notifiable;
-    protected $primaryKey = 'entry_id';
+    // protected $primaryKey = 'entry_id';
     protected $table = 'application_familyappliances';
 
     /**
