@@ -1,6 +1,6 @@
 @extends("layouts.userTab")
 
-@section('content')
+@section('content') 
 
 	<div class="container main-container">
 		{{ csrf_field() }}

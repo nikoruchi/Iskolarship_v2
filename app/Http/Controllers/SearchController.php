@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+ 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Auth;
@@ -15,9 +15,10 @@ class SearchController extends Controller
     
     public function searchStudent() {
 
-        $scholarships = '';
-        $sponsors =  '';
-        $scholars = '';
+        $scholarships = null;
+        $sponsors =  null;
+        $scholars = null;
+        $opens = null;
 
         $keyword = Input::get('keyword');
         $filter = Input::get('search_q');
@@ -49,6 +50,26 @@ class SearchController extends Controller
 
                 $opens = Scholarship::join('scholarship_deadline','Scholarship.scholarship_id','=','Scholarship_deadline.scholarship_id')
                     ->where('Scholarship.scholarship_name','LIKE','%'.$keyword.'%')
+                    ->where('Scholarship_deadline.scholarship_deadlineenddate','>',date('Y-m-d').' 00:00:00')
+                    ->orderBy('Scholarship.scholarship_name')
+                    ->get();
+
+            } else if {
+
+                $scholarships = Scholarship::all()                
+                    ->orderBy('scholarship_name')
+                    ->get();
+
+                $scholars = Scholar::all()
+                    ->orderBy('student_fname')
+                    ->get();
+
+                $sponsors = Sponsor::all()
+                    ->orderBy('sponsor_fname')
+                    ->get();
+
+                $opens = Scholarship::all()
+                    ->join('scholarship_deadline','Scholarship.scholarship_id','=','Scholarship_deadline.scholarship_id')
                     ->where('Scholarship_deadline.scholarship_deadlineenddate','>',date('Y-m-d').' 00:00:00')
                     ->orderBy('Scholarship.scholarship_name')
                     ->get();
@@ -94,9 +115,10 @@ class SearchController extends Controller
 
     public function searchSponsor() {
 
-        $scholarships = '';
-        $sponsors =  '';
-        $scholars = '';
+        $scholarships = null;
+        $sponsors =  null;
+        $scholars = null;
+        $opens = null;
 
         $keyword = Input::get('keyword');
         $filter = Input::get('search_q');
@@ -111,6 +133,28 @@ class SearchController extends Controller
         if($keyword != ''){
 
             if(empty($filter)) {
+
+                $scholarships = Scholarship::where('scholarship_name','LIKE','%'.$keyword.'%')                
+                    ->orderBy('scholarship_name')
+                    ->get();
+
+                $scholars = Scholar::where('student_fname','LIKE','%'.$keyword.'%')
+                    ->orWhere('student_lname','LIKE','%'.$keyword.'%')
+                    ->orderBy('student_fname')
+                    ->get();
+
+                $sponsors = Sponsor::where('sponsor_fname','LIKE','%'.$keyword.'%')
+                    ->orWhere('sponsor_lname','LIKE','%'.$keyword.'%')
+                    ->orderBy('sponsor_fname')
+                    ->get();
+
+                $opens = Scholarship::join('scholarship_deadline','Scholarship.scholarship_id','=','Scholarship_deadline.scholarship_id')
+                    ->where('Scholarship.scholarship_name','LIKE','%'.$keyword.'%')
+                    ->where('Scholarship_deadline.scholarship_deadlineenddate','>',date('Y-m-d').' 00:00:00')
+                    ->orderBy('Scholarship.scholarship_name')
+                    ->get();
+
+             } else if {
 
                 $scholarships = Scholarship::where('scholarship_name','LIKE','%'.$keyword.'%')                
                     ->orderBy('scholarship_name')

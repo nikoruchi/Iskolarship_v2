@@ -1,4 +1,4 @@
-<?php $__env->startSection('content'); ?>
+<?php $__env->startSection('content'); ?> 
 
 	<div class="container main-container">
 		<?php echo e(csrf_field()); ?>
