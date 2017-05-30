@@ -11,9 +11,34 @@ $(document).ready(function(){
 	$(document).on("click", ".edit", edit);
 
 	$(document).on("click", ".sent", sent);
+<<<<<<< HEAD
 
 	// $(document).on("click", ".delete", deleteNotif);
+=======
+	$(document).on("click", ".markall", mark);
+	$(document).on("click", ".unmarkall", unmark);
+>>>>>>> a858fc4f0878ea8563bb0ee29c73b3201a882eb1
 })
+
+function mark(e){
+	e.preventDefault();
+	console.log("marking all");
+	var checkboxes = document.querySelectorAll("input[type='checkbox']");
+
+	for (var i = 0; i < checkboxes.length; i++) {
+		checkboxes[i].checked = true;
+	}
+}
+
+function unmark(e){
+	e.preventDefault();
+	console.log("marking all");
+	var checkboxes = document.querySelectorAll("input[type='checkbox']");
+
+	for (var i = 0; i < checkboxes.length; i++) {
+		checkboxes[i].checked = false;
+	}
+}
 
 function sent(e){
 	e.preventDefault();
@@ -106,8 +131,7 @@ function seeFullMessage(e){
 					msgs+= '<div class="thread-message their-message">';
 				}
 				msgs+= '<div class="panel-body">';
-								msgs+= '<p class="to"><strong>' + value['receiver_name']+ '</strong></p>';
-
+				// msgs+= '<p class="to"><strong>' + value['receiver_name']+ '</strong></p>';
 				msgs+= '<p class="message-sender">' + value['sender_name'] + '</p>';
 				msgs+= '<p class="message-content">' + value['content'] + '</p>';
 				msgs+= '<p class="time-stamp">' + value['timestamp'] +'</p>';

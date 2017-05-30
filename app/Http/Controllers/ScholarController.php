@@ -34,22 +34,23 @@ class ScholarController extends Controller{
     	$student = Scholar::find($student_id);
         $studentProfile = Scholar::find($student_id);
 
-
-
 		// $pending = Application::where('student_id','=', $student_id)
         // ->where('accept_status', '=','pending')
         // ->where('avail_status','=','pending')
         // ->get();
 
-		$scholarships = Application::where('student_id', '=', $student_id)
-    		->where('accept_status','=','accept')
-    		->where('avail_status','=','accept')
+		$scholarships = Scholarship::join('application','Application.scholarship_id','=','Scholarship.scholarship_id')
+            ->where('Application.student_id', '=', $student_id)
+    		->where('Application.accept_status','=','accept')
+    		->where('Application.avail_status','=','accept')
+            ->select('Application.application_id','Scholarship.scholarship_id','Scholarship.scholarship_name','Scholarship.scholarship_desc')
     		->get();
 
   	    $pendingAvail = Application::where('student_id','=',$student_id)
             ->where('accept_status','=','accept')
             ->where('avail_status','=','pending')
             ->get();
+
         return view('profiles.profile_scholar', compact('studentProfile','student', 'user','scholarships','pendingAvail')); 
     }  
 }
