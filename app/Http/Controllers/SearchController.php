@@ -92,13 +92,16 @@ class SearchController extends Controller
 
         } else {
 
-            $scholarships = Scholarship::all();
+            $scholarships = Scholarship::orderBy('scholarship_name')->get();
 
-            $scholars = Scholar::all();
+            $scholars = Scholar::orderBy('student_fname')->get();
 
-            $sponsors = Sponsor::all();
+            $sponsors = Sponsor::orderBy('sponsor_fname')->get();
 
-            $opens = Scholarship::all();
+            $opens = Scholarship::join('scholarship_deadline','Scholarship.scholarship_id','=','Scholarship_deadline.scholarship_id')
+                ->where('Scholarship_deadline.scholarship_deadlineenddate','>',date('Y-m-d').' 00:00:00')
+                ->orderBy('Scholarship.scholarship_name')
+                ->get();
 
         }
 
@@ -120,7 +123,7 @@ class SearchController extends Controller
         $scholars = null;
         $opens = null;
 
-        $keyword = Input::get('keyword');
+        $keyword = empty(Input::get('keyword'))? '' : Input::get('keyword') ;
         $filter = Input::get('search_q');
         $size = count('search_q');
 
@@ -190,27 +193,28 @@ class SearchController extends Controller
 
         } else {
 
-            $scholarships = Scholarship::all();
+            $scholarships = Scholarship::orderBy('scholarship_name')->get();
 
-            $scholars = Scholar::all();
+            $scholars = Scholar::orderBy('student_fname')->get();
 
-            $sponsors = Sponsor::all();
+            $sponsors = Sponsor::orderBy('sponsor_fname')->get();
 
-            $opens = Scholarship::all();
+            $opens = Scholarship::join('scholarship_deadline','Scholarship.scholarship_id','=','Scholarship_deadline.scholarship_id')
+                ->where('Scholarship_deadline.scholarship_deadlineenddate','>',date('Y-m-d').' 00:00:00')
+                ->orderBy('Scholarship.scholarship_name')
+                ->get();
 
         }
-<<<<<<< HEAD
-        
-        return view('search_results',compact('sponsor','scholarships','scholars','sponsors','opens','keyword','user'));
-=======
+
         $notification = Notification::join('application', 'Application.application_id','=','Notification.application_id')
         	->where('Notification.account_id','=',$user_id)
         	->select('Notification.notification_id','Notification.notification_desc','Notification.notification_date','Notification.notification_status','Notification.application_id','Notification.account_id','Application.scholarship_id','Application.student_id')
         	->get();
+
         $unnotif = count($notification);
         $unread = Message::where('msg_receiver','=',$user_id)->where('msg_status','=','unread')->count();
+
         return view('search_results',compact('sponsor','scholarships','scholars','sponsors','opens','keyword','user', 'unread', 'unnotif'));
->>>>>>> 32356f430ea29e828c2ad8c4be80ad29bb9752bc
-      //  return view('search_results',compact('scholarships','scholars','sponsors','keyword','user','student'));
+        //  return view('search_results',compact('scholarships','scholars','sponsors','keyword','user','student'));
     }
 }
