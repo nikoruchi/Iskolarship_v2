@@ -215,6 +215,5 @@ class SearchController extends Controller
         $unread = Message::where('msg_receiver','=',$user_id)->where('msg_status','=','unread')->count();
 
         return view('search_results',compact('sponsor','scholarships','scholars','sponsors','opens','keyword','user', 'unread', 'unnotif'));
-        //  return view('search_results',compact('scholarships','scholars','sponsors','keyword','user','student'));
     }
 }
