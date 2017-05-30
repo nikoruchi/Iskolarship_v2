@@ -1,14 +1,25 @@
+<<<<<<< HEAD
 <?php $__env->startSection('content'); ?>
+=======
+<?php $__env->startSection('content'); ?> 
+>>>>>>> 3fbee04672ff224d7e4aff47c0a99389ebd0d450
 
 	<div class="container main-container">
 		<?php echo e(csrf_field()); ?>
 
 		<ul class="internal-links">
 			<li><a href="/home"><span class="glyphicon glyphicon-arrow-left"></span> Back to Home</a></li>
+<<<<<<< HEAD
 			<?php if(count($scholarships) > 0): ?><li><a href="#scholarships">Scholarships</a></li><?php endif; ?>
 			<?php if(count($sponsors) > 0): ?><li><a href="#sponsors">Sponsors</a></li><?php endif; ?>
 			<?php if(count($scholars) > 0): ?><li><a href="#scholars">Scholars</a></li><?php endif; ?>
 			<?php if(count($opens) > 0): ?><li><a href="#open">Open Scholarships</a></li><?php endif; ?>
+=======
+			<li><a href="#scholarships">Scholarships</a></li>
+			<li><a href="#sponsors">Sponsors</a></li>
+			<li><a href="#scholars">Scholars</a></li>
+			<li><a href="#open">Open Scholarships</a></li>
+>>>>>>> 3fbee04672ff224d7e4aff47c0a99389ebd0d450
 		</ul>
 		<h1 class="text-center you-search">You have searched for: <span class="keyword"><?php echo e($keyword); ?></span></h1>
 		<div class="row">

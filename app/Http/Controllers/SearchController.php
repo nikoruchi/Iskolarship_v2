@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+ 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Auth;
@@ -17,12 +17,12 @@ class SearchController extends Controller
     
     public function searchStudent() {
 
-        $scholarships = [];
-        $sponsors =  [];
-        $scholars = [];
-        $opens = [];
+        $scholarships = null;
+        $sponsors =  null;
+        $scholars = null;
+        $opens = null;
 
-        $keyword = Input::get('keyword');
+        $keyword = empty(Input::get('keyword'))? '' : Input::get('keyword') ;
         $filter = Input::get('search_q');
         $size = count('search_q');
 
@@ -32,7 +32,7 @@ class SearchController extends Controller
         $stud_id = Scholar::where('user_id','=', $user_id)->pluck('student_id')->first();
         $student = Scholar::findOrFail($stud_id);
 
-        if($keyword != ''){
+        if(!(empty($keyword))){
 
             if(empty($filter)) {
 
@@ -89,6 +89,17 @@ class SearchController extends Controller
                     }
                 }
             }
+
+        } else {
+
+            $scholarships = Scholarship::all();
+
+            $scholars = Scholar::all();
+
+            $sponsors = Sponsor::all();
+
+            $opens = Scholarship::all();
+
         }
 
         $notification = Notification::join('application', 'Application.application_id','=','Notification.application_id')
@@ -104,10 +115,10 @@ class SearchController extends Controller
 
     public function searchSponsor() {
 
-        $scholarships = [];
-        $sponsors =  [];
-        $scholars = [];
-        $opens = [];
+        $scholarships = null;
+        $sponsors =  null;
+        $scholars = null;
+        $opens = null;
 
         $keyword = Input::get('keyword');
         $filter = Input::get('search_q');
@@ -119,7 +130,7 @@ class SearchController extends Controller
         $spon_id = Sponsor::where('user_id','=', $user_id)->pluck('sponsor_id')->first();
         $sponsor = Sponsor::findOrFail($spon_id);
 
-        if($keyword != ''){
+        if(!(empty($keyword))){
 
             if(empty($filter)) {
 
@@ -176,6 +187,17 @@ class SearchController extends Controller
                     }
                 }
             }
+
+        } else {
+
+            $scholarships = Scholarship::all();
+
+            $scholars = Scholar::all();
+
+            $sponsors = Sponsor::all();
+
+            $opens = Scholarship::all();
+
         }
 
         $notification = Notification::join('application', 'Application.application_id','=','Notification.application_id')
@@ -186,5 +208,7 @@ class SearchController extends Controller
         $unread = Message::where('msg_receiver','=',$user_id)->where('msg_status','=','unread')->count();
 
         return view('search_results',compact('sponsor','scholarships','scholars','sponsors','opens','keyword','user', 'unread', 'unnotif'));
+
+      //  return view('search_results',compact('scholarships','scholars','sponsors','keyword','user','student'));
     }
 }
