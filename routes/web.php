@@ -37,8 +37,7 @@ Route::post('/registration/Sponsor', 'SponsorAuthController@Validation');
 
 Route::get('/profile scholar', 'ScholarController@viewProfile');
 Route::get('/profile scholar/{student_id}', 'ProfileController@profileNotStudent');
-Route::get('/setup form', 'ProfileSetupController@viewSetupForm');
-Route::get('/setup form/register', 'ProfileSetupController@editSetup');
+
 Route::get('/setup', 'ProfileSetupController@viewSetup');
 
 Route::get('/profile sponsor', 'SponsorController@viewProfile');
@@ -71,6 +70,11 @@ Route::get("/profile scholarship/{scholarship_id}", function($scholarship_id){
     }
 });
 
+// Route::resource('edit','UploadImgScholarships');
+// Route::get('/edit/{scholarship_id}', 'UploadImgScholarships@showImg');
+// Route::get('/edit/upload/{scholarship_id}', 'UploadImgScholarships@uploadImg');
+
+
 //=============== FOR FRONT-END PURPOSES =======================
 
 Route::get('/scholarship form', 'ScholarshipsController@createForm'); 
@@ -97,7 +101,6 @@ Route::post('/Sponsor/upload', 'EditProfileController_Sponsor@upload');
 Route::get('/scholar questionaire/{scholarship_id}', 'ApplicationController@viewQuestionaire');
 Route::post('/scholar questionaire/send', 'ApplicationController@sendApplication');
 Route::get('/scholarship form/create', 'ScholarshipsController@createScholarship');
-// Route::post('/upload/logo', 'ScholarshipsController@uploadLogo');
 
 
 Route::get("/messages", function(){
@@ -126,6 +129,9 @@ Route::group(['middleware' => 'isguest'], function(){
     // Route::get('/messages/mark', 'MessagesController@readMessage'); 
     // Route::get('/getlessons/{lesson_id}/{page_number}', 'LessonController@getPage');
     Route::get('/messages/sent', 'MessagesController@sentMessages');
+
+    Route::get('/setup form', 'ProfileSetupController@viewSetupForm');
+    Route::get('/setup form/register', 'ProfileSetupController@editSetup'); 
 });
 
 
@@ -160,17 +166,6 @@ Route::get("/profile sponsor/{sponsor_id}", function($sponsor_id){
     }
 });
 
-
-// Route::get("/profile sponsor/{sponsor_id}", function($sponsor_id){
-//     switch(Auth::user()->user_type){
-//         case 'sponsor':
-//           return (new \App\Http\Controllers\SponsorController)->viewSearchfromSponsor($sponsor_id);
-//         break;
-//         case 'student':
-//           return (new \App\Http\Controllers\SponsorController)->viewSearchfromStudent($sponsor_id);
-//         break;
-//     }
-// });
 
 Route::get('/profile_sponsor/{scholarship_id}', 'SponsorController@profileCont');
 Route::get('/scholarship/reopen/{scholarship_id}', 'ScholarshipsController@reopenScholarship');

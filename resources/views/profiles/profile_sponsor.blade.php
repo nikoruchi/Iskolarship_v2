@@ -56,7 +56,7 @@
 									
 								</li>
 							@endforeach
-						@else
+						<!-- @else -->
 							@if( (empty($sponsor1) && $user->user_type == "sponsor") || (empty($sponsor) && $user->user_type == "student") )
 								<h5 class="text-center">You haven't created any open scholarships.</h5>
 							@else

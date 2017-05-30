@@ -28,7 +28,7 @@
 							<label>{{$qn->essay_question}}</label>
 							<input type="hidden" name="qnID[]" value="{{ $qn->essay_questionsID  }}" /> 
 							<!-- <div class="input-group {{ $errors->has('answer') ? ' has-error' : '' }} "> -->
-								<textarea name="answer[]" class="form-control" placeholder="Answer"></textarea>
+								<textarea name="answer[]" class="form-control" placeholder="Answer" required></textarea>
 							<!-- </div> -->
 						<!-- 	@if ($errors->has('answer'))
 									<span class="help-block">
@@ -38,7 +38,7 @@
 
 						@endforeach
 						<section>
-							<label><input type="checkbox" name="agreement" value="agreed"> I agree to submit my account information, family background, and financial and socio-economic information with this application.</label>
+							<label><input type="checkbox" name="agreement" value="agreed" required> I agree to submit my account information, family background, and financial and socio-economic information with this application.</label>
 						</section>
 						<button class="btn btn-success pull-right send-app btn-lg" type="submit"><span class="glyphicon glyphicon-send"></span> Submit Application</button>
 					</form>

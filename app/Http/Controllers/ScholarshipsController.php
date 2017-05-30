@@ -15,11 +15,16 @@ use App\ScholarshipsDeadline;
 use App\ScholarshipGrant;
 use App\ScholarshipSpecification;
 use App\EssayQuestions;
-use Illuminate\Support\Facades\Input;
 use Illuminate\Routing\Redirector;
+
+use Illuminate\Validation\Rule;
+use Illuminate\Http\JsonResponse;
+
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 class ScholarshipsController extends Controller
 {
-
     public function createForm()
     {
         $user_id = Auth::user()->user_id;
@@ -81,28 +86,6 @@ class ScholarshipsController extends Controller
             $question->essay_question=$questions[$i];
             $question->save();
         }
-
-
-        // $file = Input::file('image');
-        // $input = array('image' => $file);
-        // $rules = array(
-        // );
-        // $image=$file;
-        // $validator = Validator::make([
-        //     'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        // ]);
-        
-        // if ( $validator->fails() )
-        // {
-        //     return Response::json(['success' => false, 'errors' => $validator->getMessageBag()->toArray()]);
-        // } else {
-        //     $destinationPath = '/logo';
-        //     $filename = $file->getClientOriginalName();
-        //     Input::file('image')->move($destinationPath, $filename);
-        //     $scholarship->scholarship_logo=$filename;
-        //     $scholarship->save();
-        //     return Response::json(['success' => true, 'file' => asset($destinationPath.$filename)]);
-        // }
         
         return $lastId;
     }

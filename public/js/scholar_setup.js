@@ -77,6 +77,7 @@ function setupScholarAccount(e){
 		type: "GET",
 		data: {	details:details, sibling_name:sibName, sibling_scholarship:sibScho, sibling_school:sibUniv, relative_name:relName, relative_relation:relRela, relative_nature:relNatu, relative_average:relAver },
 		success:function(data){
+			// console.log(data);
 			window.location.href="/profile scholar";
 		}
 	})

@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Session;
 class EditProfileController_Sponsor extends Controller{
 
     public function upload (Request $request){
-         $validator = Validator::make($request->all(),[
+        $validator = Validator::make($request->all(),[
             'image' => 'image|required',
         ]);
         if ($validator->fails()) {
