@@ -20,7 +20,7 @@ class SearchController extends Controller
         $scholars = null;
         $opens = null;
 
-        $keyword = Input::get('keyword');
+        $keyword = empty(Input::get('keyword'))? '' : Input::get('keyword') ;
         $filter = Input::get('search_q');
         $size = count('search_q');
 
@@ -30,7 +30,7 @@ class SearchController extends Controller
         $stud_id = Scholar::where('user_id','=', $user_id)->pluck('student_id')->first();
         $student = Scholar::findOrFail($stud_id);
 
-        if($keyword != ''){
+        if(!(empty($keyword))){
 
             if(empty($filter)) {
 
@@ -50,26 +50,6 @@ class SearchController extends Controller
 
                 $opens = Scholarship::join('scholarship_deadline','Scholarship.scholarship_id','=','Scholarship_deadline.scholarship_id')
                     ->where('Scholarship.scholarship_name','LIKE','%'.$keyword.'%')
-                    ->where('Scholarship_deadline.scholarship_deadlineenddate','>',date('Y-m-d').' 00:00:00')
-                    ->orderBy('Scholarship.scholarship_name')
-                    ->get();
-
-            } else if {
-
-                $scholarships = Scholarship::all()                
-                    ->orderBy('scholarship_name')
-                    ->get();
-
-                $scholars = Scholar::all()
-                    ->orderBy('student_fname')
-                    ->get();
-
-                $sponsors = Sponsor::all()
-                    ->orderBy('sponsor_fname')
-                    ->get();
-
-                $opens = Scholarship::all()
-                    ->join('scholarship_deadline','Scholarship.scholarship_id','=','Scholarship_deadline.scholarship_id')
                     ->where('Scholarship_deadline.scholarship_deadlineenddate','>',date('Y-m-d').' 00:00:00')
                     ->orderBy('Scholarship.scholarship_name')
                     ->get();
@@ -107,6 +87,17 @@ class SearchController extends Controller
                     }
                 }
             }
+
+        } else {
+
+            $scholarships = Scholarship::all();
+
+            $scholars = Scholar::all();
+
+            $sponsors = Sponsor::all();
+
+            $opens = Scholarship::all();
+
         }
 
         return view('search_results',compact('student','scholarships','scholars','sponsors','opens','keyword','user'));
@@ -130,31 +121,9 @@ class SearchController extends Controller
         $spon_id = Sponsor::where('user_id','=', $user_id)->pluck('sponsor_id')->first();
         $sponsor = Sponsor::findOrFail($spon_id);
 
-        if($keyword != ''){
+        if(!(empty($keyword))){
 
             if(empty($filter)) {
-
-                $scholarships = Scholarship::where('scholarship_name','LIKE','%'.$keyword.'%')                
-                    ->orderBy('scholarship_name')
-                    ->get();
-
-                $scholars = Scholar::where('student_fname','LIKE','%'.$keyword.'%')
-                    ->orWhere('student_lname','LIKE','%'.$keyword.'%')
-                    ->orderBy('student_fname')
-                    ->get();
-
-                $sponsors = Sponsor::where('sponsor_fname','LIKE','%'.$keyword.'%')
-                    ->orWhere('sponsor_lname','LIKE','%'.$keyword.'%')
-                    ->orderBy('sponsor_fname')
-                    ->get();
-
-                $opens = Scholarship::join('scholarship_deadline','Scholarship.scholarship_id','=','Scholarship_deadline.scholarship_id')
-                    ->where('Scholarship.scholarship_name','LIKE','%'.$keyword.'%')
-                    ->where('Scholarship_deadline.scholarship_deadlineenddate','>',date('Y-m-d').' 00:00:00')
-                    ->orderBy('Scholarship.scholarship_name')
-                    ->get();
-
-             } else if {
 
                 $scholarships = Scholarship::where('scholarship_name','LIKE','%'.$keyword.'%')                
                     ->orderBy('scholarship_name')
@@ -209,7 +178,19 @@ class SearchController extends Controller
                     }
                 }
             }
+
+        } else {
+
+            $scholarships = Scholarship::all();
+
+            $scholars = Scholar::all();
+
+            $sponsors = Sponsor::all();
+
+            $opens = Scholarship::all();
+
         }
+        
         return view('search_results',compact('sponsor','scholarships','scholars','sponsors','opens','keyword','user'));
       //  return view('search_results',compact('scholarships','scholars','sponsors','keyword','user','student'));
     }

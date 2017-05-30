@@ -24,7 +24,7 @@ class MessagesController extends Controller
         $data['sponsor']=$sponsor;
         $user1 = Sponsor::where('sponsor_id', '=', $data['sponsor'])->pluck('user_id')->first();
 
-        $email = User::where('user_id','=',$user1)->pluck('email');
+        $email = User::where('user_id','=',$user1)->pluck('email')->first();
         $inbox = Message::where('msg_receiver','=',$user_id)->get();
         return view('/user/messages', compact('sponsor', 'student','user', 'email', 'inbox'));
     }
@@ -181,9 +181,9 @@ class MessagesController extends Controller
         // append original message in beggining of array
         $user_id = Auth::user()->user_id;
         if($sender->user_type=='student'){
-            $sender = Scholar::where('user_id','=',$sender_id)->pluck('student_fname');
+            $sender = Scholar::where('user_id','=',$sender_id)->pluck('student_fname')->first();
         }elseif($sender->user_type=='sponsor'){
-            $sender = Sponsor::where('user_id','=',$sender_id)->pluck('sponsor_fname');
+            $sender = Sponsor::where('user_id','=',$sender_id)->pluck('sponsor_fname')->first();
         }
 
         if($receiver->user_type=='student'){
