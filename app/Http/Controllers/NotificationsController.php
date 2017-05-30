@@ -6,9 +6,10 @@ use Illuminate\Http\Request;
 use App\Scholar;
 use App\Sponsor;
 use App\User;
-use Auth;
 use App\Application;
+use App\Message;
 use App\Notification;
+use Auth;
 use DB;
 
 class NotificationsController extends Controller{
@@ -25,8 +26,12 @@ class NotificationsController extends Controller{
         	->get();
         
         
-        var_dump(count($notification));
-        return view('profiles.notifications', compact('user', 'student', 'notification', 'student_id')); 
+        // var_dump(count($notification));
+
+        $unnotif = count($notification);
+        $unread = Message::where('msg_receiver','=',$user_id)->where('msg_status','=','unread')->count();
+
+        return view('profiles.notifications', compact('user', 'student', 'notification', 'student_id', 'unread', 'unnotif')); 
     }   
 
     public function viewNotificationsFrSponsor(){
@@ -46,8 +51,12 @@ class NotificationsController extends Controller{
         	->select('Notification.notification_id','Notification.notification_desc','Notification.notification_date','Notification.notification_status','Notification.application_id','Notification.account_id','Application.scholarship_id','Application.student_id')
         	->get();
 
-        var_dump($user_id);
-        return view('profiles.notifications', compact('user', 'sponsor', 'notification', 'sponsor_id')); 
+        // var_dump($user_id);
+
+        $unnotif = count($notification);
+        $unread = Message::where('msg_receiver','=',$user_id)->where('msg_status','=','unread')->count();
+
+        return view('profiles.notifications', compact('user', 'sponsor', 'notification', 'sponsor_id', 'unread', 'unnotif')); 
     }   
 
 

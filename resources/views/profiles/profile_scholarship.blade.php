@@ -5,8 +5,8 @@
 	<div class="container main-container">
 		<div class="row">
 			<div class="col-sm-8 col-sm-offset-2">
-				<div class="panel">
-					<div class="panel-heading">
+				<!-- <div class="panel"> -->
+					<!-- <div class="panel-heading"> -->
 						<img src="/image/{{$scholarship->scholarship_logo}}" class="img-responsive scholarship-logo"/>
 						<h1 class="scholarship-name">{{$scholarship->scholarship_name}}</h1>
 						<p class="scholarship-description">{{$scholarship->scholarship_desc}}</p>
@@ -27,12 +27,21 @@
 						</div>
 						<h2 class="scholar-count"><span class="glyphicon glyphicon-education"></span> Scholars: {{$scholars->count()}}</h2>
 						<ul class="list-unstyled further-details">
-							<li><button class="btn btn-default btn-md"><span class="glyphicon glyphicon-briefcase"></span></button></li>
-							<li><button class="btn btn-default btn-md"><span class="glyphicon glyphicon-calendar"></span></button></li>
-							<li><button class="btn btn-default btn-md"><span class="glyphicon glyphicon-search"></span></button></li>
+							<li class="dropdown">
+								<button class="btn btn-default btn-md" data-toggle="dropdown" data-target="sponsor"><span class="glyphicon glyphicon-briefcase"></span></button>
+								<ul class="dropdown-menu" id="sponsor"><li><a href="#">Sponsor Name</a></li></ul>
+							</li>
+							<li class="dropdown">
+								<button class="btn btn-default btn-md" data-toggle="dropdown" data-target="deadline"><span class="glyphicon glyphicon-calendar"></span></button>
+								<ul class="dropdown-menu" id="deadline"><li><a href="#">Scholarship Deadline</a></li></ul>
+							</li>
+							<li class="dropdown">
+								<button class="btn btn-default btn-md"><span class="glyphicon glyphicon-search"></span></button>
+								<ul class="dropdown-menu" id=""></ul>
+							</li>
 						</ul>
-					</div>
-					<div class="panel-body grants-specs">
+					<!-- </div> -->
+					<div class="grants-specs">
 						<div class="row">
 							<div class="col-sm-12">
 								<h3 class="text-center">Grants</h3>
@@ -55,7 +64,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				<!-- </div> -->
 			</div>
 		</div>
 	</div>

@@ -7,6 +7,8 @@ use App\Sponsor;
 use App\Scholar;
 use App\Application;
 use App\Scholarship;
+use App\Message;
+use App\Notification;
 use Illuminate\Http\Request; 
 use Carbon\Carbon;
 use App\ScholarshipsDeadline;
@@ -24,7 +26,13 @@ class ScholarshipsController extends Controller
         $user = User::findOrFail($user_id);
         $sponsor_id = Sponsor::where('user_id','=', $user_id)->pluck('sponsor_id')->first();
         $sponsor = Sponsor::find($sponsor_id);
-        return view('registration.scholarship_form', compact('user', 'sponsor', 'sponsor_id', 'user_id')); 
+        $notification = Notification::join('application', 'Application.application_id','=','Notification.application_id')
+        	->where('Notification.account_id','=',$user_id)
+        	->select('Notification.notification_id','Notification.notification_desc','Notification.notification_date','Notification.notification_status','Notification.application_id','Notification.account_id','Application.scholarship_id','Application.student_id')
+        	->get();
+        $unnotif = count($notification);
+        $unread = Message::where('msg_receiver','=',$user_id)->where('msg_status','=','unread')->count();
+        return view('registration.scholarship_form', compact('user', 'sponsor', 'sponsor_id', 'user_id', 'unread', 'unnotif')); 
     }
 
     public function createScholarship(Request $request){
@@ -123,10 +131,17 @@ class ScholarshipsController extends Controller
 
         $deadline = ScholarshipsDeadline::find($scholarship_id)
                     ->pluck('scholarship_deadlineenddate');
+        $notification = Notification::join('application', 'Application.application_id','=','Notification.application_id')
+        	->where('Notification.account_id','=',$user_id)
+        	->select('Notification.notification_id','Notification.notification_desc','Notification.notification_date','Notification.notification_status','Notification.application_id','Notification.account_id','Application.scholarship_id','Application.student_id')
+        	->get();
+        $unnotif = count($notification);
+        $unread = Message::where('msg_receiver','=',$user_id)->where('msg_status','=','unread')->count();
 
         // $deadline = ScholarshipsDeadline::where('scholarship_id','=',$scholarship_id)
         //     ->first()->scholarship_deadlineenddate;     
-        return view('/profiles/profile_scholarship', compact('student','user','scholarship','specifications','grants','scholars','exists','currentTime','deadline'));
+        
+        return view('/profiles/profile_scholarship', compact('student','user','scholarship','specifications','grants','scholars','exists','currentTime','deadline', 'unread', 'unnotif'));
     }
 
      public function scholarshipSponsor($scholarship_id){
@@ -146,8 +161,14 @@ class ScholarshipsController extends Controller
         $currentTime = Carbon::now()->toDateTimeString();
         $deadline = ScholarshipsDeadline::where('scholarship_id','=',$scholarship_id)
             ->pluck('scholarship_deadlineenddate');
+        $notification = Notification::join('application', 'Application.application_id','=','Notification.application_id')
+        	->where('Notification.account_id','=',$user_id)
+        	->select('Notification.notification_id','Notification.notification_desc','Notification.notification_date','Notification.notification_status','Notification.application_id','Notification.account_id','Application.scholarship_id','Application.student_id')
+        	->get();
+        $unnotif = count($notification);
+        $unread = Message::where('msg_receiver','=',$user_id)->where('msg_status','=','unread')->count();
 
-        return view('/profiles/profile_scholarship', compact('sponsor','user','scholarship', 'deadline', 'currentTime', 'specifications','grants','scholars'));
+        return view('/profiles/profile_scholarship', compact('sponsor','user','scholarship', 'deadline', 'currentTime', 'specifications','grants','scholars', 'unread', 'unnotif'));
     } 
 
     public function reopenScholarship($scholarship_id){

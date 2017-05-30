@@ -10,6 +10,8 @@ use App\Scholarship;
 use Auth;
 use App\Application;
 use DB;
+use App\Message;
+use App\Notification;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 use App\ScholarshipsDeadline;
@@ -27,7 +29,14 @@ class SponsorController extends Controller{
         $user = User::findOrFail($user_id);
         $spon_id = Sponsor::where('user_id','=', $user_id)->pluck('sponsor_id')->first();
         $sponsor = Sponsor::findOrFail($spon_id);
-        return view('home', compact('sponsor', 'user', 'scholarships'));
+        $user_id = Auth::user()->user_id;
+        $notification = Notification::join('application', 'Application.application_id','=','Notification.application_id')
+        	->where('Notification.account_id','=',$user_id)
+        	->select('Notification.notification_id','Notification.notification_desc','Notification.notification_date','Notification.notification_status','Notification.application_id','Notification.account_id','Application.scholarship_id','Application.student_id')
+        	->get();
+        $unnotif = count($notification);
+        $unread = Message::where('msg_receiver','=',$user_id)->where('msg_status','=','unread')->count();
+        return view('home', compact('sponsor', 'user', 'scholarships', 'unread', 'unnotif'));
     }
    
     public function viewProfile(){
@@ -67,7 +76,14 @@ class SponsorController extends Controller{
         $user_id1 = Sponsor::where('sponsor_id','=',$sponsor_id)->pluck('user_id')->first();
         $user1 = User::findOrFail($user_id1);
 
-        return view('profiles.profile_sponsor', compact('sponsor', 'user', 'openscholarships', 'endscholarships', 'currentTime', 'user1'));       
+        $notification = Notification::join('application', 'Application.application_id','=','Notification.application_id')
+        	->where('Notification.account_id','=',$user_id)
+        	->select('Notification.notification_id','Notification.notification_desc','Notification.notification_date','Notification.notification_status','Notification.application_id','Notification.account_id','Application.scholarship_id','Application.student_id')
+        	->get();
+        $unnotif = count($notification);
+        $unread = Message::where('msg_receiver','=',$user_id)->where('msg_status','=','unread')->count();
+
+        return view('profiles.profile_sponsor', compact('sponsor', 'user', 'openscholarships', 'endscholarships', 'currentTime', 'user1', 'unread', 'unnotif'));       
     } 
 
     public function viewSearchfromStudent($sponsor_id){
@@ -101,7 +117,14 @@ class SponsorController extends Controller{
         $user_id1 = Sponsor::where('sponsor_id','=',$sponsor_id)->pluck('user_id')->first();
         $user1 = User::findOrFail($user_id1);
 
-        return view('profiles.profile_sponsor', compact('sponsor', 'student', 'user', 'openscholarships', 'endscholarships', 'currentTime', 'user1'));       
+        $notification = Notification::join('application', 'Application.application_id','=','Notification.application_id')
+        	->where('Notification.account_id','=',$user_id)
+        	->select('Notification.notification_id','Notification.notification_desc','Notification.notification_date','Notification.notification_status','Notification.application_id','Notification.account_id','Application.scholarship_id','Application.student_id')
+        	->get();
+        $unnotif = count($notification);
+        $unread = Message::where('msg_receiver','=',$user_id)->where('msg_status','=','unread')->count();
+
+        return view('profiles.profile_sponsor', compact('sponsor', 'student', 'user', 'openscholarships', 'endscholarships', 'currentTime', 'user1', 'unread', 'unnotif'));       
     } 
 
     public function viewSearchfromSponsor($sponsor_id){
@@ -135,7 +158,14 @@ class SponsorController extends Controller{
             ->select('Scholarship_deadline.scholarship_id','Scholarship.scholarship_name','Scholarship_deadline.scholarship_deadlineenddate','Scholarship_deadline.scholarship_deadlinestartdate')
             ->get();
 
-        return view('profiles.profile_sponsor', compact('sponsor', 'sponsor1', 'currentTime', 'user', 'user1', 'openscholarships', 'endscholarships'));       
+        $notification = Notification::join('application', 'Application.application_id','=','Notification.application_id')
+        	->where('Notification.account_id','=',$user_id)
+        	->select('Notification.notification_id','Notification.notification_desc','Notification.notification_date','Notification.notification_status','Notification.application_id','Notification.account_id','Application.scholarship_id','Application.student_id')
+        	->get();
+        $unnotif = count($notification);
+        $unread = Message::where('msg_receiver','=',$user_id)->where('msg_status','=','unread')->count();
+
+        return view('profiles.profile_sponsor', compact('sponsor', 'sponsor1', 'currentTime', 'user', 'user1', 'openscholarships', 'endscholarships', 'unread', 'unnotif'));       
     } 
 
     public function scholars(){ 
@@ -155,8 +185,14 @@ class SponsorController extends Controller{
             ->where('avail_status','=','pending')
             ->get();
 
+        $notification = Notification::join('application', 'Application.application_id','=','Notification.application_id')
+        	->where('Notification.account_id','=',$user_id)
+        	->select('Notification.notification_id','Notification.notification_desc','Notification.notification_date','Notification.notification_status','Notification.application_id','Notification.account_id','Application.scholarship_id','Application.student_id')
+        	->get();
+        $unnotif = count($notification);
+        $unread = Message::where('msg_receiver','=',$user_id)->where('msg_status','=','unread')->count();
 
-        return view('profiles.scholars', compact('user','officialScholars','pendingApplications','sponsor'));
+        return view('profiles.scholars', compact('user','officialScholars','pendingApplications','sponsor', 'unread', 'unnotif'));
     }
 
     public function profileCont($scholarship_id){
