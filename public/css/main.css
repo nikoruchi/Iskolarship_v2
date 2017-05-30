@@ -106,13 +106,24 @@
     justify-content: center;
 }
 
-/*button:not(.input-btn){
+/*
+button:not(.input-btn){
 	margin: 5px 0;
 }
 */
 
 textarea {
     resize: vertical;
+}
+
+.dropdown-pp{
+    width: 1.5em;
+    height: 1.5em;
+    object-fit: cover;
+    object-position: center;
+    display: inline-block;
+    /* margin: auto; */
+    /* margin-bottom: 0.5em; */
 }
 
 .check-box label {
@@ -480,5 +491,12 @@ form:not(.navbar-form) .input-group {
     display: none;
 }
 
+.label-success{
+    background-color: #79d229;
+}
+
+.label-warning{
+    background-color: #f0e75b;
+}
 
 

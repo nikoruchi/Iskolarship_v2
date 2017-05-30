@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Scholarship;
 use App\Scholar;
 use App\User;
+use App\Message;
+use App\Notification;
 use Auth;
 use App\Application;
 use DB;
@@ -24,7 +26,13 @@ class ScholarController extends Controller{
         $stud_id = Scholar::where('user_id','=', $user_id)->pluck('student_id')->first();
         $student = Scholar::findOrFail($stud_id);
 
-        return view('home', compact('student', 'user', 'scholarships'));
+        $notification = Notification::join('application', 'Application.application_id','=','Notification.application_id')
+        	->where('Notification.account_id','=',$user_id)
+        	->select('Notification.notification_id','Notification.notification_desc','Notification.notification_date','Notification.notification_status','Notification.application_id','Notification.account_id','Application.scholarship_id','Application.student_id')
+        	->get();
+        $unnotif = count($notification);
+        $unread = Message::where('msg_receiver','=',$user_id)->where('msg_status','=','unread')->count();
+        return view('home', compact('student', 'user', 'scholarships', 'unread', 'unnotif'));
     }
     
     public function viewProfile(){
@@ -51,6 +59,13 @@ class ScholarController extends Controller{
             ->where('avail_status','=','pending')
             ->get();
 
-        return view('profiles.profile_scholar', compact('studentProfile','student', 'user','scholarships','pendingAvail')); 
+        $notification = Notification::join('application', 'Application.application_id','=','Notification.application_id')
+        	->where('Notification.account_id','=',$user_id)
+        	->select('Notification.notification_id','Notification.notification_desc','Notification.notification_date','Notification.notification_status','Notification.application_id','Notification.account_id','Application.scholarship_id','Application.student_id')
+        	->get();
+        $unnotif = count($notification);
+        $unread = Message::where('msg_receiver','=',$user_id)->where('msg_status','=','unread')->count();
+
+        return view('profiles.profile_scholar', compact('studentProfile','student', 'user','scholarships','pendingAvail', 'unread', 'unnotif')); 
     }  
 }

@@ -10,6 +10,7 @@ use App\Scholar;
 use App\User;
 use App\Sponsor;
 use App\Message;
+use App\Notification;
 use Carbon\Carbon;
 use App\Reply;
 class MessagesController extends Controller
@@ -26,7 +27,15 @@ class MessagesController extends Controller
 
         $email = User::where('user_id','=',$user1)->pluck('email')->first();
         $inbox = Message::where('msg_receiver','=',$user_id)->get();
-        return view('/user/messages', compact('sponsor', 'student','user', 'email', 'inbox'));
+
+        $notification = Notification::join('application', 'Application.application_id','=','Notification.application_id')
+        	->where('Notification.account_id','=',$user_id)
+        	->select('Notification.notification_id','Notification.notification_desc','Notification.notification_date','Notification.notification_status','Notification.application_id','Notification.account_id','Application.scholarship_id','Application.student_id')
+        	->get();
+        $unnotif = count($notification);
+        $unread = Message::where('msg_receiver','=',$user_id)->where('msg_status','=','unread')->count();
+
+        return view('/user/messages', compact('sponsor', 'student','user', 'email', 'inbox', 'unread', 'unnotif'));
     }
 
     public function autofillMsgScholar($studentProfile){
@@ -40,7 +49,15 @@ class MessagesController extends Controller
 
         $email = User::where('user_id','=',$user1)->pluck('email');
         $inbox = Message::where('msg_receiver','=',$user_id)->get();
-        return view('/user/messages', compact('sponsor','user', 'email', 'inbox','studentProfile'));
+
+        $notification = Notification::join('application', 'Application.application_id','=','Notification.application_id')
+        	->where('Notification.account_id','=',$user_id)
+        	->select('Notification.notification_id','Notification.notification_desc','Notification.notification_date','Notification.notification_status','Notification.application_id','Notification.account_id','Application.scholarship_id','Application.student_id')
+        	->get();
+        $unnotif = count($notification);
+        $unread = Message::where('msg_receiver','=',$user_id)->where('msg_status','=','unread')->count();
+        
+        return view('/user/messages', compact('sponsor','user', 'email', 'inbox','studentProfile', 'unread', 'unnotif'));
     }
 
     public function indexSponsor()
@@ -50,7 +67,14 @@ class MessagesController extends Controller
         $id = Sponsor::where('user_id','=', $user_id)->pluck('sponsor_id')->first();
         $sponsor = Sponsor::findOrFail($id);
         $inbox = Message::where('msg_receiver','=',$user_id)->get();
-        return view('/user/messages', compact('sponsor','user','inbox'));
+        $notification = Notification::join('application', 'Application.application_id','=','Notification.application_id')
+        	->where('Notification.account_id','=',$user_id)
+        	->select('Notification.notification_id','Notification.notification_desc','Notification.notification_date','Notification.notification_status','Notification.application_id','Notification.account_id','Application.scholarship_id','Application.student_id')
+        	->get();
+        $unnotif = count($notification);
+        $unread = Message::where('msg_receiver','=',$user_id)->where('msg_status','=','unread')->count();
+
+        return view('/user/messages', compact('sponsor','user','inbox', 'unread', 'unnotif'));
     }
 
     public function indexStudent()
@@ -62,7 +86,13 @@ class MessagesController extends Controller
         $inbox = Message::where('msg_receiver','=',$user_id)->get();
         // $sender = User::
         // $senderName = 
-        return view('/user/messages', compact('student','user','inbox'));
+        $notification = Notification::join('application', 'Application.application_id','=','Notification.application_id')
+        	->where('Notification.account_id','=',$user_id)
+        	->select('Notification.notification_id','Notification.notification_desc','Notification.notification_date','Notification.notification_status','Notification.application_id','Notification.account_id','Application.scholarship_id','Application.student_id')
+        	->get();
+        $unnotif = count($notification);
+        $unread = Message::where('msg_receiver','=',$user_id)->where('msg_status','=','unread')->count();
+        return view('/user/messages', compact('student','user','inbox', 'unread', 'unnotif'));
     }
 
 
@@ -74,7 +104,13 @@ class MessagesController extends Controller
         $sponsor = Sponsor::findOrFail($id);
         $inbox = Message::where('msg_receiver','=',$user_id)->get();
 
-        return view('/user/messages', compact('sponsor','email','user','inbox'));
+        $notification = Notification::join('application', 'Application.application_id','=','Notification.application_id')
+        	->where('Notification.account_id','=',$user_id)
+        	->select('Notification.notification_id','Notification.notification_desc','Notification.notification_date','Notification.notification_status','Notification.application_id','Notification.account_id','Application.scholarship_id','Application.student_id')
+        	->get();
+        $unnotif = count($notification);
+        $unread = Message::where('msg_receiver','=',$user_id)->where('msg_status','=','unread')->count();
+        return view('/user/messages', compact('sponsor','email','user','inbox', 'unread', 'unnotif'));
 
     }
 

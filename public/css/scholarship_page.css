@@ -28,7 +28,7 @@
 }
 
 .further-details{
-	display: none;
+	display: flex;
 	justify-content: center;
 	align-items: center;
 	margin: auto;
@@ -45,10 +45,13 @@
 
 .grants-specs ul li,
 .grants-specs ol li{
-	margin-bottom: 1em;
 	padding: 0.5em 1em;
 	border-left: 0.25em solid #4FC3F7;
-	border-bottom: 1px solid #DDD;
+	/* border-bottom: 1px solid #DDD; */
+	box-shadow: 0 3px 15px rgba(0, 0, 0, 0.15);
+	background-color: white;
+	width: 80%;
+	margin: 0.75em auto;
 }
 
 .apply-btn{

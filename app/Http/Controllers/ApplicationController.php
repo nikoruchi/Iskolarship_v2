@@ -11,6 +11,8 @@ use App\Scholarship;
 use App\Notification;
 use App\Sponsor;
 use App\EssayQuestions;
+use App\Message;
+use App\Notification;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\MessageBag;
 use Carbon\Carbon;
@@ -125,7 +127,13 @@ class ApplicationController extends Controller
         $stud_id = Scholar::where('user_id','=', $user_id)->pluck('student_id')->first();
         $student = Scholar::findOrFail($stud_id);
         $questions = EssayQuestions::where('scholarship_id','=',$scholarship_id)->get();
-        return view('registration/scholarship_application', compact('questions','scholarship','student','user'));
+        $notification = Notification::join('application', 'Application.application_id','=','Notification.application_id')
+        	->where('Notification.account_id','=',$user_id)
+        	->select('Notification.notification_id','Notification.notification_desc','Notification.notification_date','Notification.notification_status','Notification.application_id','Notification.account_id','Application.scholarship_id','Application.student_id')
+        	->get();
+        $unnotif = count($notification);
+        $unread = Message::where('msg_receiver','=',$user_id)->where('msg_status','=','unread')->count();
+        return view('registration/scholarship_application', compact('questions','scholarship','student','user', 'unread', 'unnotif'));
     }
 
     public function sendApplication(Request $request){
@@ -188,8 +196,14 @@ class ApplicationController extends Controller
         $type = ApplicationFamilyFinancial::where('student_id','=',$stud_id)->pluck('housing_ownershiptype')->first();
         $answers = EssayAnswer::where('application_id','=',$app_id)->get();
         $questions = EssayQuestions::where('scholarship_id','=',$scholarship_id)->get();
+        $notification = Notification::join('application', 'Application.application_id','=','Notification.application_id')
+        	->where('Notification.account_id','=',$user_id)
+        	->select('Notification.notification_id','Notification.notification_desc','Notification.notification_date','Notification.notification_status','Notification.application_id','Notification.account_id','Application.scholarship_id','Application.student_id')
+        	->get();
+        $unnotif = count($notification);
+        $unread = Message::where('msg_receiver','=',$user_id)->where('msg_status','=','unread')->count();
         $i = 0;
                 // $four = ApplicationFamilyFinancial::where('student_id','=',$stud_id)->pluck('beneficiary_dswd4ps')->first();
-        return view('profiles/application', compact('questions','answers','sponsor','user','app','siblings','relatives','four','type'));
+        return view('profiles/application', compact('questions','answers','sponsor','user','app','siblings','relatives','four','type', 'unread', 'unnotif'));
     }
 }

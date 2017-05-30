@@ -9,6 +9,8 @@ use App\Scholar;
 use App\Scholarship;
 use App\Sponsor;
 use App\User;
+use App\Message;
+use App\Notification;
 
 class SearchController extends Controller
 {
@@ -100,7 +102,14 @@ class SearchController extends Controller
 
         }
 
-        return view('search_results',compact('student','scholarships','scholars','sponsors','opens','keyword','user'));
+        $notification = Notification::join('application', 'Application.application_id','=','Notification.application_id')
+        	->where('Notification.account_id','=',$user_id)
+        	->select('Notification.notification_id','Notification.notification_desc','Notification.notification_date','Notification.notification_status','Notification.application_id','Notification.account_id','Application.scholarship_id','Application.student_id')
+        	->get();
+        $unnotif = count($notification);
+        $unread = Message::where('msg_receiver','=',$user_id)->where('msg_status','=','unread')->count();
+
+        return view('search_results',compact('student','scholarships','scholars','sponsors','opens','keyword','user', 'unread', 'unnotif'));
     }
 
 
@@ -190,8 +199,18 @@ class SearchController extends Controller
             $opens = Scholarship::all();
 
         }
+<<<<<<< HEAD
         
         return view('search_results',compact('sponsor','scholarships','scholars','sponsors','opens','keyword','user'));
+=======
+        $notification = Notification::join('application', 'Application.application_id','=','Notification.application_id')
+        	->where('Notification.account_id','=',$user_id)
+        	->select('Notification.notification_id','Notification.notification_desc','Notification.notification_date','Notification.notification_status','Notification.application_id','Notification.account_id','Application.scholarship_id','Application.student_id')
+        	->get();
+        $unnotif = count($notification);
+        $unread = Message::where('msg_receiver','=',$user_id)->where('msg_status','=','unread')->count();
+        return view('search_results',compact('sponsor','scholarships','scholars','sponsors','opens','keyword','user', 'unread', 'unnotif'));
+>>>>>>> 32356f430ea29e828c2ad8c4be80ad29bb9752bc
       //  return view('search_results',compact('scholarships','scholars','sponsors','keyword','user','student'));
     }
 }

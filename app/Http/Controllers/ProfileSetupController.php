@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Scholar; 
 use App\User;
+use App\Message;
+use App\Notification;
 use App\ApplicationFamilyAppliances;
 use App\ApplicationFamilyFinancial;
 use App\ApplicationParentsInfo;
@@ -20,8 +22,14 @@ class ProfileSetupController extends Controller{
         $user = User::findOrFail($user_id);
         $student_id = Scholar::where('user_id','=', $user_id)->pluck('student_id')->first();
         $student = Scholar::find($student_id);
+        $notification = Notification::join('application', 'Application.application_id','=','Notification.application_id')
+        	->where('Notification.account_id','=',$user_id)
+        	->select('Notification.notification_id','Notification.notification_desc','Notification.notification_date','Notification.notification_status','Notification.application_id','Notification.account_id','Application.scholarship_id','Application.student_id')
+        	->get();
+        $unnotif = count($notification);
+        $unread = Message::where('msg_receiver','=',$user_id)->where('msg_status','=','unread')->count();
 
-        return view('profiles.settings.scholar_setup_form', compact('user', 'student', 'student_id')); 
+        return view('profiles.settings.scholar_setup_form', compact('user', 'student', 'student_id', 'unread', 'unnotif')); 
     }
 
     public function viewSetup(){
@@ -29,8 +37,14 @@ class ProfileSetupController extends Controller{
         $user = User::findOrFail($user_id);
         $student_id = Scholar::where('user_id','=', $user_id)->pluck('student_id')->first();
         $student = Scholar::find($student_id);
+        $notification = Notification::join('application', 'Application.application_id','=','Notification.application_id')
+        	->where('Notification.account_id','=',$user_id)
+        	->select('Notification.notification_id','Notification.notification_desc','Notification.notification_date','Notification.notification_status','Notification.application_id','Notification.account_id','Application.scholarship_id','Application.student_id')
+        	->get();
+        $unnotif = count($notification);
+        $unread = Message::where('msg_receiver','=',$user_id)->where('msg_status','=','unread')->count();
 
-        return view('profiles.profile_scholar_setup', compact('user', 'student', 'student_id')); 
+        return view('profiles.profile_scholar_setup', compact('user', 'student', 'student_id', 'unread', 'unnotif')); 
     }  
 
     public  function createSetup($parents_info, $family_financial, $family_appliances, $rel_con, $sib_scho, $student_id, $details, $sibName, $sibScho, $sibUniv, $relName, $relRela, $relNatu, $relAver, $exist){

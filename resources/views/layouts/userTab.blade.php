@@ -4,6 +4,7 @@
 	<title>Iskolarship</title>
 	<meta charset="utf-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<link rel="shortcut icon" href="{{ asset('image/I.ico') }}" type="image/x-icon">
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/app.css')}}"/>
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome/css/font-awesome.min.css')}}"/>
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/main.css')}}"/>
@@ -34,19 +35,23 @@
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown">
 						@if(Auth::user()->hasRole('student'))
-							<a href="/profile scholar" class="dropdown-toggle" data-toggle="dropdown">{{ $student->student_fname }} {{ $student->student_lname}} <span class="caret"></span></a>
+							<a href="/profile scholar" class="dropdown-toggle" data-toggle="dropdown"><img src="/image/{{ $user->user_imagepath }}" class="dropdown-pp img-circle"/> {{ $student->student_fname }} {{ $student->student_lname}} <span class="caret"></span></a>
 						@elseif(Auth::user()->hasRole('sponsor'))
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ $sponsor->sponsor_fname }} {{$sponsor->sponsor_lname}} <span class="caret"></span></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"> <img src="/image/{{ $user->user_imagepath }}" class="dropdown-pp img-circle"/> {{ $sponsor->sponsor_fname }} {{$sponsor->sponsor_lname}} <span class="caret"></span></a>
 						@endif
 							<ul class="dropdown-menu">
 							@if(Auth::user()->hasRole('sponsor'))
-								<li><a href="{{ url('/profile sponsor') }}"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+								<li><a href="{{ url('/profile sponsor') }}">
+									<span class="glyphicon glyphicon-user"></span> Profile
+								</a></li>
 							@elseif(Auth::user()->hasRole('student'))
-								<li><a href="{{ url('/profile scholar')}}"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+								<li><a href="{{ url('/profile scholar')}}">
+									<span class="glyphicon glyphicon-user"></span> Profile
+								</a></li>
 							@endif
 							@if(Auth::check())
-							<li><a href="{{ url('/messages') }}"><span class="glyphicon glyphicon-envelope"></span> Messages</a></li>
-							<li><a href="{{ url('/notifications') }}"><span class="glyphicon glyphicon-bell"></span> Notifications</a></li>
+							<li><a href="{{ url('/messages') }}"><span class="glyphicon glyphicon-envelope"></span> Messages <span class="label label-success">@if($unread > 0) {{ $unread }} @endif</span></a></li>
+							<li><a href="{{ url('/notifications') }}"><span class="glyphicon glyphicon-bell"></span> Notifications <span class="label label-warning">@if($unnotif > 0) {{ $unnotif }} @endif</span></a></li>
 							@endif
 							@if(Auth::user()->hasRole('sponsor'))
 							<li><a href="/Sponsor/Account Settings"><span class="glyphicon glyphicon-cog"></span> Account Settings</a></li>

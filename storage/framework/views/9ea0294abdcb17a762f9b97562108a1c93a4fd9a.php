@@ -5,10 +5,10 @@
 
 		<ul class="internal-links">
 			<li><a href="/home"><span class="glyphicon glyphicon-arrow-left"></span> Back to Home</a></li>
-			<li><a href="#scholarships">Scholarships</a></li>
-			<li><a href="#sponsors">Sponsors</a></li>
-			<li><a href="#scholars">Scholars</a></li>
-			<li><a href="#open">Open Scholarships</a></li>
+			<?php if(count($scholarships) > 0): ?><li><a href="#scholarships">Scholarships</a></li><?php endif; ?>
+			<?php if(count($sponsors) > 0): ?><li><a href="#sponsors">Sponsors</a></li><?php endif; ?>
+			<?php if(count($scholars) > 0): ?><li><a href="#scholars">Scholars</a></li><?php endif; ?>
+			<?php if(count($opens) > 0): ?><li><a href="#open">Open Scholarships</a></li><?php endif; ?>
 		</ul>
 		<h1 class="text-center you-search">You have searched for: <span class="keyword"><?php echo e($keyword); ?></span></h1>
 		<div class="row">

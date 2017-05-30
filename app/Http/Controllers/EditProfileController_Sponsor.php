@@ -7,6 +7,8 @@ use Auth;
 use App\Scholar;
 use App\User;
 use App\Sponsor;
+use App\Message;
+use App\Notification;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\MessageBag;
@@ -53,7 +55,13 @@ class EditProfileController_Sponsor extends Controller{
         $user = User::findOrFail($user_id);
         $spons_id = Sponsor::where('user_id','=', $user_id)->pluck('sponsor_id')->first();
         $sponsor = Sponsor::findOrFail($spons_id);
-        return view('profiles/settings/edit_profile-sponsor', compact('sponsor','user'));
+        $notification = Notification::join('application', 'Application.application_id','=','Notification.application_id')
+        	->where('Notification.account_id','=',$user_id)
+        	->select('Notification.notification_id','Notification.notification_desc','Notification.notification_date','Notification.notification_status','Notification.application_id','Notification.account_id','Application.scholarship_id','Application.student_id')
+        	->get();
+        $unnotif = count($notification);
+        $unread = Message::where('msg_receiver','=',$user_id)->where('msg_status','=','unread')->count();
+        return view('profiles/settings/edit_profile-sponsor', compact('sponsor','user', 'unread', 'unnotif'));
     }
 
     public function validatePassword(Request $request){
