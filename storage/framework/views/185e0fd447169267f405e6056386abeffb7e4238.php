@@ -9,10 +9,7 @@
 						<h1 class="scholarship-name"><?php echo e($scholarship->scholarship_name); ?></h1>
 						<p class="scholarship-description"><?php echo e($scholarship->scholarship_desc); ?></p>
 						<div class="flex">
-<<<<<<< HEAD:storage/framework/views/5b3a71083e6c4316649bc7f1795baac54e7900f4.php
-=======
 
->>>>>>> 75dba9ff822d635b39d350be1ea45c62bace1f16:storage/framework/views/185e0fd447169267f405e6056386abeffb7e4238.php
 						<?php if($deadline < $currentTime): ?>
 							<p class ="text-center">Submission for application is over.</p>
 						<?php elseif((Auth::user()->hasRole('student')) && ($exists>0)): ?>
@@ -33,22 +30,25 @@
 						<ul class="list-unstyled further-details">
 							<li class="dropdown">
 								<button class="btn btn-default btn-md" data-toggle="dropdown" data-target="sponsor"><span class="glyphicon glyphicon-briefcase"></span></button>
-								<ul class="dropdown-menu" id="sponsor"><li><a href="#">Sponsor Name</a></li></ul>
+								<ul class="dropdown-menu" id="sponsor"><li><a href="#">Sponsor: <?php echo e($sponsor->sponsor_fname); ?> <?php echo e($sponsor->sponsor_lname); ?></a></li></ul>
 							</li>
 							<li class="dropdown">
 								<button class="btn btn-default btn-md" data-toggle="dropdown" data-target="deadline"><span class="glyphicon glyphicon-calendar"></span></button>
-								<ul class="dropdown-menu" id="deadline"><li><a href="#">Scholarship Deadline</a></li></ul>
+								<ul class="dropdown-menu" id="deadline"><li><a href="#">Deadline: <?php echo e(date('m-d-Y', strtotime($deadline))); ?> </a></li></ul>
 							</li>
 							<li class="dropdown">
-								<button class="btn btn-default btn-md"><span class="glyphicon glyphicon-search"></span></button>
-								<ul class="dropdown-menu" id=""></ul>
+								<button class="btn btn-default btn-md" data-toggle="dropdown" data-target="details"><span class="glyphicon glyphicon-search"></span></button>
+								<ul class="dropdown-menu" id="details">
+									<li><a href="#grants">Grants: <?php echo e($grants->count()); ?></a></li>
+									<li><a href="#specs">Specifications: <?php echo e($specifications->count()); ?></a></li>
+								</ul>
 							</li>
 						</ul>
 					<!-- </div> -->
 					<div class="grants-specs">
 						<div class="row">
 							<div class="col-sm-12">
-								<h3 class="text-center">Grants</h3>
+								<h3 class="text-center" id="grants">Grants</h3>
 								<ul class="list-unstyled">
 									<?php $__currentLoopData = $grants; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $grant): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 										<li><?php echo e($grant->scholarship_grantDesc); ?></li>
@@ -59,7 +59,7 @@
 								</ul>
 							</div>
 							<div class="col-sm-12">
-								<h3 class="text-center">Specifications</h3>
+								<h3 class="text-center" id="specs">Specifications</h3>
 								<ol class="list-unstyled">
 									<?php $__currentLoopData = $specifications; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $specification): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 										<li><?php echo e($specification->scholarship_specDesc); ?></li>

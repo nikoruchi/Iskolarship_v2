@@ -17,7 +17,7 @@ function deleteNotif() {
                 element.fadeOut().remove();
                 console.log("row deleted");
             }else{
-                alert("can't delete the row");
+                console.log("can't delete the row");
             }
         } 
 	});

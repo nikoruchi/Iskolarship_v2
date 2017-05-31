@@ -115,12 +115,11 @@ class ScholarshipsController extends Controller
         $deadline = ScholarshipsDeadline::find($scholarship_id)
                     ->pluck('scholarship_deadlineenddate');
         $notification = Notification::join('application', 'Application.application_id','=','Notification.application_id')
-        	->where('Notification.account_id','=',$user_id)
-        	->select('Notification.notification_id','Notification.notification_desc','Notification.notification_date','Notification.notification_status','Notification.application_id','Notification.account_id','Application.scholarship_id','Application.student_id')
-        	->get();
+            ->where('Notification.account_id','=',$user_id)
+            ->select('Notification.notification_id','Notification.notification_desc','Notification.notification_date','Notification.notification_status','Notification.application_id','Notification.account_id','Application.scholarship_id','Application.student_id')
+            ->get();
         $unnotif = count($notification);
         $unread = Message::where('msg_receiver','=',$user_id)->where('msg_status','=','unread')->count();
-
         // $deadline = ScholarshipsDeadline::where('scholarship_id','=',$scholarship_id)
         //     ->first()->scholarship_deadlineenddate;     
         

@@ -4,6 +4,7 @@
 	<title>Iskolarship</title>
 	<meta charset="utf-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<link rel="shortcut icon" href="<?php echo e(asset('image/I.ico')); ?>" type="image/x-icon">
 	<link rel="stylesheet" type="text/css" href="<?php echo e(asset('css/app.css')); ?>"/>
 	<link rel="stylesheet" type="text/css" href="<?php echo e(asset('css/font-awesome/css/font-awesome.min.css')); ?>"/>
 	<link rel="stylesheet" type="text/css" href="<?php echo e(asset('css/main.css')); ?>"/>
@@ -34,19 +35,23 @@
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown">
 						<?php if(Auth::user()->hasRole('student')): ?>
-							<a href="/profile scholar" class="dropdown-toggle" data-toggle="dropdown"><?php echo e($student->student_fname); ?> <?php echo e($student->student_lname); ?> <span class="caret"></span></a>
+							<a href="/profile scholar" class="dropdown-toggle" data-toggle="dropdown"><img src="/image/<?php echo e($user->user_imagepath); ?>" class="dropdown-pp img-circle"/> <?php echo e($student->student_fname); ?> <?php echo e($student->student_lname); ?> <span class="caret"></span></a>
 						<?php elseif(Auth::user()->hasRole('sponsor')): ?>
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo e($sponsor->sponsor_fname); ?> <?php echo e($sponsor->sponsor_lname); ?> <span class="caret"></span></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"> <img src="/image/<?php echo e($user->user_imagepath); ?>" class="dropdown-pp img-circle"/> <?php echo e($sponsor->sponsor_fname); ?> <?php echo e($sponsor->sponsor_lname); ?> <span class="caret"></span></a>
 						<?php endif; ?>
 							<ul class="dropdown-menu">
 							<?php if(Auth::user()->hasRole('sponsor')): ?>
-								<li><a href="<?php echo e(url('/profile sponsor')); ?>"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+								<li><a href="<?php echo e(url('/profile sponsor')); ?>">
+									<span class="glyphicon glyphicon-user"></span> Profile
+								</a></li>
 							<?php elseif(Auth::user()->hasRole('student')): ?>
-								<li><a href="<?php echo e(url('/profile scholar')); ?>"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+								<li><a href="<?php echo e(url('/profile scholar')); ?>">
+									<span class="glyphicon glyphicon-user"></span> Profile
+								</a></li>
 							<?php endif; ?>
 							<?php if(Auth::check()): ?>
-							<li><a href="<?php echo e(url('/messages')); ?>"><span class="glyphicon glyphicon-envelope"></span> Messages</a></li>
-							<li><a href="<?php echo e(url('/notifications')); ?>"><span class="glyphicon glyphicon-bell"></span> Notifications</a></li>
+							<li><a href="<?php echo e(url('/messages')); ?>"><span class="glyphicon glyphicon-envelope"></span> Messages <span class="label label-success"><?php if($unread > 0): ?> <?php echo e($unread); ?> <?php endif; ?></span></a></li>
+							<li><a href="<?php echo e(url('/notifications')); ?>"><span class="glyphicon glyphicon-bell"></span> Notifications <span class="label label-warning"><?php if($unnotif > 0): ?> <?php echo e($unnotif); ?> <?php endif; ?></span></a></li>
 							<?php endif; ?>
 							<?php if(Auth::user()->hasRole('sponsor')): ?>
 							<li><a href="/Sponsor/Account Settings"><span class="glyphicon glyphicon-cog"></span> Account Settings</a></li>

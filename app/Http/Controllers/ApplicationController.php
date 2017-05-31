@@ -12,7 +12,6 @@ use App\Notification;
 use App\Sponsor;
 use App\EssayQuestions;
 use App\Message;
-use App\Notification;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\MessageBag;
 use Carbon\Carbon;
@@ -187,7 +186,7 @@ class ApplicationController extends Controller
         $user = User::findOrFail($user_id);
         $spon_id = Sponsor::where('user_id','=', $user_id)->pluck('sponsor_id')->first();
         $sponsor = Sponsor::findOrFail($spon_id);
-        $app = Application::find($app_id);
+        $app = Application::find($app_id)->first();
         $scholarship_id = $app->scholarship_id;
         $stud_id = $app->student_id;
         $siblings = ApplicationSiblingScholar::where('student_id','=',$stud_id)->first();

@@ -62,9 +62,8 @@ class NotificationsController extends Controller{
 
     public function deleteNotif(Request $request){
         $id = $request->id;
-        dd($id);
-        $notif = Notification::findOrFail($id);
-        $notif->delete();
+        $notif = Notification::findOrFail($id)->delete();
+        // $notif->delete(); 
         //Session::flash('flash_message', 'Task successfully deleted!');
         return "YES";
         // return redirect('/notifications');

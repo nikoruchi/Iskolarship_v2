@@ -32,22 +32,25 @@
 						<ul class="list-unstyled further-details">
 							<li class="dropdown">
 								<button class="btn btn-default btn-md" data-toggle="dropdown" data-target="sponsor"><span class="glyphicon glyphicon-briefcase"></span></button>
-								<ul class="dropdown-menu" id="sponsor"><li><a href="#">Sponsor Name</a></li></ul>
+								<ul class="dropdown-menu" id="sponsor"><li><a href="#">Sponsor: {{$sponsor->sponsor_fname}} {{$sponsor->sponsor_lname}}</a></li></ul>
 							</li>
 							<li class="dropdown">
 								<button class="btn btn-default btn-md" data-toggle="dropdown" data-target="deadline"><span class="glyphicon glyphicon-calendar"></span></button>
-								<ul class="dropdown-menu" id="deadline"><li><a href="#">Scholarship Deadline</a></li></ul>
+								<ul class="dropdown-menu" id="deadline"><li><a href="#">Deadline: {{date('m-d-Y', strtotime($deadline)) }} </a></li></ul>
 							</li>
 							<li class="dropdown">
-								<button class="btn btn-default btn-md"><span class="glyphicon glyphicon-search"></span></button>
-								<ul class="dropdown-menu" id=""></ul>
+								<button class="btn btn-default btn-md" data-toggle="dropdown" data-target="details"><span class="glyphicon glyphicon-search"></span></button>
+								<ul class="dropdown-menu" id="details">
+									<li><a href="#grants">Grants: {{$grants->count()}}</a></li>
+									<li><a href="#specs">Specifications: {{$specifications->count()}}</a></li>
+								</ul>
 							</li>
 						</ul>
 					<!-- </div> -->
 					<div class="grants-specs">
 						<div class="row">
 							<div class="col-sm-12">
-								<h3 class="text-center">Grants</h3>
+								<h3 class="text-center" id="grants">Grants</h3>
 								<ul class="list-unstyled">
 									@foreach($grants as $grant)
 										<li>{{$grant->scholarship_grantDesc}}</li>
@@ -58,7 +61,7 @@
 								</ul>
 							</div>
 							<div class="col-sm-12">
-								<h3 class="text-center">Specifications</h3>
+								<h3 class="text-center" id="specs">Specifications</h3>
 								<ol class="list-unstyled">
 									@foreach($specifications as $specification)
 										<li>{{$specification->scholarship_specDesc}}</li>
