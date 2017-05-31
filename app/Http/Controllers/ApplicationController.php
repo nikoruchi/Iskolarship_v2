@@ -12,7 +12,6 @@ use App\Notification;
 use App\Sponsor;
 use App\EssayQuestions;
 use App\Message;
-use App\Notification;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\MessageBag;
 use Carbon\Carbon;
