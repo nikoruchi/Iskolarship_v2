@@ -35,7 +35,7 @@
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown">
 						@if(Auth::user()->hasRole('student'))
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="/image/{{ $user->user_imagepath }}" class="dropdown-pp img-circle"/> {{ $student->student_fname }} {{ $student->student_lname}} <span class="caret"></span></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"> <img src="/image/{{ $user->user_imagepath }}" class="dropdown-pp img-circle"/> {{ $student->student_fname }} {{$student->student_lname}} <span class="caret"></span></a>
 						@elseif(Auth::user()->hasRole('sponsor'))
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown"> <img src="/image/{{ $user->user_imagepath }}" class="dropdown-pp img-circle"/> {{ $sponsor->sponsor_fname }} {{$sponsor->sponsor_lname}} <span class="caret"></span></a>
 						@endif
@@ -59,11 +59,11 @@
 							<li><a href="/Scholar/Account Settings"><span class="glyphicon glyphicon-cog"></span> Account Settings</a></li>
 							@endif
 							@if(Auth::check())
-									<li><a href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><span class="glyphicon glyphicon-off"></span>&nbsp;Logout</a></li>
-									 <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
-			                           		{{ csrf_field() }}
-			                         </form>
-		                         @endif
+								<li><a href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><span class="glyphicon glyphicon-off"></span>&nbsp;Logout</a></li>
+								 <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+		                           		{{ csrf_field() }}
+		                         </form>
+	                         @endif
 							</ul>
 						</li>
 					</ul>

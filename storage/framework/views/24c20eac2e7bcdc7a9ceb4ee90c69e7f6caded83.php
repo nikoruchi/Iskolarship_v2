@@ -10,16 +10,22 @@
 		<ul class="internal-links">
 			<li><a href="/home"><span class="glyphicon glyphicon-arrow-left"></span> Back to Home</a></li>
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> b567823be617a43c729f024532d0aef280717882
 			<?php if(count($scholarships) > 0): ?><li><a href="#scholarships">Scholarships</a></li><?php endif; ?>
 			<?php if(count($sponsors) > 0): ?><li><a href="#sponsors">Sponsors</a></li><?php endif; ?>
 			<?php if(count($scholars) > 0): ?><li><a href="#scholars">Scholars</a></li><?php endif; ?>
 			<?php if(count($opens) > 0): ?><li><a href="#open">Open Scholarships</a></li><?php endif; ?>
+<<<<<<< HEAD
+=======
 =======
 			<li><a href="#scholarships">Scholarships</a></li>
 			<li><a href="#sponsors">Sponsors</a></li>
 			<li><a href="#scholars">Scholars</a></li>
 			<li><a href="#open">Open Scholarships</a></li>
 >>>>>>> 3fbee04672ff224d7e4aff47c0a99389ebd0d450
+>>>>>>> b567823be617a43c729f024532d0aef280717882
 		</ul>
 		<h1 class="text-center you-search">You have searched for: <span class="keyword"><?php echo e($keyword); ?></span></h1>
 		<div class="row">

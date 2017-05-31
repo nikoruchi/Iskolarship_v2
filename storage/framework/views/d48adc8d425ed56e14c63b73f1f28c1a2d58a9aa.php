@@ -55,7 +55,7 @@
 									
 								</li>
 							<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-						<!-- <?php else: ?> -->
+						<?php else: ?>
 							<?php if( (empty($sponsor1) && $user->user_type == "sponsor") || (empty($sponsor) && $user->user_type == "student") ): ?>
 								<h5 class="text-center">You haven't created any open scholarships.</h5>
 							<?php else: ?>
