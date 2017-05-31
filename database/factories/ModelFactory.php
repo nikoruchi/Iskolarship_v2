@@ -21,7 +21,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'user_aboutme' => $faker->paragraph,
         'user_contact' => "09000000000",
         'user_type' => "sponsor",
-        'user_imagepath' => "default",
+        'user_imagepath' => "spon_def.jpg",
         'remember_token' => str_random(10),
     ];
 });
@@ -46,7 +46,7 @@ $factory->define(App\Scholarship::class, function (Faker\Generator $faker) {
         'sponsor_id' => App\Sponsor::all()->random()->sponsor_id,
         'scholarship_name' => $faker->name,
         'scholarship_desc' => "Lorem ipsum keme keme keme 48 years fayatollah kumenis guash otoko boyband intonses matod juts warla shala krung-krung.",
-        'scholarship_logo' => "default",
+        'scholarship_logo' => "default_scholarship.png",
         'scholarship_coverage' => "7 days",
     ];
 });

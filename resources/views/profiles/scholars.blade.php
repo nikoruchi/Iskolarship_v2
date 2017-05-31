@@ -33,10 +33,10 @@
 									<form method="POST" action="/application/accept">
 											{{ csrf_field() }}
 										<input type="hidden" value="{{$application->application_id}}" name="app_id" />
-										<button type="submit" class="accept"><span class="glyphicon glyphicon-remove"></span> Accept</button>
+										<button type="submit" class="accept"><span class="glyphicon glyphicon-ok"></span> Accept</button>
 									</form>
 
-									<a href="/application/{{$application->application_id}}"" class="view"><span class="glyphicon glyphicon-eye-open"></span> View</a>
+									<a href="/application/{{$application->application_id}}" class="view"><span class="glyphicon glyphicon-eye-open"></span> View</a>
 									<form method="POST" action="/application/reject">
 											{{ csrf_field() }}
 										<input type="hidden" value="{{$application->application_id}}" name="app_id" />
@@ -49,7 +49,7 @@
 						@endforeach
 					</ul>
 					@else 
-						<h5 class="text-center">No pending applications.</h5>
+						<h5 class="text-center none">No pending applications.</h5>
 					@endif
 
 					@if(($officialScholars->count())>0)
@@ -78,7 +78,7 @@
 						@endforeach
 					</ul>
 					@else
-						<h5 class="text-center">No official scholars.</h5>
+						<h5 class="text-center none">No official scholars.</h5>
 					@endif
 				</div>
 			</div>

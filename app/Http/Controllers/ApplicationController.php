@@ -12,7 +12,6 @@ use App\Notification;
 use App\Sponsor;
 use App\EssayQuestions;
 use App\Message;
-use App\Notification;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\MessageBag;
 use Carbon\Carbon;
@@ -123,6 +122,10 @@ class ApplicationController extends Controller
         $user_id = Auth::user()->user_id;
         // dd($user_id);
         $scholarship = Scholarship::find($scholarship_id);
+        $sponsor = Sponsor::findOrFail($scholarship->sponsor_id)->first();
+
+        // var_dump($sponsor->user_id);
+
         $user = User::findOrFail($user_id);
         $stud_id = Scholar::where('user_id','=', $user_id)->pluck('student_id')->first();
         $student = Scholar::findOrFail($stud_id);
@@ -133,13 +136,17 @@ class ApplicationController extends Controller
         	->get();
         $unnotif = count($notification);
         $unread = Message::where('msg_receiver','=',$user_id)->where('msg_status','=','unread')->count();
-        return view('registration/scholarship_application', compact('questions','scholarship','student','user', 'unread', 'unnotif'));
+        return view('registration/scholarship_application', compact('questions','scholarship','student', 'sponsor', 'user', 'unread', 'unnotif'));
     }
 
     public function sendApplication(Request $request){
       $agree = $request->agreement;
       $currentTime = Carbon::now()->toDateTimeString();
       $id = $request->scholarshipID;
+      $sponsor = $request->sponsor;
+
+      // dd($sponsor->user_id);
+
       $user_id = Auth::user()->user_id;
       $student_id = Scholar::where('user_id','=',$user_id)->pluck('student_id')->first();
       if($agree!=null){
@@ -164,6 +171,17 @@ class ApplicationController extends Controller
             $application->save();
             $app_id = $application->application_id;
 
+            $scholarship = Scholarship::findOrFail($application->scholarship_id);
+
+            $notif = new Notification;
+            $notif->notification_desc = "A student applied for ".$scholarship->scholarship_name.".";
+            $notif->notification_status = 'unread';
+            $notif->application_id = $app_id;
+            $notif->account_id = $sponsor;
+
+            $notif->save();
+
+
             for($i=0;$i<count($answers);$i++){
               $answer = new EssayAnswer;
               $answer->essay_questionsID=$questions[$i];
@@ -187,7 +205,8 @@ class ApplicationController extends Controller
         $user = User::findOrFail($user_id);
         $spon_id = Sponsor::where('user_id','=', $user_id)->pluck('sponsor_id')->first();
         $sponsor = Sponsor::findOrFail($spon_id);
-        $app = Application::find($app_id);
+        // $app_id = $app_id - 1;
+        $app = Application::find($app_id)->first();
         $scholarship_id = $app->scholarship_id;
         $stud_id = $app->student_id;
         $siblings = ApplicationSiblingScholar::where('student_id','=',$stud_id)->first();

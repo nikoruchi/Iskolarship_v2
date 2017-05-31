@@ -445,6 +445,7 @@ form:not(.navbar-form) .input-group {
 
 .scholarships > li > article .btns{
     float: right;
+    display: flex;
 }
 
 .scholarships > li > article .view,
@@ -457,6 +458,9 @@ form:not(.navbar-form) .input-group {
     border-radius: 3px;
     font-family: Roboto;
     text-align: center;
+    border: none;
+    display: inline-block;
+    margin: 0 0.25em;
 }
 
 .scholarships > li > article .view_scholars,
@@ -499,4 +503,13 @@ form:not(.navbar-form) .input-group {
     background-color: #f0e75b;
 }
 
+.none{
+    font-family: Roboto;
+    color: #AAA;
+    background-color: white;
+    padding: 1em 2.5em;
+    max-width: 60%;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+    margin: 1em auto;
+}
 

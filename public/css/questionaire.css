@@ -16,12 +16,14 @@
 }
 
 .heading .img-container > img[alt="sponsor-img"]{
-	width: 40%;
 	position: absolute;
 	bottom: 0;
 	right: 0;
-	height: 1.5em;
-	width: 1.5em;
+	height: 2.5em;
+	width: 2.5em;
+	border-radius: 50%;
+	object-fit: cover;
+	object-position: center;
 }
 
 .heading > article{

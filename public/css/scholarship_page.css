@@ -63,3 +63,19 @@
 	position: absolute;
 	transform: translate(-2%,-20%);
 }
+
+.further-details button{
+	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+#sponsor,
+#deadline,
+#details{
+	transform: translate(-35%, 0);
+}
+
+#sponsor li a,
+#deadline li a,
+#details li a{
+	font-family: Roboto;
+}

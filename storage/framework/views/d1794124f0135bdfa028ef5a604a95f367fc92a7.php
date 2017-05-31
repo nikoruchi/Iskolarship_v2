@@ -23,11 +23,12 @@
 						<?php echo e(csrf_field()); ?>
 
 						<input type="hidden" name="scholarshipID" value="<?php echo e($scholarship->scholarship_id); ?>" /> 
+						<input type="hidden" name="sponsor" value="<?php echo e($sponsor->user_id); ?>" /> 
 						<?php $__currentLoopData = $questions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $qn): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 							<label><?php echo e($qn->essay_question); ?></label>
 							<input type="hidden" name="qnID[]" value="<?php echo e($qn->essay_questionsID); ?>" /> 
 							<!-- <div class="input-group <?php echo e($errors->has('answer') ? ' has-error' : ''); ?> "> -->
-								<textarea name="answer[]" class="form-control" placeholder="Answer"></textarea>
+								<textarea name="answer[]" class="form-control" placeholder="Answer" required></textarea>
 							<!-- </div> -->
 						<!-- 	<?php if($errors->has('answer')): ?>
 									<span class="help-block">
@@ -37,7 +38,7 @@
 
 						<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 						<section>
-							<label><input type="checkbox" name="agreement" value="agreed"> I agree to submit my account information, family background, and financial and socio-economic information with this application.</label>
+							<label><input type="checkbox" name="agreement" value="agreed" required> I agree to submit my account information, family background, and financial and socio-economic information with this application.</label>
 						</section>
 						<button class="btn btn-success pull-right send-app btn-lg" type="submit"><span class="glyphicon glyphicon-send"></span> Submit Application</button>
 					</form>

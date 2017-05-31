@@ -58,9 +58,9 @@
 							@endforeach
 						@else
 							@if( (empty($sponsor1) && $user->user_type == "sponsor") || (empty($sponsor) && $user->user_type == "student") )
-								<h5 class="text-center">You haven't created any open scholarships.</h5>
+								<h5 class="text-center none">You haven't created any open scholarships.</h5>
 							@else
-								<h5 class="text-center">No open scholarship to show.</h5>
+								<h5 class="text-center none">No open scholarship to show.</h5>
 							@endif
 						@endif
 
@@ -118,17 +118,17 @@
 							@endforeach
 						@else
 							@if( (empty($sponsor1) && $user->user_type == "sponsor") || (empty($sponsor) && $user->user_type == "student") )
-								<h5 class="text-center">You haven't created any open scholarships.</h5>
+								<h5 class="text-center none">You do not have any closed scholarships.</h5>
 							@else
-								<h5 class="text-center">No open scholarship to show.</h5>
+								<h5 class="text-center none">No closed scholarship to show.</h5>
 							@endif
 						@endif
 					</ul>
 					@else
 						@if( (empty($sponsor1) && $user->user_type == "sponsor") || (empty($sponsor) && $user->user_type == "student") )
-						<h3 class="text-center">You haven't created any scholarships.</h3>
+						<h3 class="text-center none">You haven't created any scholarships.</h3>
 						@else
-						<h3 class="text-center">No scholarship to show.</h3>
+						<h3 class="text-center none">No scholarships to show.</h3>
 						@endif
 					@endif
 				</div>

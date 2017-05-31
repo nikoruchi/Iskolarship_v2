@@ -98,6 +98,9 @@ class ScholarshipsController extends Controller
         $student = Scholar::findOrFail($stud_id);
 
         $scholarship = Scholarship::find($scholarship_id);
+        $spon_id = Scholarship::find($scholarship_id)->sponsor_id;
+        $sponsor = Sponsor::findOrFail($spon_id);
+
         $specifications = Scholarship::find($scholarship_id)->specifications;
         $grants = Scholarship::find($scholarship_id)->grants;
         $scholars = Application::where('scholarship_id','=',$scholarship_id)
@@ -115,16 +118,15 @@ class ScholarshipsController extends Controller
         $deadline = ScholarshipsDeadline::find($scholarship_id)
                     ->pluck('scholarship_deadlineenddate');
         $notification = Notification::join('application', 'Application.application_id','=','Notification.application_id')
-        	->where('Notification.account_id','=',$user_id)
-        	->select('Notification.notification_id','Notification.notification_desc','Notification.notification_date','Notification.notification_status','Notification.application_id','Notification.account_id','Application.scholarship_id','Application.student_id')
-        	->get();
+            ->where('Notification.account_id','=',$user_id)
+            ->select('Notification.notification_id','Notification.notification_desc','Notification.notification_date','Notification.notification_status','Notification.application_id','Notification.account_id','Application.scholarship_id','Application.student_id')
+            ->get();
         $unnotif = count($notification);
         $unread = Message::where('msg_receiver','=',$user_id)->where('msg_status','=','unread')->count();
-
         // $deadline = ScholarshipsDeadline::where('scholarship_id','=',$scholarship_id)
         //     ->first()->scholarship_deadlineenddate;     
         
-        return view('/profiles/profile_scholarship', compact('student','user','scholarship','specifications','grants','scholars','exists','currentTime','deadline', 'unread', 'unnotif'));
+        return view('/profiles/profile_scholarship', compact('student', 'sponsor', 'user','scholarship','specifications','grants','scholars','exists','currentTime','deadline', 'unread', 'unnotif'));
     }
 
      public function scholarshipSponsor($scholarship_id){

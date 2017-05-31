@@ -51,7 +51,7 @@
 						<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 					</ul>
 					<?php else: ?> 
-						<h5 class="text-center none">No pending applications.</h5>
+						<h5 class="text-center">No pending applications.</h5>
 					<?php endif; ?>
 
 					<?php if(($officialScholars->count())>0): ?>
@@ -82,7 +82,7 @@
 						<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 					</ul>
 					<?php else: ?>
-						<h5 class="text-center none">No official scholars.</h5>
+						<h5 class="text-center">No official scholars.</h5>
 					<?php endif; ?>
 				</div>
 			</div>

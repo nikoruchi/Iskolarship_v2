@@ -24,6 +24,7 @@
 					<form id="apply-form" action="/scholar questionaire/send" method="POST">
 						{{ csrf_field() }}
 						<input type="hidden" name="scholarshipID" value="{{ $scholarship->scholarship_id}}" /> 
+						<input type="hidden" name="sponsor" value="{{ $sponsor->user_id }}" /> 
 						@foreach($questions as $qn)
 							<label>{{$qn->essay_question}}</label>
 							<input type="hidden" name="qnID[]" value="{{ $qn->essay_questionsID  }}" /> 
