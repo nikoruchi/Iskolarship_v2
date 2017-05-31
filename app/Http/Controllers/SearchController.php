@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+ 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Auth;
@@ -17,11 +17,12 @@ class SearchController extends Controller
     
     public function searchStudent() {
 
-        $scholarships = '';
-        $sponsors =  '';
-        $scholars = '';
+        $scholarships = null;
+        $sponsors =  null;
+        $scholars = null;
+        $opens = null;
 
-        $keyword = Input::get('keyword');
+        $keyword = empty(Input::get('keyword'))? '' : Input::get('keyword') ;
         $filter = Input::get('search_q');
         $size = count('search_q');
 
@@ -31,7 +32,7 @@ class SearchController extends Controller
         $stud_id = Scholar::where('user_id','=', $user_id)->pluck('student_id')->first();
         $student = Scholar::findOrFail($stud_id);
 
-        if($keyword != ''){
+        if(!(empty($keyword))){
 
             if(empty($filter)) {
 
@@ -88,6 +89,20 @@ class SearchController extends Controller
                     }
                 }
             }
+
+        } else {
+
+            $scholarships = Scholarship::orderBy('scholarship_name')->get();
+
+            $scholars = Scholar::orderBy('student_fname')->get();
+
+            $sponsors = Sponsor::orderBy('sponsor_fname')->get();
+
+            $opens = Scholarship::join('scholarship_deadline','Scholarship.scholarship_id','=','Scholarship_deadline.scholarship_id')
+                ->where('Scholarship_deadline.scholarship_deadlineenddate','>',date('Y-m-d').' 00:00:00')
+                ->orderBy('Scholarship.scholarship_name')
+                ->get();
+
         }
 
         $notification = Notification::join('application', 'Application.application_id','=','Notification.application_id')
@@ -103,11 +118,12 @@ class SearchController extends Controller
 
     public function searchSponsor() {
 
-        $scholarships = '';
-        $sponsors =  '';
-        $scholars = '';
+        $scholarships = null;
+        $sponsors =  null;
+        $scholars = null;
+        $opens = null;
 
-        $keyword = Input::get('keyword');
+        $keyword = empty(Input::get('keyword'))? '' : Input::get('keyword') ;
         $filter = Input::get('search_q');
         $size = count('search_q');
 
@@ -117,7 +133,7 @@ class SearchController extends Controller
         $spon_id = Sponsor::where('user_id','=', $user_id)->pluck('sponsor_id')->first();
         $sponsor = Sponsor::findOrFail($spon_id);
 
-        if($keyword != ''){
+        if(!(empty($keyword))){
 
             if(empty($filter)) {
 
@@ -174,14 +190,30 @@ class SearchController extends Controller
                     }
                 }
             }
+
+        } else {
+
+            $scholarships = Scholarship::orderBy('scholarship_name')->get();
+
+            $scholars = Scholar::orderBy('student_fname')->get();
+
+            $sponsors = Sponsor::orderBy('sponsor_fname')->get();
+
+            $opens = Scholarship::join('scholarship_deadline','Scholarship.scholarship_id','=','Scholarship_deadline.scholarship_id')
+                ->where('Scholarship_deadline.scholarship_deadlineenddate','>',date('Y-m-d').' 00:00:00')
+                ->orderBy('Scholarship.scholarship_name')
+                ->get();
+
         }
+
         $notification = Notification::join('application', 'Application.application_id','=','Notification.application_id')
         	->where('Notification.account_id','=',$user_id)
         	->select('Notification.notification_id','Notification.notification_desc','Notification.notification_date','Notification.notification_status','Notification.application_id','Notification.account_id','Application.scholarship_id','Application.student_id')
         	->get();
+
         $unnotif = count($notification);
         $unread = Message::where('msg_receiver','=',$user_id)->where('msg_status','=','unread')->count();
+
         return view('search_results',compact('sponsor','scholarships','scholars','sponsors','opens','keyword','user', 'unread', 'unnotif'));
-      //  return view('search_results',compact('scholarships','scholars','sponsors','keyword','user','student'));
     }
 }
