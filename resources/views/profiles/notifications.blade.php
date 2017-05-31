@@ -1,6 +1,6 @@
 @extends('layouts.userTab')
 
-@section('content')
+@section('content') 
 	<div class="container main-container">
 		<div class="row">
 			<ul class="list-unstyled notif-options">
