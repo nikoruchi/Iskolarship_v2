@@ -164,6 +164,17 @@ class ApplicationController extends Controller
             $application->save();
             $app_id = $application->application_id;
 
+            $scholarship = Scholarship::findOrFail($application->scholarship_id);
+
+            $notif = new Notification;
+            $notif->notification_desc = "A student applied for ".$scholarship->scholarship_name.".";
+            $notif->notification_status = 'unread';
+            $notif->application_id = $app_id;
+            $notif->account_id = $sponsor->user_id;
+
+            $notif->save();
+
+
             for($i=0;$i<count($answers);$i++){
               $answer = new EssayAnswer;
               $answer->essay_questionsID=$questions[$i];
