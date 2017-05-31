@@ -197,6 +197,7 @@ class ApplicationController extends Controller
         $user = User::findOrFail($user_id);
         $spon_id = Sponsor::where('user_id','=', $user_id)->pluck('sponsor_id')->first();
         $sponsor = Sponsor::findOrFail($spon_id);
+        // $app_id = $app_id - 1;
         $app = Application::find($app_id)->first();
         $scholarship_id = $app->scholarship_id;
         $stud_id = $app->student_id;

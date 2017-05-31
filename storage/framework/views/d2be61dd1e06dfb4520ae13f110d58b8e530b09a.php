@@ -34,10 +34,10 @@
 											<?php echo e(csrf_field()); ?>
 
 										<input type="hidden" value="<?php echo e($application->application_id); ?>" name="app_id" />
-										<button type="submit" class="accept"><span class="glyphicon glyphicon-remove"></span> Accept</button>
+										<button type="submit" class="accept"><span class="glyphicon glyphicon-ok"></span> Accept</button>
 									</form>
 
-									<a href="/application/<?php echo e($application->application_id); ?>"" class="view"><span class="glyphicon glyphicon-eye-open"></span> View</a>
+									<a href="/application/<?php echo e($application->application_id); ?>" class="view"><span class="glyphicon glyphicon-eye-open"></span> View</a>
 									<form method="POST" action="/application/reject">
 											<?php echo e(csrf_field()); ?>
 

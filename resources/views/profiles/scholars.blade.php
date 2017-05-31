@@ -33,7 +33,7 @@
 									<form method="POST" action="/application/accept">
 											{{ csrf_field() }}
 										<input type="hidden" value="{{$application->application_id}}" name="app_id" />
-										<button type="submit" class="accept"><span class="glyphicon glyphicon-remove"></span> Accept</button>
+										<button type="submit" class="accept"><span class="glyphicon glyphicon-ok"></span> Accept</button>
 									</form>
 
 									<a href="/application/{{$application->application_id}}" class="view"><span class="glyphicon glyphicon-eye-open"></span> View</a>
